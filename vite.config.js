@@ -56,4 +56,18 @@ function apiDevMiddleware() {
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), apiDevMiddleware()],
+  build: {
+    rollupOptions: {
+      output: {
+        // Bibliotecas de terceiros mudam muito menos que o site. Separadas,
+        // elas ficam no cache do navegador entre um deploy e outro em vez de
+        // serem rebaixadas junto com qualquer ajuste de copy.
+        manualChunks: {
+          react: ['react', 'react-dom', 'react-router-dom'],
+          motion: ['framer-motion'],
+          swiper: ['swiper', 'swiper/react', 'swiper/modules'],
+        },
+      },
+    },
+  },
 })

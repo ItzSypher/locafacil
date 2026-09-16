@@ -23,6 +23,17 @@ colors:
   glass-light-surface: "rgba(255,255,255,0.7)"
   glass-light-border: "rgba(255,255,255,0.4)"
   glass-dark-surface: "rgba(10,22,40,0.85)"
+  surface-muted: "#F1F5F9"
+  surface-sunken: "#E2E8F0"
+  line: "#E2E8F0"
+  line-soft: "#F1F5F9"
+  state-error: "#DC2626"
+  state-error-soft: "#FEF2F2"
+  state-error-line: "#FECACA"
+  state-error-dark: "#FCA5A5"
+  state-success-soft: "#ECFDF5"
+  brand-whatsapp: "#25D366"
+  brand-whatsapp-hover: "#1EBD5B"
 typography:
   display:
     fontFamily: "Archivo, Archivo Fallback, system-ui, -apple-system, sans-serif"
@@ -196,6 +207,12 @@ sinais quentes usados com parcimônia.
   reserva, ícone de sucesso, indicador de canal ativo. É estado, não decoração.
 - **Âmbar de Alerta** (#F59E0B): escassez e prazo reais. A cor mais restrita do
   sistema (ver regra abaixo).
+- **Vermelho de Erro** (#DC2626 sobre claro, #FCA5A5 sobre escuro): validação e
+  falha. Tem duas faces porque o site tem dois fundos, e nenhuma delas aparece
+  fora de uma mensagem com `role="alert"`.
+- **Verde WhatsApp** (#25D366): cor de terceiro, não da marca. Só existe em
+  controle que abre o WhatsApp, e por isso é token nomeado — nunca hex solto no
+  meio do JSX.
 
 ### Named Rules
 
@@ -302,6 +319,16 @@ margem negativa estrutural do sistema.
 vezes entre 375 e 1440. Se precisa de três reorganizações, o componente está
 fazendo coisa demais.
 
+**A Regra do Cartão Que Se Justifica.** Cartão é para conteúdo que o dedo
+arrasta ou o olho compara lado a lado. Lista de argumentos não é nem um nem
+outro: vira `ReasonList` — fio de 1px entre itens, espaço generoso, nenhum
+distintivo na frente. Quando três seções seguidas viram grade de cartão, a
+página perdeu a estrutura e ganhou um molde.
+
+**A Regra do Alvo de 44px.** Todo controle tem 44px de altura e largura de área
+clicável, mesmo quando a marca visível é menor. O padding cresce, o desenho não
+— `py-3 -my-1` num link de rodapé dá o alvo sem abrir o espaçamento da lista.
+
 ## Elevation & Depth
 
 Este sistema constrói profundidade com **luz e camada, não com sombra
@@ -332,6 +359,12 @@ não flutuar sem apoio.
 **A Regra do Vidro Sem Halo.** Profundidade vem de transparência e borda, nunca
 de brilho colorido. Nenhum `box-shadow` com matiz azul existe no sistema.
 
+**A Regra da Camada Que Se Comporta.** Qualquer coisa que cobre a página é um
+diálogo, não um cartão flutuante: `role="dialog"`, `aria-modal`, título ligado
+por `aria-labelledby`, Escape fecha, foco entra e fica preso dentro, rolagem
+trava e o foco volta para quem abriu. O hook `useDialog` entrega isso inteiro —
+popup de boas-vindas, popup de saída e a conversa da Locagora usam o mesmo.
+
 **A Regra da Elevação Declarada Uma Vez.** Uma superfície escolhe borda **ou**
 sombra, nunca as duas. Borda de 1px sob sombra larga e difusa é o card fantasma:
 lê como erro de camada, não como profundidade. O vidro já traz sua borda, então
@@ -340,6 +373,36 @@ não recebe sombra.
 **A Regra da Borda Fantasma.** Todo painel de vidro carrega uma borda de 1px em
 branco translúcido. Sem ela o vidro derrete no fundo e o limite do painel some em
 telas de baixo contraste.
+
+## Motion
+
+Uma entrada, repetida. Seção que chega ao viewport sobe 16px e revela em 400ms
+com `cubic-bezier(0.16, 1, 0.3, 1)` — desaceleração exponencial, o conteúdo
+assenta em vez de deslizar. Filhos entram em cascata de 60ms. O container que
+orquestra nunca começa invisível: só coordena, para que nada fique em branco
+enquanto o gatilho não dispara.
+
+Botão responde ao toque com escala entre 1.01 e 1.03 e 0.97 ao pressionar —
+quanto maior o alvo, menor o ganho.
+
+Movimento contínuo existe em quatro lugares e só neles: o veículo que flutua nos
+três heros, a faixa de montadoras, o ponto de status da Locagora e o esqueleto
+de carregamento.
+
+### Named Rules
+
+**A Regra do Movimento Que Obedece.** `prefers-reduced-motion` não desliga a
+interface, desliga a decoração. O que se repete sozinho para: as animações CSS
+infinitas caem por seletor, e as de JavaScript — flutuação dos heros, autoplay
+dos dois carrosséis — caem por `useReducedMotion`, porque a regra de mídia não
+alcança transform escrito por script. O que responde a uma ação sobrevive
+encurtado para 120ms: sem transição, o botão troca de estado sem avisar, e isso
+é perder feedback, não ganhar calma.
+
+**A Regra da Saída Que Some de Verdade.** Camada que sai leva o nó com ela. Um
+painel animado para `opacity: 0` e deixado no DOM continua tabulável e continua
+sendo anunciado como diálogo — invisível para quem enxerga, presente para quem
+não enxerga. Quando a saída animada não garante a remoção, a saída é instantânea.
 
 ## Shapes
 
@@ -379,6 +442,17 @@ coisa de controle pequeno, nunca de CTA de largura total.
 - **Disabled:** opacidade 0.6, cursor default, sem mudança de escala.
 - **Rótulo:** nomeia a ação inteira, não o gesto. "Selecionar HB20 ou similar",
   "Continuar para seus dados" — nunca "Continuar →" solto. Sem seta decorativa.
+
+### Reason List
+- **Uso:** lista de argumentos sobre superfície clara — "por que a Locafacil",
+  "4 motivos para contratar". Substitui a grade de cartões quando os itens são
+  para ler, não para arrastar ou comparar.
+- **Estrutura:** `<ul>` com fio de 1px (`divide-line`) entre itens, 24px de
+  respiro em cada lado do fio, título em Subtitle e corpo em Body a 62ch.
+- **Sem ornamento:** nada de círculo numerado. A ordem dos motivos não carrega
+  informação, então o número era enfeite ocupando o lugar do texto.
+- **Compartilhado:** um componente (`components/Global/ReasonList.jsx`) para
+  Home e Para Empresas. O markup vivia duplicado nos dois arquivos.
 
 ### Cards / Containers
 - **Corner Style:** 16px (1rem).
@@ -449,6 +523,14 @@ chegam.
 - **Do** mostrar esqueleto na forma do conteúdo enquanto a API responde.
 - **Do** exibir mensagens de erro da API OTA em português, como vieram, dentro de
   um bloco com `role="alert"` e uma saída de recuperação ao lado.
+- **Do** dar 44px de área clicável a todo controle, crescendo o padding em vez do
+  desenho.
+- **Do** abrir qualquer camada sobre a página pelo `useDialog` — `role="dialog"`,
+  Escape, foco preso e devolvido, rolagem travada.
+- **Do** usar os tokens de superfície e de estado (`surface-light`, `line`,
+  `state-error`, `brand-whatsapp`) em vez das cores cruas do Tailwind.
+- **Do** dar `loading="lazy"`, `decoding="async"` e `width`/`height` reais a toda
+  imagem abaixo da dobra.
 
 ### Don't:
 - **Don't** adicionar `box-shadow` com matiz azul: o halo saiu do sistema.
@@ -462,7 +544,11 @@ chegam.
   de texto de botão.
 - **Don't** colorir de azul qualquer elemento que não seja acionável.
 - **Don't** usar emoji como ícone de interface — ícones são SVG inline de traço
-  1.75 e tamanho 16px.
+  1.75 e tamanho 16px. `✕`, `✓` e `★` são caracteres, não ícones.
+- **Don't** transformar lista de argumentos em grade de cartões, nem numerar
+  itens cuja ordem não significa nada.
+- **Don't** publicar dado de exemplo como se fosse real — CNPJ, telefone e
+  endereço vêm do cliente ou não aparecem.
 - **Don't** repetir a mesma entrada animada em toda seção, nem animar o que já
   está visível no primeiro quadro.
 - **Don't** abrir tela clara sem tarefa de leitura ou digitação dentro dela.

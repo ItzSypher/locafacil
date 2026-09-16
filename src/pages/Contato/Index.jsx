@@ -5,7 +5,7 @@ import Content from './Content'
 
 export default function Contato() {
   return (
-    <div>
+    <div className="min-h-screen overflow-x-hidden">
       <Topbar />
       <Header />
       <Content />

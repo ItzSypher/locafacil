@@ -198,6 +198,50 @@
           "oklch(91% 0.008 250)",
           "oklch(98% 0.004 250)"
         ]
+      },
+      "surface-muted": {
+        "displayName": "Superfície Recuada",
+        "purpose": "Fundo de campo e de bloco neutro no lado claro do site."
+      },
+      "surface-sunken": {
+        "displayName": "Superfície Afundada",
+        "purpose": "Hover de controle neutro sobre fundo claro."
+      },
+      "line": {
+        "displayName": "Fio",
+        "purpose": "Borda de campo e separador entre itens de lista sobre fundo claro."
+      },
+      "line-soft": {
+        "displayName": "Fio Suave",
+        "purpose": "Divisória interna quando o fio cheio pesaria demais."
+      },
+      "state-error": {
+        "displayName": "Erro sobre Claro",
+        "purpose": "Texto de validação e falha em superfície branca. Sempre dentro de role=\"alert\"."
+      },
+      "state-error-soft": {
+        "displayName": "Erro Fundo",
+        "purpose": "Fundo do bloco de erro em formulário claro."
+      },
+      "state-error-line": {
+        "displayName": "Erro Borda",
+        "purpose": "Borda do bloco de erro em formulário claro."
+      },
+      "state-error-dark": {
+        "displayName": "Erro sobre Escuro",
+        "purpose": "A mesma mensagem de erro sobre fundo escuro ou vidro."
+      },
+      "state-success-soft": {
+        "displayName": "Sucesso Fundo",
+        "purpose": "Fundo do ícone de confirmação."
+      },
+      "brand-whatsapp": {
+        "displayName": "Verde WhatsApp",
+        "purpose": "Cor de terceiro. Só em controle que abre o WhatsApp, nunca como cor da marca."
+      },
+      "brand-whatsapp-hover": {
+        "displayName": "Verde WhatsApp Hover",
+        "purpose": "Hover do controle de WhatsApp."
       }
     },
     "typographyMeta": {

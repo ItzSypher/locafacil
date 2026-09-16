@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import HeroImage from '../../assets/images/header.webp'
 import SearchWidget from '../Reservar/SearchWidget'
 
@@ -10,6 +10,7 @@ import SearchWidget from '../Reservar/SearchWidget'
  * - Formulário glassmorphism sobrepondo hero e próxima seção
  */
 export default function Header() {
+  const reduzMovimento = useReducedMotion()
 
   /* Variantes de animação para entrada staggered */
   const containerVariants = {
@@ -142,12 +143,8 @@ export default function Header() {
               src={HeroImage}
               alt="Veículo premium Locafacil disponível para locação imediata"
               className="relative w-full max-w-lg lg:max-w-xl xl:max-w-2xl drop-shadow-2xl"
-              animate={{ y: [0, -15, 0] }}
-              transition={{
-                repeat: Infinity,
-                duration: 3,
-                ease: 'easeInOut'
-              }}
+              animate={reduzMovimento ? undefined : { y: [0, -15, 0] }}
+              transition={reduzMovimento ? undefined : { repeat: Infinity, duration: 3, ease: 'easeInOut' }}
             />
           </motion.div>
         </div>

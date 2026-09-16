@@ -1,10 +1,12 @@
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import Image from '../../assets/images/header-empresas.webp'
 
 /**
  * Header da página Empresas - estilo premium consistente com a Home.
  */
 export default function Header() {
+  const reduzMovimento = useReducedMotion()
+
   return (
     <div className="relative bg-hero-gradient pt-28 sm:pt-32 lg:pt-36 pb-16 sm:pb-20 overflow-hidden">
       {/* Decoração de fundo */}
@@ -44,8 +46,8 @@ export default function Header() {
               src={Image}
               alt="Frota corporativa Locafacil Business"
               className="w-full max-w-lg mx-auto drop-shadow-2xl"
-              animate={{ y: [0, -10, 0] }}
-              transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
+              animate={reduzMovimento ? undefined : { y: [0, -10, 0] }}
+              transition={reduzMovimento ? undefined : { repeat: Infinity, duration: 4, ease: 'easeInOut' }}
             />
           </motion.div>
         </div>

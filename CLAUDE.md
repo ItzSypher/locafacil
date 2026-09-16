@@ -112,7 +112,7 @@ acumulam com eles:
   telefone, CPF e número de etapa. Sem ele, o total muda de largura a cada
   recálculo.
 - `.on-light` — em qualquer superfície clara (card branco, seção `bg-white` ou
-  `bg-slate-50`). Zera a compensação óptica que o fundo escuro exige.
+  `bg-surface-light`). Zera a compensação óptica que o fundo escuro exige.
 
 Valor em reais nunca é string solta: sempre `src/pages/Reservar/Price.jsx`, que
 separa símbolo, inteiro, centavos e unidade.
@@ -129,18 +129,42 @@ Padrões que se repetem e devem ser seguidos em UI nova:
   `fadeInUp`/`staggerContainer` — redefinidas por arquivo, não importadas de um
   módulo comum. O container de stagger nunca usa `opacity: 0`, só orquestra os
   filhos.
-- Inputs sobre fundo claro: `bg-slate-50 border border-slate-200 rounded-xl px-4
+- Inputs sobre fundo claro: `bg-surface-light border border-line rounded-xl px-4
   py-3 text-sm focus:border-brand-accent focus:ring-1 focus:ring-brand-accent`
   (referência: `WelcomePopup.jsx`). Sobre fundo escuro/glass, a variante em
   `Reservar/SearchWidget.jsx`.
+- **Cor crua do Tailwind não entra.** As superfícies e estados do lado claro têm
+  token: `surface-light`, `surface-muted`, `surface-sunken`, `line`, `line-soft`,
+  `state-error`, `state-error-soft`, `state-error-line`, `state-error-dark`,
+  `state-success-soft`, `brand-whatsapp`. Nada de `slate-*`, `red-*`, `green-*`
+  nem hex solto no JSX.
+- **Alvo de toque de 44px** em todo controle, crescendo o padding e não o
+  desenho (`py-3 -my-1` num link de lista dá o alvo sem abrir o espaçamento).
+- **Camada sobre a página é diálogo**, e passa pelo `src/hooks/useDialog.js`:
+  `role="dialog"`, `aria-modal`, `aria-labelledby`, Escape, foco preso e
+  devolvido, rolagem travada por contador. Os três popups usam o mesmo hook.
+- **Movimento infinito** (flutuação de hero, autoplay de carrossel) é desligado
+  por `useReducedMotion` do framer-motion — a regra `@media
+  (prefers-reduced-motion)` do `global.css` só alcança CSS, e ela encurta
+  transições para 120ms em vez de matá-las.
+- **Lista de argumentos** usa `components/Global/ReasonList.jsx` (fio de 1px,
+  sem cartão, sem número). Cartão só para o que se arrasta ou se compara.
+- Imagem abaixo da dobra: `loading="lazy"`, `decoding="async"` e `width`/`height`
+  reais do arquivo.
 - Ícones são SVG inline (estilo Heroicons); `@iconify-icon/react` só aparece no
   Footer.
 
+### Carregamento
+
+`src/Routes.jsx` divide por rota: só a Home vem no pacote inicial, o resto é
+`React.lazy`. Dentro da Home, o `Content` (que carrega o Swiper inteiro) também
+é adiado, então o hero pinta sem esperar por ele. `vite.config.js` separa
+`react`, `framer-motion` e `swiper` em chunks próprios para sobreviverem no
+cache entre deploys. Primeiro carregamento da Home: 349 kB (116 kB gzip).
+
 `UX_REDESIGN_DOC.md` documenta a intenção por trás do visual atual (gatilhos de
-escassez, urgência e autoridade) e traz o checklist de UI/UX usado na entrega:
-sem emoji como ícone, `cursor-pointer` em tudo clicável, contraste WCAG AA,
-foco visível, `prefers-reduced-motion` respeitado (já implementado em
-`global.css`), responsivo em 375/768/1024/1440.
+escassez, urgência e autoridade). O checklist de UI/UX daquele documento está
+desatualizado em alguns pontos; `DESIGN.md` é a referência corrente.
 
 ## Skills de design instaladas
 

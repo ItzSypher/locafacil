@@ -102,7 +102,7 @@ export default function ReservarVeiculos() {
   return (
     <div className="min-h-screen overflow-x-hidden bg-hero-gradient">
       <Topbar />
-      <section className="pt-28 sm:pt-32 pb-24 px-4 sm:px-6 lg:px-8">
+      <main className="pt-28 sm:pt-32 pb-24 px-4 sm:px-6 lg:px-8">
         <div className="container mx-auto">
           <StepProgress current="veiculos" />
 
@@ -228,7 +228,7 @@ export default function ReservarVeiculos() {
             </motion.div>
           )}
         </div>
-      </section>
+      </main>
       <Footer />
     </div>
   )

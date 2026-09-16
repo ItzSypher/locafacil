@@ -39,7 +39,7 @@ export default function Topbar() {
         <div className="flex items-center justify-between h-16 sm:h-20">
 
           {/* Logo */}
-          <Link to="/" className="flex-shrink-0">
+          <Link to="/" className="flex-shrink-0 flex items-center h-11" aria-label="Locafacil — página inicial">
             <img
               src={Logo}
               alt="Locafacil Aluguel de Veículos"
@@ -53,10 +53,10 @@ export default function Topbar() {
               <Link
                 key={link.label}
                 to={link.href}
-                className="relative type-label text-text-secondary hover:text-white transition-colors duration-200 cursor-pointer group"
+                className="relative type-label text-text-secondary hover:text-white transition-colors duration-200 cursor-pointer group py-3"
               >
                 {link.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-accent transition-all duration-300 group-hover:w-full" />
+                <span className="absolute bottom-2 left-0 w-0 h-0.5 bg-brand-accent transition-all duration-300 group-hover:w-full" />
               </Link>
             ))}
 
@@ -65,7 +65,7 @@ export default function Topbar() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
-                className="bg-brand-accent hover:bg-brand-glow text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-colors duration-300 cursor-pointer"
+                className="bg-brand-accent hover:bg-brand-glow text-white text-sm font-semibold px-5 h-11 rounded-xl transition-colors duration-300 cursor-pointer"
               >
                 Garanta seu veículo
               </motion.button>
@@ -75,8 +75,10 @@ export default function Topbar() {
           {/* Botão Hamburger Mobile */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden relative w-8 h-8 flex flex-col items-center justify-center gap-1.5 cursor-pointer z-50"
-            aria-label="Abrir menu"
+            className="md:hidden relative w-11 h-11 -mr-2 flex flex-col items-center justify-center gap-1.5 cursor-pointer z-50"
+            aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}
+            aria-expanded={menuOpen}
+            aria-controls="menu-principal"
           >
             <motion.span
               animate={menuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
@@ -98,10 +100,12 @@ export default function Topbar() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
+            key="menu-mobile"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            id="menu-principal"
             className="md:hidden fixed inset-0 top-16 glass-dark z-40"
           >
             <nav className="flex flex-col items-center justify-center h-full gap-8 -mt-16">
@@ -115,7 +119,7 @@ export default function Topbar() {
                   <Link
                     to={link.href}
                     onClick={() => setMenuOpen(false)}
-                    className="type-title text-white hover:text-brand-accent transition-colors cursor-pointer"
+                    className="block type-title text-white hover:text-brand-accent transition-colors cursor-pointer px-6 py-2"
                   >
                     {link.label}
                   </Link>

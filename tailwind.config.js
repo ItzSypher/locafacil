@@ -18,13 +18,36 @@ export default {
           gold: '#F59E0B',
           surface: 'rgba(255,255,255,0.08)',
           'surface-hover': 'rgba(255,255,255,0.12)',
+          /* Verde do WhatsApp: cor de terceiro, não da marca. Fica nomeada
+             para nunca mais aparecer como hex solto no meio do JSX. */
+          whatsapp: '#25D366',
+          'whatsapp-hover': '#1EBD5B',
         },
         text: {
           primary: '#F8FAFC',
           secondary: '#94A3B8',
           dark: '#1E293B',
           muted: '#64748B',
-        }
+        },
+        /* Superfícies e linhas do lado claro do site. Existiam como slate-*
+           espalhado; agora têm nome e um lugar só para mudar. */
+        surface: {
+          light: '#F8FAFC',
+          muted: '#F1F5F9',
+          sunken: '#E2E8F0',
+        },
+        line: {
+          DEFAULT: '#E2E8F0',
+          soft: '#F1F5F9',
+        },
+        /* Estado. O erro tem duas faces porque o site tem dois fundos. */
+        state: {
+          error: '#DC2626',
+          'error-soft': '#FEF2F2',
+          'error-line': '#FECACA',
+          'error-dark': '#FCA5A5',
+          'success-soft': '#ECFDF5',
+        },
       },
       /* Archivo variável — uma família, dois eixos. A voz de display vem da
          largura (font-stretch), não de uma segunda fonte; por isso `display`

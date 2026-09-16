@@ -7,7 +7,7 @@ import StepProgress from '../StepProgress'
 import { useReservation } from '../../../context/ReservationContext'
 import { confirmReservation, ReservationApiError } from '../../../lib/api/reservation'
 
-const inputClass = 'w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-text-dark text-sm focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-colors'
+const inputClass = 'w-full bg-surface-light border border-line rounded-xl px-4 py-3 text-text-dark text-sm focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-colors'
 const labelClass = 'block type-label text-text-muted mb-2'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -104,7 +104,7 @@ export default function ReservarDados() {
   return (
     <div className="min-h-screen overflow-x-hidden bg-hero-gradient">
       <Topbar />
-      <section className="pt-28 sm:pt-32 pb-24 px-4 sm:px-6 lg:px-8">
+      <main className="pt-28 sm:pt-32 pb-24 px-4 sm:px-6 lg:px-8">
         <div className="container mx-auto max-w-2xl">
           <StepProgress current="dados" />
 
@@ -165,7 +165,7 @@ export default function ReservarDados() {
             </div>
 
             {error && (
-              <p className="type-meta text-red-600 bg-red-50 border border-red-200 rounded-xl px-4 py-3" role="alert">
+              <p className="type-meta text-state-error bg-state-error-soft border border-state-error-line rounded-xl px-4 py-3" role="alert">
                 {error}
               </p>
             )}
@@ -181,7 +181,7 @@ export default function ReservarDados() {
             </motion.button>
           </form>
         </div>
-      </section>
+      </main>
       <Footer />
     </div>
   )

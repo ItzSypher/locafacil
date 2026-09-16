@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useDialog } from '../../hooks/useDialog'
 
 export default function ExitPopup() {
   const [show, setShow] = useState(false)
   const [hasShown, setHasShown] = useState(false)
+  const panelRef = useDialog(show, () => setShow(false))
 
   useEffect(() => {
     const handleMouseLeave = (e) => {
@@ -25,31 +27,40 @@ export default function ExitPopup() {
     <AnimatePresence>
       {show && (
         <motion.div
+          key="exit-popup"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="fixed inset-0 z-[9998] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
         >
           <motion.div
+            ref={panelRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="exit-popup-titulo"
+            tabIndex={-1}
             initial={{ scale: 0.9, y: 20 }}
             animate={{ scale: 1, y: 0 }}
-            exit={{ scale: 0.9, y: 20 }}
-            className="bg-white rounded-2xl p-8 max-w-lg w-full shadow-2xl relative overflow-hidden"
+            exit={{ scale: 0.96, y: 16 }}
+            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="on-light bg-white rounded-2xl p-8 max-w-lg w-full shadow-2xl relative overflow-hidden focus:outline-none"
           >
-            <button 
+            <button
+              type="button"
               onClick={() => setShow(false)}
-              className="absolute top-4 right-4 text-text-muted hover:text-text-dark bg-slate-100 w-8 h-8 rounded-full flex items-center justify-center transition-colors z-10 cursor-pointer"
+              aria-label="Fechar"
+              className="absolute top-2 right-2 text-text-muted hover:text-text-dark w-11 h-11 rounded-full flex items-center justify-center transition-colors z-10 cursor-pointer hover:bg-surface-muted"
             >
-              ✕
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 6l12 12M18 6L6 18" />
+                </svg>
             </button>
             
             <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-brand-accent to-brand-glow" />
             
             <div className="text-center relative z-10">
-              <span className="inline-block bg-brand-accent/10 text-brand-accent type-label px-4 py-1.5 rounded-full mb-6">
-                ESPERE UM SEGUNDO!
-              </span>
-              <h2 className="type-title text-text-dark mb-4 text-balance">
+              <h2 id="exit-popup-titulo" className="type-title text-text-dark mb-4 text-balance">
                 Não feche essa página antes de ver isso.
               </h2>
               <p className="type-body text-text-muted text-lg mb-8 max-w-[45ch] mx-auto">
@@ -63,14 +74,14 @@ export default function ExitPopup() {
                   className="w-full bg-brand-accent hover:bg-brand-glow text-white font-semibold text-lg py-4 rounded-xl transition-colors cursor-pointer"
                   onClick={() => setShow(false)}
                 >
-                  Resgatar Condição Especial →
+                  Falar com um consultor agora
                 </motion.button>
               </a>
               <button 
                 onClick={() => setShow(false)} 
                 className="mt-5 type-meta text-text-muted hover:underline cursor-pointer"
               >
-                Não, prefiro perder essa oportunidade
+                Agora não, obrigado
               </button>
             </div>
           </motion.div>

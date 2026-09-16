@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import ReasonList from '../../components/Global/ReasonList'
 
 import Image1 from '../../assets/images/image-5.webp'
 import Image2 from '../../assets/images/image-6.webp'
@@ -12,10 +13,6 @@ const fadeInUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } }
 }
 
-const stagger = {
-  hidden: { opacity: 1 },
-  visible: { transition: { staggerChildren: 0.06 } }
-}
 
 const motivos = [
   {
@@ -40,7 +37,7 @@ export default function EmpresasContent() {
   return (
     <main>
       {/* Seção principal */}
-      <section className="on-light py-16 sm:py-24 bg-slate-50">
+      <section className="on-light py-16 sm:py-24 bg-surface-light">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
@@ -70,7 +67,7 @@ export default function EmpresasContent() {
               whileHover={{ y: -8 }}
               transition={{ type: 'spring', stiffness: 200 }}
             >
-              <img src={Image1} alt="Frota empresarial Locafacil" className="w-full rounded-2xl shadow-card" />
+              <img src={Image1} alt="Frota empresarial Locafacil" loading="lazy" decoding="async" width={620} height={358} className="w-full rounded-2xl shadow-card" />
             </motion.div>
           </motion.div>
         </div>
@@ -92,25 +89,7 @@ export default function EmpresasContent() {
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.12 }}
-              variants={stagger}
-              className="space-y-8"
-            >
-              {motivos.map((item, i) => (
-                <motion.div key={i} variants={fadeInUp} className="flex gap-5 group">
-                  <div className="flex-shrink-0 w-12 h-12 bg-brand-accent/10 text-brand-accent rounded-xl flex items-center justify-center type-numeric text-lg font-bold group-hover:bg-brand-accent group-hover:text-white transition-colors duration-300">
-                    {i + 1}
-                  </div>
-                  <div>
-                    <h4 className="type-subtitle text-text-dark mb-2">{item.titulo}</h4>
-                    <p className="text-text-muted leading-relaxed">{item.descricao}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
+            <ReasonList items={motivos} />
 
             <motion.div
               initial="hidden"
@@ -118,14 +97,14 @@ export default function EmpresasContent() {
               viewport={{ once: true, amount: 0.12 }}
               variants={fadeInUp}
             >
-              <img src={Image2} alt="Equipe Locafacil Business" className="w-full rounded-2xl shadow-card" />
+              <img src={Image2} alt="Equipe Locafacil Business" loading="lazy" decoding="async" width={620} height={358} className="w-full rounded-2xl shadow-card" />
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* Banner final */}
-      <section className="on-light hidden md:block py-8 bg-slate-50">
+      <section className="on-light hidden md:block py-8 bg-surface-light">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.img
             initial={{ opacity: 0, y: 20 }}

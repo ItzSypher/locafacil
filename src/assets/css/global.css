@@ -16,6 +16,12 @@
   --text-dark: #1E293B;
   --white: #ffffff;
   --black: #000000;
+  --surface-light: #F8FAFC;
+  --surface-muted: #F1F5F9;
+  --line: #E2E8F0;
+  --line-soft: #F1F5F9;
+  --state-error: #DC2626;
+  --brand-whatsapp: #25D366;
 
   /* Compensação óptica. Texto claro sobre fundo escuro fecha e engrossa:
      ganha um fio de tracking e uma fração de entrelinha. Superfície clara
@@ -218,13 +224,32 @@ input[inputmode='numeric'] {
   font-variant-numeric: tabular-nums lining-nums;
 }
 
-/* ===== REDUÇÃO DE MOVIMENTO ===== */
+/* ===== REDUÇÃO DE MOVIMENTO =====
+   Quem pede menos movimento não está pedindo interface morta. Animação que
+   se repete sozinha é decoração e para; transição que responde a uma ação é
+   feedback e só encurta — sem ela o botão pisca de estado sem avisar. */
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+    transition-duration: 120ms !important;
+    transition-delay: 0ms !important;
+    animation-delay: 0ms !important;
+  }
+
+  /* Decoração que nunca para: as quatro animações que o projeto usa. */
+  .animate-ping,
+  .animate-pulse,
+  .animate-float,
+  .animate-slide-up {
+    animation: none !important;
+  }
+
+  /* Marquee das montadoras: o trilho fica parado no lugar. */
+  .marcas-swiper .swiper-wrapper {
+    transition: none !important;
   }
 }
 

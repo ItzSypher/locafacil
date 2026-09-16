@@ -172,7 +172,7 @@ export default function SearchWidget() {
       </div>
 
       {error && (
-        <p className="mt-4 type-meta text-red-400 text-center" role="alert">{error}</p>
+        <p className="mt-4 type-meta text-state-error-dark text-center" role="alert">{error}</p>
       )}
 
       <motion.button

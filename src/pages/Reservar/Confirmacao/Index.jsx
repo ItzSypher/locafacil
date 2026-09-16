@@ -26,7 +26,7 @@ export default function ReservarConfirmacao() {
   return (
     <div className="min-h-screen overflow-x-hidden bg-hero-gradient">
       <Topbar />
-      <section className="pt-28 sm:pt-32 pb-24 px-4 sm:px-6 lg:px-8">
+      <main className="pt-28 sm:pt-32 pb-24 px-4 sm:px-6 lg:px-8">
         <div className="container mx-auto max-w-2xl">
           <StepProgress current="confirmacao" />
 
@@ -86,7 +86,7 @@ export default function ReservarConfirmacao() {
             </a>
           </motion.div>
         </div>
-      </section>
+      </main>
       <Footer />
     </div>
   )

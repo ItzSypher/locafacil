@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Pagination, Navigation, EffectFade } from 'swiper/modules'
@@ -8,6 +8,8 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import 'swiper/css/effect-fade'
+
+import ReasonList from '../../components/Global/ReasonList'
 
 /* Importação de imagens existentes */
 import Nissan from '../../assets/images/nissan.webp'
@@ -81,20 +83,22 @@ const beneficios = [
         <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
       </svg>
     ),
-    titulo: 'Eleita 4.9 ★ pelos Clientes',
+    titulo: 'Nota 4,9 entre os clientes',
     descricao: 'Não acredite na gente, acredite em quem já testou e aprovou nossa frota. São avaliações reais de clientes extremamente satisfeitos.',
   },
 ]
 
 /* ===== DADOS DAS MARCAS (Social Proof) ===== */
+/* Dimensões reais de cada arquivo: o navegador reserva o espaço antes de
+   baixar e a faixa não pula quando as logos chegam. */
 const marcas = [
-  { src: Nissan, alt: 'Nissan' },
-  { src: Hyundai, alt: 'Hyundai' },
-  { src: Mazda, alt: 'Mazda' },
-  { src: Chevrolet, alt: 'Chevrolet' },
-  { src: Renault, alt: 'Renault' },
-  { src: Ford, alt: 'Ford' },
-  { src: Dodge, alt: 'Dodge' },
+  { src: Nissan, alt: 'Nissan', w: 115, h: 100 },
+  { src: Hyundai, alt: 'Hyundai', w: 121, h: 71 },
+  { src: Mazda, alt: 'Mazda', w: 166, h: 92 },
+  { src: Chevrolet, alt: 'Chevrolet', w: 107, h: 59 },
+  { src: Renault, alt: 'Renault', w: 118, h: 98 },
+  { src: Ford, alt: 'Ford', w: 167, h: 62 },
+  { src: Dodge, alt: 'Dodge', w: 102, h: 106 },
 ]
 
 /* ===== DADOS DOS SERVIÇOS ===== */
@@ -121,22 +125,18 @@ const servicos = [
 /* ===== DADOS "POR QUE ESCOLHER" ===== */
 const diferenciais = [
   {
-    numero: '01',
     titulo: 'Aceleração de Aprovação',
     descricao: 'Você tem pressa. Então cortamos a burocracia inútil. Do orçamento à chave na mão num piscar de olhos.',
   },
   {
-    numero: '02',
     titulo: 'O Que Você Vê É O Que Você Paga',
     descricao: 'Esqueça as taxas ocultas de "proteção extra" no balcão. O combinado não sai caro, o nosso contrato é reto e direto.',
   },
   {
-    numero: '03',
     titulo: 'Máquinas Selecionadas a Dedo',
     descricao: 'Só trabalhamos com veículos novos ou recém-revisados das melhores marcas. Sente, ligue e sinta o conforto.',
   },
   {
-    numero: '04',
     titulo: 'Atendimento Corpo a Corpo',
     descricao: 'Quando ligar, não falará com um robô burro. Falará com alguém da equipe focado em resolver seu problema real.',
   },
@@ -153,11 +153,14 @@ const diferenciais = [
  * 5. CTA Final (urgência + conversão)
  */
 export default function HomeContent() {
+  /* Carrossel que anda sozinho é movimento não solicitado: com movimento
+     reduzido os dois viram estáticos e continuam navegáveis pelo dedo. */
+  const reduzMovimento = useReducedMotion()
   return (
     <main>
 
       {/* ===== SEÇÃO BENEFÍCIOS ===== */}
-      <section id="beneficios" className="on-light pt-32 sm:pt-40 pb-16 sm:pb-24 bg-slate-50">
+      <section id="beneficios" className="on-light pt-32 sm:pt-40 pb-16 sm:pb-24 bg-surface-light">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
@@ -186,7 +189,7 @@ export default function HomeContent() {
               spaceBetween={24}
               slidesPerView={1}
               pagination={{ clickable: true, dynamicBullets: true }}
-              autoplay={{ delay: 3000, disableOnInteraction: false }}
+              autoplay={reduzMovimento ? false : { delay: 3000, disableOnInteraction: false }}
               breakpoints={{
                 640: { slidesPerView: 2 },
                 1024: { slidesPerView: 3 },
@@ -195,12 +198,12 @@ export default function HomeContent() {
             >
               {beneficios.map((item, i) => (
                 <SwiperSlide key={i} className="h-auto">
-                  <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-card hover:shadow-card-hover transition-all duration-300 cursor-grab active:cursor-grabbing group h-full flex flex-col border border-slate-100 hover:border-brand-accent/20">
+                  <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-card hover:shadow-card-hover transition-shadow duration-300 cursor-grab active:cursor-grabbing group h-full flex flex-col">
                     <div className="w-14 h-14 bg-brand-accent/10 text-brand-accent rounded-2xl flex items-center justify-center mb-5 group-hover:bg-brand-accent group-hover:text-white group-hover:scale-110 transition-all duration-300">
                       {item.icone}
                     </div>
                     <h3 className="type-subtitle text-text-dark mb-2">{item.titulo}</h3>
-                    <p className="text-text-muted leading-relaxed flex-grow">{item.descricao}</p>
+                    <p className="type-body text-text-muted flex-grow">{item.descricao}</p>
                   </div>
                 </SwiperSlide>
               ))}
@@ -235,13 +238,10 @@ export default function HomeContent() {
               modules={[Autoplay]}
               spaceBetween={40}
               slidesPerView={3}
-              loop={true}
+              loop={!reduzMovimento}
               speed={3000}
-              autoplay={{
-                delay: 0,
-                disableOnInteraction: false,
-              }}
-              allowTouchMove={false}
+              autoplay={reduzMovimento ? false : { delay: 0, disableOnInteraction: false }}
+              allowTouchMove={reduzMovimento}
               breakpoints={{
                 640: { slidesPerView: 4, spaceBetween: 60 },
                 1024: { slidesPerView: 6, spaceBetween: 80 },
@@ -254,6 +254,10 @@ export default function HomeContent() {
                     <img
                       src={marca.src}
                       alt={marca.alt}
+                      loading="lazy"
+                      decoding="async"
+                      width={marca.w}
+                      height={marca.h}
                       className="h-10 sm:h-12 lg:h-14 w-auto object-contain"
                     />
                   </div>
@@ -265,7 +269,7 @@ export default function HomeContent() {
       </section>
 
       {/* ===== SEÇÃO SERVIÇOS ===== */}
-      <section className="on-light py-16 sm:py-24 bg-slate-50 relative overflow-hidden">
+      <section className="on-light py-16 sm:py-24 bg-surface-light relative overflow-hidden">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Título */}
           <div className="mb-12 sm:mb-16 text-center">
@@ -307,6 +311,10 @@ export default function HomeContent() {
                       <img
                         src={servico.imagem}
                         alt={servico.titulo}
+                        loading="lazy"
+                        decoding="async"
+                        width={620}
+                        height={358}
                         className="relative w-full rounded-2xl group-hover:scale-105 transition-transform duration-700 object-cover aspect-[4/3]"
                       />
                     </div>
@@ -370,29 +378,7 @@ export default function HomeContent() {
                 </h2>
               </motion.div>
 
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.12 }}
-                variants={staggerContainer}
-                className="space-y-6"
-              >
-                {diferenciais.map((item, i) => (
-                  <motion.div
-                    key={i}
-                    variants={fadeInUp}
-                    className="flex gap-5 group"
-                  >
-                    <div className="flex-shrink-0 w-12 h-12 bg-brand-accent/10 text-brand-accent rounded-xl flex items-center justify-center type-numeric font-bold text-lg group-hover:bg-brand-accent group-hover:text-white transition-all duration-300">
-                      {item.numero}
-                    </div>
-                    <div>
-                      <h4 className="type-subtitle text-text-dark mb-1">{item.titulo}</h4>
-                      <p className="text-text-muted leading-relaxed">{item.descricao}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </motion.div>
+              <ReasonList items={diferenciais} />
             </div>
 
             {/* Imagem */}
@@ -405,6 +391,10 @@ export default function HomeContent() {
               <img
                 src={Image4}
                 alt="Equipe Locafacil pronta para atender com excelência"
+                loading="lazy"
+                decoding="async"
+                width={727}
+                height={563}
                 className="w-full rounded-2xl shadow-card"
               />
             </motion.div>
@@ -467,7 +457,7 @@ export default function HomeContent() {
             {/* Confiança final — o visto é desenhado, não é um caractere */}
             <motion.ul
               variants={fadeInUp}
-              className="type-meta text-text-secondary/60 mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2"
+              className="type-meta text-text-secondary mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2"
             >
               {['Sem caução', 'Todos os seguros inclusos', 'Cancele quando quiser'].map((item) => (
                 <li key={item} className="flex items-center gap-2">

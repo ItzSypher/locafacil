@@ -54,7 +54,7 @@ export default function ReservarExtras() {
   return (
     <div className="min-h-screen overflow-x-hidden bg-hero-gradient">
       <Topbar />
-      <section className="pt-28 sm:pt-32 pb-24 px-4 sm:px-6 lg:px-8">
+      <main className="pt-28 sm:pt-32 pb-24 px-4 sm:px-6 lg:px-8">
         <div className="container mx-auto max-w-4xl">
           <StepProgress current="extras" />
 
@@ -141,7 +141,7 @@ export default function ReservarExtras() {
             Continuar para seus dados
           </motion.button>
         </div>
-      </section>
+      </main>
       <Footer />
     </div>
   )
