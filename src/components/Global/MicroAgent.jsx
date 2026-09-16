@@ -87,40 +87,28 @@ export default function MicroAgent() {
     setLoading(true)
 
     try {
-      const promptText = `
-Você é a Locagora, a assistente virtual especialista e amigável da Locafacil. 
-A Locafacil aluga carros e motos no Rio de Janeiro sem caução, sem cartão de crédito, com todos os seguros inclusos e dobro de franquia de quilometragem.
-O nome do usuário é ${userName || 'Cliente'}.
-Responda de forma curta, prestativa e persuasiva. 
-Seja gentil. 
-Sempre recomende o botão de WhatsApp ao final de uma explicação para finalizar a contratação com um consultor humano.
-Não invente preços exatos ou detalhes se não souber, apenas promova os benefícios.
-`
-      
-      const chatHistory = messages.map(m => ({
-        role: m.role === 'model' ? 'model' : 'user',
-        parts: [{ text: m.text }]
-      }))
-
-      const payload = {
-        systemInstruction: { parts: [{ text: promptText }] },
-        contents: [
-          ...chatHistory,
-          { role: 'user', parts: [{ text: userMsg }] }
-        ]
-      }
-
-      const res = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=CHAVE-REMOVIDA-DO-HISTORICO', {
+      // O prompt e a chave moram em api/agent-chat.js. Nada de credencial no
+      // código que chega ao navegador.
+      const res = await fetch('/api/agent-chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        body: JSON.stringify({
+          message: userMsg,
+          userName,
+          history: messages.map((m) => ({ role: m.role, text: m.text })),
+        }),
       })
       const data = await res.json()
-      const aiReply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "Tive um problema na conexão. Pode me chamar no botão do WhatsApp logo abaixo para continuarmos?"
-      
-      setMessages(prev => [...prev, { role: 'model', text: aiReply }])
-    } catch (error) {
-      setMessages(prev => [...prev, { role: 'model', text: "Ocorreu um erro de conexão. Pode me chamar no botão do WhatsApp!" }])
+      const aiReply =
+        data?.data?.text ||
+        'Tive um problema na conexão. Pode me chamar no botão do WhatsApp logo abaixo para continuarmos?'
+
+      setMessages((prev) => [...prev, { role: 'model', text: aiReply }])
+    } catch {
+      setMessages((prev) => [
+        ...prev,
+        { role: 'model', text: 'Não consegui responder agora. Me chama no botão do WhatsApp que um consultor continua com você.' },
+      ])
     } finally {
       setLoading(false)
     }

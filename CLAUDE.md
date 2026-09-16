@@ -63,9 +63,18 @@ Cada função em `api/*.js` é um proxy fino para uma operação ReservaOTA, e
 
 O token é cacheado em variável de módulo e renovado 5 min antes de expirar.
 **As credenciais nunca podem chegar ao bundle do cliente** — só existem nas
-serverless functions. (`src/components/Global/MicroAgent.jsx:88` tem uma chave
-Gemini hardcoded no código do cliente: é o anti-padrão a não repetir, e vale
-rotacionar.)
+serverless functions.
+
+### Assistente Locagora
+
+`api/agent-chat.js` é o proxy do Gemini: prompt de sistema, chave e recorte do
+histórico ficam no servidor, e o `MicroAgent` só chama `/api/agent-chat`. Sem
+`GEMINI_API_KEY` no ambiente o endpoint responde 200 com `unavailable: true` e o
+texto de saída para o WhatsApp — o assistente degrada, não quebra.
+
+**A chave anterior estava hardcoded no cliente e foi publicada no bundle. Ela
+precisa ser rotacionada no Google AI Studio**; a chave nova vai em `.env.local`
+e no painel da Vercel, nunca no código.
 
 O front nunca chama a API OTA direto; fala só com `/api/*` através de
 `src/lib/api/reservation.js`, que normaliza o envelope `{success, data, errors}`
