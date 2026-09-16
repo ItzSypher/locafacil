@@ -116,7 +116,7 @@ export default function SearchWidget() {
             >
               <option value="" disabled className="bg-brand-dark">{loadingLocations ? 'Carregando...' : 'Selecione'}</option>
               {locations.map((loc) => (
-                <option key={loc.id} value={loc.iata} className="bg-brand-dark">{loc.descricao}</option>
+                <option key={loc.id} value={loc.code} className="bg-brand-dark">{loc.descricao}</option>
               ))}
             </select>
           </div>
@@ -134,7 +134,7 @@ export default function SearchWidget() {
             >
               <option value="" className="bg-brand-dark">Mesmo local</option>
               {locations.map((loc) => (
-                <option key={loc.id} value={loc.iata} className="bg-brand-dark">{loc.descricao}</option>
+                <option key={loc.id} value={loc.code} className="bg-brand-dark">{loc.descricao}</option>
               ))}
             </select>
           </div>

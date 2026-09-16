@@ -8,9 +8,10 @@ export default async function handler(req, res) {
     params: { LocationCode },
   })
 
-  if (result.mock) {
-    return res.status(200).json({ success: true, data: mockMinimumNotice, errors: [] })
+  if (result.json?.success) {
+    return res.status(200).json(result.json)
   }
 
-  return res.status(result.status).json(result.json)
+  // Local ainda não provisionado na API: mantém a regra padrão para não travar a busca.
+  return res.status(200).json({ success: true, data: mockMinimumNotice, errors: [], demo: true })
 }

@@ -8,9 +8,9 @@ export default async function handler(req, res) {
     params: { LocationCode },
   })
 
-  if (result.mock) {
-    return res.status(200).json({ success: true, data: mockMinimumPeriod, errors: [] })
+  if (result.json?.success) {
+    return res.status(200).json(result.json)
   }
 
-  return res.status(result.status).json(result.json)
+  return res.status(200).json({ success: true, data: mockMinimumPeriod, errors: [], demo: true })
 }

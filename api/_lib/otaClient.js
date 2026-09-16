@@ -2,10 +2,16 @@
 // client_id/client_secret NUNCA devem ir para o bundle do front-end —
 // só existem aqui, em código que roda como serverless function.
 
+const DEFAULT_BASE_URL = 'https://sgloc.apijcompany.com.br'
+
 let cachedToken = null // { token, expiresAt }
 
+function baseUrl() {
+  return process.env.OTA_BASE_URL || DEFAULT_BASE_URL
+}
+
 function hasCredentials() {
-  return Boolean(process.env.OTA_CLIENT_ID && process.env.OTA_CLIENT_SECRET && process.env.OTA_BASE_URL)
+  return Boolean(process.env.OTA_CLIENT_ID && process.env.OTA_CLIENT_SECRET)
 }
 
 async function getToken() {
@@ -13,8 +19,7 @@ async function getToken() {
     return cachedToken.token
   }
 
-  const tokenUrl = new URL('/oauth/token', process.env.OTA_BASE_URL).origin + '/oauth/token'
-  const res = await fetch(tokenUrl, {
+  const res = await fetch(`${baseUrl()}/oauth/token`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -38,11 +43,13 @@ async function getToken() {
 }
 
 export async function otaFetch(path, { method = 'GET', body, params, auth = false } = {}) {
-  if (!hasCredentials()) {
+  // Endpoints públicos sempre batem na API real; só os autenticados caem
+  // no mock enquanto as credenciais OAuth não forem emitidas.
+  if (auth && !hasCredentials()) {
     return { mock: true }
   }
 
-  const url = new URL(path, process.env.OTA_BASE_URL + '/')
+  const url = new URL(path, `${baseUrl()}/`)
   if (params) {
     Object.entries(params).forEach(([key, value]) => {
       if (value != null) url.searchParams.set(key, value)

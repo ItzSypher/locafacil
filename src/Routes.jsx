@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home/Index';
 import Empresas from './pages/Empresas/Index';
 import Contato from './pages/Contato/Index';
@@ -11,8 +11,7 @@ import { ReservationProvider } from './context/ReservationContext';
 
 export default function Rotas() {
    return (
-      <Router>
-         <Routes>
+      <Routes>
             <Route path="/" exact element={<Home />} />
             <Route path="/para-empresas" element={<Empresas />} />
             <Route path="/contato" element={<Contato />} />
@@ -30,7 +29,6 @@ export default function Rotas() {
                   </ReservationProvider>
                }
             />
-         </Routes>
-      </Router>
+      </Routes>
    );
 }
