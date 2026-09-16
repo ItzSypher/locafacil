@@ -1,0 +1,105 @@
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import Logo from '../../assets/images/logo-business.webp'
+
+/**
+ * Topbar para página de Empresas - variante com logo business.
+ * Mesma estrutura premium da Home com glassmorphism.
+ */
+export default function TopbarEmpresas() {
+  const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50)
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const navLinks = [
+    { label: 'Início', href: '/' },
+    { label: 'Para Empresas', href: '/para-empresas' },
+  ]
+
+  return (
+    <motion.header
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6, ease: 'easeOut' }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled ? 'glass-dark shadow-glass' : 'bg-transparent'
+      }`}
+    >
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 sm:h-20">
+          <a href="/" className="flex-shrink-0">
+            <img src={Logo} alt="Locafacil Business" className="h-8 sm:h-10 w-auto" />
+          </a>
+
+          <nav className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target={link.external ? '_blank' : '_self'}
+                rel={link.external ? 'noopener noreferrer' : undefined}
+                className="relative text-sm font-medium text-text-secondary hover:text-white transition-colors duration-200 cursor-pointer group"
+              >
+                {link.label}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-accent transition-all duration-300 group-hover:w-full" />
+              </a>
+            ))}
+            <a href="https://api.whatsapp.com/send?phone=5521968540185&text=Ol%C3%A1,%20Locafacil!%20Quero%20saber%20sobre%20frota%20para%20empresas." target="_blank" rel="noopener noreferrer">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.97 }}
+                className="bg-brand-accent hover:bg-brand-glow text-white text-sm font-semibold px-5 py-2.5 rounded-full shadow-glow hover:shadow-glow-lg transition-all duration-300 cursor-pointer"
+              >
+                Solicitar Proposta
+              </motion.button>
+            </a>
+          </nav>
+
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="md:hidden relative w-8 h-8 flex flex-col items-center justify-center gap-1.5 cursor-pointer z-50"
+            aria-label="Abrir menu"
+          >
+            <motion.span animate={menuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }} className="w-6 h-0.5 bg-white block" />
+            <motion.span animate={menuOpen ? { opacity: 0 } : { opacity: 1 }} className="w-6 h-0.5 bg-white block" />
+            <motion.span animate={menuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }} className="w-6 h-0.5 bg-white block" />
+          </button>
+        </div>
+      </div>
+
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden fixed inset-0 top-16 glass-dark z-40"
+          >
+            <nav className="flex flex-col items-center justify-center h-full gap-8 -mt-16">
+              {navLinks.map((link, i) => (
+                <motion.a
+                  key={link.label}
+                  href={link.href}
+                  target={link.external ? '_blank' : '_self'}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  onClick={() => setMenuOpen(false)}
+                  className="text-2xl font-semibold text-white hover:text-brand-accent transition-colors cursor-pointer"
+                >
+                  {link.label}
+                </motion.a>
+              ))}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
+  )
+}
