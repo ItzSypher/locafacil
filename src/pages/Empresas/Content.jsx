@@ -40,7 +40,7 @@ export default function EmpresasContent() {
   return (
     <main>
       {/* Seção principal */}
-      <section className="py-16 sm:py-24 bg-slate-50">
+      <section className="on-light py-16 sm:py-24 bg-slate-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
@@ -50,17 +50,17 @@ export default function EmpresasContent() {
             className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center"
           >
             <div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-text-dark leading-tight mb-6 text-balance">
+              <h2 className="type-headline text-text-dark mb-6 text-balance">
                 Crescer dói, mas não precisa ser assim.
               </h2>
-              <p className="text-text-muted text-lg leading-relaxed mb-8 max-w-[65ch]">
+              <p className="type-body text-text-muted text-lg mb-8 max-w-[65ch]">
                 Com a Locafacil Business você pode expandir sua operação sem precisar se preocupar com custos de aquisição, gestão da frota e manutenção dos veículos. Oferecemos soluções completas em terceirização de frotas para você focar no que realmente importa — o crescimento da sua empresa.
               </p>
               <a href="https://api.whatsapp.com/send?phone=5521993297697&text=Ol%C3%A1,%20Locafacil!%20Quero%20uma%20proposta%20para%20minha%20empresa." target="_blank" rel="noopener noreferrer">
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="bg-brand-accent hover:bg-brand-glow text-white font-bold px-8 py-3.5 rounded-xl transition-colors duration-300 cursor-pointer"
+                  className="bg-brand-accent hover:bg-brand-glow text-white font-semibold px-8 py-3.5 rounded-xl transition-colors duration-300 cursor-pointer"
                 >
                   Solicitar Cotação Agora
                 </motion.button>
@@ -77,7 +77,7 @@ export default function EmpresasContent() {
       </section>
 
       {/* 4 Motivos */}
-      <section className="py-16 sm:py-24 bg-white">
+      <section className="on-light py-16 sm:py-24 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
@@ -86,7 +86,7 @@ export default function EmpresasContent() {
             variants={fadeInUp}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-text-dark text-balance">
+            <h2 className="type-headline text-text-dark text-balance">
               4 motivos para contratar hoje
             </h2>
           </motion.div>
@@ -101,11 +101,11 @@ export default function EmpresasContent() {
             >
               {motivos.map((item, i) => (
                 <motion.div key={i} variants={fadeInUp} className="flex gap-5 group">
-                  <div className="flex-shrink-0 w-12 h-12 bg-brand-accent/10 text-brand-accent rounded-xl flex items-center justify-center text-lg font-bold group-hover:bg-brand-accent group-hover:text-white transition-colors duration-300">
+                  <div className="flex-shrink-0 w-12 h-12 bg-brand-accent/10 text-brand-accent rounded-xl flex items-center justify-center type-numeric text-lg font-bold group-hover:bg-brand-accent group-hover:text-white transition-colors duration-300">
                     {i + 1}
                   </div>
                   <div>
-                    <h4 className="font-bold text-xl text-text-dark mb-2">{item.titulo}</h4>
+                    <h4 className="type-subtitle text-text-dark mb-2">{item.titulo}</h4>
                     <p className="text-text-muted leading-relaxed">{item.descricao}</p>
                   </div>
                 </motion.div>
@@ -125,7 +125,7 @@ export default function EmpresasContent() {
       </section>
 
       {/* Banner final */}
-      <section className="hidden md:block py-8 bg-slate-50">
+      <section className="on-light hidden md:block py-8 bg-slate-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.img
             initial={{ opacity: 0, y: 20 }}

@@ -26,10 +26,11 @@ export default {
           muted: '#64748B',
         }
       },
-      /* Tipografia Montserrat */
+      /* Archivo variável — uma família, dois eixos. A voz de display vem da
+         largura (font-stretch), não de uma segunda fonte; por isso `display`
+         e `sans` apontam para a mesma pilha e os papéis moram em global.css. */
       fontFamily: {
-        sans: ['Montserrat', 'system-ui', '-apple-system', 'sans-serif'],
-        display: ['Montserrat', 'system-ui', '-apple-system', 'sans-serif'],
+        sans: ['Archivo', 'Archivo Fallback', 'system-ui', '-apple-system', 'sans-serif'],
       },
       /* Sombras de contato: profundidade em superfície clara, onde o vidro não filtra nada */
       boxShadow: {

@@ -6,9 +6,12 @@ import Footer from '../../../components/Footer/Index'
 import StepProgress from '../StepProgress'
 import { useReservation } from '../../../context/ReservationContext'
 import { searchAvailability, ReservationApiError } from '../../../lib/api/reservation'
+import Price from '../Price'
 
-const formatBRL = (value) =>
-  new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(Number(value) || 0)
+function diariasBetween(start, end) {
+  const hours = (new Date(end) - new Date(start)) / 36e5
+  return Number.isFinite(hours) && hours > 0 ? Math.ceil(hours / 24) : 0
+}
 
 const staggerContainer = {
   hidden: { opacity: 1 },
@@ -89,6 +92,8 @@ export default function ReservarVeiculos() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const diarias = diariasBetween(searchParams?.pickUpDateTime, searchParams?.returnDateTime)
+
   const handleSelect = (vehAvail) => {
     patch({ quote: { quoteId, expiresAt }, selectedVehicle: vehAvail })
     navigate('/reservar/extras')
@@ -101,12 +106,15 @@ export default function ReservarVeiculos() {
         <div className="container mx-auto">
           <StepProgress current="veiculos" />
 
-          <h1 className="text-2xl sm:text-3xl font-black text-text-primary text-center mb-2 tracking-tight">
+          <h1 className="type-title text-text-primary text-center mb-2">
             Escolha seu veículo
           </h1>
           {expiresAt && (
-            <p className="text-text-secondary text-sm text-center mb-10">
-              Preços válidos até {new Date(expiresAt).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}
+            <p className="type-meta text-text-secondary text-center mb-10">
+              Preços válidos até{' '}
+              <span className="type-numeric">
+                {new Date(expiresAt).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}
+              </span>
             </p>
           )}
 
@@ -131,8 +139,8 @@ export default function ReservarVeiculos() {
 
           {!loading && error && (
             <div className="glass rounded-2xl max-w-md mx-auto p-8 text-center" role="alert">
-              <p className="text-text-primary font-semibold mb-2">Não foi possível buscar os veículos</p>
-              <p className="text-text-secondary text-sm mb-6">{error}</p>
+              <p className="type-subtitle text-text-primary mb-2">Não foi possível buscar os veículos</p>
+              <p className="type-meta text-text-secondary mb-6">{error}</p>
               <button
                 onClick={() => navigate('/reservar')}
                 className="bg-brand-accent hover:bg-brand-glow text-white font-bold text-sm px-6 py-3 rounded-xl transition-colors duration-300 cursor-pointer"
@@ -144,8 +152,8 @@ export default function ReservarVeiculos() {
 
           {!loading && !error && vehAvails.length === 0 && (
             <div className="glass rounded-2xl max-w-md mx-auto p-8 text-center">
-              <p className="text-text-primary font-semibold mb-2">Nenhum veículo para este período</p>
-              <p className="text-text-secondary text-sm mb-6">
+              <p className="type-subtitle text-text-primary mb-2">Nenhum veículo para este período</p>
+              <p className="type-meta text-text-secondary mb-6">
                 Tente ampliar as datas ou escolher outra loja de retirada.
               </p>
               <button
@@ -173,12 +181,12 @@ export default function ReservarVeiculos() {
                     variants={fadeInUp}
                     className="glass rounded-2xl p-6 flex flex-col"
                   >
-                    <p className="text-text-secondary text-sm mb-1">{Vehicle.VehType?.VehicleCategory}</p>
-                    <h3 className="text-text-primary text-xl font-black tracking-tight mb-5">
+                    <p className="type-label text-text-secondary mb-2">{Vehicle.VehType?.VehicleCategory}</p>
+                    <h3 className="type-subtitle text-text-primary mb-5">
                       {Vehicle.VehMakeModel?.Name}
                     </h3>
 
-                    <ul className="grid grid-cols-2 gap-x-3 gap-y-2.5 mb-8 text-text-secondary text-sm">
+                    <ul className="grid grid-cols-2 gap-x-3 gap-y-2.5 mb-8 type-meta text-text-secondary">
                       <li className="flex items-center gap-2">
                         <SpecIcon path={ICON_PASSENGERS} />
                         {Vehicle.PassengerQuantity} pessoas
@@ -198,8 +206,13 @@ export default function ReservarVeiculos() {
                     </ul>
 
                     <div className="mt-auto">
-                      <p className="text-text-secondary text-sm">Total estimado</p>
-                      <p className="text-text-primary text-3xl font-black tracking-tight mb-5">{formatBRL(total)}</p>
+                      <p className="type-label text-text-secondary mb-1">Total estimado</p>
+                      <Price value={total} size="md" className="text-text-primary" />
+                      {diarias > 0 && (
+                        <p className="type-meta text-text-secondary mt-1 mb-5">
+                          {diarias} {diarias === 1 ? 'diária' : 'diárias'}, já com taxas
+                        </p>
+                      )}
                       <motion.button
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}

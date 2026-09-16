@@ -6,6 +6,9 @@ import Footer from '../../../components/Footer/Index'
 import StepProgress from '../StepProgress'
 import { useReservation } from '../../../context/ReservationContext'
 
+/* Segundos não dizem nada num comprovante e ainda quebram a linha no celular. */
+const DATE_TIME = { dateStyle: 'short', timeStyle: 'short' }
+
 export default function ReservarConfirmacao() {
   const navigate = useNavigate()
   const { confirmation, selectedVehicle, search, reset } = useReservation()
@@ -38,31 +41,31 @@ export default function ReservarConfirmacao() {
               </svg>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl font-black text-text-primary mb-2 tracking-tight">
+            <h1 className="type-title text-text-primary mb-2">
               Reserva confirmada
             </h1>
-            <p className="text-text-secondary mb-8">Guarde o número abaixo — ele é o seu comprovante.</p>
+            <p className="type-body text-text-secondary mb-8">Guarde o número abaixo — ele é o seu comprovante.</p>
 
-            <p className="text-text-secondary text-sm mb-1">Número da reserva</p>
-            <p className="text-text-primary text-5xl sm:text-6xl font-black tracking-tight mb-8 tabular-nums">
+            <p className="type-label text-text-secondary mb-2">Número da reserva</p>
+            <p className="type-numeric type-display text-text-primary mb-8">
               {confId}
             </p>
 
             <div className="text-left bg-white/5 rounded-2xl p-6 space-y-2 mb-8">
-              <div className="flex justify-between text-sm">
-                <span className="text-text-secondary">Veículo</span>
-                <span className="text-text-primary font-semibold">{vehicleName}</span>
+              <div className="flex items-baseline justify-between gap-4">
+                <span className="type-label text-text-secondary">Veículo</span>
+                <span className="type-body font-semibold text-text-primary text-right">{vehicleName}</span>
               </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-text-secondary">Retirada</span>
-                <span className="text-text-primary font-semibold">
-                  {search?.pickUpDateTime && new Date(search.pickUpDateTime).toLocaleString('pt-BR')}
+              <div className="flex items-baseline justify-between gap-4">
+                <span className="type-label text-text-secondary">Retirada</span>
+                <span className="type-body type-numeric font-semibold text-text-primary text-right">
+                  {search?.pickUpDateTime && new Date(search.pickUpDateTime).toLocaleString('pt-BR', DATE_TIME)}
                 </span>
               </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-text-secondary">Devolução</span>
-                <span className="text-text-primary font-semibold">
-                  {search?.returnDateTime && new Date(search.returnDateTime).toLocaleString('pt-BR')}
+              <div className="flex items-baseline justify-between gap-4">
+                <span className="type-label text-text-secondary">Devolução</span>
+                <span className="type-body type-numeric font-semibold text-text-primary text-right">
+                  {search?.returnDateTime && new Date(search.returnDateTime).toLocaleString('pt-BR', DATE_TIME)}
                 </span>
               </div>
             </div>

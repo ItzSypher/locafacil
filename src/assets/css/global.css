@@ -16,6 +16,17 @@
   --text-dark: #1E293B;
   --white: #ffffff;
   --black: #000000;
+
+  /* Compensação óptica. Texto claro sobre fundo escuro fecha e engrossa:
+     ganha um fio de tracking e uma fração de entrelinha. Superfície clara
+     zera os dois com .on-light. */
+  --type-optical: 0.006em;
+  --type-leading: 1.68;
+}
+
+.on-light {
+  --type-optical: 0em;
+  --type-leading: 1.6;
 }
 
 /* ===== RESET E BASE ===== */
@@ -48,16 +59,28 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Fallback com x-height corrigido: enquanto a Archivo carrega, a Arial desenha
+   as mesmas linhas no mesmo lugar, e a troca não empurra o layout. */
+@font-face {
+  font-family: 'Archivo Fallback';
+  src: local('Arial'), local('Helvetica Neue'), local('Liberation Sans');
+  size-adjust: 104%;
+  line-gap-override: 0%;
+  ascent-override: 92%;
+  descent-override: 24%;
+}
+
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: var(--text-dark);
   overflow-x: hidden;
   width: 100%;
-  font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+  font-family: 'Archivo', 'Archivo Fallback', system-ui, -apple-system, sans-serif;
   font-weight: 400;
   font-size: 1rem;
-  line-height: 1.6;
+  line-height: var(--type-leading, 1.68);
+  letter-spacing: var(--type-optical, 0.006em);
   background-color: var(--white);
 }
 
@@ -116,6 +139,85 @@ a {
   }
 }
 
+/* ===== PAPÉIS TIPOGRÁFICOS =====
+   Seis papéis, uma família. O contraste entre eles vem de largura, peso e
+   espaço — nunca de tamanho sozinho. Quem escreve a interface escolhe o
+   papel, não os valores. */
+@layer components {
+  .type-display {
+    font-stretch: 112%;
+    font-weight: 800;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+  }
+
+  .type-headline {
+    font-stretch: 108%;
+    font-weight: 700;
+    font-size: clamp(1.875rem, 4vw, 2.75rem);
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+  }
+
+  .type-title {
+    font-stretch: 105%;
+    font-weight: 700;
+    font-size: clamp(1.5rem, 2.5vw, 1.875rem);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  .type-subtitle {
+    font-stretch: 103%;
+    font-weight: 700;
+    font-size: 1.1875rem;
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+  }
+
+  .type-body {
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: var(--type-leading, 1.68);
+    letter-spacing: var(--type-optical, 0.006em);
+  }
+
+  .type-meta {
+    font-weight: 400;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    letter-spacing: var(--type-optical, 0.006em);
+  }
+
+  /* Rótulo de campo e de dado: o único papel em caixa alta, e só porque
+     precisa desaparecer ao lado do valor que nomeia. */
+  .type-label {
+    font-weight: 600;
+    font-size: 0.75rem;
+    line-height: 1.4;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* Número que entra em coluna, soma ao vivo ou vira comprovante: largura de
+     dígito fixa, para não dançar quando o valor muda. */
+  .type-numeric {
+    font-variant-numeric: tabular-nums lining-nums;
+    font-feature-settings: 'tnum' 1, 'lnum' 1;
+    letter-spacing: -0.015em;
+  }
+}
+
+/* Campos que recebem número (data, CPF, DDD, telefone) herdam a mesma
+   largura de dígito dos valores que o checkout exibe. */
+input[type='date'],
+input[type='tel'],
+input[type='number'],
+input[inputmode='numeric'] {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
 /* ===== REDUÇÃO DE MOVIMENTO ===== */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -135,9 +237,29 @@ a {
   background-color: var(--brand-accent) !important;
 }
 
+/* No celular o carrossel usa a largura toda: 50px de cada lado espremiam o
+   card a ponto de a palavra não caber na coluna. As setas só aparecem quando
+   há margem para elas. */
 .services-swiper {
-  padding-left: 50px !important;
-  padding-right: 50px !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.services-swiper .swiper-button-next,
+.services-swiper .swiper-button-prev {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .services-swiper {
+    padding-left: 50px !important;
+    padding-right: 50px !important;
+  }
+
+  .services-swiper .swiper-button-next,
+  .services-swiper .swiper-button-prev {
+    display: flex;
+  }
 }
 
 .services-swiper .swiper-button-next,

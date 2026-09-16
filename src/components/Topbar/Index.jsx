@@ -53,7 +53,7 @@ export default function Topbar() {
               <Link
                 key={link.label}
                 to={link.href}
-                className="relative text-sm font-medium text-text-secondary hover:text-white transition-colors duration-200 cursor-pointer group"
+                className="relative type-label text-text-secondary hover:text-white transition-colors duration-200 cursor-pointer group"
               >
                 {link.label}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-accent transition-all duration-300 group-hover:w-full" />
@@ -67,7 +67,7 @@ export default function Topbar() {
                 whileTap={{ scale: 0.97 }}
                 className="bg-brand-accent hover:bg-brand-glow text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-colors duration-300 cursor-pointer"
               >
-                Garanta Seu Veículo
+                Garanta seu veículo
               </motion.button>
             </a>
           </nav>
@@ -115,7 +115,7 @@ export default function Topbar() {
                   <Link
                     to={link.href}
                     onClick={() => setMenuOpen(false)}
-                    className="text-2xl font-semibold text-white hover:text-brand-accent transition-colors cursor-pointer"
+                    className="type-title text-white hover:text-brand-accent transition-colors cursor-pointer"
                   >
                     {link.label}
                   </Link>
@@ -132,9 +132,9 @@ export default function Topbar() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-brand-accent text-white text-lg font-bold px-8 py-3 rounded-xl cursor-pointer"
+                  className="bg-brand-accent text-white text-lg font-semibold px-8 py-3 rounded-xl cursor-pointer"
                 >
-                  Garanta Seu Veículo
+                  Garanta seu veículo
                 </motion.button>
               </a>
             </nav>

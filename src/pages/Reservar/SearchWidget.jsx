@@ -99,12 +99,12 @@ export default function SearchWidget() {
 
   return (
     <form onSubmit={handleSubmit} className="glass rounded-2xl p-6 sm:p-10 max-w-5xl mx-auto">
-      <h2 className="text-text-primary text-xl sm:text-2xl font-black tracking-tight mb-8 text-center">
+      <h2 className="type-title text-text-primary mb-8 text-center text-balance">
         Encontre o veículo perfeito em segundos
       </h2>
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <div>
-          <label className="block text-text-secondary text-xs font-medium mb-1.5 uppercase tracking-wider">Local de Retirada</label>
+          <label className="block type-label text-text-secondary mb-2">Local de retirada</label>
           <div className="relative">
             <LocationIcon />
             <select
@@ -123,7 +123,7 @@ export default function SearchWidget() {
         </div>
 
         <div>
-          <label className="block text-text-secondary text-xs font-medium mb-1.5 uppercase tracking-wider">Local de Devolução</label>
+          <label className="block type-label text-text-secondary mb-2">Local de devolução</label>
           <div className="relative">
             <LocationIcon />
             <select
@@ -141,7 +141,7 @@ export default function SearchWidget() {
         </div>
 
         <div>
-          <label className="block text-text-secondary text-xs font-medium mb-1.5 uppercase tracking-wider">Data de Retirada</label>
+          <label className="block type-label text-text-secondary mb-2">Data de retirada</label>
           <div className="relative">
             <DateIcon />
             <input
@@ -156,7 +156,7 @@ export default function SearchWidget() {
         </div>
 
         <div>
-          <label className="block text-text-secondary text-xs font-medium mb-1.5 uppercase tracking-wider">Data de Devolução</label>
+          <label className="block type-label text-text-secondary mb-2">Data de devolução</label>
           <div className="relative">
             <DateIcon />
             <input
@@ -172,7 +172,7 @@ export default function SearchWidget() {
       </div>
 
       {error && (
-        <p className="mt-4 text-sm text-red-400 text-center">{error}</p>
+        <p className="mt-4 type-meta text-red-400 text-center" role="alert">{error}</p>
       )}
 
       <motion.button

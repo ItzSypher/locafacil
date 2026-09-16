@@ -19,17 +19,17 @@ export default function Header() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3, duration: 0.6 }}
           >
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-text-primary leading-tight mb-4 text-balance">
+            <h1 className="type-display text-text-primary mb-4 text-balance">
               Locafacil Business
             </h1>
-            <p className="text-xl sm:text-2xl text-text-secondary leading-relaxed mb-8 max-w-[45ch]">
+            <p className="type-body text-text-secondary text-xl mb-8 max-w-[45ch]">
               Eficiência em movimento: soluções completas em terceirização de frota.
             </p>
             <a href="https://api.whatsapp.com/send?phone=5521993297697&text=Ol%C3%A1,%20Locafacil!%20Quero%20saber%20sobre%20frota%20para%20empresas." target="_blank" rel="noopener noreferrer">
               <motion.button
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="bg-brand-accent hover:bg-brand-glow text-white font-bold px-8 py-3.5 rounded-xl transition-colors duration-300 cursor-pointer"
+                className="bg-brand-accent hover:bg-brand-glow text-white font-semibold px-8 py-3.5 rounded-xl transition-colors duration-300 cursor-pointer"
               >
                 Solicitar Proposta Comercial
               </motion.button>

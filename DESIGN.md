@@ -25,35 +25,56 @@ colors:
   glass-dark-surface: "rgba(10,22,40,0.85)"
 typography:
   display:
-    fontFamily: "Montserrat, system-ui, -apple-system, sans-serif"
-    fontSize: "clamp(2.25rem, 6vw, 4.5rem)"
-    fontWeight: 900
-    lineHeight: 1.05
-    letterSpacing: "-0.025em"
+    fontFamily: "Archivo, Archivo Fallback, system-ui, -apple-system, sans-serif"
+    fontSize: "clamp(2.5rem, 6vw, 4.5rem)"
+    fontWeight: 800
+    fontStretch: "112%"
+    lineHeight: 1.04
+    letterSpacing: "-0.03em"
   headline:
-    fontFamily: "Montserrat, system-ui, -apple-system, sans-serif"
-    fontSize: "clamp(1.875rem, 4vw, 3rem)"
-    fontWeight: 900
-    lineHeight: 1.1
+    fontFamily: "Archivo, Archivo Fallback, system-ui, -apple-system, sans-serif"
+    fontSize: "clamp(1.875rem, 4vw, 2.75rem)"
+    fontWeight: 700
+    fontStretch: "108%"
+    lineHeight: 1.12
     letterSpacing: "-0.025em"
   title:
-    fontFamily: "Montserrat, system-ui, -apple-system, sans-serif"
-    fontSize: "clamp(1.5rem, 3vw, 1.875rem)"
-    fontWeight: 900
+    fontFamily: "Archivo, Archivo Fallback, system-ui, -apple-system, sans-serif"
+    fontSize: "clamp(1.5rem, 2.5vw, 1.875rem)"
+    fontWeight: 700
+    fontStretch: "105%"
     lineHeight: 1.2
-    letterSpacing: "-0.025em"
+    letterSpacing: "-0.02em"
+  subtitle:
+    fontFamily: "Archivo, Archivo Fallback, system-ui, -apple-system, sans-serif"
+    fontSize: "1.1875rem"
+    fontWeight: 700
+    fontStretch: "103%"
+    lineHeight: 1.3
+    letterSpacing: "-0.015em"
   body:
-    fontFamily: "Montserrat, system-ui, -apple-system, sans-serif"
-    fontSize: "clamp(1rem, 1.5vw, 1.125rem)"
+    fontFamily: "Archivo, Archivo Fallback, system-ui, -apple-system, sans-serif"
+    fontSize: "1rem"
     fontWeight: 400
-    lineHeight: 1.6
-    letterSpacing: "normal"
+    lineHeight: 1.68
+    letterSpacing: "0.006em"
+  meta:
+    fontFamily: "Archivo, Archivo Fallback, system-ui, -apple-system, sans-serif"
+    fontSize: "0.8125rem"
+    fontWeight: 400
+    lineHeight: 1.5
+    letterSpacing: "0.006em"
   label:
-    fontFamily: "Montserrat, system-ui, -apple-system, sans-serif"
+    fontFamily: "Archivo, Archivo Fallback, system-ui, -apple-system, sans-serif"
     fontSize: "0.75rem"
-    fontWeight: 900
+    fontWeight: 600
     lineHeight: 1.4
-    letterSpacing: "0.2em"
+    letterSpacing: "0.06em"
+    textTransform: "uppercase"
+  numeric:
+    fontFamily: "Archivo, Archivo Fallback, system-ui, -apple-system, sans-serif"
+    fontVariantNumeric: "tabular-nums lining-nums"
+    letterSpacing: "-0.015em"
 rounded:
   xl: "0.75rem"
   2xl: "1rem"
@@ -136,7 +157,7 @@ como um desses, ela está errada.
 - Fundo escuro contínuo como ambiente padrão; o claro é a exceção funcional
 - Um único azul como voz da marca, do CTA ao foco de campo
 - Vidro fosco no lugar de sombra: profundidade por luz e camada
-- Tipografia de peso 900 para afirmar, peso 400 para explicar — sem meio-termo
+- Uma família com eixo de largura: a manchete abre, o texto recua — sem segunda fonte
 - Urgência rara e factual, nunca decorativa
 
 ## Colors
@@ -195,40 +216,62 @@ fora do mundo.
 
 ## Typography
 
-**Display Font:** Montserrat (com system-ui, -apple-system, sans-serif)
-**Body Font:** Montserrat (mesma família)
-**Label/Mono Font:** nenhuma — o sistema é monofamiliar por decisão
+**Family:** Archivo (variável, eixos `wght` 400–800 e `wdth` 100–112), com
+`Archivo Fallback` — uma Arial com `size-adjust: 104%` que desenha as mesmas
+linhas no mesmo lugar enquanto a fonte real carrega.
+**Second family:** nenhuma. A voz de display vem da largura, não de outra fonte.
 
-**Character:** Uma única voz que muda de volume, não de sotaque. O peso 900 em
-caixa apertada (-0.025em) dá o tom de placa de sinalização vista em velocidade;
-o peso 400 com entrelinha 1.6 devolve o ar para quem parou para ler. A ausência
-de uma segunda família é o que mantém o sistema veloz — nenhum contraste
-tipográfico rouba atenção do azul.
+**Character:** A Archivo nasce da tradição de letreiro e placa — grotesca de
+aberturas fechadas, dígitos de largura igual, contornos que aguentam ser lidos
+de relance. É o oposto da geométrica genérica que vinha antes: tem sotaque, e o
+sotaque é o da estrada. O eixo de largura é o que faz o sistema respirar sem
+importar uma segunda família: a manchete abre para 112% e ganha porte de
+wordmark; o texto fica em 100% e some para quem só quer ler.
 
 ### Hierarchy
-- **Display** (900, clamp 2.25rem–4.5rem, entrelinha 1.05): promessa principal do
-  hero. Uma por página, quebrada em duas linhas por `<br />` — a quebra é
-  autoral, não acidental.
-- **Headline** (900, clamp 1.875rem–3rem, entrelinha 1.1): abertura de seção.
-  Vem sozinha, com `text-balance` para equilibrar as linhas.
-- **Title** (900, clamp 1.5rem–1.875rem, entrelinha 1.2): título de card,
-  cabeçalho de etapa, nome de veículo.
-- **Body** (400, clamp 1rem–1.125rem, entrelinha 1.6, medida máxima 65ch):
-  explicação e descrição. Palavras que carregam a proposta de valor ganham
-  `<strong>` em cor de texto primário, não em azul.
-- **Label** (900, 0.75rem, tracking 0.2em, CAIXA ALTA): uso restrito a badges de
-  escassez. Não é rótulo de formulário nem antecede headline.
+- **Display** (800, largura 112%, clamp 2.5rem–4.5rem, entrelinha 1.04, tracking
+  -0.03em): promessa principal do hero — e, na confirmação, o número da reserva,
+  que ali é a única coisa que a pessoa veio ver. Uma por página.
+- **Headline** (700, largura 108%, clamp 1.875rem–2.75rem): abertura de seção.
+  Vem sozinha, com `text-balance`.
+- **Title** (700, largura 105%, clamp 1.5rem–1.875rem): título de página interna,
+  cabeçalho de etapa do checkout, título de card grande.
+- **Subtitle** (700, largura 103%, 1.1875rem): nome de veículo, título de
+  sub-seção, cabeçalho de estado vazio ou de erro.
+- **Body** (400, 1rem, entrelinha 1.68, medida 45–65ch): explicação e descrição.
+- **Meta** (400, 0.8125rem): informação de apoio — validade de preço, contagem de
+  diárias, descrição de cobertura, texto de rodapé.
+- **Label** (600, 0.75rem, tracking 0.06em, CAIXA ALTA): rótulo de campo, rótulo
+  de dado, categoria de veículo, navegação. É o único papel em caixa alta, e só
+  porque precisa sumir ao lado do valor que nomeia.
+- **Numeric** (modificador): `tabular-nums lining-nums`. Acumula com qualquer
+  papel acima.
 
 ### Named Rules
 
-**A Regra dos Dois Pesos.** Só existem 900 e 400. Pesos intermediários (500, 600,
-700) diluem a diferença entre afirmar e explicar — a única exceção é `font-bold`
-em texto de botão, onde 900 fecharia demais o contorno em corpo pequeno.
+**A Regra da Largura no Lugar da Segunda Fonte.** Contraste de display vem do
+eixo `wdth`, nunca de uma família importada. Se um título precisa de mais
+presença, ele abre — não troca de fonte. Uma família, um download, um sotaque.
+
+**A Regra do Dígito Que Não Dança.** Todo número que entra em coluna, soma ao
+vivo ou vira comprovante usa `.type-numeric`: preço, total, número de reserva,
+data, hora, telefone, CPF, DDD, número de etapa. Dígito proporcional faz o total
+pular de largura a cada seleção — num checkout isso lê como erro, não como
+animação.
+
+**A Regra da Compensação Óptica.** Texto claro sobre fundo escuro fecha e
+engrossa. Entrelinha 1.68 e tracking +0.006em são o padrão do site, que é
+escuro; superfície clara recebe `.on-light`, que zera os dois. Nenhuma tela
+mistura as duas medidas no mesmo fundo.
+
+**A Regra do Preço em Três Partes.** Valor em reais nunca é uma string só.
+Símbolo a 0,5em em cor secundária, inteiro no peso 800, centavos a 0,56em,
+unidade como metadado — sempre pelo componente `Price`. É o gesto que separa
+locadora de tabela de planilha, e é o mesmo em card, em lista e em total.
 
 **A Regra do Título Sozinho.** Headline de seção não recebe eyebrow, kicker ou
-rótulo acima. O título carrega o próprio peso; um label antes dele é muleta e
-deixa a página com cara de template. Rótulo de formulário é caixa baixa, tamanho
-de corpo, e fica colado no campo que nomeia.
+rótulo acima. O título carrega o próprio peso. Quando existe um subtítulo
+factual, ele vem depois do título, como metadado — nunca antes.
 
 ## Layout
 
@@ -392,8 +435,13 @@ chegam.
 - **Do** construir profundidade com vidro (`backdrop-filter: blur(16px)` + borda
   branca translúcida de 1px).
 - **Do** deixar a headline de seção sozinha, com `text-balance`.
-- **Do** manter apenas dois pesos tipográficos: 900 para afirmar, 400 para
-  explicar.
+- **Do** escolher o papel tipográfico (`.type-display`, `.type-headline`,
+  `.type-title`, `.type-subtitle`, `.type-body`, `.type-meta`, `.type-label`) em
+  vez de montar tamanho, peso e tracking à mão.
+- **Do** marcar com `.type-numeric` todo preço, total, número de reserva, data,
+  hora, telefone e documento.
+- **Do** marcar com `.on-light` qualquer superfície clara, para zerar a
+  compensação óptica do fundo escuro.
 - **Do** usar 12px de raio em botões e campos, 16px em cards e painéis.
 - **Do** manter o foco de teclado visível em todo elemento interativo (anel de
   2px em Azul Farol com 2px de afastamento) e o caret na cor da marca.

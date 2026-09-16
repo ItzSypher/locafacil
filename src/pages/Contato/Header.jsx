@@ -15,10 +15,10 @@ export default function Header() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3, duration: 0.6 }}
           >
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-text-primary leading-tight mb-4 text-balance">
+            <h1 className="type-display text-text-primary mb-4 text-balance">
               Estamos aqui por você.
             </h1>
-            <p className="text-xl sm:text-2xl text-text-secondary leading-relaxed mb-8 max-w-[45ch]">
+            <p className="type-body text-text-secondary text-xl mb-8 max-w-[45ch]">
               Conheça a equipe por trás da Locafacil e entre em contato conosco.
             </p>
           </motion.div>

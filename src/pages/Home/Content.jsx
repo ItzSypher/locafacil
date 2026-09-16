@@ -157,7 +157,7 @@ export default function HomeContent() {
     <main>
 
       {/* ===== SEÇÃO BENEFÍCIOS ===== */}
-      <section id="beneficios" className="pt-32 sm:pt-40 pb-16 sm:pb-24 bg-slate-50">
+      <section id="beneficios" className="on-light pt-32 sm:pt-40 pb-16 sm:pb-24 bg-slate-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
@@ -166,10 +166,10 @@ export default function HomeContent() {
             variants={fadeInUp}
             className="text-center mb-12 sm:mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-text-dark leading-tight tracking-tight text-balance">
+            <h2 className="type-headline text-text-dark text-balance">
               Aluguel de carro não é tudo igual.
             </h2>
-            <p className="text-text-muted text-lg mt-4 max-w-[65ch] mx-auto">
+            <p className="type-body text-text-muted text-lg mt-4 max-w-[65ch] mx-auto text-balance">
               Só na Locafacil você tem benefícios que ninguém mais oferece. Compare e comprove.
             </p>
           </motion.div>
@@ -199,7 +199,7 @@ export default function HomeContent() {
                     <div className="w-14 h-14 bg-brand-accent/10 text-brand-accent rounded-2xl flex items-center justify-center mb-5 group-hover:bg-brand-accent group-hover:text-white group-hover:scale-110 transition-all duration-300">
                       {item.icone}
                     </div>
-                    <h3 className="text-xl font-bold text-text-dark mb-2 tracking-tight">{item.titulo}</h3>
+                    <h3 className="type-subtitle text-text-dark mb-2">{item.titulo}</h3>
                     <p className="text-text-muted leading-relaxed flex-grow">{item.descricao}</p>
                   </div>
                 </SwiperSlide>
@@ -210,7 +210,7 @@ export default function HomeContent() {
       </section>
 
       {/* ===== SEÇÃO SOCIAL PROOF - MONTADORAS ===== */}
-      <section className="py-16 sm:py-20 bg-white">
+      <section className="on-light py-16 sm:py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
@@ -219,7 +219,7 @@ export default function HomeContent() {
             variants={fadeInUp}
             className="text-center mb-10"
           >
-            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-text-dark text-balance">
+            <h2 className="type-headline text-text-dark text-balance">
               Montadoras que fazem parte da nossa frota
             </h2>
           </motion.div>
@@ -265,7 +265,7 @@ export default function HomeContent() {
       </section>
 
       {/* ===== SEÇÃO SERVIÇOS ===== */}
-      <section className="py-16 sm:py-24 bg-slate-50 relative overflow-hidden">
+      <section className="on-light py-16 sm:py-24 bg-slate-50 relative overflow-hidden">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Título */}
           <div className="mb-12 sm:mb-16 text-center">
@@ -275,7 +275,7 @@ export default function HomeContent() {
               viewport={{ once: true, amount: 0.12 }}
               variants={fadeInUp}
             >
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-text-dark leading-tight tracking-tight text-balance">
+              <h2 className="type-headline text-text-dark text-balance">
                 Soluções que movem você.
               </h2>
             </motion.div>
@@ -313,11 +313,11 @@ export default function HomeContent() {
 
                     {/* Texto */}
                     <div className="w-full md:w-1/2 space-y-5 flex flex-col text-left">
-                      <p className="text-text-muted text-sm">{servico.subtitulo}</p>
-                      <h3 className="text-2xl sm:text-3xl font-black text-text-dark leading-tight tracking-tight">
+                      <h3 className="type-title text-text-dark text-balance">
                         {servico.titulo}
                       </h3>
-                      <p className="text-text-muted text-base sm:text-lg leading-relaxed">
+                      <p className="type-meta text-text-muted !mt-2">{servico.subtitulo}</p>
+                      <p className="type-body text-text-muted sm:text-lg max-w-[60ch]">
                         {servico.descricao}
                       </p>
                       <div className="pt-4">
@@ -354,7 +354,7 @@ export default function HomeContent() {
       </section>
 
       {/* ===== SEÇÃO POR QUE ESCOLHER ===== */}
-      <section className="py-16 sm:py-24 bg-white">
+      <section className="on-light py-16 sm:py-24 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Texto com itens numerados */}
@@ -365,7 +365,7 @@ export default function HomeContent() {
                 viewport={{ once: true, amount: 0.12 }}
                 variants={fadeInUp}
               >
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-text-dark leading-tight mb-10 text-balance">
+                <h2 className="type-headline text-text-dark mb-10 text-balance">
                   Por que mais de 5.000 clientes escolhem a Locafacil?
                 </h2>
               </motion.div>
@@ -383,11 +383,11 @@ export default function HomeContent() {
                     variants={fadeInUp}
                     className="flex gap-5 group"
                   >
-                    <div className="flex-shrink-0 w-12 h-12 bg-brand-accent/10 text-brand-accent rounded-xl flex items-center justify-center font-bold text-lg group-hover:bg-brand-accent group-hover:text-white transition-all duration-300">
+                    <div className="flex-shrink-0 w-12 h-12 bg-brand-accent/10 text-brand-accent rounded-xl flex items-center justify-center type-numeric font-bold text-lg group-hover:bg-brand-accent group-hover:text-white transition-all duration-300">
                       {item.numero}
                     </div>
                     <div>
-                      <h4 className="font-bold text-lg text-text-dark mb-1">{item.titulo}</h4>
+                      <h4 className="type-subtitle text-text-dark mb-1">{item.titulo}</h4>
                       <p className="text-text-muted leading-relaxed">{item.descricao}</p>
                     </div>
                   </motion.div>
@@ -431,14 +431,14 @@ export default function HomeContent() {
           >
             <motion.h2
               variants={fadeInUp}
-              className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black tracking-tight text-text-primary leading-tight mb-6 text-balance"
+              className="type-headline text-text-primary mb-6 text-balance"
             >
               Não deixe outro motorista<br />pegar o seu carro.
             </motion.h2>
 
             <motion.p
               variants={fadeInUp}
-              className="text-text-secondary text-lg sm:text-xl leading-relaxed mb-10 max-w-[60ch] mx-auto"
+              className="type-body text-text-secondary text-lg mb-10 max-w-[60ch] mx-auto text-balance"
             >
               As unidades são limitadas e a procura é alta. Garanta agora a liberdade de dirigir sem complicação e com o melhor custo-benefício do Rio de Janeiro.
             </motion.p>
@@ -448,7 +448,7 @@ export default function HomeContent() {
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="w-full sm:w-auto bg-brand-accent hover:bg-brand-glow text-white font-bold text-lg px-10 py-4 rounded-xl transition-colors duration-300 cursor-pointer"
+                  className="w-full sm:w-auto bg-brand-accent hover:bg-brand-glow text-white font-semibold text-lg px-10 py-4 rounded-xl transition-colors duration-300 cursor-pointer"
                 >
                   Garantir Meu Carro Agora
                 </motion.button>
@@ -457,17 +457,27 @@ export default function HomeContent() {
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="w-full sm:w-auto bg-white/5 border border-white/15 text-white font-semibold text-lg px-10 py-4 rounded-xl hover:bg-white/10 transition-colors duration-300 cursor-pointer"
+                  className="w-full sm:w-auto bg-white/5 border border-white/15 text-white font-medium text-lg px-10 py-4 rounded-xl hover:bg-white/10 transition-colors duration-300 cursor-pointer"
                 >
                   Ligar Agora: (21) 96854-0185
                 </motion.button>
               </a>
             </motion.div>
 
-            {/* Confiança final */}
-            <motion.p variants={fadeInUp} className="text-text-secondary/60 text-sm mt-8">
-              ✓ Sem caução &nbsp;&nbsp; ✓ Todos os seguros inclusos &nbsp;&nbsp; ✓ Cancele quando quiser
-            </motion.p>
+            {/* Confiança final — o visto é desenhado, não é um caractere */}
+            <motion.ul
+              variants={fadeInUp}
+              className="type-meta text-text-secondary/60 mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2"
+            >
+              {['Sem caução', 'Todos os seguros inclusos', 'Cancele quando quiser'].map((item) => (
+                <li key={item} className="flex items-center gap-2">
+                  <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                  {item}
+                </li>
+              ))}
+            </motion.ul>
           </motion.div>
         </div>
       </section>

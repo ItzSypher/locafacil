@@ -46,13 +46,13 @@ export default function ExitPopup() {
             <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-brand-accent to-brand-glow" />
             
             <div className="text-center relative z-10">
-              <span className="inline-block bg-brand-accent/10 text-brand-accent font-bold px-4 py-1.5 rounded-full mb-6 text-sm">
+              <span className="inline-block bg-brand-accent/10 text-brand-accent type-label px-4 py-1.5 rounded-full mb-6">
                 ESPERE UM SEGUNDO!
               </span>
-              <h2 className="text-3xl font-black text-text-dark mb-4 leading-tight">
+              <h2 className="type-title text-text-dark mb-4 text-balance">
                 Não feche essa página antes de ver isso.
               </h2>
-              <p className="text-text-muted text-lg mb-8">
+              <p className="type-body text-text-muted text-lg mb-8 max-w-[45ch] mx-auto">
                 Garantimos a melhor condição para você fechar negócio <strong className="text-brand-accent">hoje</strong>. Sem caução, seguro incluso e liberação expressa. Fale com nossos consultores agora e receba um benefício exclusivo.
               </p>
               
@@ -60,7 +60,7 @@ export default function ExitPopup() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-full bg-brand-accent hover:bg-brand-glow text-white font-bold text-lg py-4 rounded-xl transition-colors cursor-pointer"
+                  className="w-full bg-brand-accent hover:bg-brand-glow text-white font-semibold text-lg py-4 rounded-xl transition-colors cursor-pointer"
                   onClick={() => setShow(false)}
                 >
                   Resgatar Condição Especial →
@@ -68,7 +68,7 @@ export default function ExitPopup() {
               </a>
               <button 
                 onClick={() => setShow(false)} 
-                className="mt-5 text-sm text-text-muted hover:underline cursor-pointer"
+                className="mt-5 type-meta text-text-muted hover:underline cursor-pointer"
               >
                 Não, prefiro perder essa oportunidade
               </button>

@@ -8,7 +8,7 @@ import { useReservation } from '../../../context/ReservationContext'
 import { confirmReservation, ReservationApiError } from '../../../lib/api/reservation'
 
 const inputClass = 'w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-text-dark text-sm focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-colors'
-const labelClass = 'block text-text-muted text-sm font-medium mb-1.5'
+const labelClass = 'block type-label text-text-muted mb-2'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const CPF_RE = /^\d{11}$/
@@ -108,14 +108,14 @@ export default function ReservarDados() {
         <div className="container mx-auto max-w-2xl">
           <StepProgress current="dados" />
 
-          <h1 className="text-2xl sm:text-3xl font-black text-text-primary text-center mb-3 tracking-tight">
+          <h1 className="type-title text-text-primary text-center mb-3">
             Seus dados
           </h1>
-          <p className="text-text-secondary text-sm text-center mb-10">
+          <p className="type-meta text-text-secondary text-center mb-10">
             Precisamos deles para emitir o contrato de locação.
           </p>
 
-          <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-6 sm:p-8 space-y-4">
+          <form onSubmit={handleSubmit} className="on-light bg-white rounded-2xl p-6 sm:p-8 space-y-4">
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
                 <label className={labelClass}>Nome</label>
@@ -130,11 +130,11 @@ export default function ReservarDados() {
             <div className="grid grid-cols-3 gap-4">
               <div>
                 <label className={labelClass}>DDD</label>
-                <input className={inputClass} value={form.areaCode} onChange={setField('areaCode')} placeholder="21" maxLength={2} required />
+                <input className={inputClass} inputMode="numeric" value={form.areaCode} onChange={setField('areaCode')} placeholder="21" maxLength={2} required />
               </div>
               <div className="col-span-2">
                 <label className={labelClass}>Telefone</label>
-                <input className={inputClass} value={form.phone} onChange={setField('phone')} placeholder="968540185" required />
+                <input type="tel" className={inputClass} value={form.phone} onChange={setField('phone')} placeholder="968540185" required />
               </div>
             </div>
 
@@ -145,7 +145,7 @@ export default function ReservarDados() {
 
             <div>
               <label className={labelClass}>CPF</label>
-              <input className={inputClass} value={form.docId} onChange={setField('docId')} placeholder="Somente números" required />
+              <input className={inputClass} inputMode="numeric" value={form.docId} onChange={setField('docId')} placeholder="Somente números" required />
             </div>
 
             <div>
@@ -165,7 +165,7 @@ export default function ReservarDados() {
             </div>
 
             {error && (
-              <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-xl px-4 py-3" role="alert">
+              <p className="type-meta text-red-600 bg-red-50 border border-red-200 rounded-xl px-4 py-3" role="alert">
                 {error}
               </p>
             )}

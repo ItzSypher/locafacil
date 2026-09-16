@@ -58,7 +58,7 @@ export default function Header() {
           >
             {/* Badge de urgência */}
             <motion.div variants={itemVariants}>
-              <span className="inline-flex items-center gap-2 bg-brand-gold/10 text-brand-gold text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-full border border-brand-gold/30 mb-6">
+              <span className="inline-flex items-center gap-2 bg-brand-gold/10 text-brand-gold type-label px-4 py-1.5 rounded-full border border-brand-gold/30 mb-6">
                 <span className="w-1.5 h-1.5 bg-brand-gold rounded-full" />
                 Últimas unidades com condições exclusivas
               </span>
@@ -67,7 +67,7 @@ export default function Header() {
             {/* Headline principal absurdamente persuasiva */}
             <motion.h1
               variants={itemVariants}
-              className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-text-primary leading-[1.05] mb-6 tracking-tight"
+              className="type-display text-text-primary mb-6"
             >
               Sua Liberdade<br />Sobre Rodas.
             </motion.h1>
@@ -75,7 +75,7 @@ export default function Header() {
             {/* Subtítulo com trigger de autoridade */}
             <motion.p
               variants={itemVariants}
-              className="text-text-secondary text-base sm:text-lg lg:text-xl leading-relaxed mb-8 max-w-md"
+              className="type-body text-text-secondary sm:text-lg mb-8 max-w-[38ch]"
             >
               Alugue carros <strong className="text-text-primary">sem caução</strong>, com <strong className="text-text-primary">todos os seguros inclusos</strong> e o <strong className="text-text-primary">dobro da franquia</strong>. Mais de <strong className="text-text-primary">5.000 clientes</strong> já escolheram a liberdade.
             </motion.p>
@@ -86,18 +86,18 @@ export default function Header() {
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="bg-brand-accent hover:bg-brand-glow text-white font-bold text-sm sm:text-base px-8 py-3.5 rounded-xl transition-colors duration-300 cursor-pointer"
+                  className="bg-brand-accent hover:bg-brand-glow text-white font-semibold text-base px-8 py-3.5 rounded-xl transition-colors duration-300 cursor-pointer"
                 >
-                  Garantir Meu Carro Agora
+                  Garantir meu carro agora
                 </motion.button>
               </a>
               <a href="#beneficios">
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="bg-white/5 border border-white/15 text-white font-semibold text-sm sm:text-base px-8 py-3.5 rounded-xl hover:bg-white/10 transition-colors duration-300 cursor-pointer"
+                  className="bg-white/5 border border-white/15 text-white font-medium text-base px-8 py-3.5 rounded-xl hover:bg-white/10 transition-colors duration-300 cursor-pointer"
                 >
-                  Descubra os Benefícios
+                  Descubra os benefícios
                 </motion.button>
               </a>
             </motion.div>
@@ -108,7 +108,7 @@ export default function Header() {
                 {[1, 2, 3, 4].map((i) => (
                   <div
                     key={i}
-                    className="w-8 h-8 rounded-full border-2 border-brand-dark bg-brand-deep flex items-center justify-center text-xs text-white font-bold"
+                    className="w-8 h-8 rounded-full border-2 border-brand-dark bg-brand-deep flex items-center justify-center type-label text-white"
                   >
                     {['RS', 'MF', 'JC', 'AL'][i - 1]}
                   </div>
@@ -122,7 +122,7 @@ export default function Header() {
                     </svg>
                   ))}
                 </div>
-                <p className="text-text-secondary text-xs mt-0.5">Nota 4.9 • +5.000 locações</p>
+                <p className="type-meta type-numeric text-text-secondary mt-1">Nota 4,9 • +5.000 locações</p>
               </div>
             </motion.div>
           </motion.div>

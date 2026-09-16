@@ -5,9 +5,7 @@ import Topbar from '../../../components/Topbar/Index'
 import Footer from '../../../components/Footer/Index'
 import StepProgress from '../StepProgress'
 import { useReservation } from '../../../context/ReservationContext'
-
-const formatBRL = (value) =>
-  new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(Number(value) || 0)
+import Price from '../Price'
 
 export default function ReservarExtras() {
   const navigate = useNavigate()
@@ -60,13 +58,13 @@ export default function ReservarExtras() {
         <div className="container mx-auto max-w-4xl">
           <StepProgress current="extras" />
 
-          <h1 className="text-2xl sm:text-3xl font-black text-text-primary text-center mb-10 tracking-tight">
+          <h1 className="type-title text-text-primary text-center mb-10">
             Proteja sua viagem
           </h1>
 
           {coverages.length > 0 && (
             <div className="mb-10">
-              <h2 className="text-text-primary text-lg font-black tracking-tight mb-4">Cobertura</h2>
+              <h2 className="type-subtitle text-text-primary mb-4">Cobertura</h2>
               <div className="grid sm:grid-cols-2 gap-4">
                 {coverages.map((c, i) => {
                   const cov = c.PricedCoverage
@@ -82,11 +80,16 @@ export default function ReservarExtras() {
                         active ? '!border-brand-accent bg-brand-accent/10' : 'hover:bg-white/[0.12]'
                       }`}
                     >
-                      <p className="text-text-primary font-bold mb-1">{cov.Coverage.Details?.Value}</p>
-                      <p className="text-text-secondary text-sm mb-3">{cov.Coverage.Details?.Description}</p>
-                      <p className="text-text-primary font-bold text-sm">
-                        {included ? 'Incluso' : `+ ${formatBRL(cov.Charge.Amount)}`}
-                      </p>
+                      <p className="type-subtitle text-text-primary mb-1">{cov.Coverage.Details?.Value}</p>
+                      <p className="type-meta text-text-secondary mb-3">{cov.Coverage.Details?.Description}</p>
+                      {included ? (
+                        <p className="type-label text-brand-success">Incluso</p>
+                      ) : (
+                        <p className="flex items-baseline gap-1 text-text-primary">
+                          <span aria-hidden="true" className="text-text-secondary">+</span>
+                          <Price value={cov.Charge.Amount} size="sm" />
+                        </p>
+                      )}
                     </button>
                   )
                 })}
@@ -96,7 +99,7 @@ export default function ReservarExtras() {
 
           {equipments.length > 0 && (
             <div className="mb-10">
-              <h2 className="text-text-primary text-lg font-black tracking-tight mb-4">Equipamentos e serviços</h2>
+              <h2 className="type-subtitle text-text-primary mb-4">Equipamentos e serviços</h2>
               <div className="grid sm:grid-cols-2 gap-4">
                 {equipments.map((e, i) => {
                   const active = selectedEquip.includes(e.Equipment.EquipType)
@@ -110,8 +113,11 @@ export default function ReservarExtras() {
                         active ? '!border-brand-accent bg-brand-accent/10' : 'hover:bg-white/[0.12]'
                       }`}
                     >
-                      <span className="text-text-primary font-medium text-sm">{e.Equipment.Description}</span>
-                      <span className="text-text-primary font-bold text-sm whitespace-nowrap">+ {formatBRL(e.Charge.Amount)}</span>
+                      <span className="type-body text-text-primary">{e.Equipment.Description}</span>
+                      <span className="flex items-baseline gap-1 whitespace-nowrap text-text-primary">
+                        <span aria-hidden="true" className="text-text-secondary">+</span>
+                        <Price value={e.Charge.Amount} size="sm" />
+                      </span>
                     </button>
                   )
                 })}
@@ -119,10 +125,10 @@ export default function ReservarExtras() {
             </div>
           )}
 
-          <div className="glass rounded-2xl p-6 flex items-center justify-between mb-8">
-            <span className="text-text-secondary text-sm">Total estimado</span>
-            <span className="text-text-primary text-2xl font-black tracking-tight" aria-live="polite">
-              {formatBRL(baseTotal + extrasTotal)}
+          <div className="glass rounded-2xl p-6 flex items-center justify-between gap-4 mb-8">
+            <span className="type-label text-text-secondary">Total estimado</span>
+            <span aria-live="polite" className="text-text-primary">
+              <Price value={baseTotal + extrasTotal} size="md" />
             </span>
           </div>
 

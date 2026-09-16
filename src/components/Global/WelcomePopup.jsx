@@ -66,19 +66,19 @@ export default function WelcomePopup() {
             <div className="text-center relative z-10">
               {!submitted ? (
                 <>
-                  <span className="inline-block bg-brand-gold/10 text-brand-gold font-bold px-4 py-1.5 rounded-full mb-6 text-xs uppercase tracking-wider">
+                  <span className="inline-block bg-brand-gold/10 text-brand-gold type-label px-4 py-1.5 rounded-full mb-6">
                     Condição Exclusiva
                   </span>
-                  <h2 className="text-2xl sm:text-3xl font-black text-text-dark mb-4 leading-tight tracking-tight">
+                  <h2 className="type-title text-text-dark mb-4 text-balance">
                     Desbloqueie <span className="text-brand-accent">Zero Caução</span>
                   </h2>
-                  <p className="text-text-muted text-sm sm:text-base mb-8">
+                  <p className="type-body text-text-muted mb-8">
                     Informe seus dados abaixo para acessar nossas ofertas premium com aprovação acelerada e sem franquia.
                   </p>
                   
                   <form onSubmit={handleSubmit} className="space-y-4 text-left">
                     <div>
-                      <label className="block text-text-secondary text-xs font-bold mb-1.5 uppercase tracking-wider">Seu Nome</label>
+                      <label className="block type-label text-text-muted mb-2">Seu Nome</label>
                       <input 
                         type="text" 
                         required
@@ -89,7 +89,7 @@ export default function WelcomePopup() {
                       />
                     </div>
                     <div>
-                      <label className="block text-text-secondary text-xs font-bold mb-1.5 uppercase tracking-wider">E-mail</label>
+                      <label className="block type-label text-text-muted mb-2">E-mail</label>
                       <input 
                         type="email" 
                         required
@@ -104,7 +104,7 @@ export default function WelcomePopup() {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       type="submit"
-                      className="w-full bg-brand-accent hover:bg-brand-glow text-white font-bold text-base py-4 rounded-xl transition-colors cursor-pointer mt-2"
+                      className="w-full bg-brand-accent hover:bg-brand-glow text-white font-semibold text-base py-4 rounded-xl transition-colors cursor-pointer mt-2"
                     >
                       Acessar Condições Premium →
                     </motion.button>
@@ -117,7 +117,7 @@ export default function WelcomePopup() {
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <h2 className="text-2xl font-black text-text-dark mb-2">Tudo Certo, {name.split(' ')[0]}!</h2>
+                  <h2 className="type-title text-text-dark mb-2">Tudo certo, {name.split(' ')[0]}!</h2>
                   <p className="text-text-muted">Suas condições exclusivas foram liberadas no site. Nosso assistente já está pronto para te ajudar.</p>
                 </div>
               )}

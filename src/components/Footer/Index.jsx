@@ -30,7 +30,7 @@ export default function Footer() {
           {/* Coluna 1 - Logo e redes */}
           <motion.div variants={fadeInUp}>
             <img src={Logo} alt="Locafacil Aluguel de Veículos" className="h-10 w-auto mb-4" />
-            <p className="text-text-secondary text-sm leading-relaxed mb-5 max-w-xs">
+            <p className="type-meta text-text-secondary mb-5 max-w-xs">
               A melhor experiência em locação de veículos do Rio de Janeiro. Mobilidade que descomplica.
             </p>
             <div className="flex items-center gap-3">
@@ -57,7 +57,7 @@ export default function Footer() {
 
           {/* Coluna 2 - Links rápidos */}
           <motion.div variants={fadeInUp}>
-            <h4 className="text-text-primary font-bold text-sm uppercase tracking-wider mb-4">Links Rápidos</h4>
+            <h4 className="type-label text-text-primary mb-4">Links Rápidos</h4>
             <nav className="space-y-3">
               {[
                 { label: 'Início', href: '/' },
@@ -68,7 +68,7 @@ export default function Footer() {
                 <Link
                   key={link.label}
                   to={link.href}
-                  className="block text-text-secondary text-sm hover:text-brand-accent transition-colors duration-200 cursor-pointer"
+                  className="block type-meta text-text-secondary hover:text-brand-accent transition-colors duration-200 cursor-pointer"
                 >
                   {link.label}
                 </Link>
@@ -78,21 +78,21 @@ export default function Footer() {
 
           {/* Coluna 3 - Contatos */}
           <motion.div variants={fadeInUp}>
-            <h4 className="text-text-primary font-bold text-sm uppercase tracking-wider mb-4">Contatos</h4>
+            <h4 className="type-label text-text-primary mb-4">Contatos</h4>
             <div className="space-y-3">
-              <a href="tel:2127861404" className="flex items-center gap-2 text-text-secondary text-sm hover:text-brand-accent transition-colors cursor-pointer">
+              <a href="tel:2127861404" className="flex items-center gap-2 type-meta type-numeric text-text-secondary hover:text-brand-accent transition-colors cursor-pointer">
                 <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
                 </svg>
                 (21) 2786-1404
               </a>
-              <a href="tel:21968540185" className="flex items-center gap-2 text-text-secondary text-sm hover:text-brand-accent transition-colors cursor-pointer">
+              <a href="tel:21968540185" className="flex items-center gap-2 type-meta type-numeric text-text-secondary hover:text-brand-accent transition-colors cursor-pointer">
                 <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
                 </svg>
                 (21) 96854-0185
               </a>
-              <a href="mailto:gerencia@locafacilaluguel.com" className="flex items-center gap-2 text-text-secondary text-sm hover:text-brand-accent transition-colors cursor-pointer">
+              <a href="mailto:gerencia@locafacilaluguel.com" className="flex items-center gap-2 type-meta text-text-secondary hover:text-brand-accent transition-colors cursor-pointer">
                 <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
                 </svg>
@@ -103,8 +103,8 @@ export default function Footer() {
 
           {/* Coluna 4 - Endereço */}
           <motion.div variants={fadeInUp}>
-            <h4 className="text-text-primary font-bold text-sm uppercase tracking-wider mb-4">Endereço</h4>
-            <div className="flex gap-2 text-text-secondary text-sm leading-relaxed">
+            <h4 className="type-label text-text-primary mb-4">Endereço</h4>
+            <div className="flex gap-2 type-meta text-text-secondary">
               <svg className="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
@@ -122,10 +122,10 @@ export default function Footer() {
         {/* Divisor e copyright */}
         <div className="border-t border-white/10 pt-6">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p className="text-text-secondary/60 text-xs">
+            <p className="type-meta text-text-secondary/60">
               © {new Date().getFullYear()} Locafacil Aluguel de Veículos. Todos os direitos reservados.
             </p>
-            <p className="text-text-secondary/40 text-xs">
+            <p className="type-meta text-text-secondary/40">
               CNPJ: 00.000.000/0001-00
             </p>
           </div>

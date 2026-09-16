@@ -203,23 +203,35 @@
     "typographyMeta": {
       "display": {
         "displayName": "Display",
-        "purpose": "Promessa principal do hero. Uma por página, quebrada em duas linhas com a segunda em gradiente."
+        "purpose": "Promessa principal do hero, e o número da reserva na confirmação. Largura 112%, peso 800. Uma por página."
       },
       "headline": {
         "displayName": "Headline",
-        "purpose": "Abertura de seção, sempre precedida de um eyebrow em label."
+        "purpose": "Abertura de seção. Vem sozinha, com text-balance — nunca precedida de eyebrow."
       },
       "title": {
         "displayName": "Title",
-        "purpose": "Título de card, cabeçalho de etapa, nome de veículo."
+        "purpose": "Título de página interna, cabeçalho de etapa do checkout, título de card grande."
+      },
+      "subtitle": {
+        "displayName": "Subtitle",
+        "purpose": "Nome de veículo, título de sub-seção, cabeçalho de estado vazio ou de erro."
       },
       "body": {
         "displayName": "Body",
-        "purpose": "Explicação e descrição. Destaques usam <strong> em cor de texto primário, nunca em azul."
+        "purpose": "Explicação e descrição, medida 45–65ch. Destaques usam <strong> em cor de texto primário, nunca em azul."
+      },
+      "meta": {
+        "displayName": "Meta",
+        "purpose": "Informação de apoio: validade de preço, contagem de diárias, descrição de cobertura, rodapé."
       },
       "label": {
         "displayName": "Label",
-        "purpose": "Eyebrow, rótulo de campo e nome de etapa. Único uso de caixa alta no sistema."
+        "purpose": "Rótulo de campo, rótulo de dado, categoria de veículo e navegação. Único uso de caixa alta no sistema."
+      },
+      "numeric": {
+        "displayName": "Numeric",
+        "purpose": "Modificador tabular-nums que acumula com qualquer papel. Obrigatório em preço, total, número de reserva, data, hora e documento."
       }
     },
     "shadows": [
@@ -272,11 +284,26 @@
       }
     ],
     "breakpoints": [
-      { "name": "base", "value": "375px" },
-      { "name": "sm", "value": "640px" },
-      { "name": "md", "value": "768px" },
-      { "name": "lg", "value": "1024px" },
-      { "name": "xl", "value": "1440px" }
+      {
+        "name": "base",
+        "value": "375px"
+      },
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "xl",
+        "value": "1440px"
+      }
     ]
   },
   "components": [
@@ -286,7 +313,7 @@
       "refersTo": "button-primary",
       "description": "Ação primária única por tela. Pílula em Azul Farol com resposta tátil no toque.",
       "html": "<button class=\"ds-btn-primary\">Garantir Meu Carro Agora</button>",
-      "css": ".ds-btn-primary { background: var(--brand-accent, #2563EB); color: #fff; font-family: Montserrat, system-ui, sans-serif; font-weight: 700; font-size: 0.875rem; padding: 0.875rem 2rem; border: none; border-radius: 9999px; cursor: pointer; transition: background 300ms cubic-bezier(0.4,0,0.2,1), transform 300ms cubic-bezier(0.4,0,0.2,1); } .ds-btn-primary:hover { background: var(--brand-glow, #3B82F6); transform: scale(1.05); } .ds-btn-primary:active { transform: scale(0.97); } .ds-btn-primary:focus-visible { outline: 2px solid var(--brand-glow, #3B82F6); outline-offset: 2px; } .ds-btn-primary:disabled { opacity: 0.6; transform: none; cursor: default; }"
+      "css": ".ds-btn-primary { background: var(--brand-accent, #2563EB); color: #fff; font-family: Archivo, 'Archivo Fallback', system-ui, sans-serif; font-weight: 600; font-size: 0.875rem; padding: 0.875rem 2rem; border: none; border-radius: 9999px; cursor: pointer; transition: background 300ms cubic-bezier(0.4,0,0.2,1), transform 300ms cubic-bezier(0.4,0,0.2,1); } .ds-btn-primary:hover { background: var(--brand-glow, #3B82F6); transform: scale(1.05); } .ds-btn-primary:active { transform: scale(0.97); } .ds-btn-primary:focus-visible { outline: 2px solid var(--brand-glow, #3B82F6); outline-offset: 2px; } .ds-btn-primary:disabled { opacity: 0.6; transform: none; cursor: default; }"
     },
     {
       "name": "Ghost Button",
@@ -294,7 +321,7 @@
       "refersTo": "button-ghost",
       "description": "Ação secundária ao lado do CTA no hero. Vidro com borda fantasma.",
       "html": "<button class=\"ds-btn-ghost\">Descubra os Benefícios</button>",
-      "css": ".ds-btn-ghost { background: rgba(255,255,255,0.08); color: var(--text-primary, #F8FAFC); font-family: Montserrat, system-ui, sans-serif; font-weight: 700; font-size: 0.875rem; padding: 0.875rem 2rem; border: 1px solid rgba(255,255,255,0.12); border-radius: 9999px; cursor: pointer; backdrop-filter: blur(16px); transition: background 300ms cubic-bezier(0.4,0,0.2,1), transform 300ms cubic-bezier(0.4,0,0.2,1); } .ds-btn-ghost:hover { background: rgba(255,255,255,0.12); transform: scale(1.05); } .ds-btn-ghost:active { transform: scale(0.97); } .ds-btn-ghost:focus-visible { outline: 2px solid var(--brand-accent, #2563EB); outline-offset: 2px; }"
+      "css": ".ds-btn-ghost { background: rgba(255,255,255,0.08); color: var(--text-primary, #F8FAFC); font-family: Archivo, 'Archivo Fallback', system-ui, sans-serif; font-weight: 500; font-size: 0.875rem; padding: 0.875rem 2rem; border: 1px solid rgba(255,255,255,0.12); border-radius: 9999px; cursor: pointer; backdrop-filter: blur(16px); transition: background 300ms cubic-bezier(0.4,0,0.2,1), transform 300ms cubic-bezier(0.4,0,0.2,1); } .ds-btn-ghost:hover { background: rgba(255,255,255,0.12); transform: scale(1.05); } .ds-btn-ghost:active { transform: scale(0.97); } .ds-btn-ghost:focus-visible { outline: 2px solid var(--brand-accent, #2563EB); outline-offset: 2px; }"
     },
     {
       "name": "Input (superfície clara)",
@@ -302,7 +329,7 @@
       "refersTo": "input-light",
       "description": "Campo de formulário sobre card branco. Usado no cadastro do condutor.",
       "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">E-mail</span><input class=\"ds-input-light\" type=\"email\" placeholder=\"seu.melhor@email.com\" /></label>",
-      "css": ".ds-field { display: block; font-family: Montserrat, system-ui, sans-serif; } .ds-field-label { display: block; font-size: 0.75rem; font-weight: 900; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-secondary, #94A3B8); margin-bottom: 0.375rem; } .ds-input-light { width: 100%; background: #F8FAFC; color: var(--text-dark, #1E293B); font-family: inherit; font-size: 0.875rem; padding: 0.75rem 1rem; border: 1px solid #E2E8F0; border-radius: 0.75rem; transition: border-color 200ms ease, box-shadow 200ms ease; } .ds-input-light::placeholder { color: var(--text-muted, #64748B); } .ds-input-light:focus { outline: none; border-color: var(--brand-accent, #2563EB); box-shadow: 0 0 0 1px var(--brand-accent, #2563EB); }"
+      "css": ".ds-field { display: block; font-family: Archivo, 'Archivo Fallback', system-ui, sans-serif; } .ds-field-label { display: block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-secondary, #94A3B8); margin-bottom: 0.375rem; } .ds-input-light { width: 100%; background: #F8FAFC; color: var(--text-dark, #1E293B); font-family: inherit; font-size: 0.875rem; padding: 0.75rem 1rem; border: 1px solid #E2E8F0; border-radius: 0.75rem; transition: border-color 200ms ease, box-shadow 200ms ease; } .ds-input-light::placeholder { color: var(--text-muted, #64748B); } .ds-input-light:focus { outline: none; border-color: var(--brand-accent, #2563EB); box-shadow: 0 0 0 1px var(--brand-accent, #2563EB); }"
     },
     {
       "name": "Input (superfície de vidro)",
@@ -310,7 +337,7 @@
       "refersTo": "input-glass",
       "description": "Campo dentro do painel de busca no hero escuro. Padding maior que a versão clara.",
       "html": "<label class=\"ds-field-glass\"><span class=\"ds-field-glass-label\">Local de Retirada</span><input class=\"ds-input-glass\" type=\"text\" placeholder=\"Selecione\" /></label>",
-      "css": ".ds-field-glass { display: block; font-family: Montserrat, system-ui, sans-serif; } .ds-field-glass-label { display: block; font-size: 0.75rem; font-weight: 900; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-secondary, #94A3B8); margin-bottom: 0.375rem; } .ds-input-glass { width: 100%; background: rgba(255,255,255,0.10); color: var(--text-primary, #F8FAFC); font-family: inherit; font-size: 0.875rem; padding: 1rem 1.25rem; border: 1px solid rgba(255,255,255,0.15); border-radius: 0.75rem; transition: border-color 200ms ease, box-shadow 200ms ease; } .ds-input-glass::placeholder { color: var(--text-secondary, #94A3B8); } .ds-input-glass:focus { outline: none; border-color: var(--brand-accent, #2563EB); box-shadow: 0 0 0 1px var(--brand-accent, #2563EB); }"
+      "css": ".ds-field-glass { display: block; font-family: Archivo, 'Archivo Fallback', system-ui, sans-serif; } .ds-field-glass-label { display: block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-secondary, #94A3B8); margin-bottom: 0.375rem; } .ds-input-glass { width: 100%; background: rgba(255,255,255,0.10); color: var(--text-primary, #F8FAFC); font-family: inherit; font-size: 0.875rem; padding: 1rem 1.25rem; border: 1px solid rgba(255,255,255,0.15); border-radius: 0.75rem; transition: border-color 200ms ease, box-shadow 200ms ease; } .ds-input-glass::placeholder { color: var(--text-secondary, #94A3B8); } .ds-input-glass:focus { outline: none; border-color: var(--brand-accent, #2563EB); box-shadow: 0 0 0 1px var(--brand-accent, #2563EB); }"
     },
     {
       "name": "Glass Card",
@@ -318,7 +345,7 @@
       "refersTo": "card-glass",
       "description": "Superfície padrão sobre fundo escuro. Raio assinatura de 24px e borda fantasma.",
       "html": "<article class=\"ds-card-glass\"><span class=\"ds-card-eyebrow\">Econômico</span><h3 class=\"ds-card-title\">HB20 ou similar</h3><p class=\"ds-card-body\">5 pessoas · 2 malas · Manual · Ar-condicionado</p></article>",
-      "css": ".ds-card-glass { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 1.5rem; padding: 1.5rem; backdrop-filter: blur(16px); font-family: Montserrat, system-ui, sans-serif; transition: border-color 300ms ease; } .ds-card-glass:hover { border-color: rgba(255,255,255,0.22); } .ds-card-eyebrow { display: block; font-size: 0.75rem; font-weight: 900; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brand-accent, #2563EB); margin-bottom: 0.25rem; } .ds-card-title { font-size: 1.5rem; font-weight: 900; line-height: 1.2; letter-spacing: -0.025em; color: var(--text-primary, #F8FAFC); margin: 0 0 0.75rem; } .ds-card-body { font-size: 0.875rem; line-height: 1.6; color: var(--text-secondary, #94A3B8); margin: 0; }"
+      "css": ".ds-card-glass { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 1.5rem; padding: 1.5rem; backdrop-filter: blur(16px); font-family: Archivo, 'Archivo Fallback', system-ui, sans-serif; transition: border-color 300ms ease; } .ds-card-glass:hover { border-color: rgba(255,255,255,0.22); } .ds-card-eyebrow { display: block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--brand-accent, #2563EB); margin-bottom: 0.25rem; } .ds-card-title { font-size: 1.5rem; font-weight: 700; font-stretch: 105%; line-height: 1.2; letter-spacing: -0.02em; color: var(--text-primary, #F8FAFC); margin: 0 0 0.75rem; } .ds-card-body { font-size: 0.875rem; line-height: 1.68; letter-spacing: 0.006em; color: var(--text-secondary, #94A3B8); margin: 0; }"
     },
     {
       "name": "Nav Link",
@@ -326,7 +353,7 @@
       "refersTo": "navigation",
       "description": "Link da barra fixa. Sublinhado em Azul Farol cresce da esquerda no hover.",
       "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link\" href=\"#\">Início</a><a class=\"ds-nav-link\" href=\"#\">Reservar</a><a class=\"ds-nav-link\" href=\"#\">Contato</a></nav>",
-      "css": ".ds-nav { display: flex; gap: 2rem; font-family: Montserrat, system-ui, sans-serif; } .ds-nav-link { position: relative; font-size: 0.875rem; font-weight: 500; color: var(--text-secondary, #94A3B8); text-decoration: none; transition: color 200ms ease; } .ds-nav-link::after { content: ''; position: absolute; left: 0; bottom: -0.25rem; width: 0; height: 2px; background: var(--brand-accent, #2563EB); transition: width 300ms cubic-bezier(0.4,0,0.2,1); } .ds-nav-link:hover { color: #fff; } .ds-nav-link:hover::after { width: 100%; } .ds-nav-link:focus-visible { outline: 2px solid var(--brand-accent, #2563EB); outline-offset: 4px; border-radius: 2px; }"
+      "css": ".ds-nav { display: flex; gap: 2rem; font-family: Archivo, 'Archivo Fallback', system-ui, sans-serif; } .ds-nav-link { position: relative; font-size: 0.875rem; font-weight: 500; color: var(--text-secondary, #94A3B8); text-decoration: none; transition: color 200ms ease; } .ds-nav-link::after { content: ''; position: absolute; left: 0; bottom: -0.25rem; width: 0; height: 2px; background: var(--brand-accent, #2563EB); transition: width 300ms cubic-bezier(0.4,0,0.2,1); } .ds-nav-link:hover { color: #fff; } .ds-nav-link:hover::after { width: 100%; } .ds-nav-link:focus-visible { outline: 2px solid var(--brand-accent, #2563EB); outline-offset: 4px; border-radius: 2px; }"
     },
     {
       "name": "Scarcity Badge",
@@ -334,7 +361,7 @@
       "refersTo": "badge-scarcity",
       "description": "Sinal de urgência factual. No máximo um por tela e nunca dentro do checkout.",
       "html": "<span class=\"ds-badge-scarcity\"><span class=\"ds-badge-dot\"></span>Últimas 3 unidades nesta categoria</span>",
-      "css": ".ds-badge-scarcity { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(245,158,11,0.10); color: var(--brand-gold, #F59E0B); font-family: Montserrat, system-ui, sans-serif; font-size: 0.75rem; font-weight: 700; padding: 0.375rem 1rem; border: 1px solid rgba(245,158,11,0.30); border-radius: 9999px; } .ds-badge-dot { width: 0.5rem; height: 0.5rem; border-radius: 9999px; background: currentColor; }"
+      "css": ".ds-badge-scarcity { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(245,158,11,0.10); color: var(--brand-gold, #F59E0B); font-family: Archivo, 'Archivo Fallback', system-ui, sans-serif; font-size: 0.75rem; font-weight: 700; padding: 0.375rem 1rem; border: 1px solid rgba(245,158,11,0.30); border-radius: 9999px; } .ds-badge-dot { width: 0.5rem; height: 0.5rem; border-radius: 9999px; background: currentColor; }"
     },
     {
       "name": "Reservation Stepper",
@@ -342,7 +369,7 @@
       "refersTo": "reservation-stepper",
       "description": "Componente assinatura: mostra o fim do caminho desde o primeiro passo. Concluído em Verde Sinal, atual em Azul Farol, futuro em vidro.",
       "html": "<ol class=\"ds-stepper\"><li class=\"ds-step ds-step--done\"><span class=\"ds-step-dot\">✓</span><span class=\"ds-step-name\">Veículo</span></li><li class=\"ds-step-line ds-step-line--done\"></li><li class=\"ds-step ds-step--current\"><span class=\"ds-step-dot\">2</span><span class=\"ds-step-name\">Extras</span></li><li class=\"ds-step-line\"></li><li class=\"ds-step\"><span class=\"ds-step-dot\">3</span><span class=\"ds-step-name\">Seus Dados</span></li></ol>",
-      "css": ".ds-stepper { display: flex; align-items: center; justify-content: center; gap: 1rem; list-style: none; margin: 0; padding: 0; font-family: Montserrat, system-ui, sans-serif; } .ds-step { display: flex; flex-direction: column; align-items: center; gap: 0.375rem; } .ds-step-dot { display: flex; align-items: center; justify-content: center; width: 2.5rem; height: 2.5rem; border-radius: 9999px; background: rgba(255,255,255,0.10); color: var(--text-secondary, #94A3B8); font-size: 0.875rem; font-weight: 700; } .ds-step-name { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary, #94A3B8); } .ds-step--current .ds-step-dot { background: var(--brand-accent, #2563EB); color: #fff; } .ds-step--current .ds-step-name { color: var(--text-primary, #F8FAFC); } .ds-step--done .ds-step-dot { background: var(--brand-success, #10B981); color: #fff; } .ds-step-line { width: 4rem; height: 2px; background: rgba(255,255,255,0.10); margin-bottom: 1.25rem; } .ds-step-line--done { background: var(--brand-success, #10B981); }"
+      "css": ".ds-stepper { display: flex; align-items: center; justify-content: center; gap: 1rem; list-style: none; margin: 0; padding: 0; font-family: Archivo, 'Archivo Fallback', system-ui, sans-serif; } .ds-step { display: flex; flex-direction: column; align-items: center; gap: 0.375rem; } .ds-step-dot { display: flex; align-items: center; justify-content: center; width: 2.5rem; height: 2.5rem; border-radius: 9999px; background: rgba(255,255,255,0.10); color: var(--text-secondary, #94A3B8); font-size: 0.875rem; font-weight: 700; font-variant-numeric: tabular-nums lining-nums; } .ds-step-name { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-secondary, #94A3B8); } .ds-step--current .ds-step-dot { background: var(--brand-accent, #2563EB); color: #fff; } .ds-step--current .ds-step-name { color: var(--text-primary, #F8FAFC); } .ds-step--done .ds-step-dot { background: var(--brand-success, #10B981); color: #fff; } .ds-step-line { width: 4rem; height: 2px; background: rgba(255,255,255,0.10); margin-bottom: 1.25rem; } .ds-step-line--done { background: var(--brand-success, #10B981); }"
     }
   ],
   "narrative": {

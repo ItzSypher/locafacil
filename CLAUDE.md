@@ -96,16 +96,39 @@ propósito — o prefixo exporia os valores no bundle.
 
 Os tokens estão em `tailwind.config.js` e espelhados como CSS vars em
 `src/assets/css/global.css`, que também define as utilities `.glass`,
-`.glass-light`, `.glass-dark`, `.text-gradient` e `.bg-hero-gradient`.
+`.glass-light`, `.glass-dark` e `.bg-hero-gradient`. `DESIGN.md` é a referência
+completa do sistema; o sidecar legível por máquina fica em
+`.impeccable/design.json`.
+
+**Tipografia.** A família é a Archivo variável (eixos `wght` 400–800 e `wdth`
+100–112), carregada num único `<link>` no `index.html`, com um `@font-face`
+`Archivo Fallback` (`size-adjust: 104%`) que evita o pulo de layout durante o
+carregamento. Não montar tamanho + peso + tracking à mão: usar os papéis
+definidos em `global.css` — `.type-display`, `.type-headline`, `.type-title`,
+`.type-subtitle`, `.type-body`, `.type-meta`, `.type-label`. Dois modificadores
+acumulam com eles:
+
+- `.type-numeric` — obrigatório em preço, total, número de reserva, data, hora,
+  telefone, CPF e número de etapa. Sem ele, o total muda de largura a cada
+  recálculo.
+- `.on-light` — em qualquer superfície clara (card branco, seção `bg-white` ou
+  `bg-slate-50`). Zera a compensação óptica que o fundo escuro exige.
+
+Valor em reais nunca é string solta: sempre `src/pages/Reservar/Price.jsx`, que
+separa símbolo, inteiro, centavos e unidade.
 
 Padrões que se repetem e devem ser seguidos em UI nova:
 
-- Botões são sempre `motion.button` com `whileHover={{ scale: 1.05 }}`,
+- Botões são `motion.button` com `whileHover` entre 1.01 e 1.03,
   `whileTap={{ scale: 0.97 }}`, `bg-brand-accent hover:bg-brand-glow`,
-  `rounded-full`, `shadow-glow`, `cursor-pointer`.
+  `rounded-xl`, `cursor-pointer`. Não existe token de glow no projeto —
+  profundidade vem de vidro e borda.
+- Rótulo de botão em caixa de frase ("Garantir meu carro agora"), nomeando a
+  ação inteira.
 - Seções entram com `initial="hidden" whileInView="visible"` e variantes locais
   `fadeInUp`/`staggerContainer` — redefinidas por arquivo, não importadas de um
-  módulo comum.
+  módulo comum. O container de stagger nunca usa `opacity: 0`, só orquestra os
+  filhos.
 - Inputs sobre fundo claro: `bg-slate-50 border border-slate-200 rounded-xl px-4
   py-3 text-sm focus:border-brand-accent focus:ring-1 focus:ring-brand-accent`
   (referência: `WelcomePopup.jsx`). Sobre fundo escuro/glass, a variante em
