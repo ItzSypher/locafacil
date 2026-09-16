@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import HeroImage from '../../assets/images/header.webp'
+import SearchWidget from '../Reservar/SearchWidget'
 
 /**
  * Hero Section premium com:
@@ -161,84 +162,7 @@ export default function Header() {
         className="relative z-20 px-4 sm:px-6 lg:px-8 -mt-24 sm:-mt-32 pb-24"
       >
         <div className="container mx-auto">
-          <div className="glass rounded-2xl sm:rounded-3xl p-8 sm:p-10 lg:p-12 shadow-glass max-w-5xl mx-auto border border-white/10 backdrop-blur-md bg-white/5">
-            <h3 className="text-text-primary text-xl sm:text-2xl font-bold mb-8 text-center uppercase tracking-wide">
-              Encontre o veículo perfeito em segundos
-            </h3>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {/* Retirada */}
-              <div>
-                <label className="block text-text-secondary text-xs font-medium mb-1.5 uppercase tracking-wider">Local de Retirada</label>
-                <div className="relative">
-                  <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                  <select
-                    className="w-full bg-white/10 border border-white/15 rounded-xl px-5 py-4 pl-12 text-text-primary text-sm focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-all appearance-none cursor-pointer"
-                    defaultValue=""
-                  >
-                    <option value="" disabled className="bg-brand-dark">Selecione</option>
-                    <option value="nova-iguacu" className="bg-brand-dark">Nova Iguaçu - RJ</option>
-                    <option value="rio-centro" className="bg-brand-dark">Rio de Janeiro - Centro</option>
-                    <option value="niteroi" className="bg-brand-dark">Niterói - RJ</option>
-                  </select>
-                </div>
-              </div>
-              {/* Devolução */}
-              <div>
-                <label className="block text-text-secondary text-xs font-medium mb-1.5 uppercase tracking-wider">Local de Devolução</label>
-                <div className="relative">
-                  <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                  <select
-                    className="w-full bg-white/10 border border-white/15 rounded-xl px-5 py-4 pl-12 text-text-primary text-sm focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-all appearance-none cursor-pointer"
-                    defaultValue=""
-                  >
-                    <option value="" disabled className="bg-brand-dark">Mesmo local</option>
-                    <option value="nova-iguacu" className="bg-brand-dark">Nova Iguaçu - RJ</option>
-                    <option value="rio-centro" className="bg-brand-dark">Rio de Janeiro - Centro</option>
-                    <option value="niteroi" className="bg-brand-dark">Niterói - RJ</option>
-                  </select>
-                </div>
-              </div>
-              {/* Data */}
-              <div>
-                <label className="block text-text-secondary text-xs font-medium mb-1.5 uppercase tracking-wider">Data de Retirada</label>
-                <div className="relative">
-                  <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                  <input
-                    type="date"
-                    className="w-full bg-white/10 border border-white/15 rounded-xl px-5 py-4 pl-12 text-text-primary text-sm focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-all cursor-pointer"
-                  />
-                </div>
-              </div>
-              {/* Botão busca */}
-              <div className="flex items-end">
-                <a
-                  href="https://api.whatsapp.com/send?phone=5521968540185&text=Ol%C3%A1,%20Locafacil!%20Quero%20alugar%20um%20ve%C3%ADculo."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full"
-                >
-                  <motion.button
-                    whileHover={{ scale: 1.03, boxShadow: '0 0 25px rgba(37, 99, 235, 0.5)' }}
-                    whileTap={{ scale: 0.97 }}
-                    className="w-full bg-brand-accent hover:bg-brand-glow text-white font-bold text-sm sm:text-base py-4 rounded-xl shadow-glow transition-all duration-300 cursor-pointer flex items-center justify-center gap-2"
-                  >
-                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                    Buscar Veículo
-                  </motion.button>
-                </a>
-              </div>
-            </div>
-          </div>
+          <SearchWidget />
         </div>
       </motion.div>
     </section>

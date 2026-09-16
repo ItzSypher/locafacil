@@ -18,6 +18,7 @@ export default function Topbar() {
 
   const navLinks = [
     { label: 'Início', href: '/' },
+    { label: 'Reservar', href: '/reservar' },
     { label: 'Para Empresas', href: '/para-empresas' },
     { label: 'Contato', href: '/contato' },
   ]
