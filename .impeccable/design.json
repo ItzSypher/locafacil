@@ -1,0 +1,424 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-16T00:00:00Z",
+  "title": "Design System: Locafacil",
+  "extensions": {
+    "colorMeta": {
+      "brand-accent": {
+        "role": "primary",
+        "displayName": "Azul Farol",
+        "canonical": "#2563EB",
+        "tonalRamp": [
+          "oklch(20% 0.09 264)",
+          "oklch(30% 0.13 264)",
+          "oklch(40% 0.17 264)",
+          "oklch(50% 0.20 264)",
+          "oklch(60% 0.19 264)",
+          "oklch(72% 0.14 264)",
+          "oklch(84% 0.08 264)",
+          "oklch(95% 0.03 264)"
+        ]
+      },
+      "brand-glow": {
+        "role": "primary",
+        "displayName": "Farol Alto",
+        "canonical": "#3B82F6",
+        "tonalRamp": [
+          "oklch(22% 0.08 262)",
+          "oklch(32% 0.12 262)",
+          "oklch(43% 0.16 262)",
+          "oklch(54% 0.18 262)",
+          "oklch(65% 0.17 262)",
+          "oklch(76% 0.12 262)",
+          "oklch(86% 0.07 262)",
+          "oklch(96% 0.02 262)"
+        ]
+      },
+      "brand-dark": {
+        "role": "neutral",
+        "displayName": "Asfalto Noturno",
+        "canonical": "#0A1628",
+        "tonalRamp": [
+          "oklch(15% 0.03 255)",
+          "oklch(24% 0.04 255)",
+          "oklch(33% 0.04 255)",
+          "oklch(45% 0.04 255)",
+          "oklch(57% 0.03 255)",
+          "oklch(70% 0.02 255)",
+          "oklch(84% 0.01 255)",
+          "oklch(95% 0.005 255)"
+        ]
+      },
+      "brand-navy": {
+        "role": "neutral",
+        "displayName": "Azul de Madrugada",
+        "canonical": "#0F2240",
+        "tonalRamp": [
+          "oklch(17% 0.04 257)",
+          "oklch(26% 0.06 257)",
+          "oklch(36% 0.07 257)",
+          "oklch(47% 0.07 257)",
+          "oklch(59% 0.05 257)",
+          "oklch(72% 0.04 257)",
+          "oklch(85% 0.02 257)",
+          "oklch(95% 0.01 257)"
+        ]
+      },
+      "brand-deep": {
+        "role": "neutral",
+        "displayName": "Horizonte",
+        "canonical": "#1E3A5F",
+        "tonalRamp": [
+          "oklch(19% 0.04 254)",
+          "oklch(28% 0.06 254)",
+          "oklch(38% 0.07 254)",
+          "oklch(49% 0.07 254)",
+          "oklch(61% 0.06 254)",
+          "oklch(74% 0.04 254)",
+          "oklch(86% 0.02 254)",
+          "oklch(96% 0.01 254)"
+        ]
+      },
+      "brand-success": {
+        "role": "tertiary",
+        "displayName": "Verde Sinal",
+        "canonical": "#10B981",
+        "tonalRamp": [
+          "oklch(20% 0.06 163)",
+          "oklch(30% 0.09 163)",
+          "oklch(41% 0.12 163)",
+          "oklch(52% 0.14 163)",
+          "oklch(70% 0.15 163)",
+          "oklch(80% 0.11 163)",
+          "oklch(89% 0.06 163)",
+          "oklch(96% 0.02 163)"
+        ]
+      },
+      "brand-gold": {
+        "role": "tertiary",
+        "displayName": "Âmbar de Alerta",
+        "canonical": "#F59E0B",
+        "tonalRamp": [
+          "oklch(24% 0.06 75)",
+          "oklch(35% 0.09 75)",
+          "oklch(46% 0.12 75)",
+          "oklch(58% 0.14 75)",
+          "oklch(78% 0.16 75)",
+          "oklch(86% 0.11 75)",
+          "oklch(92% 0.07 75)",
+          "oklch(97% 0.03 75)"
+        ]
+      },
+      "text-primary": {
+        "role": "neutral",
+        "displayName": "Névoa Clara",
+        "canonical": "#F8FAFC",
+        "tonalRamp": [
+          "oklch(20% 0.01 250)",
+          "oklch(32% 0.01 250)",
+          "oklch(44% 0.01 250)",
+          "oklch(56% 0.01 250)",
+          "oklch(68% 0.01 250)",
+          "oklch(80% 0.008 250)",
+          "oklch(90% 0.006 250)",
+          "oklch(98% 0.003 250)"
+        ]
+      },
+      "text-secondary": {
+        "role": "neutral",
+        "displayName": "Cinza de Painel",
+        "canonical": "#94A3B8",
+        "tonalRamp": [
+          "oklch(22% 0.02 250)",
+          "oklch(33% 0.03 250)",
+          "oklch(45% 0.03 250)",
+          "oklch(57% 0.03 250)",
+          "oklch(70% 0.03 250)",
+          "oklch(81% 0.02 250)",
+          "oklch(90% 0.015 250)",
+          "oklch(97% 0.008 250)"
+        ]
+      },
+      "text-dark": {
+        "role": "neutral",
+        "displayName": "Tinta",
+        "canonical": "#1E293B",
+        "tonalRamp": [
+          "oklch(18% 0.02 255)",
+          "oklch(28% 0.03 255)",
+          "oklch(40% 0.03 255)",
+          "oklch(52% 0.03 255)",
+          "oklch(64% 0.025 255)",
+          "oklch(77% 0.02 255)",
+          "oklch(88% 0.012 255)",
+          "oklch(96% 0.006 255)"
+        ]
+      },
+      "text-muted": {
+        "role": "neutral",
+        "displayName": "Grafite",
+        "canonical": "#64748B",
+        "tonalRamp": [
+          "oklch(20% 0.02 252)",
+          "oklch(31% 0.025 252)",
+          "oklch(42% 0.03 252)",
+          "oklch(54% 0.03 252)",
+          "oklch(66% 0.025 252)",
+          "oklch(78% 0.02 252)",
+          "oklch(89% 0.012 252)",
+          "oklch(96% 0.006 252)"
+        ]
+      },
+      "surface-light": {
+        "role": "neutral",
+        "displayName": "Papel",
+        "canonical": "#F8FAFC",
+        "tonalRamp": [
+          "oklch(20% 0.01 250)",
+          "oklch(32% 0.01 250)",
+          "oklch(44% 0.01 250)",
+          "oklch(56% 0.01 250)",
+          "oklch(68% 0.01 250)",
+          "oklch(80% 0.008 250)",
+          "oklch(90% 0.006 250)",
+          "oklch(98% 0.003 250)"
+        ]
+      },
+      "border-light": {
+        "role": "neutral",
+        "displayName": "Traço",
+        "canonical": "#E2E8F0",
+        "tonalRamp": [
+          "oklch(21% 0.012 250)",
+          "oklch(33% 0.015 250)",
+          "oklch(45% 0.018 250)",
+          "oklch(57% 0.018 250)",
+          "oklch(69% 0.015 250)",
+          "oklch(81% 0.012 250)",
+          "oklch(91% 0.008 250)",
+          "oklch(98% 0.004 250)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Promessa principal do hero. Uma por página, quebrada em duas linhas com a segunda em gradiente."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Abertura de seção, sempre precedida de um eyebrow em label."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Título de card, cabeçalho de etapa, nome de veículo."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Explicação e descrição. Destaques usam <strong> em cor de texto primário, nunca em azul."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Eyebrow, rótulo de campo e nome de etapa. Único uso de caixa alta no sistema."
+      }
+    },
+    "shadows": [
+      {
+        "name": "contato-card",
+        "value": "0 4px 24px rgba(0,0,0,0.06)",
+        "purpose": "Repouso de card branco sobre fundo claro, onde o vidro não tem o que filtrar."
+      },
+      {
+        "name": "contato-elevado",
+        "value": "0 8px 40px rgba(0,0,0,0.12)",
+        "purpose": "Hover do card branco, quando a elevação comunica que ele é clicável."
+      },
+      {
+        "name": "peso-vidro",
+        "value": "0 8px 32px rgba(0,0,0,0.2)",
+        "purpose": "Apenas sob painel de vidro que se sobrepõe a outra seção, como a busca no hero."
+      },
+      {
+        "name": "halo-azul-legado",
+        "value": "0 0 20px rgba(37,99,235,0.4)",
+        "purpose": "LEGADO EM REMOÇÃO. Halo azul em CTAs; código novo não usa. Ver a Regra do Vidro Sem Halo."
+      }
+    ],
+    "motion": [
+      {
+        "name": "transicao-estado",
+        "value": "300ms cubic-bezier(0.4, 0, 0.2, 1)",
+        "purpose": "Transição padrão de cor e escala em elementos interativos."
+      },
+      {
+        "name": "toque-botao",
+        "value": "scale(1.05) no hover, scale(0.97) no press",
+        "purpose": "Resposta tátil do botão: reage como objeto físico, não como link colorido."
+      },
+      {
+        "name": "entrada-secao",
+        "value": "opacity 0→1, translateY 40px→0, 600ms ease-out",
+        "purpose": "Revelação de seção ao entrar na viewport, disparada uma única vez."
+      },
+      {
+        "name": "cascata",
+        "value": "staggerChildren 0.12s, delayChildren 0.1s",
+        "purpose": "Escalonamento de itens irmãos dentro de uma seção revelada."
+      },
+      {
+        "name": "flutuacao",
+        "value": "translateY(0 → -15px → 0), 3s ease-in-out infinite",
+        "purpose": "Imagem de veículo no hero. Único movimento infinito permitido."
+      }
+    ],
+    "breakpoints": [
+      { "name": "base", "value": "375px" },
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1440px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Ação primária única por tela. Pílula em Azul Farol com resposta tátil no toque.",
+      "html": "<button class=\"ds-btn-primary\">Garantir Meu Carro Agora</button>",
+      "css": ".ds-btn-primary { background: var(--brand-accent, #2563EB); color: #fff; font-family: Montserrat, system-ui, sans-serif; font-weight: 700; font-size: 0.875rem; padding: 0.875rem 2rem; border: none; border-radius: 9999px; cursor: pointer; transition: background 300ms cubic-bezier(0.4,0,0.2,1), transform 300ms cubic-bezier(0.4,0,0.2,1); } .ds-btn-primary:hover { background: var(--brand-glow, #3B82F6); transform: scale(1.05); } .ds-btn-primary:active { transform: scale(0.97); } .ds-btn-primary:focus-visible { outline: 2px solid var(--brand-glow, #3B82F6); outline-offset: 2px; } .ds-btn-primary:disabled { opacity: 0.6; transform: none; cursor: default; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Ação secundária ao lado do CTA no hero. Vidro com borda fantasma.",
+      "html": "<button class=\"ds-btn-ghost\">Descubra os Benefícios</button>",
+      "css": ".ds-btn-ghost { background: rgba(255,255,255,0.08); color: var(--text-primary, #F8FAFC); font-family: Montserrat, system-ui, sans-serif; font-weight: 700; font-size: 0.875rem; padding: 0.875rem 2rem; border: 1px solid rgba(255,255,255,0.12); border-radius: 9999px; cursor: pointer; backdrop-filter: blur(16px); transition: background 300ms cubic-bezier(0.4,0,0.2,1), transform 300ms cubic-bezier(0.4,0,0.2,1); } .ds-btn-ghost:hover { background: rgba(255,255,255,0.12); transform: scale(1.05); } .ds-btn-ghost:active { transform: scale(0.97); } .ds-btn-ghost:focus-visible { outline: 2px solid var(--brand-accent, #2563EB); outline-offset: 2px; }"
+    },
+    {
+      "name": "Input (superfície clara)",
+      "kind": "input",
+      "refersTo": "input-light",
+      "description": "Campo de formulário sobre card branco. Usado no cadastro do condutor.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">E-mail</span><input class=\"ds-input-light\" type=\"email\" placeholder=\"seu.melhor@email.com\" /></label>",
+      "css": ".ds-field { display: block; font-family: Montserrat, system-ui, sans-serif; } .ds-field-label { display: block; font-size: 0.75rem; font-weight: 900; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-secondary, #94A3B8); margin-bottom: 0.375rem; } .ds-input-light { width: 100%; background: #F8FAFC; color: var(--text-dark, #1E293B); font-family: inherit; font-size: 0.875rem; padding: 0.75rem 1rem; border: 1px solid #E2E8F0; border-radius: 0.75rem; transition: border-color 200ms ease, box-shadow 200ms ease; } .ds-input-light::placeholder { color: var(--text-muted, #64748B); } .ds-input-light:focus { outline: none; border-color: var(--brand-accent, #2563EB); box-shadow: 0 0 0 1px var(--brand-accent, #2563EB); }"
+    },
+    {
+      "name": "Input (superfície de vidro)",
+      "kind": "input",
+      "refersTo": "input-glass",
+      "description": "Campo dentro do painel de busca no hero escuro. Padding maior que a versão clara.",
+      "html": "<label class=\"ds-field-glass\"><span class=\"ds-field-glass-label\">Local de Retirada</span><input class=\"ds-input-glass\" type=\"text\" placeholder=\"Selecione\" /></label>",
+      "css": ".ds-field-glass { display: block; font-family: Montserrat, system-ui, sans-serif; } .ds-field-glass-label { display: block; font-size: 0.75rem; font-weight: 900; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-secondary, #94A3B8); margin-bottom: 0.375rem; } .ds-input-glass { width: 100%; background: rgba(255,255,255,0.10); color: var(--text-primary, #F8FAFC); font-family: inherit; font-size: 0.875rem; padding: 1rem 1.25rem; border: 1px solid rgba(255,255,255,0.15); border-radius: 0.75rem; transition: border-color 200ms ease, box-shadow 200ms ease; } .ds-input-glass::placeholder { color: var(--text-secondary, #94A3B8); } .ds-input-glass:focus { outline: none; border-color: var(--brand-accent, #2563EB); box-shadow: 0 0 0 1px var(--brand-accent, #2563EB); }"
+    },
+    {
+      "name": "Glass Card",
+      "kind": "card",
+      "refersTo": "card-glass",
+      "description": "Superfície padrão sobre fundo escuro. Raio assinatura de 24px e borda fantasma.",
+      "html": "<article class=\"ds-card-glass\"><span class=\"ds-card-eyebrow\">Econômico</span><h3 class=\"ds-card-title\">HB20 ou similar</h3><p class=\"ds-card-body\">5 pessoas · 2 malas · Manual · Ar-condicionado</p></article>",
+      "css": ".ds-card-glass { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 1.5rem; padding: 1.5rem; backdrop-filter: blur(16px); font-family: Montserrat, system-ui, sans-serif; transition: border-color 300ms ease; } .ds-card-glass:hover { border-color: rgba(255,255,255,0.22); } .ds-card-eyebrow { display: block; font-size: 0.75rem; font-weight: 900; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brand-accent, #2563EB); margin-bottom: 0.25rem; } .ds-card-title { font-size: 1.5rem; font-weight: 900; line-height: 1.2; letter-spacing: -0.025em; color: var(--text-primary, #F8FAFC); margin: 0 0 0.75rem; } .ds-card-body { font-size: 0.875rem; line-height: 1.6; color: var(--text-secondary, #94A3B8); margin: 0; }"
+    },
+    {
+      "name": "Nav Link",
+      "kind": "nav",
+      "refersTo": "navigation",
+      "description": "Link da barra fixa. Sublinhado em Azul Farol cresce da esquerda no hover.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link\" href=\"#\">Início</a><a class=\"ds-nav-link\" href=\"#\">Reservar</a><a class=\"ds-nav-link\" href=\"#\">Contato</a></nav>",
+      "css": ".ds-nav { display: flex; gap: 2rem; font-family: Montserrat, system-ui, sans-serif; } .ds-nav-link { position: relative; font-size: 0.875rem; font-weight: 500; color: var(--text-secondary, #94A3B8); text-decoration: none; transition: color 200ms ease; } .ds-nav-link::after { content: ''; position: absolute; left: 0; bottom: -0.25rem; width: 0; height: 2px; background: var(--brand-accent, #2563EB); transition: width 300ms cubic-bezier(0.4,0,0.2,1); } .ds-nav-link:hover { color: #fff; } .ds-nav-link:hover::after { width: 100%; } .ds-nav-link:focus-visible { outline: 2px solid var(--brand-accent, #2563EB); outline-offset: 4px; border-radius: 2px; }"
+    },
+    {
+      "name": "Scarcity Badge",
+      "kind": "chip",
+      "refersTo": "badge-scarcity",
+      "description": "Sinal de urgência factual. No máximo um por tela e nunca dentro do checkout.",
+      "html": "<span class=\"ds-badge-scarcity\"><span class=\"ds-badge-dot\"></span>Últimas 3 unidades nesta categoria</span>",
+      "css": ".ds-badge-scarcity { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(245,158,11,0.10); color: var(--brand-gold, #F59E0B); font-family: Montserrat, system-ui, sans-serif; font-size: 0.75rem; font-weight: 700; padding: 0.375rem 1rem; border: 1px solid rgba(245,158,11,0.30); border-radius: 9999px; } .ds-badge-dot { width: 0.5rem; height: 0.5rem; border-radius: 9999px; background: currentColor; }"
+    },
+    {
+      "name": "Reservation Stepper",
+      "kind": "custom",
+      "refersTo": "reservation-stepper",
+      "description": "Componente assinatura: mostra o fim do caminho desde o primeiro passo. Concluído em Verde Sinal, atual em Azul Farol, futuro em vidro.",
+      "html": "<ol class=\"ds-stepper\"><li class=\"ds-step ds-step--done\"><span class=\"ds-step-dot\">✓</span><span class=\"ds-step-name\">Veículo</span></li><li class=\"ds-step-line ds-step-line--done\"></li><li class=\"ds-step ds-step--current\"><span class=\"ds-step-dot\">2</span><span class=\"ds-step-name\">Extras</span></li><li class=\"ds-step-line\"></li><li class=\"ds-step\"><span class=\"ds-step-dot\">3</span><span class=\"ds-step-name\">Seus Dados</span></li></ol>",
+      "css": ".ds-stepper { display: flex; align-items: center; justify-content: center; gap: 1rem; list-style: none; margin: 0; padding: 0; font-family: Montserrat, system-ui, sans-serif; } .ds-step { display: flex; flex-direction: column; align-items: center; gap: 0.375rem; } .ds-step-dot { display: flex; align-items: center; justify-content: center; width: 2.5rem; height: 2.5rem; border-radius: 9999px; background: rgba(255,255,255,0.10); color: var(--text-secondary, #94A3B8); font-size: 0.875rem; font-weight: 700; } .ds-step-name { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary, #94A3B8); } .ds-step--current .ds-step-dot { background: var(--brand-accent, #2563EB); color: #fff; } .ds-step--current .ds-step-name { color: var(--text-primary, #F8FAFC); } .ds-step--done .ds-step-dot { background: var(--brand-success, #10B981); color: #fff; } .ds-step-line { width: 4rem; height: 2px; background: rgba(255,255,255,0.10); margin-bottom: 1.25rem; } .ds-step-line--done { background: var(--brand-success, #10B981); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "A Estrada Noturna",
+    "overview": "O sistema inteiro é a visão de quem dirige de madrugada: asfalto azul-escuro até o horizonte, o azul frio dos faróis cortando, superfícies de vidro fosco que deixam a luz passar sem revelar tudo. A locação de carro aqui não é um balcão iluminado por lâmpada fluorescente — é a liberdade de pegar a estrada quando der vontade, sem ninguém pedindo caução.\n\nO humor é confiante e veloz. Nada de hesitar: títulos em peso máximo, decisões diretas, movimento que responde na hora. Mas velocidade não é gritaria — a confiança vem de parecer que a empresa já resolveu tudo antes de você perguntar. Contenção onde a maioria das locadoras berra.\n\nO sistema rejeita três mundos de forma explícita. Não é uma locadora de promoção (banner amarelo, preço riscado, cara de panfleto). Não é uma concessionária antiga (stock photo de aperto de mão, azul corporativo morto, carrossel pesado). Não é um site de viagem lotado (filtros por toda parte, contador piscando, densidade de OTA). Quando uma decisão visual puder ser lida como um desses, ela está errada.",
+    "keyCharacteristics": [
+      "Fundo escuro contínuo como ambiente padrão; o claro é a exceção funcional",
+      "Um único azul como voz da marca, do CTA ao foco de campo",
+      "Vidro fosco no lugar de sombra: profundidade por luz e camada",
+      "Tipografia de peso 900 para afirmar, peso 400 para explicar — sem meio-termo",
+      "Urgência rara e factual, nunca decorativa"
+    ],
+    "rules": [
+      {
+        "name": "A Regra da Voz Única",
+        "body": "O Azul Farol é a única cor que convida a clicar. Se dois elementos azuis competem na mesma tela, um deles está errado — vira fantasma (button-ghost) ou texto puro. Nunca colorir de azul algo que não seja acionável.",
+        "section": "colors"
+      },
+      {
+        "name": "A Regra do Âmbar Escasso",
+        "body": "O Âmbar de Alerta só aparece quando o fato é verdadeiro, verificável e útil para a decisão. No máximo um sinal de urgência por tela, e nunca no checkout — a partir da escolha do veículo, o cliente já decidiu. Escassez inventada é o que transforma este site em locadora de promoção.",
+        "section": "colors"
+      },
+      {
+        "name": "A Regra do Fundo Escuro",
+        "body": "Escuro é o repouso; claro é ferramenta. Superfície clara existe só onde a tarefa exige leitura longa ou digitação. Uma tela clara sem tarefa dentro dela está fora do mundo.",
+        "section": "colors"
+      },
+      {
+        "name": "A Regra dos Dois Pesos",
+        "body": "Só existem 900 e 400. Pesos intermediários (500, 600, 700) diluem a diferença entre afirmar e explicar — a única exceção é font-bold em texto de botão, onde 900 fecharia demais o contorno em corpo pequeno.",
+        "section": "typography"
+      },
+      {
+        "name": "A Regra do Eyebrow",
+        "body": "Toda headline de seção é precedida por um label curto em Azul Farol. Ele nomeia o assunto para quem está escaneando; a headline faz a afirmação. Headline sozinha só no hero.",
+        "section": "typography"
+      },
+      {
+        "name": "A Regra do Colapso Único",
+        "body": "Nenhum componente muda de arranjo mais de duas vezes entre 375 e 1440. Se precisa de três reorganizações, o componente está fazendo coisa demais.",
+        "section": "layout"
+      },
+      {
+        "name": "A Regra do Vidro Sem Halo",
+        "body": "Profundidade vem de transparência e borda, nunca de brilho colorido. Nenhum box-shadow com matiz azul em elemento novo.",
+        "section": "elevation"
+      },
+      {
+        "name": "A Regra da Borda Fantasma",
+        "body": "Todo painel de vidro carrega uma borda de 1px em branco translúcido. Sem ela o vidro derrete no fundo e o limite do painel some em telas de baixo contraste.",
+        "section": "elevation"
+      },
+      {
+        "name": "A Regra Pílula-ou-Painel",
+        "body": "Se é clicável e leva a algo, é pílula. Se é superfície que contém conteúdo, é 24px. Não existe botão retangular de canto suave neste sistema — a única exceção é o botão de largura total dentro de formulário, que usa 12px para alinhar com os campos acima dele.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "Do usar o Azul Farol (#2563EB) como única cor de ação; hover vai para #3B82F6 e a escala para 1.05.",
+      "Do construir profundidade com vidro (backdrop-filter: blur(16px) + borda branca translúcida de 1px).",
+      "Do preceder toda headline de seção com um eyebrow em label caixa alta, tracking 0.2em.",
+      "Do manter apenas dois pesos tipográficos: 900 para afirmar, 400 para explicar.",
+      "Do dar 24px de raio a cards e pílula completa a botões.",
+      "Do manter o foco de teclado visível em todo elemento interativo (borda azul + anel de 1px).",
+      "Do exibir mensagens de erro da API OTA em português, como vieram."
+    ],
+    "donts": [
+      "Don't adicionar box-shadow com matiz azul em elemento novo — o halo é legado em remoção.",
+      "Don't usar o Âmbar de Alerta para escassez inventada, nem exibir mais de um sinal de urgência por tela, nem qualquer urgência dentro do checkout.",
+      "Don't introduzir uma segunda família tipográfica ou pesos 500/600/700 fora de texto de botão.",
+      "Don't colorir de azul qualquer elemento que não seja acionável.",
+      "Don't usar emoji como ícone de interface — ícones são SVG inline.",
+      "Don't abrir tela clara sem tarefa de leitura ou digitação dentro dela.",
+      "Don't empilhar filtros, contadores e selos na mesma tela: densidade de OTA é anti-referência declarada."
+    ]
+  }
+}

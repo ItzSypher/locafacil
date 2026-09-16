@@ -34,7 +34,7 @@ export default function ExitPopup() {
             initial={{ scale: 0.9, y: 20 }}
             animate={{ scale: 1, y: 0 }}
             exit={{ scale: 0.9, y: 20 }}
-            className="bg-white rounded-3xl p-8 max-w-lg w-full shadow-2xl relative overflow-hidden"
+            className="bg-white rounded-2xl p-8 max-w-lg w-full shadow-2xl relative overflow-hidden"
           >
             <button 
               onClick={() => setShow(false)}
@@ -60,7 +60,7 @@ export default function ExitPopup() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-full bg-brand-accent hover:bg-brand-glow text-white font-bold text-lg py-4 rounded-xl shadow-glow transition-all cursor-pointer"
+                  className="w-full bg-brand-accent hover:bg-brand-glow text-white font-bold text-lg py-4 rounded-xl transition-colors cursor-pointer"
                   onClick={() => setShow(false)}
                 >
                   Resgatar Condição Especial →

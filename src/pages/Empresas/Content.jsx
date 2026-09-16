@@ -8,13 +8,13 @@ import BannerFinal from '../../assets/images/banner-empresas.webp'
  * Conteúdo da página Empresas com estilo premium.
  */
 const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } }
 }
 
 const stagger = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.1 } }
+  hidden: { opacity: 1 },
+  visible: { transition: { staggerChildren: 0.06 } }
 }
 
 const motivos = [
@@ -45,23 +45,22 @@ export default function EmpresasContent() {
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.12 }}
             variants={fadeInUp}
             className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center"
           >
             <div>
-              <span className="inline-block text-brand-accent text-sm font-semibold tracking-widest uppercase mb-3">Terceirização de Frotas</span>
-              <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-text-dark leading-tight mb-6">
-                Crescer dói, mas <span className="text-gradient">não precisa ser assim.</span>
-              </h3>
-              <p className="text-text-muted text-lg leading-relaxed mb-8">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-text-dark leading-tight mb-6 text-balance">
+                Crescer dói, mas não precisa ser assim.
+              </h2>
+              <p className="text-text-muted text-lg leading-relaxed mb-8 max-w-[65ch]">
                 Com a Locafacil Business você pode expandir sua operação sem precisar se preocupar com custos de aquisição, gestão da frota e manutenção dos veículos. Oferecemos soluções completas em terceirização de frotas para você focar no que realmente importa — o crescimento da sua empresa.
               </p>
               <a href="https://api.whatsapp.com/send?phone=5521993297697&text=Ol%C3%A1,%20Locafacil!%20Quero%20uma%20proposta%20para%20minha%20empresa." target="_blank" rel="noopener noreferrer">
                 <motion.button
-                  whileHover={{ scale: 1.05, boxShadow: '0 0 25px rgba(37, 99, 235, 0.4)' }}
+                  whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="bg-brand-accent hover:bg-brand-glow text-white font-bold px-8 py-3.5 rounded-full shadow-glow transition-all duration-300 cursor-pointer"
+                  className="bg-brand-accent hover:bg-brand-glow text-white font-bold px-8 py-3.5 rounded-xl transition-colors duration-300 cursor-pointer"
                 >
                   Solicitar Cotação Agora
                 </motion.button>
@@ -83,28 +82,27 @@ export default function EmpresasContent() {
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.12 }}
             variants={fadeInUp}
             className="text-center mb-12"
           >
-            <span className="inline-block text-brand-accent text-sm font-semibold tracking-widest uppercase mb-3">Vantagens Corporativas</span>
-            <h3 className="text-3xl sm:text-4xl font-bold text-text-dark">
-              4 motivos para contratar <span className="text-gradient">hoje</span>
-            </h3>
+            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-text-dark text-balance">
+              4 motivos para contratar hoje
+            </h2>
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
             <motion.div
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
+              viewport={{ once: true, amount: 0.12 }}
               variants={stagger}
               className="space-y-8"
             >
               {motivos.map((item, i) => (
                 <motion.div key={i} variants={fadeInUp} className="flex gap-5 group">
-                  <div className="flex-shrink-0 w-12 h-12 bg-brand-accent/10 text-brand-accent rounded-xl flex items-center justify-center text-lg font-bold group-hover:bg-brand-accent group-hover:text-white transition-all duration-300">
-                    {String(i + 1).padStart(2, '0')}
+                  <div className="flex-shrink-0 w-12 h-12 bg-brand-accent/10 text-brand-accent rounded-xl flex items-center justify-center text-lg font-bold group-hover:bg-brand-accent group-hover:text-white transition-colors duration-300">
+                    {i + 1}
                   </div>
                   <div>
                     <h4 className="font-bold text-xl text-text-dark mb-2">{item.titulo}</h4>
@@ -117,7 +115,7 @@ export default function EmpresasContent() {
             <motion.div
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
+              viewport={{ once: true, amount: 0.12 }}
               variants={fadeInUp}
             >
               <img src={Image2} alt="Equipe Locafacil Business" className="w-full rounded-2xl shadow-card" />
@@ -132,7 +130,7 @@ export default function EmpresasContent() {
           <motion.img
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.12 }}
             transition={{ duration: 0.6 }}
             src={BannerFinal}
             alt="Locafacil Business - Terceirização de Frotas"

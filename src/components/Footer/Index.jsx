@@ -1,14 +1,11 @@
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { Icon } from '@iconify-icon/react'
 import Logo from '../../assets/images/logo-white.webp'
 
-/**
- * Footer premium escuro com grid responsivo, links organizados,
- * ícones sociais com hover glow e visual limpo.
- */
 const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } }
 }
 
 const stagger = {
@@ -41,7 +38,7 @@ export default function Footer() {
                 href="https://www.instagram.com/locafacilaluguel/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-text-secondary hover:text-white hover:bg-brand-accent hover:border-brand-accent hover:shadow-glow transition-all duration-300 cursor-pointer"
+                className="w-10 h-10 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-text-secondary hover:text-white hover:bg-brand-accent hover:border-brand-accent transition-colors duration-300 cursor-pointer"
                 aria-label="Instagram da Locafacil"
               >
                 <Icon icon="uil:instagram" className="text-xl" />
@@ -50,7 +47,7 @@ export default function Footer() {
                 href="https://api.whatsapp.com/send?phone=5521968540185&text=Ol%C3%A1,%20Locafacil!"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-text-secondary hover:text-white hover:bg-brand-success hover:border-brand-success hover:shadow-glow-green transition-all duration-300 cursor-pointer"
+                className="w-10 h-10 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-text-secondary hover:text-white hover:bg-brand-success hover:border-brand-success transition-colors duration-300 cursor-pointer"
                 aria-label="WhatsApp da Locafacil"
               >
                 <Icon icon="uil:whatsapp" className="text-xl" />
@@ -64,16 +61,17 @@ export default function Footer() {
             <nav className="space-y-3">
               {[
                 { label: 'Início', href: '/' },
+                { label: 'Reservar', href: '/reservar' },
                 { label: 'Para Empresas', href: '/para-empresas' },
                 { label: 'Contato', href: '/contato' },
               ].map((link) => (
-                <a
+                <Link
                   key={link.label}
-                  href={link.href}
+                  to={link.href}
                   className="block text-text-secondary text-sm hover:text-brand-accent transition-colors duration-200 cursor-pointer"
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
             </nav>
           </motion.div>

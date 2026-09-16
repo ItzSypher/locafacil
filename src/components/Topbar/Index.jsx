@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import Logo from '../../assets/images/logo-white.webp'
 
@@ -38,27 +39,25 @@ export default function Topbar() {
         <div className="flex items-center justify-between h-16 sm:h-20">
 
           {/* Logo */}
-          <a href="/" className="flex-shrink-0">
+          <Link to="/" className="flex-shrink-0">
             <img
               src={Logo}
               alt="Locafacil Aluguel de Veículos"
               className="h-8 sm:h-10 w-auto"
             />
-          </a>
+          </Link>
 
           {/* Navegação Desktop */}
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.label}
-                href={link.href}
-                target={link.external ? '_blank' : '_self'}
-                rel={link.external ? 'noopener noreferrer' : undefined}
+                to={link.href}
                 className="relative text-sm font-medium text-text-secondary hover:text-white transition-colors duration-200 cursor-pointer group"
               >
                 {link.label}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-accent transition-all duration-300 group-hover:w-full" />
-              </a>
+              </Link>
             ))}
 
             {/* CTA Desktop */}
@@ -66,7 +65,7 @@ export default function Topbar() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
-                className="bg-brand-accent hover:bg-brand-glow text-white text-sm font-semibold px-5 py-2.5 rounded-full shadow-glow hover:shadow-glow-lg transition-all duration-300 cursor-pointer"
+                className="bg-brand-accent hover:bg-brand-glow text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-colors duration-300 cursor-pointer"
               >
                 Garanta Seu Veículo
               </motion.button>
@@ -107,18 +106,20 @@ export default function Topbar() {
           >
             <nav className="flex flex-col items-center justify-center h-full gap-8 -mt-16">
               {navLinks.map((link, i) => (
-                <motion.a
+                <motion.div
                   key={link.label}
-                  href={link.href}
-                  target={link.external ? '_blank' : '_self'}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1 }}
-                  onClick={() => setMenuOpen(false)}
-                  className="text-2xl font-semibold text-white hover:text-brand-accent transition-colors cursor-pointer"
+                  transition={{ delay: i * 0.06 }}
                 >
-                  {link.label}
-                </motion.a>
+                  <Link
+                    to={link.href}
+                    onClick={() => setMenuOpen(false)}
+                    className="text-2xl font-semibold text-white hover:text-brand-accent transition-colors cursor-pointer"
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
               ))}
               <a
                 href="https://api.whatsapp.com/send?phone=5521968540185&text=Ol%C3%A1,%20Locafacil!%20Quero%20alugar%20um%20ve%C3%ADculo."
@@ -131,7 +132,7 @@ export default function Topbar() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-brand-accent text-white text-lg font-bold px-8 py-3 rounded-full shadow-glow cursor-pointer"
+                  className="bg-brand-accent text-white text-lg font-bold px-8 py-3 rounded-xl cursor-pointer"
                 >
                   Garanta Seu Veículo
                 </motion.button>

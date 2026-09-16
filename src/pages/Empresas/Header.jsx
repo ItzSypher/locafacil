@@ -19,20 +19,17 @@ export default function Header() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3, duration: 0.6 }}
           >
-            <span className="inline-flex items-center gap-2 bg-brand-accent/15 text-brand-accent text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-full border border-brand-accent/30 mb-6">
-              Soluções Corporativas
-            </span>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-text-primary leading-tight mb-4">
-              Locafacil <span className="text-gradient">Business</span>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-text-primary leading-tight mb-4 text-balance">
+              Locafacil Business
             </h1>
-            <h2 className="text-xl sm:text-2xl font-light text-text-secondary mb-8">
-              Eficiência em Movimento. Soluções completas em terceirização de frota.
-            </h2>
+            <p className="text-xl sm:text-2xl text-text-secondary leading-relaxed mb-8 max-w-[45ch]">
+              Eficiência em movimento: soluções completas em terceirização de frota.
+            </p>
             <a href="https://api.whatsapp.com/send?phone=5521993297697&text=Ol%C3%A1,%20Locafacil!%20Quero%20saber%20sobre%20frota%20para%20empresas." target="_blank" rel="noopener noreferrer">
               <motion.button
-                whileHover={{ scale: 1.05, boxShadow: '0 0 25px rgba(37, 99, 235, 0.5)' }}
+                whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="bg-brand-accent hover:bg-brand-glow text-white font-bold px-8 py-3.5 rounded-full shadow-glow transition-all duration-300 cursor-pointer"
+                className="bg-brand-accent hover:bg-brand-glow text-white font-bold px-8 py-3.5 rounded-xl transition-colors duration-300 cursor-pointer"
               >
                 Solicitar Proposta Comercial
               </motion.button>

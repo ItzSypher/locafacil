@@ -7,8 +7,8 @@ import StepProgress from '../StepProgress'
 import { useReservation } from '../../../context/ReservationContext'
 import { confirmReservation, ReservationApiError } from '../../../lib/api/reservation'
 
-const inputClass = 'w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-text-dark text-sm focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-all'
-const labelClass = 'block text-text-secondary text-xs font-bold mb-1.5 uppercase tracking-wider'
+const inputClass = 'w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-text-dark text-sm focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-colors'
+const labelClass = 'block text-text-muted text-sm font-medium mb-1.5'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const CPF_RE = /^\d{11}$/
@@ -108,11 +108,14 @@ export default function ReservarDados() {
         <div className="container mx-auto max-w-2xl">
           <StepProgress current="dados" />
 
-          <h1 className="text-2xl sm:text-3xl font-black text-text-primary text-center mb-10 tracking-tight">
-            Seus <span className="text-gradient">dados</span>
+          <h1 className="text-2xl sm:text-3xl font-black text-text-primary text-center mb-3 tracking-tight">
+            Seus dados
           </h1>
+          <p className="text-text-secondary text-sm text-center mb-10">
+            Precisamos deles para emitir o contrato de locação.
+          </p>
 
-          <form onSubmit={handleSubmit} className="bg-white rounded-3xl p-8 shadow-2xl space-y-4">
+          <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-6 sm:p-8 space-y-4">
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
                 <label className={labelClass}>Nome</label>
@@ -161,16 +164,20 @@ export default function ReservarDados() {
               </div>
             </div>
 
-            {error && <p className="text-sm text-red-500 text-center">{error}</p>}
+            {error && (
+              <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-xl px-4 py-3" role="alert">
+                {error}
+              </p>
+            )}
 
             <motion.button
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: 1.01 }}
               whileTap={{ scale: 0.98 }}
               type="submit"
               disabled={submitting}
-              className="w-full bg-brand-accent hover:bg-brand-glow text-white font-bold text-base py-4 rounded-xl shadow-glow transition-all cursor-pointer mt-2 disabled:opacity-60"
+              className="w-full bg-brand-accent hover:bg-brand-glow text-white font-bold text-base py-4 rounded-xl transition-colors cursor-pointer mt-2 disabled:opacity-60 disabled:cursor-default"
             >
-              {submitting ? 'Confirmando...' : 'Confirmar Reserva →'}
+              {submitting ? 'Confirmando reserva...' : 'Confirmar reserva'}
             </motion.button>
           </form>
         </div>

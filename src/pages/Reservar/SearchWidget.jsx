@@ -98,10 +98,10 @@ export default function SearchWidget() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="glass rounded-2xl sm:rounded-3xl p-8 sm:p-10 lg:p-12 shadow-glass max-w-5xl mx-auto border border-white/10 backdrop-blur-md bg-white/5">
-      <h3 className="text-text-primary text-xl sm:text-2xl font-bold mb-8 text-center uppercase tracking-wide">
+    <form onSubmit={handleSubmit} className="glass rounded-2xl p-6 sm:p-10 max-w-5xl mx-auto">
+      <h2 className="text-text-primary text-xl sm:text-2xl font-black tracking-tight mb-8 text-center">
         Encontre o veículo perfeito em segundos
-      </h3>
+      </h2>
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <div>
           <label className="block text-text-secondary text-xs font-medium mb-1.5 uppercase tracking-wider">Local de Retirada</label>
@@ -176,11 +176,11 @@ export default function SearchWidget() {
       )}
 
       <motion.button
-        whileHover={{ scale: 1.02, boxShadow: '0 0 25px rgba(37, 99, 235, 0.5)' }}
-        whileTap={{ scale: 0.97 }}
+        whileHover={{ scale: 1.01 }}
+        whileTap={{ scale: 0.98 }}
         type="submit"
         disabled={submitting}
-        className="w-full mt-6 bg-brand-accent hover:bg-brand-glow text-white font-bold text-sm sm:text-base py-4 rounded-xl shadow-glow transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 disabled:opacity-60"
+        className="w-full mt-6 bg-brand-accent hover:bg-brand-glow text-white font-bold text-sm sm:text-base py-4 rounded-xl transition-colors duration-300 cursor-pointer flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-default"
       >
         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />

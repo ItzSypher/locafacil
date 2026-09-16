@@ -61,12 +61,12 @@ export default function ReservarExtras() {
           <StepProgress current="extras" />
 
           <h1 className="text-2xl sm:text-3xl font-black text-text-primary text-center mb-10 tracking-tight">
-            Proteja sua <span className="text-gradient">viagem</span>
+            Proteja sua viagem
           </h1>
 
           {coverages.length > 0 && (
             <div className="mb-10">
-              <h2 className="text-text-primary font-bold mb-4 uppercase text-sm tracking-wider">Cobertura</h2>
+              <h2 className="text-text-primary text-lg font-black tracking-tight mb-4">Cobertura</h2>
               <div className="grid sm:grid-cols-2 gap-4">
                 {coverages.map((c, i) => {
                   const cov = c.PricedCoverage
@@ -77,13 +77,14 @@ export default function ReservarExtras() {
                       type="button"
                       key={i}
                       onClick={() => setSelectedCoverage(cov.Coverage.CoverageType)}
-                      className={`text-left glass rounded-2xl p-5 border transition-all cursor-pointer ${
-                        active ? 'border-brand-accent shadow-glow' : 'border-white/10'
+                      aria-pressed={active}
+                      className={`text-left glass rounded-2xl p-5 cursor-pointer transition-colors ${
+                        active ? '!border-brand-accent bg-brand-accent/10' : 'hover:bg-white/[0.12]'
                       }`}
                     >
                       <p className="text-text-primary font-bold mb-1">{cov.Coverage.Details?.Value}</p>
-                      <p className="text-text-secondary text-xs mb-3">{cov.Coverage.Details?.Description}</p>
-                      <p className="text-brand-accent font-bold text-sm">
+                      <p className="text-text-secondary text-sm mb-3">{cov.Coverage.Details?.Description}</p>
+                      <p className="text-text-primary font-bold text-sm">
                         {included ? 'Incluso' : `+ ${formatBRL(cov.Charge.Amount)}`}
                       </p>
                     </button>
@@ -95,7 +96,7 @@ export default function ReservarExtras() {
 
           {equipments.length > 0 && (
             <div className="mb-10">
-              <h2 className="text-text-primary font-bold mb-4 uppercase text-sm tracking-wider">Equipamentos e serviços</h2>
+              <h2 className="text-text-primary text-lg font-black tracking-tight mb-4">Equipamentos e serviços</h2>
               <div className="grid sm:grid-cols-2 gap-4">
                 {equipments.map((e, i) => {
                   const active = selectedEquip.includes(e.Equipment.EquipType)
@@ -104,12 +105,13 @@ export default function ReservarExtras() {
                       type="button"
                       key={i}
                       onClick={() => toggleEquip(e.Equipment.EquipType)}
-                      className={`text-left glass rounded-2xl p-5 border transition-all cursor-pointer flex items-center justify-between ${
-                        active ? 'border-brand-accent shadow-glow' : 'border-white/10'
+                      aria-pressed={active}
+                      className={`text-left glass rounded-2xl p-5 cursor-pointer transition-colors flex items-center justify-between gap-4 ${
+                        active ? '!border-brand-accent bg-brand-accent/10' : 'hover:bg-white/[0.12]'
                       }`}
                     >
                       <span className="text-text-primary font-medium text-sm">{e.Equipment.Description}</span>
-                      <span className="text-brand-accent font-bold text-sm">+ {formatBRL(e.Charge.Amount)}</span>
+                      <span className="text-text-primary font-bold text-sm whitespace-nowrap">+ {formatBRL(e.Charge.Amount)}</span>
                     </button>
                   )
                 })}
@@ -119,16 +121,18 @@ export default function ReservarExtras() {
 
           <div className="glass rounded-2xl p-6 flex items-center justify-between mb-8">
             <span className="text-text-secondary text-sm">Total estimado</span>
-            <span className="text-text-primary text-2xl font-black">{formatBRL(baseTotal + extrasTotal)}</span>
+            <span className="text-text-primary text-2xl font-black tracking-tight" aria-live="polite">
+              {formatBRL(baseTotal + extrasTotal)}
+            </span>
           </div>
 
           <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.97 }}
+            whileHover={{ scale: 1.01 }}
+            whileTap={{ scale: 0.98 }}
             onClick={handleContinue}
-            className="w-full bg-brand-accent hover:bg-brand-glow text-white font-bold py-4 rounded-xl shadow-glow transition-all duration-300 cursor-pointer"
+            className="w-full bg-brand-accent hover:bg-brand-glow text-white font-bold py-4 rounded-xl transition-colors duration-300 cursor-pointer"
           >
-            Continuar →
+            Continuar para seus dados
           </motion.button>
         </div>
       </section>

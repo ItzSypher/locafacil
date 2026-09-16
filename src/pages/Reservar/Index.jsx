@@ -13,7 +13,7 @@ export default function Reservar() {
         </div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-24 relative z-10">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-text-primary text-center mb-10 tracking-tight">
-            Reserve seu <span className="text-gradient">veículo</span>
+            Reserve seu veículo
           </h1>
           <SearchWidget />
         </div>

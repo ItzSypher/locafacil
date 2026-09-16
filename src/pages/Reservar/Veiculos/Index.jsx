@@ -11,14 +11,27 @@ const formatBRL = (value) =>
   new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(Number(value) || 0)
 
 const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
+  hidden: { opacity: 1 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.06 } },
 }
 
 const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+  hidden: { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } },
 }
+
+function SpecIcon({ path }) {
+  return (
+    <svg className="w-4 h-4 shrink-0 text-text-secondary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d={path} />
+    </svg>
+  )
+}
+
+const ICON_PASSENGERS = 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z'
+const ICON_BAGGAGE = 'M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2m-9 0h10a2 2 0 012 2v9a2 2 0 01-2 2H7a2 2 0 01-2-2V9a2 2 0 012-2z'
+const ICON_TRANSMISSION = 'M12 6v12m0-12L8 9m4-3l4 3M6 9v6a2 2 0 002 2h8a2 2 0 002-2V9'
+const ICON_AIR = 'M12 3v18M3 12h18M6.5 6.5l11 11M17.5 6.5l-11 11'
 
 function extractVehAvails(data) {
   try {
@@ -89,24 +102,59 @@ export default function ReservarVeiculos() {
           <StepProgress current="veiculos" />
 
           <h1 className="text-2xl sm:text-3xl font-black text-text-primary text-center mb-2 tracking-tight">
-            Escolha seu <span className="text-gradient">veículo</span>
+            Escolha seu veículo
           </h1>
           {expiresAt && (
-            <p className="text-text-secondary text-xs text-center mb-10">
+            <p className="text-text-secondary text-sm text-center mb-10">
               Preços válidos até {new Date(expiresAt).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}
             </p>
           )}
 
           {loading && (
-            <p className="text-text-secondary text-center py-20">Buscando veículos disponíveis...</p>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto" aria-live="polite" aria-busy="true">
+              <span className="sr-only">Buscando veículos disponíveis</span>
+              {[0, 1, 2].map((i) => (
+                <div key={i} className="glass rounded-2xl p-6 animate-pulse">
+                  <div className="h-3 w-24 bg-white/10 rounded mb-4" />
+                  <div className="h-5 w-40 bg-white/10 rounded mb-6" />
+                  <div className="grid grid-cols-2 gap-3 mb-8">
+                    {[0, 1, 2, 3].map((j) => (
+                      <div key={j} className="h-3 bg-white/10 rounded" />
+                    ))}
+                  </div>
+                  <div className="h-8 w-32 bg-white/10 rounded mb-4" />
+                  <div className="h-12 bg-white/10 rounded-xl" />
+                </div>
+              ))}
+            </div>
           )}
 
           {!loading && error && (
-            <p className="text-red-400 text-center py-20">{error}</p>
+            <div className="glass rounded-2xl max-w-md mx-auto p-8 text-center" role="alert">
+              <p className="text-text-primary font-semibold mb-2">Não foi possível buscar os veículos</p>
+              <p className="text-text-secondary text-sm mb-6">{error}</p>
+              <button
+                onClick={() => navigate('/reservar')}
+                className="bg-brand-accent hover:bg-brand-glow text-white font-bold text-sm px-6 py-3 rounded-xl transition-colors duration-300 cursor-pointer"
+              >
+                Refazer a busca
+              </button>
+            </div>
           )}
 
           {!loading && !error && vehAvails.length === 0 && (
-            <p className="text-text-secondary text-center py-20">Nenhum veículo disponível para o período selecionado.</p>
+            <div className="glass rounded-2xl max-w-md mx-auto p-8 text-center">
+              <p className="text-text-primary font-semibold mb-2">Nenhum veículo para este período</p>
+              <p className="text-text-secondary text-sm mb-6">
+                Tente ampliar as datas ou escolher outra loja de retirada.
+              </p>
+              <button
+                onClick={() => navigate('/reservar')}
+                className="bg-brand-accent hover:bg-brand-glow text-white font-bold text-sm px-6 py-3 rounded-xl transition-colors duration-300 cursor-pointer"
+              >
+                Alterar busca
+              </button>
+            </div>
           )}
 
           {!loading && !error && vehAvails.length > 0 && (
@@ -123,30 +171,42 @@ export default function ReservarVeiculos() {
                   <motion.div
                     key={i}
                     variants={fadeInUp}
-                    className="glass rounded-3xl p-6 shadow-card border border-white/10 flex flex-col"
+                    className="glass rounded-2xl p-6 flex flex-col"
                   >
-                    <span className="text-brand-accent text-xs font-black uppercase tracking-wider mb-1">
-                      {Vehicle.VehType?.VehicleCategory}
-                    </span>
-                    <h3 className="text-text-primary text-lg font-bold mb-4">{Vehicle.VehMakeModel?.Name}</h3>
+                    <p className="text-text-secondary text-sm mb-1">{Vehicle.VehType?.VehicleCategory}</p>
+                    <h3 className="text-text-primary text-xl font-black tracking-tight mb-5">
+                      {Vehicle.VehMakeModel?.Name}
+                    </h3>
 
-                    <div className="grid grid-cols-2 gap-2 mb-6 text-text-secondary text-xs">
-                      <span>🧑 {Vehicle.PassengerQuantity} pessoas</span>
-                      <span>🧳 {Vehicle.BaggageQuantity} malas</span>
-                      <span>⚙️ {Vehicle.TransmissionType}</span>
-                      <span>❄️ {Vehicle.AirConditionInd === 'true' ? 'Ar-condicionado' : 'Sem ar'}</span>
-                    </div>
+                    <ul className="grid grid-cols-2 gap-x-3 gap-y-2.5 mb-8 text-text-secondary text-sm">
+                      <li className="flex items-center gap-2">
+                        <SpecIcon path={ICON_PASSENGERS} />
+                        {Vehicle.PassengerQuantity} pessoas
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <SpecIcon path={ICON_BAGGAGE} />
+                        {Vehicle.BaggageQuantity} malas
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <SpecIcon path={ICON_TRANSMISSION} />
+                        {Vehicle.TransmissionType}
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <SpecIcon path={ICON_AIR} />
+                        {Vehicle.AirConditionInd === 'true' ? 'Ar-condicionado' : 'Sem ar'}
+                      </li>
+                    </ul>
 
                     <div className="mt-auto">
-                      <p className="text-text-secondary text-xs mb-1">Total estimado</p>
-                      <p className="text-text-primary text-2xl font-black mb-4">{formatBRL(total)}</p>
+                      <p className="text-text-secondary text-sm">Total estimado</p>
+                      <p className="text-text-primary text-3xl font-black tracking-tight mb-5">{formatBRL(total)}</p>
                       <motion.button
-                        whileHover={{ scale: 1.03 }}
-                        whileTap={{ scale: 0.97 }}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
                         onClick={() => handleSelect(vehAvail)}
-                        className="w-full bg-brand-accent hover:bg-brand-glow text-white font-bold text-sm py-3.5 rounded-full shadow-glow transition-all duration-300 cursor-pointer"
+                        className="w-full bg-brand-accent hover:bg-brand-glow text-white font-bold text-sm py-3.5 rounded-xl transition-colors duration-300 cursor-pointer"
                       >
-                        Selecionar
+                        Selecionar {Vehicle.VehMakeModel?.Name}
                       </motion.button>
                     </div>
                   </motion.div>

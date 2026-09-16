@@ -31,24 +31,16 @@ export default {
         sans: ['Montserrat', 'system-ui', '-apple-system', 'sans-serif'],
         display: ['Montserrat', 'system-ui', '-apple-system', 'sans-serif'],
       },
-      /* Sombras glow para CTAs */
+      /* Sombras de contato: profundidade em superfície clara, onde o vidro não filtra nada */
       boxShadow: {
-        'glow': '0 0 20px rgba(37, 99, 235, 0.4)',
-        'glow-lg': '0 0 40px rgba(37, 99, 235, 0.3)',
-        'glow-green': '0 0 20px rgba(16, 185, 129, 0.4)',
         'card': '0 4px 24px rgba(0, 0, 0, 0.06)',
         'card-hover': '0 8px 40px rgba(0, 0, 0, 0.12)',
         'glass': '0 8px 32px rgba(0, 0, 0, 0.2)',
       },
-      /* Animações keyframe para floating e glow pulse */
       keyframes: {
         float: {
           '0%, 100%': { transform: 'translateY(0px)' },
           '50%': { transform: 'translateY(-15px)' },
-        },
-        'glow-pulse': {
-          '0%, 100%': { boxShadow: '0 0 20px rgba(37, 99, 235, 0.4)' },
-          '50%': { boxShadow: '0 0 40px rgba(37, 99, 235, 0.6)' },
         },
         'slide-up': {
           '0%': { transform: 'translateY(20px)', opacity: '0' },
@@ -57,7 +49,6 @@ export default {
       },
       animation: {
         float: 'float 3s ease-in-out infinite',
-        'glow-pulse': 'glow-pulse 2s ease-in-out infinite',
         'slide-up': 'slide-up 0.6s ease-out forwards',
       },
       /* Backdrop blur para glassmorphism */

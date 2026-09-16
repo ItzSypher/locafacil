@@ -52,7 +52,7 @@ export default function WelcomePopup() {
             initial={{ scale: 0.9, y: 20 }}
             animate={{ scale: 1, y: 0 }}
             exit={{ scale: 0.9, y: 20 }}
-            className="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl relative overflow-hidden"
+            className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl relative overflow-hidden"
           >
             <button 
               onClick={handleClose}
@@ -104,7 +104,7 @@ export default function WelcomePopup() {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       type="submit"
-                      className="w-full bg-brand-accent hover:bg-brand-glow text-white font-bold text-base py-4 rounded-xl shadow-glow transition-all cursor-pointer mt-2"
+                      className="w-full bg-brand-accent hover:bg-brand-glow text-white font-bold text-base py-4 rounded-xl transition-colors cursor-pointer mt-2"
                     >
                       Acessar Condições Premium →
                     </motion.button>

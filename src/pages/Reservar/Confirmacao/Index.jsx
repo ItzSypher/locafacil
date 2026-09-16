@@ -30,21 +30,23 @@ export default function ReservarConfirmacao() {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="glass rounded-3xl p-10 text-center border border-white/10 shadow-glass"
+            className="glass rounded-2xl p-8 sm:p-10 text-center"
           >
-            <div className="w-16 h-16 bg-brand-success/15 text-brand-success rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+            <div className="w-14 h-14 bg-brand-success/15 text-brand-success rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3} aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>
             </div>
 
             <h1 className="text-2xl sm:text-3xl font-black text-text-primary mb-2 tracking-tight">
-              Reserva confirmada!
+              Reserva confirmada
             </h1>
             <p className="text-text-secondary mb-8">Guarde o número abaixo — ele é o seu comprovante.</p>
 
-            <p className="text-text-secondary text-xs uppercase tracking-wider mb-1">Número da reserva</p>
-            <p className="text-gradient text-4xl font-black mb-8">#{confId}</p>
+            <p className="text-text-secondary text-sm mb-1">Número da reserva</p>
+            <p className="text-text-primary text-5xl sm:text-6xl font-black tracking-tight mb-8 tabular-nums">
+              {confId}
+            </p>
 
             <div className="text-left bg-white/5 rounded-2xl p-6 space-y-2 mb-8">
               <div className="flex justify-between text-sm">
@@ -72,9 +74,9 @@ export default function ReservarConfirmacao() {
               onClick={() => reset()}
             >
               <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.97 }}
-                className="w-full bg-brand-accent hover:bg-brand-glow text-white font-bold py-4 rounded-xl shadow-glow transition-all duration-300 cursor-pointer"
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full bg-brand-accent hover:bg-brand-glow text-white font-bold py-4 rounded-xl transition-colors duration-300 cursor-pointer"
               >
                 Falar com nosso suporte
               </motion.button>

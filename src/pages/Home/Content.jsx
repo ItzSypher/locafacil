@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Pagination, Navigation, EffectFade } from 'swiper/modules'
 
@@ -21,17 +22,17 @@ import Image1 from '../../assets/images/image-1.webp'
 import Image3 from '../../assets/images/image-3.webp'
 import Image4 from '../../assets/images/image-4.webp'
 
-/* ===== VARIANTES DE ANIMAÇÃO ===== */
+/* Entrada curta com ease exponencial: o conteúdo assenta, não desliza.
+   O container nunca fica invisível — só orquestra os filhos. */
 const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } }
 }
 
 const staggerContainer = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 1 },
   visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.12, delayChildren: 0.1 }
+    transition: { staggerChildren: 0.06 }
   }
 }
 
@@ -161,15 +162,14 @@ export default function HomeContent() {
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.12 }}
             variants={fadeInUp}
             className="text-center mb-12 sm:mb-16"
           >
-            <span className="inline-block text-brand-accent text-sm font-black tracking-[0.2em] uppercase mb-3 drop-shadow-md">Vantagens Exclusivas</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-text-dark leading-tight tracking-tight">
-              Aluguel de carro <span className="text-gradient font-black">não é tudo igual.</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-text-dark leading-tight tracking-tight text-balance">
+              Aluguel de carro não é tudo igual.
             </h2>
-            <p className="text-text-muted text-lg mt-4 max-w-2xl mx-auto">
+            <p className="text-text-muted text-lg mt-4 max-w-[65ch] mx-auto">
               Só na Locafacil você tem benefícios que ninguém mais oferece. Compare e comprove.
             </p>
           </motion.div>
@@ -215,12 +215,11 @@ export default function HomeContent() {
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.12 }}
             variants={fadeInUp}
             className="text-center mb-10"
           >
-            <span className="inline-block text-brand-accent text-sm font-semibold tracking-widest uppercase mb-3">Parceiros de Confiança</span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-text-dark">
+            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-text-dark text-balance">
               Montadoras que fazem parte da nossa frota
             </h2>
           </motion.div>
@@ -228,7 +227,7 @@ export default function HomeContent() {
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.12 }}
             variants={fadeInUp}
             className="w-full overflow-hidden"
           >
@@ -273,14 +272,11 @@ export default function HomeContent() {
             <motion.div
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.5 }}
+              viewport={{ once: true, amount: 0.12 }}
               variants={fadeInUp}
             >
-              <span className="inline-block text-brand-accent text-sm font-black tracking-[0.2em] uppercase mb-3">
-                Nossos Serviços
-              </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-text-dark leading-tight tracking-tight">
-                Soluções que <span className="text-gradient">movem você.</span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-text-dark leading-tight tracking-tight text-balance">
+                Soluções que movem você.
               </h2>
             </motion.div>
           </div>
@@ -289,7 +285,7 @@ export default function HomeContent() {
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.12 }}
             variants={fadeInUp}
             className="w-full relative"
           >
@@ -305,22 +301,19 @@ export default function HomeContent() {
               >
               {servicos.map((servico, i) => (
                 <SwiperSlide key={i}>
-                  <div className="bg-white rounded-3xl p-6 sm:p-10 shadow-card flex flex-col md:flex-row gap-8 items-center border border-slate-100">
+                  <div className="bg-white rounded-2xl p-6 sm:p-10 shadow-card flex flex-col md:flex-row gap-8 items-center">
                     {/* Imagem */}
                     <div className="w-full md:w-1/2 relative overflow-hidden rounded-2xl group">
-                      <div className="absolute -inset-4 bg-gradient-to-r from-brand-accent/20 to-brand-glow/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500" />
                       <img
                         src={servico.imagem}
                         alt={servico.titulo}
-                        className="relative w-full rounded-2xl shadow-md group-hover:scale-105 transition-transform duration-700 object-cover aspect-[4/3]"
+                        className="relative w-full rounded-2xl group-hover:scale-105 transition-transform duration-700 object-cover aspect-[4/3]"
                       />
                     </div>
 
                     {/* Texto */}
                     <div className="w-full md:w-1/2 space-y-5 flex flex-col text-left">
-                      <span className="inline-block text-brand-accent text-xs font-black tracking-[0.15em] uppercase">
-                        {servico.subtitulo}
-                      </span>
+                      <p className="text-text-muted text-sm">{servico.subtitulo}</p>
                       <h3 className="text-2xl sm:text-3xl font-black text-text-dark leading-tight tracking-tight">
                         {servico.titulo}
                       </h3>
@@ -329,21 +322,21 @@ export default function HomeContent() {
                       </p>
                       <div className="pt-4">
                         {servico.interno ? (
-                          <a href={servico.link}>
+                          <Link to={servico.link}>
                             <motion.button
-                              whileHover={{ scale: 1.05, boxShadow: '0 0 25px rgba(37, 99, 235, 0.4)' }}
+                              whileHover={{ scale: 1.03 }}
                               whileTap={{ scale: 0.97 }}
-                              className="bg-brand-accent hover:bg-brand-glow text-white font-bold px-8 py-3.5 rounded-full shadow-glow transition-all duration-300 cursor-pointer"
+                              className="bg-brand-accent hover:bg-brand-glow text-white font-bold px-8 py-3.5 rounded-xl transition-colors duration-300 cursor-pointer"
                             >
                               {servico.cta}
                             </motion.button>
-                          </a>
+                          </Link>
                         ) : (
                           <a href={servico.link} target="_blank" rel="noopener noreferrer">
                             <motion.button
-                              whileHover={{ scale: 1.05, boxShadow: '0 0 25px rgba(37, 99, 235, 0.4)' }}
+                              whileHover={{ scale: 1.03 }}
                               whileTap={{ scale: 0.97 }}
-                              className="bg-brand-accent hover:bg-brand-glow text-white font-bold px-8 py-3.5 rounded-full shadow-glow transition-all duration-300 cursor-pointer"
+                              className="bg-brand-accent hover:bg-brand-glow text-white font-bold px-8 py-3.5 rounded-xl transition-colors duration-300 cursor-pointer"
                             >
                               {servico.cta}
                             </motion.button>
@@ -369,19 +362,18 @@ export default function HomeContent() {
               <motion.div
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
+                viewport={{ once: true, amount: 0.12 }}
                 variants={fadeInUp}
               >
-                <span className="inline-block text-brand-accent text-sm font-semibold tracking-widest uppercase mb-3">Diferenciais</span>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-text-dark leading-tight mb-10">
-                  Por que mais de <span className="text-gradient">5.000 clientes</span> escolhem a Locafacil?
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-text-dark leading-tight mb-10 text-balance">
+                  Por que mais de 5.000 clientes escolhem a Locafacil?
                 </h2>
               </motion.div>
 
               <motion.div
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
+                viewport={{ once: true, amount: 0.12 }}
                 variants={staggerContainer}
                 className="space-y-6"
               >
@@ -407,7 +399,7 @@ export default function HomeContent() {
             <motion.div
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
+              viewport={{ once: true, amount: 0.12 }}
               variants={fadeInUp}
             >
               <img
@@ -433,28 +425,20 @@ export default function HomeContent() {
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.12 }}
             variants={staggerContainer}
             className="max-w-3xl mx-auto text-center"
           >
-            <motion.div variants={fadeInUp}>
-              <span className="inline-flex items-center gap-2 bg-brand-gold/20 text-brand-gold text-sm font-semibold px-4 py-1.5 rounded-full border border-brand-gold/30 mb-6">
-                <span className="w-2 h-2 bg-brand-gold rounded-full animate-pulse" />
-                Oferta por tempo limitado
-              </span>
-            </motion.div>
-
             <motion.h2
               variants={fadeInUp}
-              className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-text-primary leading-tight mb-6"
+              className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black tracking-tight text-text-primary leading-tight mb-6 text-balance"
             >
-              Não deixe outro motorista<br />
-              <span className="text-gradient">pegar o seu carro.</span>
+              Não deixe outro motorista<br />pegar o seu carro.
             </motion.h2>
 
             <motion.p
               variants={fadeInUp}
-              className="text-text-secondary text-lg sm:text-xl leading-relaxed mb-10 max-w-xl mx-auto"
+              className="text-text-secondary text-lg sm:text-xl leading-relaxed mb-10 max-w-[60ch] mx-auto"
             >
               As unidades são limitadas e a procura é alta. Garanta agora a liberdade de dirigir sem complicação e com o melhor custo-benefício do Rio de Janeiro.
             </motion.p>
@@ -462,18 +446,18 @@ export default function HomeContent() {
             <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row justify-center gap-4">
               <a href="https://api.whatsapp.com/send?phone=5521968540185&text=Ol%C3%A1,%20Locafacil!%20Quero%20garantir%20meu%20ve%C3%ADculo%20agora!" target="_blank" rel="noopener noreferrer">
                 <motion.button
-                  whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(37, 99, 235, 0.5)' }}
+                  whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="w-full sm:w-auto bg-brand-accent hover:bg-brand-glow text-white font-bold text-lg px-10 py-4 rounded-full shadow-glow animate-glow-pulse transition-all duration-300 cursor-pointer"
+                  className="w-full sm:w-auto bg-brand-accent hover:bg-brand-glow text-white font-bold text-lg px-10 py-4 rounded-xl transition-colors duration-300 cursor-pointer"
                 >
-                  Garantir Meu Carro Agora →
+                  Garantir Meu Carro Agora
                 </motion.button>
               </a>
               <a href="tel:5521968540185">
                 <motion.button
-                  whileHover={{ scale: 1.05, background: 'rgba(255,255,255,0.12)' }}
+                  whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="w-full sm:w-auto bg-white/5 border border-white/20 text-white font-semibold text-lg px-10 py-4 rounded-full hover:border-white/40 transition-all duration-300 cursor-pointer"
+                  className="w-full sm:w-auto bg-white/5 border border-white/15 text-white font-semibold text-lg px-10 py-4 rounded-xl hover:bg-white/10 transition-colors duration-300 cursor-pointer"
                 >
                   Ligar Agora: (21) 96854-0185
                 </motion.button>

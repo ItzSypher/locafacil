@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import Avatar from '../../assets/images/locagora-avatar.png'
 
@@ -13,13 +14,19 @@ export default function MicroAgent() {
   
   const messagesEndRef = useRef(null)
 
+  const { pathname } = useLocation()
+  const inCheckout = pathname.startsWith('/reservar')
+
   useEffect(() => {
-    // Show a greeting bubble after a short delay
-    const timer = setTimeout(() => {
-      setMessageVisible(true)
-    }, 4000)
+    // Dentro da reserva o balão cobre preço e CTA: o assistente fica disponível
+    // pelo botão, mas não se convida sozinho.
+    if (inCheckout) {
+      setMessageVisible(false)
+      return
+    }
+    const timer = setTimeout(() => setMessageVisible(true), 4000)
     return () => clearTimeout(timer)
-  }, [])
+  }, [inCheckout])
 
   useEffect(() => {
     const fetchLead = () => {
@@ -145,7 +152,7 @@ Não invente preços exatos ou detalhes se não souber, apenas promova os benef�
             initial={{ opacity: 0, y: 20, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
-            className="bg-white w-[300px] sm:w-[360px] rounded-3xl shadow-2xl overflow-hidden mb-4 border border-slate-100 flex flex-col h-[500px] max-h-[80vh]"
+            className="bg-white w-[300px] sm:w-[360px] rounded-2xl shadow-2xl overflow-hidden mb-4 flex flex-col h-[500px] max-h-[80vh]"
           >
             <div className="bg-brand-dark p-4 flex items-center gap-4 relative shrink-0">
               <div className="absolute top-0 right-0 w-32 h-32 bg-brand-accent/20 rounded-full blur-2xl pointer-events-none" />
@@ -181,9 +188,10 @@ Não invente preços exatos ou detalhes se não souber, apenas promova os benef�
                 <div className="flex gap-3">
                   <img src={Avatar} alt="Locagora" className="w-8 h-8 rounded-full object-cover shadow-sm shrink-0" />
                   <div className="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm text-sm text-text-dark border border-slate-100 flex items-center gap-1">
-                    <span className="w-2 h-2 bg-brand-accent rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                    <span className="w-2 h-2 bg-brand-accent rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                    <span className="w-2 h-2 bg-brand-accent rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                    <span className="sr-only">Locagora está digitando</span>
+                    <span className="w-1.5 h-1.5 bg-brand-accent rounded-full animate-pulse" style={{ animationDelay: '0ms' }} />
+                    <span className="w-1.5 h-1.5 bg-brand-accent rounded-full animate-pulse" style={{ animationDelay: '200ms' }} />
+                    <span className="w-1.5 h-1.5 bg-brand-accent rounded-full animate-pulse" style={{ animationDelay: '400ms' }} />
                   </div>
                 </div>
               )}

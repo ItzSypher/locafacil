@@ -21,10 +21,10 @@ export default function Header() {
   }
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 16 },
     visible: {
       opacity: 1, y: 0,
-      transition: { duration: 0.6, ease: 'easeOut' }
+      transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] }
     }
   }
 
@@ -58,8 +58,8 @@ export default function Header() {
           >
             {/* Badge de urgência */}
             <motion.div variants={itemVariants}>
-              <span className="inline-flex items-center gap-2 bg-brand-success/15 text-brand-success text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-full border border-brand-success/30 mb-6">
-                <span className="w-2 h-2 bg-brand-success rounded-full animate-pulse" />
+              <span className="inline-flex items-center gap-2 bg-brand-gold/10 text-brand-gold text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-full border border-brand-gold/30 mb-6">
+                <span className="w-1.5 h-1.5 bg-brand-gold rounded-full" />
                 Últimas unidades com condições exclusivas
               </span>
             </motion.div>
@@ -69,8 +69,7 @@ export default function Header() {
               variants={itemVariants}
               className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-text-primary leading-[1.05] mb-6 tracking-tight"
             >
-              Sua Liberdade<br />
-              <span className="text-gradient">Sobre Rodas.</span>
+              Sua Liberdade<br />Sobre Rodas.
             </motion.h1>
 
             {/* Subtítulo com trigger de autoridade */}
@@ -85,18 +84,18 @@ export default function Header() {
             <motion.div variants={itemVariants} className="flex flex-wrap gap-4">
               <a href="https://api.whatsapp.com/send?phone=5521968540185&text=Ol%C3%A1,%20Locafacil!%20Quero%20garantir%20meu%20ve%C3%ADculo%20agora!" target="_blank" rel="noopener noreferrer">
                 <motion.button
-                  whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(37, 99, 235, 0.5)' }}
+                  whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="bg-brand-accent hover:bg-brand-glow text-white font-bold text-sm sm:text-base px-8 py-3.5 rounded-full shadow-glow transition-all duration-300 cursor-pointer"
+                  className="bg-brand-accent hover:bg-brand-glow text-white font-bold text-sm sm:text-base px-8 py-3.5 rounded-xl transition-colors duration-300 cursor-pointer"
                 >
                   Garantir Meu Carro Agora
                 </motion.button>
               </a>
               <a href="#beneficios">
                 <motion.button
-                  whileHover={{ scale: 1.05, background: 'rgba(255,255,255,0.1)' }}
+                  whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="bg-transparent border border-white/20 text-white font-semibold text-sm sm:text-base px-8 py-3.5 rounded-full hover:border-white/40 transition-all duration-300 cursor-pointer"
+                  className="bg-white/5 border border-white/15 text-white font-semibold text-sm sm:text-base px-8 py-3.5 rounded-xl hover:bg-white/10 transition-colors duration-300 cursor-pointer"
                 >
                   Descubra os Benefícios
                 </motion.button>
@@ -109,7 +108,7 @@ export default function Header() {
                 {[1, 2, 3, 4].map((i) => (
                   <div
                     key={i}
-                    className="w-8 h-8 rounded-full border-2 border-brand-dark bg-gradient-to-br from-brand-accent to-brand-glow flex items-center justify-center text-[10px] text-white font-bold"
+                    className="w-8 h-8 rounded-full border-2 border-brand-dark bg-brand-deep flex items-center justify-center text-xs text-white font-bold"
                   >
                     {['RS', 'MF', 'JC', 'AL'][i - 1]}
                   </div>
@@ -156,7 +155,7 @@ export default function Header() {
 
       {/* Formulário Glassmorphism flutuante - sobrepõe hero e próxima seção */}
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.8 }}
         className="relative z-20 px-4 sm:px-6 lg:px-8 -mt-24 sm:-mt-32 pb-24"

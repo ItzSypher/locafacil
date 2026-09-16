@@ -15,15 +15,12 @@ export default function Header() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3, duration: 0.6 }}
           >
-            <span className="inline-flex items-center gap-2 bg-brand-accent/15 text-brand-accent text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-full border border-brand-accent/30 mb-6">
-              Fale Conosco
-            </span>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-text-primary leading-tight mb-4">
-              Estamos aqui <span className="text-gradient">por você.</span>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-text-primary leading-tight mb-4 text-balance">
+              Estamos aqui por você.
             </h1>
-            <h2 className="text-xl sm:text-2xl font-light text-text-secondary mb-8">
+            <p className="text-xl sm:text-2xl text-text-secondary leading-relaxed mb-8 max-w-[45ch]">
               Conheça a equipe por trás da Locafacil e entre em contato conosco.
-            </h2>
+            </p>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, x: 40 }}

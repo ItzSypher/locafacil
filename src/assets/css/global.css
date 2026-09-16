@@ -40,8 +40,8 @@
 }
 
 *::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--brand-accent), var(--brand-glow));
-  border-radius: 10px;
+  background: var(--brand-accent);
+  border-radius: 9999px;
 }
 
 html {
@@ -61,16 +61,30 @@ body {
   background-color: var(--white);
 }
 
-/* ===== SELEÇÃO DE TEXTO ===== */
+/* ===== SUPERFÍCIES DO NAVEGADOR =====
+   Seleção, cursor de texto e anel de foco também carregam o design;
+   deixá-los no padrão do navegador entrega uma página montada, não construída. */
 ::selection {
   background-color: var(--brand-accent);
   color: var(--white);
+}
+
+input,
+textarea,
+select {
+  caret-color: var(--brand-accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand-accent);
+  outline-offset: 2px;
 }
 
 /* ===== LINKS ===== */
 a {
   text-decoration: none;
   color: inherit;
+  text-underline-offset: 0.2em;
   transition: color 0.2s ease;
 }
 
@@ -95,13 +109,6 @@ a {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.08);
-  }
-
-  .text-gradient {
-    background: linear-gradient(135deg, var(--brand-accent), var(--brand-glow));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
   }
 
   .bg-hero-gradient {
