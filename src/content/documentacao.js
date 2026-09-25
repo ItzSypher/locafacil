@@ -535,7 +535,7 @@ Para anexar ou baixar:
 PDF do cliente: https://locafacil-nine.vercel.app/doc/Locafacil-Apresentacao-Cliente.pdf
 PDF do marketing: https://locafacil-nine.vercel.app/doc/Locafacil-Apresentacao-Marketing.pdf
 
-Nas duas páginas dá para marcar o que já conferiu e escrever as observações passo a passo. No fim, um botão monta o retorno pronto para mandar.
+Nas duas páginas dá para marcar o que já conferiu e escrever as observações passo a passo. Tudo é salvo automaticamente e chega para mim; no fim, um botão manda o retorno também pelo WhatsApp.
 
 COMO TESTAR — DADOS FICTÍCIOS, TELA A TELA
 
@@ -657,7 +657,7 @@ Sugiro uma reunião na segunda, dia 28, para fechar design, responsividade e o f
 
 Montei uma página com as telas em alta, as cores e os arquivos da marca, as frases do atendimento e dados de teste para percorrer a reserva inteira: https://locafacil-nine.vercel.app/doc/marketing
 
-Leva uns dez minutos, e vale fazer uma vez no computador e uma no celular. Dá para anotar na própria página e copiar o retorno no fim.
+Leva uns dez minutos, e vale fazer uma vez no computador e uma no celular. Dá para anotar na própria página, que salva sozinha, e mandar o retorno pelo WhatsApp no fim.
 
 Sugiro uma reunião na segunda, dia 28, para fechar os pontos finais de design e responsividade. Qual horário fica bom para vocês?`,
   },

@@ -21,6 +21,14 @@ O formato das variáveis está documentado em
 **O projeto não usa chave de IA.** O chat por IA foi removido; o atendimento é
 um atalho de WhatsApp com frases prontas, sem servidor e sem credencial.
 
+**Retornos da homologação.** O que as pessoas marcam e escrevem em
+`/doc/cliente` e `/doc/marketing` vai para um Vercel Blob **privado**
+(`locafacil-retornos`): os arquivos não têm URL pública, e só a função
+`api/retornos.js` lê e escreve, com `BLOB_READ_WRITE_TOKEN`. A leitura exige
+`DOC_RETORNOS_SENHA`, comparada em tempo constante. A escrita é aberta — a
+página é pública para quem tiver o link —, então o endpoint aceita só o
+formato que a página manda, com limite de tamanho em cada campo.
+
 ## O que barra segredo antes do commit
 
 `.githooks/pre-commit` inspeciona **as linhas adicionadas** de tudo que está em

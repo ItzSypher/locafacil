@@ -6,9 +6,10 @@ import { useCallback, useEffect, useState } from 'react'
  * notebook, volta no dia seguinte. Se o que ela marcou sumir, ela não marca de
  * novo — desiste da lista e manda o retorno pela metade.
  *
- * O armazenamento é do navegador, não do servidor: cada pessoa vê o próprio
- * progresso, e nada disso chega até nós até ela copiar o retorno e mandar. Em
- * aba anônima o acesso estoura; ali a página funciona igual, só não lembra.
+ * Esta é a cópia local: cada pessoa continua de onde parou, e nada se perde
+ * se um salvamento no servidor falhar. O retorno que chega até nós vai por
+ * `/api/retornos` (ver `Checklist.jsx`). Em aba anônima o acesso estoura; ali
+ * a página funciona igual, só não lembra.
  */
 export function useArmazenamento(chave, inicial) {
   const [valor, setValor] = useState(() => {
@@ -62,4 +63,29 @@ export function useCopia() {
   }, [])
 
   return [copiar, copiado]
+}
+
+const TITULO_DO_SITE = 'Locafacil | Aluguel de Veículos Sem Burocracia - Carros e Motos no RJ'
+
+/**
+ * Título da aba e `noindex` das páginas internas.
+ *
+ * Posto ao montar e retirado ao sair. O site não usa biblioteca de `<head>`,
+ * e um `noindex` esquecido no documento derrubaria a home do Google na
+ * próxima navegação dentro da mesma aba.
+ */
+export function useSemIndice(titulo) {
+  useEffect(() => {
+    document.title = `${titulo} — Locafácil`
+
+    const meta = document.createElement('meta')
+    meta.name = 'robots'
+    meta.content = 'noindex, nofollow'
+    document.head.appendChild(meta)
+
+    return () => {
+      document.head.removeChild(meta)
+      document.title = TITULO_DO_SITE
+    }
+  }, [titulo])
 }

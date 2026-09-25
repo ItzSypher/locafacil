@@ -257,7 +257,7 @@ export default function DocMarketing() {
         id="roteiro"
         numero={9}
         titulo="Roteiro de homologação"
-        resumo="Leva cerca de dez minutos. Faça uma vez no computador e uma vez no celular. Marque o que conferiu e escreva as observações aqui mesmo; no fim, um botão monta o retorno."
+        resumo="Leva cerca de dez minutos. Faça uma vez no computador e uma vez no celular. Diga quem está respondendo, marque o que conferiu e escreva as observações aqui mesmo: tudo é salvo sozinho e chega à equipe do projeto. No fim, mande também pelo WhatsApp."
       >
         <Checklist publico="marketing" />
       </Secao>

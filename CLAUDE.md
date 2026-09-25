@@ -74,9 +74,25 @@ ali muda as páginas, os dois PDFs e os textos de envio de uma vez. Os assuntos
 do WhatsApp moram em `src/config/atendimento.js` e são lidos tanto pelo botão
 flutuante quanto pela página do marketing — a mesma frase, nunca uma cópia.
 
-O roteiro de homologação é marcável e aceita observação por passo, em
-`localStorage` (`locafacil_doc_<publico>_roteiro`), e um botão monta o texto de
-retorno. Nada é enviado: o retorno só existe quando a pessoa copia e manda.
+O roteiro de homologação é marcável e aceita observação por passo, com o nome
+de quem responde. **Tudo é salvo sozinho no servidor**: `POST /api/retornos`,
+com espera de 1,2 s depois da última alteração, grava um arquivo por pessoa e
+por página no Vercel Blob privado `locafacil-retornos`
+(`retornos/<publico>/<id>.json`, sobrescrito a cada salvamento). O `id` é um
+UUID guardado no navegador, então quem volta no dia seguinte continua o mesmo
+retorno. `localStorage` guarda uma cópia local, para a pessoa retomar e para
+nada se perder se um salvamento falhar.
+
+O botão "Enviar retorno pelo WhatsApp" abre a conversa **sem número fixo** — o
+WhatsApp mostra a lista de contatos e a pessoa escolhe a equipe do projeto.
+
+Os retornos aparecem em **`/doc/retornos`**, que pede a senha de
+`DOC_RETORNOS_SENHA` (variável *sensitive* na Vercel; troca-se lá, vale no
+próximo deploy). `GET /api/retornos` compara a senha em tempo constante e lê
+com `useCache: false`, porque o arquivo é sobrescrito. O endpoint é aberto para
+escrita — a página é pública para quem tiver o link — e por isso valida forma e
+tamanho de tudo o que recebe. Sem `BLOB_READ_WRITE_TOKEN` (rodando local), o
+`POST` responde `salvo: false` e a página diz "Salvo neste navegador".
 
 Cada página põe e tira o próprio `<meta name="robots" content="noindex">` — o
 projeto não usa biblioteca de `<head>`, e um `noindex` esquecido derrubaria a

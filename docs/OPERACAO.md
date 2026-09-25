@@ -157,10 +157,12 @@ Duas páginas internas, fora do menu e fora das buscas:
 |---|---|
 | `/doc/cliente` | Cliente e operação: estado, roteiro de homologação, fluxo de reserva, o que falta |
 | `/doc/marketing` | Marketing: telas em alta, cores, frases do atendimento, textos prontos |
+| `/doc/retornos` | Quem conduz o projeto: os retornos salvos de todo mundo. Pede senha |
 
 Nas duas, o roteiro de homologação é marcável e aceita observação por passo —
-tudo guardado no navegador de quem lê, e um botão monta o retorno para enviar.
-Nada é gravado do nosso lado.
+tudo salvo sozinho no Vercel Blob `locafacil-retornos`, e um botão manda o
+retorno também pelo WhatsApp. Os retornos de todo mundo ficam em
+**`/doc/retornos`**, com a senha da variável `DOC_RETORNOS_SENHA` na Vercel.
 
 O conteúdo das duas vive em
 [`src/content/documentacao.js`](../src/content/documentacao.js). Editar ali

@@ -141,7 +141,7 @@ export default function DocCliente() {
         id="roteiro"
         numero={5}
         titulo="Roteiro de homologação"
-        resumo="Leva cerca de dez minutos. Faça uma vez no computador e uma vez no celular — as duas versões são diferentes de propósito. Marque o que conferiu e escreva as observações aqui mesmo; no fim, um botão monta o retorno para me mandar."
+        resumo="Leva cerca de dez minutos. Faça uma vez no computador e uma vez no celular — as duas versões são diferentes de propósito. Diga quem está respondendo, marque o que conferiu e escreva as observações aqui mesmo: tudo é salvo sozinho e chega à equipe do projeto. No fim, mande também pelo WhatsApp."
       >
         <Checklist publico="cliente" />
 

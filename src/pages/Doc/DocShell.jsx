@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import logo from '../../assets/brand/logo-lockup-white.svg'
 import { SITE } from '../../content/documentacao'
+import { useSemIndice } from './hooks'
 
 /* Quantos dias faltam para a reunião. Meia-noite local dos dois lados: comparar
    com `new Date()` cru faria "hoje" virar zero ou um conforme a hora. */
@@ -16,26 +17,12 @@ function diasAte(iso) {
  * Casca das páginas internas de documentação.
  *
  * Não entra no menu do site e não é indexada: é um link que se manda para
- * alguém, não uma página que se acha. O `noindex` é posto e removido aqui
- * mesmo — o site não usa uma biblioteca de `<head>`, e um `noindex` esquecido
- * no documento derrubaria a home do Google.
+ * alguém, não uma página que se acha (ver `useSemIndice`).
  */
 export default function DocShell({ publico, titulo, tituloAba, resumo, secoes, pdf, children }) {
   const [ativa, setAtiva] = useState(secoes[0]?.id)
 
-  useEffect(() => {
-    document.title = `${tituloAba ?? titulo} — Locafácil`
-
-    const meta = document.createElement('meta')
-    meta.name = 'robots'
-    meta.content = 'noindex, nofollow'
-    document.head.appendChild(meta)
-
-    return () => {
-      document.head.removeChild(meta)
-      document.title = 'Locafacil | Aluguel de Veículos Sem Burocracia - Carros e Motos no RJ'
-    }
-  }, [titulo, tituloAba])
+  useSemIndice(tituloAba ?? titulo)
 
   /* Marca no índice a seção que está sendo lida. A margem de topo tira da
      conta a faixa fixa: sem ela, a seção acende quando encosta no topo da
