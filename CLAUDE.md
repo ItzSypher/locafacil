@@ -28,9 +28,13 @@ terceiros. Não há backend próprio além das serverless functions de proxy.
 
 **Marketing** (`/`, `/para-empresas`, `/contato`): páginas estáticas no padrão
 `pages/<Página>/{Index,Header,Content}.jsx`. Toda conversão termina em link do
-WhatsApp. Estado compartilhado acontece via `localStorage['locafacil_lead']` +
-`window.dispatchEvent(new Event('lead_captured'))` — `WelcomePopup` escreve,
-`MicroAgent` e `ExitPopup` escutam. Não existe store nem Context aqui.
+WhatsApp, com a frase já escrita. Não existe store nem Context aqui.
+
+Há **um** popup, e só um: `DescontoPopup` oferece o desconto de primeira
+locação e manda para o WhatsApp. O de saída (disparado quando o ponteiro
+deixava a janela pelo topo) foi removido — dois convites na mesma visita é um a
+mais do que a página aguenta. O formulário de captação de nome e e-mail também
+saiu: pedia dois campos para mandar a pessoa ao WhatsApp de qualquer jeito.
 
 **Checkout** (`/reservar/*`): busca → veículos → opcionais → dados → **revisão**
 → confirmação, em `src/pages/Reservar/`. O `StepProgress` conta quatro etapas
@@ -41,8 +45,11 @@ de dados só guardam estado; `POST /api/reservation-confirm` sai de um único
 lugar, atrás do aceite dos termos e de um `useRef` que barra o envio duplo. É o
 único efeito irreversível do fluxo.
 
-`/reservar/consultar` é a porta de fora do funil: consulta por localizador +
-sobrenome e cancelamento com diálogo de confirmação.
+Não há tela de consulta de reserva. Ela existiu e saiu: a reserva não é
+consultada no site — quem precisa alterar ou cancelar fala com a loja, e a
+tela de confirmação já manda o localizador junto na mensagem do WhatsApp. Os
+proxies `api/reservation-lookup.js` e `api/reservation-cancel.js` seguem no
+lugar, sem chamador no front.
 
 Estado entre etapas vive em `ReservationContext`, espelhado em
 `sessionStorage['locafacil_reservation']` — sessionStorage e não localStorage
@@ -121,6 +128,24 @@ number; `toBool` traduz `"true"`; e `fixText` repara mojibake e acento perdido
 `normalizeAvailability` achata os três níveis de aninhamento numa lista de
 `offers[]` com `id` estável, e guarda o `raw` de cada oferta — é dele que
 `buildConfirmPayload` remonta o envelope de confirmação.
+
+### Imagem do veículo
+
+A API não devolve mídia. `src/config/vehiclePhotos.js` mapeia código do grupo →
+foto, e `VehicleImage` decide: grupo com foto mostra a foto, grupo sem foto cai
+na ilustração de `VehicleArt`. As telas falam só com o `VehicleImage`.
+
+As fotos são normalizadas por `node scripts/converter-veiculos.mjs`, que lê os
+PNG de `public/__tmp-veiculos/<CODIGO>.png`, recorta a moldura vazia e grava
+800×600 em webp. Sem isso cada foto chegava numa proporção (623×401, 667×374,
+1100×628) e a grade dançava de linha em linha.
+
+**O recorte respeita o alfa que o arquivo já traz.** Limiar de branco só entra
+quando as quatro quinas são opacas: num carro branco sobre fundo branco, o
+limiar entra pela lataria e fura o teto e o capô.
+
+A legenda diz o porte e "imagem ilustrativa" — a reserva é por grupo, e nem
+foto da frota garante o modelo que estará no pátio.
 
 ### Horário de funcionamento
 
@@ -218,7 +243,9 @@ Padrões que se repetem e devem ser seguidos em UI nova:
   e o botão não cabem na linha e quebram em duas e três linhas.
 - **Camada sobre a página é diálogo**, e passa pelo `src/hooks/useDialog.js`:
   `role="dialog"`, `aria-modal`, `aria-labelledby`, Escape, foco preso e
-  devolvido, rolagem travada por contador. Os três popups usam o mesmo hook.
+  devolvido, rolagem travada por contador. **O `open` passado ao hook tem de
+  ser a mesma condição que renderiza o painel** — quando não era, um diálogo
+  que não estava na tela travou a rolagem do site inteiro.
 - **Movimento infinito** (flutuação de hero, autoplay de carrossel) é desligado
   por `useReducedMotion` do framer-motion — a regra `@media
   (prefers-reduced-motion)` do `global.css` só alcança CSS, e ela encurta

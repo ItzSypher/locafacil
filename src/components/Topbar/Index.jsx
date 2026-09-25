@@ -8,7 +8,6 @@ import Logo from '../../assets/brand/logo-lockup-white.svg'
 const NAV_LINKS = [
   { label: 'Início', href: '/' },
   { label: 'Reservar', href: '/reservar' },
-  { label: 'Minha Reserva', href: '/reservar/consultar' },
   { label: 'Para Empresas', href: '/para-empresas' },
   { label: 'Contato', href: '/contato' },
 ]

@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import { ReservationProvider } from './context/ReservationContext'
 
 /* A Home é a porta de entrada e continua no pacote inicial. Todo o resto
@@ -18,7 +18,6 @@ const ReservarExtras = lazy(() => import('./pages/Reservar/Extras/Index'))
 const ReservarDados = lazy(() => import('./pages/Reservar/Dados/Index'))
 const ReservarRevisao = lazy(() => import('./pages/Reservar/Revisao/Index'))
 const ReservarConfirmacao = lazy(() => import('./pages/Reservar/Confirmacao/Index'))
-const ReservarConsultar = lazy(() => import('./pages/Reservar/Consultar/Index'))
 
 /* Enquanto o pedaço da rota chega, a página fica no fundo da marca em vez de
    piscar branco. O texto é para quem ouve a tela, não para quem a vê. */
@@ -50,11 +49,15 @@ export default function Rotas() {
                 <Route path="dados" element={<ReservarDados />} />
                 <Route path="revisao" element={<ReservarRevisao />} />
                 <Route path="confirmacao" element={<ReservarConfirmacao />} />
-                <Route path="consultar" element={<ReservarConsultar />} />
+                {/* `/reservar/consultar` existiu e saiu. Sem isto a rota
+                    antiga pinta uma tela em branco — pior que um erro, porque
+                    não diz nada e não tem saída. */}
+                <Route path="*" element={<Navigate to="/reservar" replace />} />
               </Routes>
             </ReservationProvider>
           }
         />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Suspense>
   )

@@ -74,7 +74,6 @@ function IconeWhatsApp({ className }) {
 export default function FaleConosco() {
   const [aberto, setAberto] = useState(false)
   const [balaoVisivel, setBalaoVisivel] = useState(false)
-  const [primeiroNome, setPrimeiroNome] = useState('')
 
   const fabRef = useRef(null)
   const estavaAbertoRef = useRef(false)
@@ -108,25 +107,7 @@ export default function FaleConosco() {
     return () => clearTimeout(timer)
   }, [noCheckout])
 
-  useEffect(() => {
-    const lerLead = () => {
-      try {
-        const lead = localStorage.getItem('locafacil_lead')
-        if (!lead) return
-        const nome = JSON.parse(lead)?.name
-        if (nome) setPrimeiroNome(String(nome).split(' ')[0])
-      } catch {
-        // lead malformado ou storage indisponível: segue sem o nome
-      }
-    }
-    lerLead()
-    window.addEventListener('lead_captured', lerLead)
-    return () => window.removeEventListener('lead_captured', lerLead)
-  }, [])
-
-  const saudacao = primeiroNome
-    ? `Olá, ${primeiroNome}! Quer falar com a gente pelo WhatsApp?`
-    : 'Olá! Quer falar com a gente pelo WhatsApp?'
+  const saudacao = 'Olá! Quer falar com a gente pelo WhatsApp?'
 
   return (
     <div className="fixed bottom-6 right-6 z-[9990] flex flex-col items-end">

@@ -1,43 +1,45 @@
-/* ============================================================================
- * Foto por grupo de veículo
- * ----------------------------------------------------------------------------
+/* Foto por grupo de veículo.
+ *
  * A API da JCompany não devolve imagem: a disponibilidade traz código ACRISS,
  * descrição e preço, e nada de mídia. Então a foto é nossa.
  *
- * COMO ADICIONAR UMA FOTO
+ * O grupo manda no arquivo, não o modelo. A API diz "Kwid ou similar" — a foto
+ * mostra o Kwid porque é o representante daquele grupo, e a legenda avisa que
+ * é ilustrativa. D PLUS e G usam a mesma foto de propósito: as duas descrições
+ * dizem "Pulse ou similar", e inventar carro diferente para cada uma seria
+ * prometer o que o contrato não separa.
  *
- *   1. Coloque o arquivo em `src/assets/veiculos/` — de preferência `.webp`,
- *      com fundo claro e neutro, o carro em três quartos, recortado.
- *      Proporção de trabalho: 4:3. Largura útil: 800px basta (o card mostra
- *      no máximo ~380px em tela de alta densidade).
- *   2. Importe aqui e associe ao código do grupo.
+ * PARA TROCAR UMA FOTO
  *
- *      import grupoB from '../assets/veiculos/grupo-b.webp'
- *      export const VEHICLE_PHOTOS = { B: grupoB }
+ *   1. PNG com fundo branco ou transparente, carro em três quartos, em
+ *      `public/__tmp-veiculos/<CODIGO>.png` (B, C, D, DP, E, G, GP).
+ *   2. `node scripts/converter-veiculos.mjs` — recorta a moldura vazia, apaga
+ *      o fundo e normaliza tudo em 800×600 sobre transparente.
+ *   3. Apague `public/__tmp-veiculos/`.
  *
- * O `VehicleImage` faz o resto: grupo com foto mostra a foto, grupo sem foto
- * cai na ilustração do `VehicleArt`. Não é preciso tocar em componente nenhum,
- * e a tela nunca fica com buraco.
- *
- * POR QUE ESTÁ VAZIO
- *
- * A reserva é por **grupo** (B, C, D, D PLUS, E, G, G PLUS), não por modelo —
- * a própria descrição da API diz "Kwid ou similar". Uma foto de um carro
- * específico promete o que o contrato não garante, então ela precisa ser da
- * frota real ou, no mínimo, do mesmo porte.
- *
- * Procurei um conjunto de banco de imagem que servisse como provisório e não
- * encontrei: o acervo livre tem carro de luxo, esportivo e pátio de
- * estacionamento, e quase nada de econômico em fundo neutro. Um conjunto
- * remendado — um hatch azul, um sedã preto de estúdio e um Mini clássico —
- * ficaria pior do que a ilustração, que ao menos é coerente entre os sete
- * grupos e não promete modelo nenhum.
- *
- * Assim que as fotos da frota chegarem, é preencher este objeto.
- * ==========================================================================*/
+ * A normalização não é capricho: as fotos chegaram em 623×401, 667×374 e
+ * 1100×628. Postas direto no card, cada uma ocuparia uma altura e a grade
+ * dançaria de linha em linha.
+ */
 
-/** @type {Record<string, string>} código do grupo (ACRISS) → imagem importada */
-export const VEHICLE_PHOTOS = {}
+import grupoB from '../assets/veiculos/grupo-b.webp'
+import grupoC from '../assets/veiculos/grupo-c.webp'
+import grupoD from '../assets/veiculos/grupo-d.webp'
+import grupoDP from '../assets/veiculos/grupo-dp.webp'
+import grupoE from '../assets/veiculos/grupo-e.webp'
+import grupoG from '../assets/veiculos/grupo-g.webp'
+import grupoGP from '../assets/veiculos/grupo-gp.webp'
+
+/** Código do grupo (ACRISS) → foto. Grupo fora daqui cai na ilustração. */
+export const VEHICLE_PHOTOS = {
+  B: grupoB,   // Kwid ou similar
+  C: grupoC,   // Mobi ou similar
+  D: grupoD,   // Argo ou similar
+  DP: grupoDP, // Pulse ou similar
+  E: grupoE,   // Cronos ou similar
+  G: grupoG,   // Pulse ou similar
+  GP: grupoGP, // Fastback ou similar
+}
 
 export function photoFor(groupCode) {
   if (!groupCode) return null

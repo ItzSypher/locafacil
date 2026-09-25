@@ -50,8 +50,9 @@ export const getAgreementRate = (payload) =>
 export const confirmReservation = (payload) =>
   call('reservation-confirm', { method: 'POST', body: payload })
 
-export const lookupReservation = (payload) =>
-  call('reservation-lookup', { method: 'POST', body: payload })
-
-export const cancelReservation = (payload) =>
-  call('reservation-cancel', { method: 'POST', body: payload })
+/* `reservation-lookup` e `reservation-cancel` continuam em api/, mas não têm
+   chamador no front: a tela de consulta saiu porque a reserva não é
+   consultada aqui — quem precisa alterar ou cancelar fala com a loja pelo
+   WhatsApp, e a confirmação já leva o localizador na mensagem. Os proxies
+   ficam porque são operações reais do contrato (ver docs/API-JCOMPANY.md);
+   voltar a ter tela é reescrever as duas linhas abaixo. */

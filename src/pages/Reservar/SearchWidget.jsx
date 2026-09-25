@@ -4,32 +4,35 @@ import { motion } from 'framer-motion'
 import { getLocations, getMinimumNotice, getMinimumPeriod, getStoreHours } from '../../lib/api/reservation'
 import { useOptionalReservation } from '../../context/ReservationContext'
 
-const fieldBase = 'w-full bg-white/10 border border-white/15 rounded-xl px-5 py-4 pl-12 text-text-primary text-sm focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-all'
-const selectClass = `${fieldBase} appearance-none cursor-pointer`
-const inputClass = `${fieldBase} cursor-pointer`
+/* O campo de data e o de hora NÃO carregam o ícone decorativo à esquerda.
+   Com `pl-12`, os 48px do ícone comiam metade de um campo de 88px: abaixo de
+   1024px sobravam 18px de espaço útil e "Hora" saía cortado pela metade. O
+   rótulo acima do par já diz Retirada ou Devolução; o ícone repetia isso
+   ocupando o lugar do valor. */
+const fieldBase = 'w-full bg-white/10 border border-white/15 rounded-xl py-4 text-text-primary text-sm focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-all'
+const comIcone = `${fieldBase} pl-12 pr-10`
+const compacto = `${fieldBase} px-3.5`
+
+const selectClass = `${comIcone} appearance-none cursor-pointer`
+const selectCompacto = `${compacto} pr-9 appearance-none cursor-pointer`
+const inputClass = `${compacto} cursor-pointer`
 const invalidClass = '!border-state-error-dark'
+
+/* `appearance-none` apaga a setinha nativa do select. Sem repô-la, o campo
+   lê como caixa de texto e ninguém descobre que dá para abrir. */
+function Chevron() {
+  return (
+    <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-secondary pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M6 9l6 6 6-6" />
+    </svg>
+  )
+}
 
 function LocationIcon() {
   return (
     <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
       <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
       <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-    </svg>
-  )
-}
-
-function DateIcon() {
-  return (
-    <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-    </svg>
-  )
-}
-
-function ClockIcon() {
-  return (
-    <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l2.5 2.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
     </svg>
   )
 }
@@ -206,7 +209,10 @@ export default function SearchWidget() {
         Encontre o veículo perfeito em segundos
       </h2>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+      {/* Uma coluna até lg. A 640px o par data+hora dividia metade da largura
+          do formulário entre si, e nenhum dos dois cabia. Um rearranjo só,
+          como manda a Regra do Colapso Único. */}
+      <div className="grid lg:grid-cols-4 gap-5 sm:gap-6">
         <div className="lg:col-span-2">
           <label htmlFor="local-retirada" className="block type-label text-text-secondary mb-2">Local de retirada</label>
           <div className="relative">
@@ -226,6 +232,7 @@ export default function SearchWidget() {
                 <option key={loc.id} value={loc.code} className="bg-brand-dark">{loc.descricao}</option>
               ))}
             </select>
+            <Chevron />
           </div>
         </div>
 
@@ -245,6 +252,7 @@ export default function SearchWidget() {
                 <option key={loc.id} value={loc.code} className="bg-brand-dark">{loc.descricao}</option>
               ))}
             </select>
+            <Chevron />
           </div>
         </div>
 
@@ -335,9 +343,8 @@ function DateTimeField({ idPrefix, label, date, time, minDate, slots, closed, cl
   return (
     <div className="lg:col-span-2">
       <label htmlFor={`${idPrefix}-data`} className="block type-label text-text-secondary mb-2">{label}</label>
-      <div className="grid grid-cols-5 gap-3">
-        <div className="relative col-span-3">
-          <DateIcon />
+      <div className="grid grid-cols-2 gap-3">
+        <div className="relative">
           <input
             id={`${idPrefix}-data`}
             type="date"
@@ -350,11 +357,10 @@ function DateTimeField({ idPrefix, label, date, time, minDate, slots, closed, cl
             required
           />
         </div>
-        <div className="relative col-span-2">
-          <ClockIcon />
+        <div className="relative">
           <select
             aria-label={`Horário de ${label.toLowerCase()}`}
-            className={selectClass}
+            className={selectCompacto}
             value={time}
             onChange={(e) => onTime(e.target.value)}
             disabled={!date || closed || slots.length === 0}
@@ -365,6 +371,7 @@ function DateTimeField({ idPrefix, label, date, time, minDate, slots, closed, cl
               <option key={slot} value={slot} className="bg-brand-dark">{slot}</option>
             ))}
           </select>
+          <Chevron />
         </div>
       </div>
       {closed && (

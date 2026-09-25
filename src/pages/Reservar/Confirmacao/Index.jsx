@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import Topbar from '../../../components/Topbar/Index'
 import Footer from '../../../components/Footer/Index'
@@ -136,10 +136,20 @@ export default function ReservarConfirmacao() {
               </a>
             </div>
 
+            {/* A consulta e o cancelamento acontecem com a equipe da loja, não
+                aqui: o localizador vai junto na mensagem para não precisar
+                repetir. */}
             <p className="type-meta text-text-secondary mt-6">
-              <Link to="/reservar/consultar" className="text-text-primary underline underline-offset-4 hover:text-brand-glow transition-colors py-3 -my-1.5 inline-block">
-                Consultar ou cancelar esta reserva
-              </Link>
+              <a
+                href={`https://api.whatsapp.com/send?phone=5521968540185&text=${encodeURIComponent(
+                  `Olá! Vim pelo site e preciso falar sobre a reserva ${confId}.`,
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-text-primary underline underline-offset-4 hover:text-brand-glow transition-colors py-3 -my-1.5 inline-block"
+              >
+                Alterar ou cancelar esta reserva
+              </a>
             </p>
 
             {data.demo && (

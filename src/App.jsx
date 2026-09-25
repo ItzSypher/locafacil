@@ -2,8 +2,7 @@ import './assets/css/global.css'
 import { BrowserRouter as Router, useLocation } from 'react-router-dom'
 import Routes from './Routes'
 import Preloader from './components/Global/Preloader'
-import WelcomePopup from './components/Global/WelcomePopup'
-import ExitPopup from './components/Global/ExitPopup'
+import DescontoPopup from './components/Global/DescontoPopup'
 import FaleConosco from './components/Global/FaleConosco'
 
 /* Modo de captura, só em desenvolvimento: `?print=1` cala os popups e o
@@ -25,12 +24,7 @@ function MarketingPopups() {
   if (pathname.startsWith('/reservar')) return null
   if (modoPrint()) return null
 
-  return (
-    <>
-      <WelcomePopup />
-      <ExitPopup />
-    </>
-  )
+  return <DescontoPopup />
 }
 
 export default function App() {
