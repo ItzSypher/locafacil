@@ -32,9 +32,8 @@ const CHROMES = [
 const TELAS = [
   { rota: '/', nome: '01-home' },
   { rota: '/reservar', nome: '02-reservar-busca' },
-  { rota: '/reservar/consultar', nome: '03-minha-reserva' },
-  { rota: '/para-empresas', nome: '04-para-empresas' },
-  { rota: '/contato', nome: '05-contato' },
+  { rota: '/para-empresas', nome: '03-para-empresas' },
+  { rota: '/contato', nome: '04-contato' },
 ]
 
 const FORMATOS = [
