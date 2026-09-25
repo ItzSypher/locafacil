@@ -5,7 +5,7 @@ import Topbar from '../../../components/Topbar/Index'
 import Footer from '../../../components/Footer/Index'
 import StepProgress from '../StepProgress'
 import TripSummary from '../TripSummary'
-import VehicleArt from '../VehicleArt'
+import VehicleImage from '../VehicleImage'
 import Dialog from '../Dialog'
 import Price from '../Price'
 import { useReservation } from '../../../context/ReservationContext'
@@ -291,7 +291,7 @@ export default function ReservarVeiculos() {
                       <h2 className="type-subtitle text-text-primary mb-4">{offer.groupName}</h2>
 
                       <div className="text-text-primary/80 mb-4 px-2">
-                        <VehicleArt offer={offer} />
+                        <VehicleImage offer={offer} />
                       </div>
 
                       <p className="type-meta text-text-secondary mb-5">{offer.description}</p>

@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import Topbar from '../../../components/Topbar/Index'
 import Footer from '../../../components/Footer/Index'
 import StepProgress from '../StepProgress'
-import VehicleArt from '../VehicleArt'
+import VehicleImage from '../VehicleImage'
 import Price from '../Price'
 import { useReservation } from '../../../context/ReservationContext'
 import { confirmReservation, getPersonalizacao, ReservationApiError } from '../../../lib/api/reservation'
@@ -103,7 +103,7 @@ export default function ReservarRevisao() {
             <Block title="Veículo" onEdit={() => navigate('/reservar/veiculos')} editLabel="Trocar">
               <div className="flex items-center gap-5">
                 <div className="w-28 sm:w-36 shrink-0 text-text-dark/70">
-                  <VehicleArt offer={offer} />
+                  <VehicleImage offer={offer} legenda={false} />
                 </div>
                 <div className="min-w-0">
                   <p className="type-subtitle text-text-dark">{offer.groupName}</p>
