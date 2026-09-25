@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { getLocations, getMinimumNotice, getMinimumPeriod, getStoreHours } from '../../lib/api/reservation'
 import { useOptionalReservation } from '../../context/ReservationContext'
+import { modoPrint } from '../../lib/modoPrint'
 
 /* O campo de data e o de hora NÃO carregam o ícone decorativo à esquerda.
    Com `pl-12`, os 48px do ícone comiam metade de um campo de 88px: abaixo de
@@ -302,7 +303,7 @@ export default function SearchWidget() {
         </div>
       )}
 
-      {DEV && (
+      {DEV && !modoPrint() && (
         <div className="mt-6 pt-5 border-t border-white/10">
           <label htmlFor="cenario" className="block type-label text-text-secondary mb-2">
             Cenário de teste (só em desenvolvimento)

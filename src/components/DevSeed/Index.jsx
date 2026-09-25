@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router-dom'
 import { useReservation } from '../../context/ReservationContext'
 import { getStoreHours, searchAvailability, ReservationApiError } from '../../lib/api/reservation'
 import { buildAvailabilityPayload } from '../../pages/Reservar/lib/reservation'
+import { modoPrint } from '../../lib/modoPrint'
 
 const DEV = import.meta.env.DEV
 
@@ -76,7 +77,9 @@ export default function DevSeed() {
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
 
-  if (!DEV) return null
+  // `?print=1` também esconde o andaime: a tarja de dados falsos aparecia
+  // no rodapé das capturas que vão para o cliente e para quem monta banner.
+  if (!DEV || modoPrint()) return null
 
   const seed = async () => {
     setBusy(true)

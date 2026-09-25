@@ -63,6 +63,36 @@ no-op fora do provider.
 `MarketingPopups` possa usar `useLocation` e sumir dentro de `/reservar/*`, onde
 os popups de captação cobriam o checkout.
 
+### Documentação interna (`/doc/cliente`, `/doc/marketing`)
+
+Duas páginas fora do menu e fora do índice das buscas, feitas para mandar por
+link: a do cliente (estado, homologação, fluxo de reserva, pendências) e a do
+marketing (telas, marca, frases do atendimento, textos prontos).
+
+**O conteúdo das duas é um arquivo só**: `src/content/documentacao.js`. Editar
+ali muda as páginas, os dois PDFs e os textos de envio de uma vez. Os assuntos
+do WhatsApp moram em `src/config/atendimento.js` e são lidos tanto pelo botão
+flutuante quanto pela página do marketing — a mesma frase, nunca uma cópia.
+
+O roteiro de homologação é marcável e aceita observação por passo, em
+`localStorage` (`locafacil_doc_<publico>_roteiro`), e um botão monta o texto de
+retorno. Nada é enviado: o retorno só existe quando a pessoa copia e manda.
+
+Cada página põe e tira o próprio `<meta name="robots" content="noindex">` — o
+projeto não usa biblioteca de `<head>`, e um `noindex` esquecido derrubaria a
+home do Google. `public/robots.txt` é a segunda tranca.
+
+**Os PDFs são impressos dessas rotas**, não de um HTML paralelo (já foi assim,
+e as duas cópias divergiram). `?impressao=1` abre o que estaria recolhido e
+troca a galeria por um bloco de papel; o resto do enfeite some pelas variantes
+`print:` do Tailwind. `scripts/gerar-pdf.mjs` grava em `public/doc/`, junto com
+as telas reduzidas de `scripts/telas-doc.mjs` — **saída versionada de
+propósito**, porque a Vercel publica o repositório e `prints/` está ignorado.
+
+`?print=1` é outra bandeira, de `src/lib/modoPrint.js`: cala preloader, popups
+e **o andaime de desenvolvimento**. Sem ela as capturas saíam com a tarja de
+dados falsos e o seletor de cenário — e essas imagens vão para o cliente.
+
 ### Integração com a API OTA (JCompany/SGLOC)
 
 Base: `https://sgloc.apijcompany.com.br`. A spec Swagger completa está em

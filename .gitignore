@@ -25,9 +25,10 @@ lerna-debug.log*
 # Prints das telas para material de campanha: saída de
 # `node scripts/print-telas.mjs`, não fonte.
 prints/
-# PDF de apresentação: saída de `node scripts/gerar-pdf.mjs`. A fonte é
-# docs/apresentacao.html, que está versionada.
-apresentacao/
+
+# O que as páginas de documentação servem (public/doc/) NÃO é ignorado: a
+# Vercel publica o que está no repositório, e prints/ não está. Sem os
+# arquivos versionados, as telas quebrariam em produção.
 
 # ===== Ferramentas locais =====
 # Checkout de plugin com .git próprio; não entra no bundle.

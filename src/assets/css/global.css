@@ -157,6 +157,19 @@ a {
   .bg-hero-gradient {
     background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand-navy) 40%, var(--brand-deep) 100%);
   }
+
+  /* Faixa que rola na horizontal sem mostrar a barra: o índice fixo das
+     páginas de documentação desliza no celular, e a barra do Windows come
+     8px de uma linha que tem 44 de altura. O conteúdo continua alcançável
+     por toque, por roda e por teclado. */
+  .scrollbar-none {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /* ===== PAPÉIS TIPOGRÁFICOS =====

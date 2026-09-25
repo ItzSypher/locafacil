@@ -1,54 +1,39 @@
 /**
- * Gera o PDF de apresentação do site, para mandar ao cliente e ao marketing.
+ * Gera os PDFs de apresentação a partir das próprias páginas do site.
  *
- *   node scripts/print-telas.mjs   (antes, se os prints mudaram)
+ *   npm run dev                      (noutro terminal)
+ *   node scripts/telas-doc.mjs       (se os prints mudaram)
  *   node scripts/gerar-pdf.mjs
  *
- * Fonte: `docs/apresentacao.html`. Saída: `apresentacao/Locafacil-Apresentacao.pdf`.
+ * Saída: `public/doc/Locafacil-Apresentacao-Cliente.pdf` e
+ * `-Marketing.pdf`, servidos pelo próprio site — o botão "Baixar em PDF" no
+ * topo de cada página aponta para eles.
  *
- * Este script não precisa do dev server: monta uma pasta temporária com o HTML
- * e as imagens lado a lado e imprime o arquivo direto do disco.
+ * O PDF é impresso de `/doc/cliente` e `/doc/marketing`, e não de um HTML
+ * paralelo. Já foi assim, com um `docs/apresentacao.html` só para impressão, e
+ * o problema é conhecido: duas fontes para o mesmo conteúdo envelhecem em
+ * ritmos diferentes, e é sempre a que ninguém abriu que vai para o cliente.
  *
- * Por que reduzir os prints antes de imprimir: as capturas saem em 2× para
- * retina e somam 22 MB. Embutidas cruas, o PDF não passa por e-mail nem por
- * WhatsApp. Reduzidas para 1400 px de largura e recodificadas em JPEG, o
- * documento inteiro fica em poucos megabytes e continua nítido em papel.
- *
- * A redução roda dentro do próprio Chrome, via canvas, como em
- * `converter-veiculos.mjs` — sem dependência nova. O acesso de um arquivo
- * local a outro exige `--allow-file-access-from-files`; sem a flag o canvas
- * fica marcado como contaminado e `toDataURL` estoura.
+ * `?print=1` cala o preloader e os popups; `?impressao=1` abre o que estaria
+ * recolhido e troca a galeria por um bloco que cabe no papel. O resto do
+ * enfeite de tela sai pelas variantes `print:` do Tailwind.
  */
 
-import { writeFileSync, mkdirSync, rmSync, existsSync, copyFileSync, readFileSync } from 'node:fs'
+import { writeFileSync, mkdirSync, rmSync, existsSync } from 'node:fs'
 import { spawn } from 'node:child_process'
 import { join } from 'node:path'
-import { pathToFileURL } from 'node:url'
 
-const RAIZ = process.cwd()
-const FONTE = join(RAIZ, 'docs', 'apresentacao.html')
-const PRINTS = join(RAIZ, 'prints')
-const LOGO = join(RAIZ, 'src', 'assets', 'brand', 'logo-lockup-color.svg')
-const SAIDA = join(RAIZ, 'apresentacao')
-const MONTAGEM = join(SAIDA, '.build')
-const PDF = join(SAIDA, 'Locafacil-Apresentacao.pdf')
+const BASE = process.env.PRINT_BASE ?? 'http://localhost:5173'
+const SAIDA = join(process.cwd(), 'public', 'doc')
 const PORTA = 9335
 
-const LARGURA_MAX = 1400
-const QUALIDADE = 0.82
-
-/* Só as capturas usadas no documento. As de página inteira ficam de fora: são
-   as mais pesadas e o PDF não é o lugar de mostrar a página inteira rolada. */
-const IMAGENS = [
-  '01-home-desktop-dobra',
-  '02-reservar-busca-desktop-dobra',
-  '03-para-empresas-desktop-dobra',
-  '04-contato-desktop-dobra',
-  '01-home-mobile-dobra',
-  '02-reservar-busca-mobile-dobra',
-  '03-para-empresas-mobile-dobra',
-  '04-contato-mobile-dobra',
+const PAGINAS = [
+  { rota: '/doc/cliente', arquivo: 'Locafacil-Apresentacao-Cliente.pdf', rodape: 'Locafácil — novo site · apresentação e homologação' },
+  { rota: '/doc/marketing', arquivo: 'Locafacil-Apresentacao-Marketing.pdf', rodape: 'Locafácil — novo site · material para marketing' },
 ]
+
+/* A4 em polegadas. A margem dá lugar ao rodapé com o número da página. */
+const PAPEL = { paperWidth: 8.27, paperHeight: 11.69, marginTop: 0.5, marginBottom: 0.6, marginLeft: 0.4, marginRight: 0.4 }
 
 const CHROMES = [
   'C:/Program Files/Google/Chrome/Application/chrome.exe',
@@ -85,70 +70,27 @@ function abrirSessao(url) {
   })
 }
 
-/* Roda dentro da página: lê o PNG, reduz e devolve JPEG sobre branco.
-   O fundo branco é explícito porque JPEG não tem transparência — sem ele,
-   pixel transparente vira preto. */
-const REDUZIR = `
-async (arquivo, larguraMax, qualidade) => {
-  const img = new Image()
-  img.src = arquivo
-  await img.decode()
-
-  const escala = Math.min(1, larguraMax / img.naturalWidth)
-  const c = document.createElement('canvas')
-  c.width = Math.round(img.naturalWidth * escala)
-  c.height = Math.round(img.naturalHeight * escala)
-
-  const ctx = c.getContext('2d')
-  ctx.imageSmoothingQuality = 'high'
-  ctx.fillStyle = '#ffffff'
-  ctx.fillRect(0, 0, c.width, c.height)
-  ctx.drawImage(img, 0, 0, c.width, c.height)
-
-  return { jpeg: c.toDataURL('image/jpeg', qualidade), largura: c.width, altura: c.height }
-}
-`
-
-async function esperarChrome() {
-  for (let tentativa = 0; tentativa < 40; tentativa += 1) {
-    try {
-      const res = await fetch(`http://127.0.0.1:${PORTA}/json/version`)
-      if (res.ok) return
-    } catch {
-      /* ainda subindo */
-    }
-    await espera(250)
-  }
-  throw new Error('o Chrome não abriu a porta de depuração')
-}
-
-async function novaAba(url) {
-  const alvo = await fetch(
-    `http://127.0.0.1:${PORTA}/json/new?${encodeURIComponent(url)}`,
-    { method: 'PUT' },
-  ).then((r) => r.json())
-  const sessao = await abrirSessao(alvo.webSocketDebuggerUrl)
-  await sessao.enviar('Page.enable')
-  return { alvo, sessao }
-}
+const rodape = (texto) =>
+  '<div style="width:100%;font-size:7pt;color:#8a8a92;font-family:sans-serif;'
+  + 'padding:0 10mm;display:flex;justify-content:space-between;">'
+  + `<span>${texto}</span><span class="pageNumber"></span></div>`
 
 async function principal() {
   const chrome = CHROMES.find((caminho) => existsSync(caminho))
   if (!chrome) throw new Error('não encontrei o Chrome nem o Edge instalados')
-  if (!existsSync(FONTE)) throw new Error(`não achei ${FONTE}`)
-  if (!existsSync(PRINTS)) {
-    throw new Error('a pasta prints/ não existe. Rode `node scripts/print-telas.mjs` antes.')
+
+  try {
+    await fetch(BASE)
+  } catch {
+    throw new Error(`${BASE} não respondeu. Rode \`npm run dev\` antes.`)
   }
 
-  const faltando = IMAGENS.filter((nome) => !existsSync(join(PRINTS, `${nome}.png`)))
-  if (faltando.length) {
-    throw new Error(`faltam capturas em prints/: ${faltando.join(', ')}`)
+  if (!existsSync(join(SAIDA, 'telas'))) {
+    throw new Error('faltam as telas em public/doc/telas/. Rode `node scripts/telas-doc.mjs` antes.')
   }
 
-  rmSync(MONTAGEM, { recursive: true, force: true })
-  mkdirSync(join(MONTAGEM, 'img'), { recursive: true })
-  copyFileSync(FONTE, join(MONTAGEM, 'index.html'))
-  copyFileSync(LOGO, join(MONTAGEM, 'img', 'logo.svg'))
+  mkdirSync(SAIDA, { recursive: true })
+  const perfil = join(SAIDA, '.perfil')
 
   const processo = spawn(chrome, [
     '--headless=new',
@@ -156,88 +98,52 @@ async function principal() {
     '--hide-scrollbars',
     '--no-first-run',
     '--disable-extensions',
-    '--allow-file-access-from-files',
     `--remote-debugging-port=${PORTA}`,
-    '--user-data-dir=' + join(MONTAGEM, '.perfil'),
+    `--user-data-dir=${perfil}`,
     'about:blank',
   ], { stdio: 'ignore' })
 
   try {
-    await esperarChrome()
-
-    // --- 1. Reduzir as capturas -------------------------------------------
-    const base = pathToFileURL(join(MONTAGEM, 'index.html')).href
-    const { alvo, sessao } = await novaAba(base)
-    await espera(1000)
-
-    let peso = 0
-    for (const nome of IMAGENS) {
-      const origem = pathToFileURL(join(PRINTS, `${nome}.png`)).href
-      const { result } = await sessao.enviar('Runtime.evaluate', {
-        expression: `(${REDUZIR})(${JSON.stringify(origem)}, ${LARGURA_MAX}, ${QUALIDADE})`,
-        awaitPromise: true,
-        returnByValue: true,
-      })
-      if (!result.value?.jpeg) throw new Error(`não consegui reduzir ${nome}.png`)
-      const bytes = Buffer.from(result.value.jpeg.split(',')[1], 'base64')
-      writeFileSync(join(MONTAGEM, 'img', `${nome}.jpg`), bytes)
-      peso += bytes.length
-      console.log(`  ${nome}.jpg`.padEnd(42), `${result.value.largura}x${result.value.altura}`, (bytes.length / 1024).toFixed(0) + ' kB')
+    for (let tentativa = 0; tentativa < 40; tentativa += 1) {
+      try { if ((await fetch(`http://127.0.0.1:${PORTA}/json/version`)).ok) break } catch { /* subindo */ }
+      await espera(250)
     }
-    sessao.fechar()
-    await fetch(`http://127.0.0.1:${PORTA}/json/close/${alvo.id}`)
 
-    // --- 2. Imprimir -------------------------------------------------------
-    const impressao = await novaAba('about:blank')
-    await impressao.sessao.enviar('Page.navigate', { url: base })
-    // Tempo real: a fonte vem do Google Fonts e as imagens do disco.
-    await espera(3000)
-    await impressao.sessao.enviar('Runtime.evaluate', {
-      expression: 'document.fonts.ready.then(() => true)',
-      awaitPromise: true,
-    })
-    await espera(500)
+    for (const pagina of PAGINAS) {
+      const alvo = await fetch(`http://127.0.0.1:${PORTA}/json/new?about:blank`, { method: 'PUT' })
+        .then((r) => r.json())
+      const sessao = await abrirSessao(alvo.webSocketDebuggerUrl)
+      await sessao.enviar('Page.enable')
+      await sessao.enviar('Page.navigate', { url: `${BASE}${pagina.rota}?print=1&impressao=1` })
 
-    const { data } = await impressao.sessao.enviar('Page.printToPDF', {
-      printBackground: true,
-      preferCSSPageSize: true,
-      displayHeaderFooter: true,
-      headerTemplate: '<span></span>',
-      footerTemplate:
-        '<div style="width:100%;font-size:7pt;color:#8a8a92;font-family:sans-serif;'
-        + 'padding:0 16mm;display:flex;justify-content:space-between;">'
-        + '<span>Locafácil — novo site · apresentação e homologação</span>'
-        + '<span class="pageNumber"></span></div>',
-      marginTop: 0.7,
-      marginBottom: 0.7,
-    })
+      // Tempo real: a rota chega por `lazy`, e as oito telas vêm do disco.
+      await espera(4000)
+      await sessao.enviar('Runtime.evaluate', {
+        expression: 'document.fonts.ready.then(() => true)',
+        awaitPromise: true,
+      })
+      await espera(500)
 
-    const pdf = Buffer.from(data, 'base64')
-    writeFileSync(PDF, pdf)
-    impressao.sessao.fechar()
-    await fetch(`http://127.0.0.1:${PORTA}/json/close/${impressao.alvo.id}`)
+      const { data } = await sessao.enviar('Page.printToPDF', {
+        ...PAPEL,
+        printBackground: true,
+        displayHeaderFooter: true,
+        headerTemplate: '<span></span>',
+        footerTemplate: rodape(pagina.rodape),
+      })
 
-    console.log(`\nImagens: ${(peso / 1024 / 1024).toFixed(1)} MB`)
-    console.log(`PDF:     ${(pdf.length / 1024 / 1024).toFixed(1)} MB — ${PDF}`)
+      const pdf = Buffer.from(data, 'base64')
+      writeFileSync(join(SAIDA, pagina.arquivo), pdf)
+      console.log(`  ${pagina.arquivo}`.padEnd(46), `${(pdf.length / 1024 / 1024).toFixed(1)} MB`)
+
+      sessao.fechar()
+      await fetch(`http://127.0.0.1:${PORTA}/json/close/${alvo.id}`)
+    }
   } finally {
     processo.kill()
     await espera(500)
-    // `--manter` deixa a montagem em pé para abrir no navegador e conferir a
-    // paginação antes de imprimir de novo.
-    if (process.argv.includes('--manter')) {
-      rmSync(join(MONTAGEM, '.perfil'), { recursive: true, force: true })
-      console.log(`Montagem mantida: ${MONTAGEM}`)
-    } else {
-      rmSync(MONTAGEM, { recursive: true, force: true })
-    }
+    rmSync(perfil, { recursive: true, force: true })
   }
-}
-
-// `readFileSync` fica aqui só para a mensagem de erro citar o arquivo certo
-// quando o HTML existe mas está vazio — engano comum ao editar o documento.
-if (existsSync(FONTE) && readFileSync(FONTE, 'utf8').trim().length === 0) {
-  console.error('Falhou: docs/apresentacao.html está vazio')
-  process.exit(1)
 }
 
 principal().catch((erro) => {

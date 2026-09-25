@@ -1,0 +1,6 @@
+# As páginas de documentação são internas: um link que se manda para alguém,
+# não uma página que se acha. Cada uma já põe `noindex` no próprio `<head>`;
+# esta linha é a segunda tranca, para o robô nem pedir a página.
+User-agent: *
+Disallow: /doc
+Allow: /

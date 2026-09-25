@@ -156,22 +156,40 @@ artefato, não fonte. Rode de novo sempre que o visual mudar.
 
 ---
 
-## PDF de apresentação, para cliente e marketing
+## Páginas de documentação e PDF
+
+Duas páginas internas, fora do menu e fora das buscas:
+
+| Endereço | Para quem |
+|---|---|
+| `/doc/cliente` | Cliente e operação: estado, roteiro de homologação, fluxo de reserva, o que falta |
+| `/doc/marketing` | Marketing: telas em alta, cores, frases do atendimento, textos prontos |
+
+Nas duas, o roteiro de homologação é marcável e aceita observação por passo —
+tudo guardado no navegador de quem lê, e um botão monta o retorno para enviar.
+Nada é gravado do nosso lado.
+
+O conteúdo das duas vive em
+[`src/content/documentacao.js`](../src/content/documentacao.js). Editar ali
+muda a página, o PDF e os textos de envio de uma vez.
+
+Para refazer os arquivos que elas servem:
 
 ```bash
+npm run dev                      # num terminal
 node scripts/print-telas.mjs     # se o visual mudou
-node scripts/gerar-pdf.mjs
+node scripts/telas-doc.mjs       # telas reduzidas + arquivos de marca
+node scripts/gerar-pdf.mjs       # os dois PDFs
 ```
 
-Sai em `apresentacao/Locafacil-Apresentacao.pdf`, com cerca de 1,3 MB — passa em
-e-mail e em WhatsApp. O conteúdo vive em
-[`apresentacao.html`](apresentacao.html): telas, roteiro de homologação, fluxo de
-reserva, o que a API entrega e o que não entrega, pendências por responsável e
-as cores da marca. Editar o documento é editar esse HTML e rodar o script de
-novo; `--manter` deixa a montagem em pé para conferir no navegador antes.
+`telas-doc.mjs` grava em `public/doc/telas/` e `public/doc/marca/`;
+`gerar-pdf.mjs` imprime as próprias rotas `/doc/*` e grava
+`public/doc/Locafacil-Apresentacao-Cliente.pdf` e `-Marketing.pdf`, cerca de
+1,3 MB cada. **Essa saída é versionada de propósito** — a Vercel publica o que
+está no repositório, e `prints/` não está.
 
-Os textos de e-mail e de WhatsApp que acompanham o PDF estão em
-[`COMUNICACAO.md`](COMUNICACAO.md).
+Os textos de e-mail e de WhatsApp aparecem na página do marketing com botão de
+copiar. Detalhes em [`COMUNICACAO.md`](COMUNICACAO.md).
 
 ---
 

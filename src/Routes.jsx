@@ -19,6 +19,12 @@ const ReservarDados = lazy(() => import('./pages/Reservar/Dados/Index'))
 const ReservarRevisao = lazy(() => import('./pages/Reservar/Revisao/Index'))
 const ReservarConfirmacao = lazy(() => import('./pages/Reservar/Confirmacao/Index'))
 
+/* Documentação interna. Não entra no menu e não é indexada (cada página põe o
+   próprio `noindex`): é um link que se manda para alguém. Fica em `lazy` como
+   o resto — quem vem alugar um carro não baixa o material do marketing. */
+const DocCliente = lazy(() => import('./pages/Doc/Cliente'))
+const DocMarketing = lazy(() => import('./pages/Doc/Marketing'))
+
 /* Enquanto o pedaço da rota chega, a página fica no fundo da marca em vez de
    piscar branco. O texto é para quem ouve a tela, não para quem a vê. */
 function RouteFallback() {
@@ -57,6 +63,12 @@ export default function Rotas() {
             </ReservationProvider>
           }
         />
+        <Route path="/doc/cliente" element={<DocCliente />} />
+        <Route path="/doc/marketing" element={<DocMarketing />} />
+        {/* `/doc` sozinho não tem o que mostrar: quem chegou sem o resto do
+            caminho quase sempre quer a versão do cliente. */}
+        <Route path="/doc" element={<Navigate to="/doc/cliente" replace />} />
+
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Suspense>

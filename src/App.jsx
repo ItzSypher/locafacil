@@ -4,27 +4,28 @@ import Routes from './Routes'
 import Preloader from './components/Global/Preloader'
 import DescontoPopup from './components/Global/DescontoPopup'
 import FaleConosco from './components/Global/FaleConosco'
+import { modoPrint } from './lib/modoPrint'
 
-/* Modo de captura, só em desenvolvimento: `?print=1` cala os popups e o
-   assistente, e pula a abertura da marca, para tirar print limpo das telas —
-   senão a captura headless congela no preloader. Em produção a bandeira não
-   existe: `import.meta.env.DEV` some no build. */
-function modoPrint() {
-  if (!import.meta.env.DEV) return false
-  try {
-    return new URLSearchParams(window.location.search).get('print') === '1'
-  } catch {
-    return false
-  }
-}
+// As páginas internas de documentação são material de trabalho, não o site:
+// nem o convite de desconto nem o botão de atendimento têm o que fazer ali.
+const ehDocumentacao = (pathname) => pathname.startsWith('/doc')
 
 // Popups de captação atrapalham quem já está reservando: só aparecem fora do checkout.
 function MarketingPopups() {
   const { pathname } = useLocation()
   if (pathname.startsWith('/reservar')) return null
+  if (ehDocumentacao(pathname)) return null
   if (modoPrint()) return null
 
   return <DescontoPopup />
+}
+
+function AtendimentoFlutuante() {
+  const { pathname } = useLocation()
+  if (ehDocumentacao(pathname)) return null
+  if (modoPrint()) return null
+
+  return <FaleConosco />
 }
 
 export default function App() {
@@ -33,7 +34,7 @@ export default function App() {
       {!modoPrint() && <Preloader />}
       <MarketingPopups />
       <Routes />
-      {!modoPrint() && <FaleConosco />}
+      <AtendimentoFlutuante />
     </Router>
   )
 }
