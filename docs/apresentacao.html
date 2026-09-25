@@ -1,0 +1,690 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Locafácil — Novo site: apresentação e homologação</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --marca: #0628DA;
+    --acao: #2563EB;
+    --tinta: #1a1a1f;
+    --grafite: #424245;
+    --cinza: #6b6b73;
+    --linha: #e2e2e8;
+    --fundo-suave: #f6f7fb;
+    --verde: #1d8a3a;
+    --ambar: #a35b00;
+    --vermelho: #b3261e;
+  }
+
+  @page { size: A4; margin: 18mm 16mm; }
+
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    color: var(--tinta);
+    font-size: 10.5pt;
+    line-height: 1.6;
+    margin: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  h1, h2, h3, h4 { line-height: 1.25; margin: 0; font-weight: 700; }
+  h2 {
+    font-size: 17pt; color: var(--marca); margin: 0 0 4mm;
+    padding-bottom: 2mm; border-bottom: 2px solid var(--marca);
+  }
+  h3 { font-size: 12pt; margin: 7mm 0 2mm; }
+  h4 { font-size: 10.5pt; margin: 5mm 0 1mm; color: var(--grafite); }
+  p { margin: 0 0 3mm; }
+  ul, ol { margin: 0 0 3mm; padding-left: 5mm; }
+  li { margin-bottom: 1.5mm; }
+  strong { font-weight: 700; }
+  a { color: var(--acao); text-decoration: none; }
+  code {
+    font-family: Consolas, 'SF Mono', monospace; font-size: 9pt;
+    background: var(--fundo-suave); padding: 0.5mm 1.2mm; border-radius: 2px;
+  }
+
+  .secao { page-break-before: always; }
+
+  /* ---------- Capa ---------- */
+  .capa {
+    height: 250mm; display: flex; flex-direction: column;
+    justify-content: space-between; page-break-after: always;
+  }
+  .capa-topo img { width: 52mm; display: block; }
+  .capa-centro { margin-bottom: 28mm; }
+  .capa-centro .eyebrow {
+    font-size: 10pt; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--marca); margin-bottom: 5mm;
+  }
+  .capa-centro h1 { font-size: 30pt; font-weight: 800; letter-spacing: -0.02em; max-width: 150mm; }
+  .capa-centro .sub { font-size: 13pt; color: var(--cinza); margin-top: 5mm; max-width: 140mm; }
+  .capa-rodape { font-size: 9.5pt; color: var(--cinza); border-top: 1px solid var(--linha); padding-top: 4mm; }
+  .capa-rodape .linha { display: flex; justify-content: space-between; }
+
+  /* ---------- Blocos ---------- */
+  /* Caixa de observação. O destaque vem do fundo e do título em cor, não de
+     uma barra lateral grossa — em papel a barra vira mancha e é o tique mais
+     reconhecível de layout gerado. */
+  .destaque {
+    background: var(--fundo-suave); border: 1px solid var(--linha); border-radius: 2mm;
+    padding: 4mm 5mm; margin: 4mm 0; page-break-inside: avoid;
+  }
+  .destaque p:last-child { margin-bottom: 0; }
+  .destaque .titulo {
+    font-weight: 700; margin-bottom: 1.5mm; color: var(--marca);
+    font-size: 9pt; text-transform: uppercase; letter-spacing: 0.06em;
+  }
+
+  .link-grande {
+    display: block; font-size: 14pt; font-weight: 700; color: var(--acao);
+    word-break: break-all; margin: 2mm 0 3mm;
+  }
+
+  table { width: 100%; border-collapse: collapse; margin: 3mm 0 5mm; font-size: 9.5pt; page-break-inside: avoid; }
+  th {
+    text-align: left; font-weight: 700; font-size: 8.5pt; text-transform: uppercase;
+    letter-spacing: 0.06em; color: var(--cinza); border-bottom: 1.5px solid var(--linha);
+    padding: 2mm 3mm 2mm 0;
+  }
+  td { padding: 2.2mm 3mm 2.2mm 0; border-bottom: 1px solid var(--linha); vertical-align: top; }
+  td:last-child, th:last-child { padding-right: 0; }
+
+  .selo { font-size: 8.5pt; font-weight: 700; white-space: nowrap; }
+  .ok { color: var(--verde); }
+  .parcial { color: var(--ambar); }
+  .falta { color: var(--vermelho); }
+
+  /* ---------- Cartões de pendência ---------- */
+  .cartao {
+    border: 1px solid var(--linha); border-radius: 3mm; padding: 4mm 5mm;
+    margin-bottom: 4mm; page-break-inside: avoid;
+  }
+  .cartao-cabeca { display: flex; justify-content: space-between; align-items: baseline; gap: 4mm; margin-bottom: 2mm; }
+  .cartao-cabeca h4 { margin: 0; color: var(--tinta); font-size: 11pt; }
+  .responsavel {
+    font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--marca); background: var(--fundo-suave); padding: 1mm 2.5mm; border-radius: 10mm; white-space: nowrap;
+  }
+  .cartao dl { margin: 0; font-size: 9.5pt; overflow: hidden; }
+  .cartao dt { font-weight: 700; color: var(--grafite); float: left; clear: left; width: 34mm; }
+  .cartao dd { margin: 0 0 1.5mm 34mm; }
+
+  /* ---------- Prints ---------- */
+  .tela { page-break-inside: avoid; margin: 0 0 7mm; }
+  .tela img { width: 100%; border: 1px solid var(--linha); border-radius: 2mm; display: block; }
+  .tela figcaption { font-size: 9pt; color: var(--cinza); margin-top: 2mm; }
+  .tela figcaption b { color: var(--tinta); font-weight: 600; }
+  .par { display: flex; gap: 5mm; page-break-inside: avoid; margin-bottom: 7mm; }
+  .par .tela { flex: 1; margin-bottom: 0; }
+
+  /* ---------- Passos ---------- */
+  ol.roteiro { counter-reset: passo; list-style: none; padding: 0; }
+  ol.roteiro > li {
+    counter-increment: passo; position: relative; padding-left: 11mm; margin-bottom: 4mm;
+    page-break-inside: avoid;
+  }
+  ol.roteiro > li::before {
+    content: counter(passo); position: absolute; left: 0; top: 0;
+    width: 7mm; height: 7mm; border-radius: 50%; background: var(--marca); color: #fff;
+    font-size: 9pt; font-weight: 700; display: flex; align-items: center; justify-content: center;
+  }
+  ol.roteiro b { display: block; }
+
+  .cores { display: flex; gap: 4mm; margin: 3mm 0 5mm; }
+  .cor { flex: 1; font-size: 8.5pt; line-height: 1.45; }
+  .cor .amostra { height: 14mm; border-radius: 2mm; border: 1px solid var(--linha); margin-bottom: 1.5mm; }
+  .cor .hex { font-weight: 700; font-family: Consolas, monospace; }
+</style>
+</head>
+<body>
+
+<!-- ====================== CAPA ====================== -->
+<section class="capa">
+  <div class="capa-topo"><img src="img/logo.svg" alt="Locafácil"></div>
+  <div class="capa-centro">
+    <div class="eyebrow">Apresentação e homologação</div>
+    <h1>O novo site da Locafácil</h1>
+    <p class="sub">
+      O que já está no ar, como conferir tela a tela, e o que ainda falta para
+      receber reserva de verdade.
+    </p>
+  </div>
+  <div class="capa-rodape">
+    <div class="linha">
+      <span>Documento para o time de marketing e para o cliente</span>
+      <span>25 de setembro de 2026</span>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== 1 ====================== -->
+<section class="secao">
+<h2>1. Em uma página</h2>
+
+<p>
+  O novo site da Locafácil está no ar, em endereço de teste, com todas as telas
+  prontas e o fluxo de reserva funcionando do começo ao fim: o cliente escolhe
+  local e data, vê os grupos de carro com preço, escolhe a proteção, preenche os
+  dados, revisa e confirma.
+</p>
+
+<p>
+  <strong>O que ainda não é real são os preços e a disponibilidade.</strong> Eles
+  vêm do sistema de locação da JCompany, o SGLOC, e a conta da Locafácil ainda
+  não foi liberada por eles. Enquanto isso, o site mostra dados de exemplo — os
+  sete grupos reais da loja, com os preços de tabela que ela pratica, mas fixos,
+  sem consultar a agenda.
+</p>
+
+<div class="destaque">
+  <div class="titulo">O ponto que trava tudo</div>
+  <p>
+    Falta a JCompany entregar as credenciais de acesso da Locafácil. São duas
+    linhas de configuração. No dia em que chegarem, o site passa a mostrar preço
+    e disponibilidade reais <strong>sem nenhuma alteração de código</strong> —
+    é ligar uma chave.
+  </p>
+</div>
+
+<h3>Estado por bloco</h3>
+<table>
+  <thead><tr><th style="width:44mm">Bloco</th><th>Situação</th><th style="width:24mm">Status</th></tr></thead>
+  <tbody>
+    <tr><td>Visual e conteúdo</td><td>Todas as telas prontas, responsivas do celular ao desktop</td><td class="selo ok">Pronto</td></tr>
+    <tr><td>Fluxo de reserva</td><td>Cinco etapas completas, da busca ao localizador</td><td class="selo ok">Pronto</td></tr>
+    <tr><td>Fotos da frota</td><td>Uma foto por grupo, dos modelos que a própria loja cita</td><td class="selo ok">Pronto</td></tr>
+    <tr><td>Publicação</td><td>No ar, e atualiza sozinho a cada ajuste aprovado</td><td class="selo ok">Pronto</td></tr>
+    <tr><td>Preço e disponibilidade reais</td><td>Dependem das credenciais da JCompany</td><td class="selo falta">Travado</td></tr>
+    <tr><td>Termos e cláusulas</td><td>O checkout pede o aceite, mas não há link para os documentos</td><td class="selo falta">Travado</td></tr>
+    <tr><td>Domínio próprio</td><td>Roda em endereço de teste; falta apontar o domínio da Locafácil</td><td class="selo parcial">A fazer</td></tr>
+    <tr><td>Imagem de compartilhamento</td><td>Falta a arte que aparece ao mandar o link no WhatsApp</td><td class="selo parcial">A fazer</td></tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ====================== 2 ====================== -->
+<section class="secao">
+<h2>2. Onde acessar</h2>
+
+<a class="link-grande" href="https://locafacil-nine.vercel.app">locafacil-nine.vercel.app</a>
+
+<p>
+  Abre em qualquer navegador, no computador ou no celular. Não precisa de senha.
+  O endereço é temporário: quando o domínio da Locafácil for apontado, o site
+  passa a responder nele sem mudar nada do que está aqui.
+</p>
+
+<div class="destaque">
+  <div class="titulo">Pode clicar à vontade</div>
+  <p>
+    Nada do que você fizer nesse endereço vira reserva de verdade. O site ainda
+    não está ligado ao sistema da loja — os carros, os preços e o localizador
+    que aparece no fim são de exemplo. Ninguém do balcão vai receber nada.
+  </p>
+</div>
+
+<h3>O que muda quando as credenciais chegarem</h3>
+<p>
+  O mesmo site, o mesmo endereço, as mesmas telas. A diferença é que os grupos
+  de carro passam a vir da agenda real da loja: some o grupo que não tem carro
+  livre no período, o preço passa a ser o daquela data, e a confirmação passa a
+  criar uma reserva de verdade no SGLOC, com localizador válido.
+</p>
+
+<p>
+  Por isso a homologação de agora vale: o que você está conferindo é o
+  comportamento, o texto e a navegação — e isso não muda depois.
+</p>
+</section>
+
+<!-- ====================== 3 ====================== -->
+<section class="secao">
+<h2>3. Roteiro de homologação</h2>
+
+<p>
+  Leva cerca de dez minutos. A ideia é percorrer o site como um cliente
+  percorreria, anotando o que incomodar. <strong>Faça uma vez no computador e
+  uma vez no celular</strong> — as duas versões são diferentes de propósito.
+</p>
+
+<ol class="roteiro">
+  <li>
+    <b>Abra a home e desça até o fim.</b>
+    Confira o texto do topo, os blocos de serviço, as marcas da frota e o
+    rodapé. É por aqui que a maior parte das pessoas chega pelo Google.
+  </li>
+  <li>
+    <b>Clique em “Reservar”.</b>
+    Escolha a loja, uma data de retirada e uma de devolução, com horário. O site
+    não deixa escolher domingo nem horário fora do expediente — é proposital, é
+    a grade que o sistema da loja aceita.
+  </li>
+  <li>
+    <b>Veja a lista de grupos.</b>
+    Sete grupos, cada um com foto, características e preço do período. Use os
+    filtros de câmbio, ar e passageiros, e abra “Ver detalhes” em um deles para
+    ver a composição do valor.
+  </li>
+  <li>
+    <b>Escolha a proteção.</b>
+    Três opções — Básico, Padrão e Completa — com o preço por dia e o total do
+    período lado a lado. É obrigatório escolher uma para seguir.
+  </li>
+  <li>
+    <b>Preencha os dados do condutor.</b>
+    CPF, telefone e CEP têm máscara e validação. Há também a opção de
+    estrangeiro, que troca o CPF por passaporte.
+  </li>
+  <li>
+    <b>Revise e confirme.</b>
+    A tela de revisão mostra tudo outra vez, com o valor aberto em linhas e um
+    link “editar” em cada bloco. Só aqui a reserva é criada.
+  </li>
+  <li>
+    <b>Confira a tela final.</b>
+    Localizador em destaque, resumo e botão de WhatsApp. Olhe com atenção: é a
+    tela que o cliente vai printar.
+  </li>
+  <li>
+    <b>Repita no celular.</b>
+    Abra o mesmo endereço no telefone. Teste o menu, o formulário de busca e a
+    escolha de carro. É de onde vem a maioria dos acessos.
+  </li>
+</ol>
+
+<h3>O que anotar</h3>
+<ul>
+  <li>Texto que soa errado, comprido demais, ou que a Locafácil não fala assim.</li>
+  <li>Qualquer coisa que pareça quebrada, desalinhada ou cortada na tela.</li>
+  <li>Informação que falta e que o cliente perguntaria: documentos, idade mínima, o que está incluso.</li>
+  <li>Preço, nome de grupo ou condição que não bata com a operação real.</li>
+</ul>
+
+<div class="destaque">
+  <div class="titulo">O que não adianta anotar ainda</div>
+  <p>
+    Disponibilidade e preço por data: estão fixos porque o site ainda não
+    consulta o sistema da loja. O que vale conferir é se os <strong>sete grupos
+    e os valores de tabela</strong> estão certos — esses vieram da operação real
+    e devem bater.
+  </p>
+</div>
+</section>
+
+<!-- ====================== 4 ====================== -->
+<section class="secao">
+<h2>4. As telas</h2>
+<p>
+  Capturas do site no ar, em 25 de setembro de 2026. As versões de computador
+  foram feitas a 1440 pixels de largura; as de celular, a 390 — o tamanho de um
+  iPhone comum.
+</p>
+
+<figure class="tela">
+  <img src="img/01-home-desktop-dobra.jpg" alt="Home no computador, primeira dobra">
+  <figcaption><b>Home — computador, primeira dobra.</b> O que aparece antes de qualquer rolagem: proposta, busca rápida e acesso ao WhatsApp.</figcaption>
+</figure>
+
+<figure class="tela">
+  <img src="img/02-reservar-busca-desktop-dobra.jpg" alt="Tela de reserva no computador">
+  <figcaption><b>Reserva — computador.</b> Local, datas e horários. É a porta do fluxo inteiro.</figcaption>
+</figure>
+
+<figure class="tela">
+  <img src="img/03-para-empresas-desktop-dobra.jpg" alt="Página para empresas no computador">
+  <figcaption><b>Para empresas — computador.</b> A frente comercial de frota e assinatura mensal.</figcaption>
+</figure>
+
+<figure class="tela">
+  <img src="img/04-contato-desktop-dobra.jpg" alt="Página de contato no computador">
+  <figcaption><b>Contato — computador.</b> Canais, endereço da loja e horário de atendimento.</figcaption>
+</figure>
+
+<div class="par">
+  <figure class="tela">
+    <img src="img/01-home-mobile-dobra.jpg" alt="Home no celular">
+    <figcaption><b>Home — celular.</b></figcaption>
+  </figure>
+  <figure class="tela">
+    <img src="img/02-reservar-busca-mobile-dobra.jpg" alt="Reserva no celular">
+    <figcaption><b>Reserva — celular.</b> Um campo por linha, para nada sair cortado.</figcaption>
+  </figure>
+</div>
+
+<div class="par">
+  <figure class="tela">
+    <img src="img/03-para-empresas-mobile-dobra.jpg" alt="Para empresas no celular">
+    <figcaption><b>Para empresas — celular.</b></figcaption>
+  </figure>
+  <figure class="tela">
+    <img src="img/04-contato-mobile-dobra.jpg" alt="Contato no celular">
+    <figcaption><b>Contato — celular.</b></figcaption>
+  </figure>
+</div>
+
+<div class="destaque">
+  <div class="titulo">Para quem produz banner</div>
+  <p>
+    Existem dezesseis capturas em resolução dobrada, própria para retina: cada
+    tela em duas versões — só a primeira dobra e a página inteira — em
+    computador e em celular. São geradas por comando e podem ser refeitas
+    sempre que o visual mudar. Peça ao desenvolvimento.
+  </p>
+</div>
+</section>
+
+<!-- ====================== 5 ====================== -->
+<section class="secao">
+<h2>5. O fluxo de reserva, etapa por etapa</h2>
+
+<p>
+  São cinco telas até o localizador. A regra que mais importa: <strong>a reserva
+  só nasce quando o cliente clica em “Confirmar reserva”, na tela de
+  revisão.</strong> Antes disso nada é enviado à loja — o cliente pode voltar,
+  trocar de carro, corrigir o CPF, fechar a aba.
+</p>
+
+<table>
+  <thead><tr><th style="width:30mm">Etapa</th><th>O que acontece</th><th style="width:38mm">Cria reserva?</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Busca</strong></td><td>Loja, data e hora de retirada e devolução</td><td>Não</td></tr>
+    <tr><td><strong>1. Veículo</strong></td><td>Lista de grupos com foto, preço e filtros</td><td>Não</td></tr>
+    <tr><td><strong>2. Proteção</strong></td><td>Básico, Padrão ou Completa; opcionais, se houver</td><td>Não</td></tr>
+    <tr><td><strong>3. Dados</strong></td><td>Condutor e endereço, com validação campo a campo</td><td>Não</td></tr>
+    <tr><td><strong>4. Revisão</strong></td><td>Resumo, valor aberto, aceite dos termos</td><td><strong>Sim, ao confirmar</strong></td></tr>
+    <tr><td><strong>Confirmação</strong></td><td>Localizador, resumo e WhatsApp</td><td>—</td></tr>
+  </tbody>
+</table>
+
+<h3>Os grupos e os preços que o site mostra hoje</h3>
+<p>Valores de exemplo, para duas diárias. Vieram da tabela real da loja.</p>
+<table>
+  <thead><tr><th style="width:24mm">Grupo</th><th>Perfil</th><th style="width:24mm">Câmbio</th><th style="width:24mm">2 diárias</th></tr></thead>
+  <tbody>
+    <tr><td>B</td><td>Econômico 1.0 — Kwid ou similar</td><td>Manual</td><td>R$ 260,00</td></tr>
+    <tr><td>C</td><td>Econômico 1.0 — Mobi ou similar</td><td>Manual</td><td>R$ 300,00</td></tr>
+    <tr><td>D</td><td>Hatch 1.0 completo — Argo ou similar</td><td>Manual</td><td>R$ 320,00</td></tr>
+    <tr><td>D PLUS</td><td>Hatch 1.0 turbo — Pulse ou similar</td><td>Automático</td><td>R$ 340,00</td></tr>
+    <tr><td>E</td><td>Sedan 1.3 completo — Cronos ou similar</td><td>Manual</td><td>R$ 380,00</td></tr>
+    <tr><td>G</td><td>SUV compacto 1.0 turbo — Pulse ou similar</td><td>Automático</td><td>R$ 380,00</td></tr>
+    <tr><td>G PLUS</td><td>SUV 1.0 turbo completo — Fastback ou similar</td><td>Automático</td><td>R$ 440,00</td></tr>
+  </tbody>
+</table>
+
+<p>
+  Todos com quilometragem controlada de 200 km, cinco lugares, quatro portas, ar
+  condicionado, ABS e airbag.
+</p>
+
+<h3>As proteções</h3>
+<table>
+  <thead><tr><th style="width:26mm">Proteção</th><th>O que cobre</th><th style="width:22mm">Por dia</th></tr></thead>
+  <tbody>
+    <tr><td>Básico</td><td>Furto, incêndio e perda total; danos ao veículo locado, com participação do locatário</td><td>R$ 30,00</td></tr>
+    <tr><td>Padrão</td><td>O anterior, mais danos a terceiros, com participação reduzida</td><td>R$ 60,00</td></tr>
+    <tr><td>Completa</td><td>Roubo, furto, incêndio, perda total e danos a terceiros, sem participação</td><td>R$ 95,00</td></tr>
+  </tbody>
+</table>
+
+<h3>As regras da loja que o site respeita</h3>
+<ul>
+  <li><strong>Antecedência mínima de 48 horas.</strong> Não dá para reservar para amanhã.</li>
+  <li><strong>Segunda a sexta, 08:00 às 17:30. Sábado, 08:00 às 12:00. Domingo fechado.</strong> Vale para a retirada e para a devolução.</li>
+  <li><strong>O pagamento é no balcão.</strong> O site não cobra nada — ver a seção 6.</li>
+</ul>
+
+<div class="destaque">
+  <div class="titulo">Atenção, operação</div>
+  <p>
+    Essa grade de horário não foi inventada nem combinada: foi levantada
+    testando o próprio sistema da JCompany, que recusa qualquer reserva fora
+    dela. <strong>Se a loja atende em outro horário, quem precisa ser corrigido
+    primeiro é o cadastro no SGLOC</strong> — enquanto ele disser outra coisa, a
+    reserva será recusada por mais que o site prometa.
+  </p>
+</div>
+</section>
+
+<!-- ====================== 6 ====================== -->
+<section class="secao">
+<h2>6. O que o sistema da JCompany entrega — e o que não</h2>
+
+<p>
+  O site não tem cadastro próprio de carros nem de reservas. Ele conversa com o
+  SGLOC, o sistema de locação da JCompany, e mostra o que vem de lá. Vale saber
+  onde esse contrato ajuda e onde deixa buraco.
+</p>
+
+<h3>Entrega</h3>
+<table>
+  <thead><tr><th style="width:52mm">Informação</th><th>Observação</th></tr></thead>
+  <tbody>
+    <tr><td>Lista de lojas</td><td>Nome e código de cada unidade</td></tr>
+    <tr><td>Grupos disponíveis no período</td><td>Com diária, taxas, coberturas e política de quilometragem</td></tr>
+    <tr><td>Antecedência mínima</td><td>48 horas nesta loja</td></tr>
+    <tr><td>Período mínimo de locação</td><td>Consultado a cada busca</td></tr>
+    <tr><td>Criação da reserva</td><td>Devolve o localizador que o cliente leva ao balcão</td></tr>
+    <tr><td>Consulta e cancelamento</td><td>Existe no contrato; hoje passa pelo atendimento</td></tr>
+  </tbody>
+</table>
+
+<h3>Não entrega</h3>
+
+<div class="cartao">
+  <div class="cartao-cabeca"><h4>Horário de funcionamento</h4><span class="responsavel">JCompany</span></div>
+  <dl>
+    <dt>O que falta</dt><dd>Não existe forma de perguntar ao sistema quando a loja abre. A validação só acontece depois que o cliente clica em buscar.</dd>
+    <dt>Como resolvemos</dt><dd>A grade está guardada do nosso lado, levantada testando o sistema deles. O site barra o horário errado antes do clique.</dd>
+    <dt>O risco</dt><dd>No dia em que a loja mudar o expediente, o site continua mostrando o antigo até alguém avisar o desenvolvimento.</dd>
+  </dl>
+</div>
+
+<div class="cartao">
+  <div class="cartao-cabeca"><h4>Foto do carro</h4><span class="responsavel">Resolvido por nós</span></div>
+  <dl>
+    <dt>O que falta</dt><dd>A reserva é por grupo, não por modelo, e o sistema não devolve imagem nenhuma.</dd>
+    <dt>Como resolvemos</dt><dd>Uma foto por grupo, do modelo que a própria descrição cita, com legenda avisando que é ilustrativa.</dd>
+    <dt>Observação</dt><dd>D PLUS e G usam a mesma foto de propósito: as duas descrições dizem “Pulse ou similar”.</dd>
+  </dl>
+</div>
+
+<div class="cartao">
+  <div class="cartao-cabeca"><h4>Pagamento online</h4><span class="responsavel">Decisão comercial</span></div>
+  <dl>
+    <dt>O que falta</dt><dd>O contrato de reservas da JCompany não tem pagamento. O fluxo termina no localizador e o cliente paga no balcão.</dd>
+    <dt>Existe caminho?</dt><dd>Existe um caminho de boleto fora desse contrato, com conta em PJBANK, ASAAS ou Banco do Brasil. É outra integração, outra autenticação e outro acordo comercial com a JCompany.</dd>
+    <dt>Decisão</dt><dd>Ficou fora desta entrega. Nada foi inventado na tela: o site não promete pagamento que não existe.</dd>
+  </dl>
+</div>
+
+<div class="cartao">
+  <div class="cartao-cabeca"><h4>Termos de uso e cláusulas</h4><span class="responsavel">JCompany / jurídico</span></div>
+  <dl>
+    <dt>O que falta</dt><dd>O sistema tem os campos para os links dos documentos, mas eles voltam vazios.</dd>
+    <dt>Hoje</dt><dd>O checkout mostra “Li e aceito os termos e as cláusulas contratuais” sem link — melhor um texto sem link do que um link morto.</dd>
+    <dt>Precisa antes de publicar</dt><dd>Sim. Ou a JCompany preenche, ou a Locafácil manda os textos e hospedamos no próprio site.</dd>
+  </dl>
+</div>
+</section>
+
+<!-- ====================== 7 ====================== -->
+<section class="secao">
+<h2>7. O que falta, por responsável</h2>
+
+<p>
+  Cada item diz quem resolve, por que importa e o que acontece enquanto ninguém
+  resolve. Os quatro primeiros seguram a publicação; o resto pode ir depois.
+</p>
+
+<h3>Segura a publicação</h3>
+
+<div class="cartao">
+  <div class="cartao-cabeca"><h4>1. Credenciais de acesso ao sistema de reservas</h4><span class="responsavel">JCompany</span></div>
+  <dl>
+    <dt>O que é</dt><dd>Um usuário e uma senha de sistema para a conta da Locafácil, de produção e, se existir, de homologação. Junto, o código correto da loja de Nova Iguaçu.</dd>
+    <dt>Por que importa</dt><dd>É o único item que separa o site de dados reais.</dd>
+    <dt>Enquanto não chega</dt><dd>O site funciona inteiro com dados de exemplo. Dá para demonstrar; não dá para receber reserva.</dd>
+    <dt>Quanto custa ligar</dt><dd>Duas linhas de configuração, sem tocar em código.</dd>
+  </dl>
+</div>
+
+<div class="cartao">
+  <div class="cartao-cabeca"><h4>2. Termos de uso e cláusulas contratuais</h4><span class="responsavel">Marketing / jurídico</span></div>
+  <dl>
+    <dt>O que é</dt><dd>Os dois documentos que o cliente aceita antes de confirmar.</dd>
+    <dt>Por que importa</dt><dd>O aceite já está na tela. Publicar sem os documentos é pedir concordância com algo que ninguém pode ler.</dd>
+    <dt>Duas saídas</dt><dd>Pedir à JCompany que preencha no cadastro, ou mandar os textos para hospedarmos no site.</dd>
+  </dl>
+</div>
+
+<div class="cartao">
+  <div class="cartao-cabeca"><h4>3. Confirmar o horário de funcionamento</h4><span class="responsavel">Operação da loja</span></div>
+  <dl>
+    <dt>O que é</dt><dd>Dizer se a grade seg–sex 08:00–17:30, sábado 08:00–12:00, domingo fechado e 48 horas de antecedência é a operação de hoje.</dd>
+    <dt>Por que importa</dt><dd>É o que o site usa para barrar data inválida. Se estiver errada, o cliente escolhe um horário que a loja vai recusar.</dd>
+    <dt>Cuidado</dt><dd>Se mudou, o cadastro no SGLOC precisa mudar primeiro. O site só reflete.</dd>
+  </dl>
+</div>
+
+<div class="cartao">
+  <div class="cartao-cabeca"><h4>4. Revogar a chave antiga de inteligência artificial</h4><span class="responsavel">Conta Google</span></div>
+  <dl>
+    <dt>O que é</dt><dd>Uma versão anterior do site tinha um assistente com IA, e a chave de acesso ficou publicada. O assistente já foi removido — hoje o botão de atendimento abre o WhatsApp com frases prontas, sem IA nenhuma.</dd>
+    <dt>Por que importa</dt><dd>A chave chegou a ficar visível e é cobrável por quem a tenha copiado. Limpar o código não desfaz isso.</dd>
+    <dt>O que fazer</dt><dd>Entrar no Google AI Studio e apagar a chave. <strong>Não precisa gerar outra</strong> — o projeto não usa mais IA.</dd>
+  </dl>
+</div>
+
+<h3>Pode ir depois da publicação</h3>
+
+<div class="cartao">
+  <div class="cartao-cabeca"><h4>5. Domínio próprio e e-mail</h4><span class="responsavel">Domínio</span></div>
+  <dl>
+    <dt>O que é</dt><dd>Apontar o domínio da Locafácil para a hospedagem, e confirmar que o e-mail usado no rodapé está ativo.</dd>
+    <dt>Enquanto não</dt><dd>O site responde só no endereço de teste, que não serve para campanha.</dd>
+  </dl>
+</div>
+
+<div class="cartao">
+  <div class="cartao-cabeca"><h4>6. Imagem de compartilhamento</h4><span class="responsavel">Marketing</span></div>
+  <dl>
+    <dt>O que é</dt><dd>Uma arte de 1200 × 630 pixels com a marca, que aparece como miniatura quando alguém manda o link no WhatsApp, no Instagram ou no Facebook.</dd>
+    <dt>Enquanto não</dt><dd>O link é compartilhado sem imagem — no meio de uma conversa, some.</dd>
+  </dl>
+</div>
+
+<div class="cartao">
+  <div class="cartao-cabeca"><h4>7. Revisar as frases do atendimento</h4><span class="responsavel">Marketing</span></div>
+  <dl>
+    <dt>O que é</dt><dd>O botão flutuante oferece seis assuntos, e cada um abre o WhatsApp com a mensagem já escrita: alugar um carro, assinatura mensal, frota para empresa, documentos necessários, dúvida sobre reserva existente e outro assunto.</dd>
+    <dt>Por que importa</dt><dd>É literalmente o texto que o cliente vai mandar. Vale a leitura de quem cuida da voz da marca.</dd>
+  </dl>
+</div>
+
+<div class="cartao">
+  <div class="cartao-cabeca"><h4>8. Números de prova social</h4><span class="responsavel">Marketing</span></div>
+  <dl>
+    <dt>O que é</dt><dd>O site exibia “Nota 4,9” e “+5.000 clientes” sem dizer de onde vinham. Foram retirados.</dd>
+    <dt>Para voltarem</dt><dd>Precisamos da origem — avaliações do Google, número interno de locações — para citar junto. Com fonte, voltam.</dd>
+  </dl>
+</div>
+
+<div class="cartao">
+  <div class="cartao-cabeca"><h4>9. Fotos da frota real</h4><span class="responsavel">Marketing — opcional</span></div>
+  <dl>
+    <dt>Hoje</dt><dd>Cada grupo tem foto do modelo que a loja cita, em fundo transparente e enquadramento igual.</dd>
+    <dt>O ganho</dt><dd>Fotos dos carros da própria frota, na cor e no estado reais, vendem mais que foto de catálogo. Se vierem, basta mandar em PNG, três quartos, fundo claro — a troca é rápida.</dd>
+  </dl>
+</div>
+</section>
+
+<!-- ====================== 8 ====================== -->
+<section class="secao">
+<h2>8. Marca, para quem produz arte</h2>
+
+<p>Do Manual de Identidade Visual da Locafácil, de fevereiro de 2025.</p>
+
+<div class="cores">
+  <div class="cor"><div class="amostra" style="background:#0628DA"></div><div class="hex">#0628DA</div>Azul da marca — logotipo e superfícies de marca</div>
+  <div class="cor"><div class="amostra" style="background:#2AE82A"></div><div class="hex">#2AE82A</div>Verde — só dentro da marca</div>
+  <div class="cor"><div class="amostra" style="background:#939598"></div><div class="hex">#939598</div>Cinza — apoio</div>
+  <div class="cor"><div class="amostra" style="background:#424245"></div><div class="hex">#424245</div>Grafite — apoio</div>
+  <div class="cor"><div class="amostra" style="background:#2563EB"></div><div class="hex">#2563EB</div>Azul de interface — só no site, no que é clicável</div>
+</div>
+
+<div class="destaque">
+  <div class="titulo">Uma regra que vale para banner também</div>
+  <p>
+    <strong>O verde nunca carrega texto.</strong> Escrito sobre branco, ele dá
+    contraste de cerca de 1,6 para 1 — abaixo de qualquer mínimo legível. Ele
+    funciona como elemento de marca, não como fundo de frase nem como cor de
+    letra.
+  </p>
+</div>
+
+<h3>Tipografia</h3>
+<p>
+  <strong>Archivo</strong>, nos pesos 400 a 800. É uma fonte gratuita do Google
+  Fonts, então o time de arte pode baixar e usar nas peças sem custo nem
+  licença: <a href="https://fonts.google.com/specimen/Archivo">fonts.google.com/specimen/Archivo</a>.
+</p>
+
+<h3>Os dois azuis não se misturam</h3>
+<p>
+  O azul do manual identifica a marca. O azul de interface sinaliza ação — é a
+  cor de tudo que se clica no site, e só dela. Em peça de campanha, use o do
+  manual.
+</p>
+</section>
+
+<!-- ====================== 9 ====================== -->
+<section class="secao">
+<h2>9. Próximo passo</h2>
+
+<ol class="roteiro">
+  <li>
+    <b>Homologação, esta semana.</b>
+    Marketing e Locafácil percorrem o roteiro da seção 3 e devolvem os ajustes
+    de texto e de visual numa lista só.
+  </li>
+  <li>
+    <b>Cobrança à JCompany, em paralelo.</b>
+    Pedido formal das credenciais, do horário por sistema e dos links de termos.
+    O texto do e-mail já está pronto e vai junto com este documento.
+  </li>
+  <li>
+    <b>Publicação no domínio próprio.</b>
+    Assim que os termos existirem e o domínio for apontado. As credenciais podem
+    chegar depois: o site vai ao ar mostrando a tabela, e liga a disponibilidade
+    real no dia em que elas chegarem.
+  </li>
+</ol>
+
+<div class="destaque">
+  <div class="titulo">Resumo do que precisamos de vocês</div>
+  <p>
+    <strong>Da Locafácil:</strong> confirmação do horário de funcionamento, dos
+    sete grupos e dos preços de tabela; os textos de termos e cláusulas; e a
+    revogação da chave antiga no Google AI Studio.
+  </p>
+  <p>
+    <strong>Do marketing:</strong> a lista de ajustes da homologação, a arte de
+    compartilhamento 1200 × 630 e a leitura das frases de atendimento.
+  </p>
+  <p>
+    <strong>Da JCompany:</strong> as credenciais. É o item mais demorado e o que
+    depende de terceiro — por isso é o primeiro a ser cobrado.
+  </p>
+</div>
+</section>
+
+</body>
+</html>

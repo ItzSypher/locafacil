@@ -203,4 +203,6 @@ API real e o campo `demo` some das respostas.
 Depois disso, vale refazer o percurso completo contra a API de verdade e
 conferir o normalizador contra a resposta real — encoding, tipos e campos
 ausentes. A confirmação cria uma reserva de verdade: faça em homologação, ou
-cancele em seguida pela tela `/reservar/consultar`.
+cancele em seguida pelo atendimento da loja. O site não tem mais tela de
+consulta — `api/reservation-lookup.js` e `api/reservation-cancel.js` seguem
+prontos, sem chamador no front.

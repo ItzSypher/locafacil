@@ -110,6 +110,8 @@ tamanho + peso + tracking à mão. `DESIGN.md` é a referência completa.
 | [`CLAUDE.md`](CLAUDE.md) | Convenções e arquitetura, para quem for mexer no código |
 | [`docs/API-JCOMPANY.md`](docs/API-JCOMPANY.md) | O que a API entrega, o que falta e o que pedir ao time deles |
 | [`docs/OPERACAO.md`](docs/OPERACAO.md) | O que marketing e infraestrutura precisam resolver |
+| [`docs/apresentacao.html`](docs/apresentacao.html) | Apresentação para cliente e marketing — vira PDF com `node scripts/gerar-pdf.mjs` |
+| [`docs/COMUNICACAO.md`](docs/COMUNICACAO.md) | E-mails e mensagens de WhatsApp prontos para enviar |
 
 ---
 

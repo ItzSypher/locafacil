@@ -64,26 +64,29 @@ necessário: apagar a pasta e a linha `<DevSeed />` em `src/Routes.jsx`.
 
 ## Conteúdo e marketing
 
-### 6. Fotos da frota
+### 6. Fotos da frota — **opcional, já resolvido**
 
-**Quem:** marketing.
+**Quem:** marketing, se quiser melhorar.
 
 A API não devolve imagem de veículo, e a reserva é por **grupo**, não por
-modelo. A tela de veículos precisa de uma foto por grupo:
+modelo. Cada grupo já tem foto do modelo que a própria descrição da API cita:
 
-| Grupo | Perfil |
-|---|---|
-| B | Econômico compacto — hatch de entrada |
-| C | Econômico |
-| D | Intermediário |
-| D PLUS | Intermediário automático |
-| E | Sedan |
-| G | SUV compacto automático |
-| G PLUS | SUV automático |
+| Grupo | Foto | O que a API diz |
+|---|---|---|
+| B | Kwid | "Econômico 1.0 com Ar e Direção - Kwid ou similar" |
+| C | Mobi | "…Mobi ou similar" |
+| D | Argo | "Hatch 1.0 completo - Argo ou similar" |
+| D PLUS | Pulse | "Hatch 1.0 turbo automático - Pulse ou similar" |
+| E | Cronos | "Sedan 1.3 completo - Cronos ou similar" |
+| G | Pulse | "SUV compacto 1.0 turbo - Pulse ou similar" |
+| G PLUS | Fastback | "…Fastback ou similar" |
 
-O ideal são fotos da frota real, em três quartos, fundo claro e neutro,
-recortadas em PNG. Enquanto não chegarem, a tela usa uma silhueta desenhada por
-porte — honesta, já que a reserva é por grupo, mas sem a força de uma foto.
+D PLUS e G repetem o Pulse de propósito: as duas descrições dizem Pulse.
+
+Fotos da frota real vendem mais que foto de catálogo. Se vierem, mande em PNG,
+três quartos, fundo claro — o caminho de troca está em
+[`src/config/vehiclePhotos.js`](../src/config/vehiclePhotos.js) e leva um
+comando.
 
 ### 7. Termos de uso e cláusulas contratuais
 
@@ -147,9 +150,28 @@ npm run dev                      # num terminal
 node scripts/print-telas.mjs     # noutro
 ```
 
-Gera 20 imagens em `prints/`: dobra em 2× e página inteira, em desktop (1440) e
-celular (390), das cinco telas públicas. A pasta é ignorada pelo Git — é
+Gera 16 imagens em `prints/`: dobra e página inteira, em 2×, em desktop (1440) e
+celular (390), das quatro telas públicas. A pasta é ignorada pelo Git — é
 artefato, não fonte. Rode de novo sempre que o visual mudar.
+
+---
+
+## PDF de apresentação, para cliente e marketing
+
+```bash
+node scripts/print-telas.mjs     # se o visual mudou
+node scripts/gerar-pdf.mjs
+```
+
+Sai em `apresentacao/Locafacil-Apresentacao.pdf`, com cerca de 1,3 MB — passa em
+e-mail e em WhatsApp. O conteúdo vive em
+[`apresentacao.html`](apresentacao.html): telas, roteiro de homologação, fluxo de
+reserva, o que a API entrega e o que não entrega, pendências por responsável e
+as cores da marca. Editar o documento é editar esse HTML e rodar o script de
+novo; `--manter` deixa a montagem em pé para conferir no navegador antes.
+
+Os textos de e-mail e de WhatsApp que acompanham o PDF estão em
+[`COMUNICACAO.md`](COMUNICACAO.md).
 
 ---
 

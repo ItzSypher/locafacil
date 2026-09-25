@@ -4,9 +4,9 @@ dist
 dist-ssr
 
 # ===== Segredos =====
-# `*.local` cobre .env.local, que guarda OTA_CLIENT_ID, OTA_CLIENT_SECRET e
-# GEMINI_API_KEY. Nenhuma credencial usa prefixo VITE_, de propósito: o
-# prefixo a exporia no bundle do cliente.
+# `*.local` cobre .env.local, que guarda OTA_CLIENT_ID e OTA_CLIENT_SECRET.
+# Nenhuma credencial usa prefixo VITE_, de propósito: o prefixo a exporia no
+# bundle do cliente.
 *.local
 .env
 .env.*
@@ -25,6 +25,9 @@ lerna-debug.log*
 # Prints das telas para material de campanha: saída de
 # `node scripts/print-telas.mjs`, não fonte.
 prints/
+# PDF de apresentação: saída de `node scripts/gerar-pdf.mjs`. A fonte é
+# docs/apresentacao.html, que está versionada.
+apresentacao/
 
 # ===== Ferramentas locais =====
 # Checkout de plugin com .git próprio; não entra no bundle.
