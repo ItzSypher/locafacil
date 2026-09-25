@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+#
+# Barra segredo antes de virar commit.
+#
+# Este repositorio ja teve uma chave de API publicada no bundle e no historico
+# do Git. O historico foi reescrito, mas a licao fica: a hora de barrar e antes
+# do commit existir, porque depois vira reescrita de historico.
+#
+# Para pular num caso legitimo (fixture, exemplo em documentacao):
+#   git commit --no-verify
+#
+set -u
+
+# So o que esta em staged, e so as linhas adicionadas.
+ADICIONADAS="$(git diff --cached --no-color -U0 --diff-filter=ACM | grep '^+' | grep -v '^+++')"
+
+achou=0
+
+# `grep -e` e obrigatorio: sem ele um padrao que comeca com '-' (a chave
+# privada em PEM) e lido como opcao do proprio grep.
+checar() { # nome  padrao
+  [ -z "$ADICIONADAS" ] && return 0
+  local encontrado
+  encontrado="$(printf '%s\n' "$ADICIONADAS" | grep -nE -e "$2" | head -3)" || return 0
+  [ -z "$encontrado" ] && return 0
+  if [ "$achou" -eq 0 ]; then
+    printf '\n  COMMIT BLOQUEADO - parece haver segredo nas linhas adicionadas.\n\n'
+    achou=1
+  fi
+  printf '  - %s\n' "$1"
+  # So o inicio da linha: o alerta nao precisa reimprimir o segredo.
+  printf '%s\n' "$encontrado" | cut -c1-64 | sed 's/^/      /'
+}
+
+Q="[\"']"
+
+checar "chave do Google API"        'AIza[0-9A-Za-z_-]{35}'
+checar "chave da OpenAI"            'sk-[A-Za-z0-9]{32,}'
+checar "token pessoal do GitHub"    'gh[pousr]_[A-Za-z0-9]{36}'
+checar "token do Slack"             'xox[baprs]-[0-9A-Za-z-]{10,}'
+checar "chave privada"              '-----BEGIN [A-Z ]*PRIVATE KEY-----'
+checar "senha ou segredo no codigo" "(client_secret|api_?key|password|senha)${Q}?[[:space:]]*[:=][[:space:]]*${Q}[^\"']{8,}"
+checar "credencial de ambiente"     '(OTA_CLIENT_ID|OTA_CLIENT_SECRET)[[:space:]]*=[[:space:]]*[^[:space:]]+'
+
+if [ "$achou" -eq 1 ]; then
+  printf '\n  Tire o valor do codigo e use variavel de ambiente (ver .env.example).\n'
+  printf '  Se for falso positivo: git commit --no-verify\n\n'
+  exit 1
+fi
+
+# Arquivo de ambiente nunca entra, mesmo que o .gitignore falhe.
+ENVS="$(git diff --cached --name-only --diff-filter=ACM | grep -E '(^|/)\.env($|\.)' | grep -v '\.env\.example$')" || true
+if [ -n "$ENVS" ]; then
+  printf '\n  COMMIT BLOQUEADO - arquivo de ambiente no staging:\n'
+  printf '%s\n' "$ENVS" | sed 's/^/      /'
+  printf '\n  Use .env.example para documentar o formato, sem os valores.\n\n'
+  exit 1
+fi
+
+exit 0

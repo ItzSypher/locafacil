@@ -1,0 +1,19 @@
+# Fim de linha normalizado no repositorio.
+# Sem isto, cada commit feito no Windows avisava "LF will be replaced by CRLF"
+# e o mesmo arquivo aparecia como alterado so por causa da quebra de linha.
+* text=auto eol=lf
+
+# Binarios nunca sao convertidos.
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.webp binary
+*.ico  binary
+*.woff binary
+*.woff2 binary
+*.pdf  binary
+
+# Scripts de shell precisam de LF mesmo em Windows, senao o interpretador
+# engasga no \r do fim da primeira linha.
+*.sh text eol=lf
+.githooks/* text eol=lf
