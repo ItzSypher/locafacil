@@ -48,7 +48,7 @@ export default function WelcomePopup() {
     e.preventDefault()
     if (name && email) {
       localStorage.setItem('locafacil_lead', JSON.stringify({ name, email }))
-      // Dispatch custom event to notify other components (like MicroAgent)
+      // Dispatch custom event to notify other components (like FaleConosco)
       window.dispatchEvent(new Event('lead_captured'))
       setSubmitted(true)
       setTimeout(() => setShow(false), 2000)

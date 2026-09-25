@@ -78,16 +78,19 @@ O token é cacheado em variável de módulo e renovado 5 min antes de expirar.
 **As credenciais nunca podem chegar ao bundle do cliente** — só existem nas
 serverless functions.
 
-### Assistente Locagora
+### Atendimento pelo WhatsApp
 
-`api/agent-chat.js` é o proxy do Gemini: prompt de sistema, chave e recorte do
-histórico ficam no servidor, e o `MicroAgent` só chama `/api/agent-chat`. Sem
-`GEMINI_API_KEY` no ambiente o endpoint responde 200 com `unavailable: true` e o
-texto de saída para o WhatsApp — o assistente degrada, não quebra.
+`src/components/Global/FaleConosco.jsx` é o botão flutuante: seis assuntos
+escritos, cada um abrindo o WhatsApp com a frase já na caixa de texto.
 
-**A chave anterior estava hardcoded no cliente e foi publicada no bundle. Ela
-precisa ser rotacionada no Google AI Studio**; a chave nova vai em `.env.local`
-e no painel da Vercel, nunca no código.
+Isto já foi um chat por IA (`MicroAgent` + `api/agent-chat.js`, proxy do
+Gemini). Saiu: a conversa terminava sempre em "me chama no WhatsApp", e no
+caminho custava uma chave de API para manter e rotacionar. **O projeto não tem
+mais nenhuma chave de IA, e não deve ganhar uma de volta sem pedido explícito.**
+
+Assunto novo entra no array `ASSUNTOS`, com `rotulo` (curto, cabe no botão),
+`detalhe` (uma linha) e `frase` (o texto que vai para o WhatsApp, completo o
+bastante para a pessoa do outro lado entender de primeira).
 
 O front nunca chama a API OTA direto; fala só com `/api/*` através de
 `src/lib/api/reservation.js`, que normaliza o envelope `{success, data, errors}`

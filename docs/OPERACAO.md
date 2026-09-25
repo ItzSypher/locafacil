@@ -7,21 +7,21 @@ diz quem resolve, por que importa e o que acontece enquanto não for resolvido.
 
 ## Infraestrutura
 
-### 1. Rotacionar a chave do Google AI Studio — **urgente**
+### 1. Revogar a chave antiga do Google AI Studio — **urgente**
 
 **Quem:** quem administra a conta Google.
 
-A chave que alimentava o assistente Locagora esteve publicada no bundle de
-produção, visível para qualquer visitante que abrisse o inspetor. Ela também
-estava no histórico do Git — o histórico foi reescrito e hoje o repositório está
-limpo, mas **isso não desfaz a exposição anterior**.
+O site **não usa mais nenhuma chave de IA**. O chat da Locagora foi substituído
+por um atalho de WhatsApp com frases prontas, e `api/agent-chat.js` foi
+removido do projeto. Não há o que cadastrar.
 
-Revogue a chave atual no Google AI Studio e gere outra. A nova vai em
-`.env.local` e no painel da Vercel como `GEMINI_API_KEY`, nunca no código.
+Mas a chave antiga precisa ser **revogada assim mesmo**. Ela esteve publicada
+no bundle de produção, visível para qualquer visitante que abrisse o inspetor,
+e também aparecia no histórico do Git — o histórico foi reescrito e o
+repositório está limpo, mas **isso não desfaz a exposição anterior**. Enquanto
+a chave existir no Google AI Studio, ela é cobrável por quem a copiou.
 
-> Se a Locafacil não quiser manter o assistente por IA, a saída mais simples é
-> não cadastrar chave nenhuma: o endpoint responde `unavailable: true` e a
-> conversa é encaminhada para o WhatsApp. O site não quebra.
+Entre no Google AI Studio e apague a chave. Não precisa gerar outra.
 
 ### 2. Credenciais da API de reservas
 
@@ -38,8 +38,8 @@ ponta; não dá para receber reserva de verdade.
 
 **Quem:** quem administra o projeto na Vercel.
 
-Cadastrar as chaves de [`.env.example`](../.env.example):
-`OTA_BASE_URL`, `OTA_CLIENT_ID`, `OTA_CLIENT_SECRET`, `GEMINI_API_KEY`.
+Cadastrar as chaves de [`.env.example`](../.env.example): `OTA_BASE_URL`,
+`OTA_CLIENT_ID` e `OTA_CLIENT_SECRET`. São as três únicas do projeto.
 
 Nenhuma usa prefixo `VITE_`, de propósito: o prefixo publicaria o valor no
 bundle do cliente.
@@ -126,12 +126,17 @@ número interno de locações — para citar junto. Com fonte, voltam.
 Quando alguém compartilha o link no WhatsApp ou no Instagram, o preview usa a
 `og:image`. Ainda não existe uma. Precisamos de uma arte 1200×630 com a marca.
 
-### 11. Revisar os textos da Locagora
+### 11. Revisar as frases do atendimento
 
 **Quem:** marketing.
 
-O prompt do assistente vive em `api/agent-chat.js`, no servidor. Vale uma
-leitura de quem cuida da voz da marca antes de ir ao ar.
+O botão flutuante oferece seis assuntos, e cada um abre o WhatsApp com a
+mensagem já escrita. As frases vivem no array `ASSUNTOS`, em
+`src/components/Global/FaleConosco.jsx`. Valem uma leitura de quem cuida da voz
+da marca — é literalmente o texto que o cliente vai mandar.
+
+Os seis assuntos de hoje: alugar um carro, assinatura mensal, frota para
+empresa, documentos necessários, dúvida sobre reserva existente, outro assunto.
 
 ---
 

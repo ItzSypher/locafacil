@@ -4,7 +4,7 @@ import Routes from './Routes'
 import Preloader from './components/Global/Preloader'
 import WelcomePopup from './components/Global/WelcomePopup'
 import ExitPopup from './components/Global/ExitPopup'
-import MicroAgent from './components/Global/MicroAgent'
+import FaleConosco from './components/Global/FaleConosco'
 
 /* Modo de captura, só em desenvolvimento: `?print=1` cala os popups e o
    assistente, e pula a abertura da marca, para tirar print limpo das telas —
@@ -39,7 +39,7 @@ export default function App() {
       {!modoPrint() && <Preloader />}
       <MarketingPopups />
       <Routes />
-      {!modoPrint() && <MicroAgent />}
+      {!modoPrint() && <FaleConosco />}
     </Router>
   )
 }
