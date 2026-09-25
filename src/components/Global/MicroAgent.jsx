@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useDialog } from '../../hooks/useDialog'
-import Avatar from '../../assets/images/locagora-avatar.webp'
+import LocagoraMark from './LocagoraMark'
 
 export default function MicroAgent() {
   const [isOpen, setIsOpen] = useState(false)
@@ -177,7 +177,7 @@ export default function MicroAgent() {
           <div className="bg-brand-dark p-4 flex items-center gap-4 relative shrink-0">
             <div className="absolute top-0 right-0 w-32 h-32 bg-brand-accent/20 rounded-full blur-2xl pointer-events-none" />
             <div className="relative">
-              <img src={Avatar} alt="" width={48} height={48} decoding="async" className="w-12 h-12 rounded-full object-cover border-2 border-brand-accent" />
+              <LocagoraMark className="w-12 h-12 border-2 border-brand-accent" />
               <span className="absolute bottom-0 right-0 w-3 h-3 bg-brand-success rounded-full border-2 border-brand-dark" />
             </div>
             <div className="flex-1 z-10">
@@ -193,7 +193,7 @@ export default function MicroAgent() {
             {messages.map((msg, idx) => (
               <div key={idx} className={`flex gap-3 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}>
                 {msg.role === 'model' && (
-                  <img src={Avatar} alt="" width={32} height={32} loading="lazy" decoding="async" className="w-8 h-8 rounded-full object-cover shadow-sm shrink-0" />
+                  <LocagoraMark className="w-8 h-8 shadow-sm shrink-0" simboloClassName="w-[45%]" />
                 )}
                 <div className={`p-3 rounded-2xl shadow-sm text-sm border ${
                   msg.role === 'user' 
@@ -206,7 +206,7 @@ export default function MicroAgent() {
             ))}
             {loading && (
               <div className="flex gap-3">
-                <img src={Avatar} alt="" width={32} height={32} loading="lazy" decoding="async" className="w-8 h-8 rounded-full object-cover shadow-sm shrink-0" />
+                <LocagoraMark className="w-8 h-8 shadow-sm shrink-0" simboloClassName="w-[45%]" />
                 <div className="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm text-sm text-text-dark border border-line-soft flex items-center gap-1">
                   <span className="sr-only">Locagora está digitando</span>
                   <span className="w-1.5 h-1.5 bg-brand-accent rounded-full animate-pulse" style={{ animationDelay: '0ms' }} />
@@ -265,7 +265,7 @@ export default function MicroAgent() {
           className="w-16 h-16 rounded-full shadow-2xl relative cursor-pointer"
         >
           <div className="absolute inset-0 bg-brand-accent rounded-full animate-ping opacity-30" />
-          <img src={Avatar} alt="" width={64} height={64} decoding="async" className="w-full h-full rounded-full object-cover border-4 border-white relative z-10" />
+          <LocagoraMark className="w-full h-full border-4 border-white relative z-10" simboloClassName="w-[42%]" />
           <span className="absolute top-1 right-1 w-4 h-4 bg-brand-success border-2 border-white rounded-full z-20" />
         </motion.button>
       )}

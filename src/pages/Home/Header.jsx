@@ -78,54 +78,46 @@ export default function Header() {
               variants={itemVariants}
               className="type-body text-text-secondary sm:text-lg mb-8 max-w-[38ch]"
             >
-              Alugue carros <strong className="text-text-primary">sem caução</strong>, com <strong className="text-text-primary">todos os seguros inclusos</strong> e o <strong className="text-text-primary">dobro da franquia</strong>. Mais de <strong className="text-text-primary">5.000 clientes</strong> já escolheram a liberdade.
+              Alugue carros <strong className="text-text-primary">sem caução</strong>, com <strong className="text-text-primary">todos os seguros inclusos</strong> e o <strong className="text-text-primary">dobro da franquia</strong>. Retirada em Nova Iguaçu, contrato na hora.
             </motion.p>
 
-            {/* CTAs */}
-            <motion.div variants={itemVariants} className="flex flex-wrap gap-4">
-              <a href="https://api.whatsapp.com/send?phone=5521968540185&text=Ol%C3%A1,%20Locafacil!%20Quero%20garantir%20meu%20ve%C3%ADculo%20agora!" target="_blank" rel="noopener noreferrer">
-                <motion.button
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="bg-brand-accent hover:bg-brand-glow text-white font-semibold text-base px-8 py-3.5 rounded-xl transition-colors duration-300 cursor-pointer"
-                >
-                  Garantir meu carro agora
-                </motion.button>
+            {/* CTAs — o <a> É o botão. Envolver um <button> num <a> sem
+                largura deixava cada um medindo o próprio texto, com alturas
+                diferentes e rótulo quebrado em duas linhas. */}
+            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+              <a
+                href="https://api.whatsapp.com/send?phone=5521968540185&text=Ol%C3%A1,%20Locafacil!%20Quero%20garantir%20meu%20ve%C3%ADculo%20agora!"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center whitespace-nowrap bg-brand-accent hover:bg-brand-glow text-white font-semibold text-base px-8 py-3.5 rounded-xl transition-colors duration-300 cursor-pointer"
+              >
+                Garantir meu carro agora
               </a>
-              <a href="#beneficios">
-                <motion.button
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="bg-white/5 border border-white/15 text-white font-medium text-base px-8 py-3.5 rounded-xl hover:bg-white/10 transition-colors duration-300 cursor-pointer"
-                >
-                  Descubra os benefícios
-                </motion.button>
+              <a
+                href="#beneficios"
+                className="inline-flex items-center justify-center whitespace-nowrap bg-white/5 border border-white/15 text-white font-medium text-base px-8 py-3.5 rounded-xl hover:bg-white/10 transition-colors duration-300 cursor-pointer"
+              >
+                Descubra os benefícios
               </a>
             </motion.div>
 
-            {/* Social proof mini */}
-            <motion.div variants={itemVariants} className="flex items-center gap-4 mt-8">
-              <div className="flex -space-x-2">
-                {[1, 2, 3, 4].map((i) => (
-                  <div
-                    key={i}
-                    className="w-8 h-8 rounded-full border-2 border-brand-dark bg-brand-deep flex items-center justify-center type-label text-white"
-                  >
-                    {['RS', 'MF', 'JC', 'AL'][i - 1]}
-                  </div>
-                ))}
-              </div>
-              <div>
-                <div className="flex items-center gap-1">
-                  {[...Array(5)].map((_, i) => (
-                    <svg key={i} className="w-3.5 h-3.5 text-brand-gold fill-current" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
-                <p className="type-meta type-numeric text-text-secondary mt-1">Nota 4,9 • +5.000 locações</p>
-              </div>
-            </motion.div>
+            {/* Selos de confiança. Os quatro avatares "RS MF JC AL" e a
+                "Nota 4,9 • +5.000 locações" eram números sem origem — prova
+                social inventada custa mais confiança do que compra. Aqui cada
+                linha é uma condição que está no contrato. */}
+            <motion.ul
+              variants={itemVariants}
+              className="type-meta text-text-secondary mt-10 flex flex-wrap items-center gap-x-6 gap-y-2"
+            >
+              {['Sem caução', 'Seguros inclusos', 'Retirada em Nova Iguaçu'].map((selo) => (
+                <li key={selo} className="flex items-center gap-2">
+                  <svg className="w-3.5 h-3.5 shrink-0 text-brand-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                  {selo}
+                </li>
+              ))}
+            </motion.ul>
           </motion.div>
 
           {/* Coluna da imagem - veículo flutuante */}

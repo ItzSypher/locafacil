@@ -34,6 +34,10 @@ colors:
   state-success-soft: "#ECFDF5"
   brand-whatsapp: "#25D366"
   brand-whatsapp-hover: "#1EBD5B"
+  brand-brand: "#0628DA"
+  brand-leaf: "#2AE82A"
+  brand-stone: "#939598"
+  brand-ink: "#424245"
 typography:
   display:
     fontFamily: "Archivo, Archivo Fallback, system-ui, -apple-system, sans-serif"
@@ -219,6 +223,17 @@ sinais quentes usados com parcimônia.
 **A Regra da Voz Única.** O Azul Farol é a única cor que convida a clicar. Se dois
 elementos azuis competem na mesma tela, um deles está errado — vira fantasma
 (`button-ghost`) ou texto puro. Nunca colorir de azul algo que não seja acionável.
+
+**A Regra das Duas Marcas.** O Manual de Identidade Visual define outro azul
+(`brand-brand`, #0628DA) e um verde (`brand-leaf`, #2AE82A). Eles são a marca —
+logotipo e superfícies que representam a Locafacil — e não a interação. Quem é
+clicável continua sendo `brand-accent`; quem está concluído continua sendo
+`brand-success`. Pintar um botão de #0628DA quebra a Voz Única, porque passam a
+existir dois azuis clicáveis na mesma tela.
+
+**A Regra do Verde Mudo.** `brand-leaf` nunca carrega texto. Sobre branco dá
+cerca de 1,6:1, muito abaixo do piso de 4,5:1. Ele existe como acento dentro do
+símbolo da marca e como preenchimento, nunca como cor de leitura.
 
 **A Regra do Âmbar Escasso.** O Âmbar de Alerta só aparece quando o fato é
 verdadeiro, verificável e útil para a decisão ("últimas 3 unidades nesta

@@ -65,7 +65,6 @@ export default defineConfig({
         manualChunks: {
           react: ['react', 'react-dom', 'react-router-dom'],
           motion: ['framer-motion'],
-          swiper: ['swiper', 'swiper/react', 'swiper/modules'],
         },
       },
     },

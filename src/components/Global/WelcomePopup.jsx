@@ -2,24 +2,47 @@ import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useDialog } from '../../hooks/useDialog'
 
+/* Leitura defensiva: em aba anônima o acesso ao storage pode estourar, e um
+   popup de captação não é motivo para derrubar a página. */
+function foiDispensado() {
+  try {
+    return sessionStorage.getItem('locafacil_lead_dismissed') === 'true'
+  } catch {
+    return false
+  }
+}
+
 export default function WelcomePopup() {
   const [show, setShow] = useState(false)
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
-  const panelRef = useDialog(show, () => handleClose())
+
+  /* A dispensa é lida uma vez, para o estado inicial.
+     Antes ela era um `return null` no meio do render. O componente sumia da
+     tela, mas os hooks continuavam rodando: o temporizador disparava,
+     `show` virava true e o `useDialog` travava a rolagem por um diálogo que
+     não estava renderizado. Quem fechasse o popup sem preencher perdia a
+     rolagem do site inteiro na página seguinte, sem nada na tela explicando.
+
+     Invariante do useDialog: o `open` passado para o hook tem de ser a mesma
+     condição que renderiza o painel. */
+  const [dispensado] = useState(foiDispensado)
+  const aberto = show && !dispensado
+
+  const panelRef = useDialog(aberto, () => handleClose())
 
   useEffect(() => {
+    if (dispensado) return undefined
+
     // Check if we already have the lead
     const lead = localStorage.getItem('locafacil_lead')
-    if (!lead) {
-      // Show the popup shortly after entering
-      const timer = setTimeout(() => {
-        setShow(true)
-      }, 1500)
-      return () => clearTimeout(timer)
-    }
-  }, [])
+    if (lead) return undefined
+
+    // Show the popup shortly after entering
+    const timer = setTimeout(() => setShow(true), 1500)
+    return () => clearTimeout(timer)
+  }, [dispensado])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -34,16 +57,17 @@ export default function WelcomePopup() {
 
   const handleClose = () => {
     // If user closes, we might not want to bother them again this session
-    sessionStorage.setItem('locafacil_lead_dismissed', 'true')
+    try {
+      sessionStorage.setItem('locafacil_lead_dismissed', 'true')
+    } catch {
+      // Sem storage o popup volta na próxima página; é o mal menor.
+    }
     setShow(false)
   }
 
-  // If user has dismissed in this session, don't show
-  if (sessionStorage.getItem('locafacil_lead_dismissed')) return null
-
   return (
     <AnimatePresence>
-      {show && (
+      {aberto && (
         <motion.div
           key="welcome-popup"
           initial={{ opacity: 0 }}

@@ -32,12 +32,25 @@ WhatsApp. Estado compartilhado acontece via `localStorage['locafacil_lead']` +
 `window.dispatchEvent(new Event('lead_captured'))` — `WelcomePopup` escreve,
 `MicroAgent` e `ExitPopup` escutam. Não existe store nem Context aqui.
 
-**Checkout** (`/reservar/*`): wizard de 5 etapas (busca → veículos → extras →
-dados → confirmação) em `src/pages/Reservar/`. Estado entre etapas vive em
-`ReservationContext`, espelhado em `sessionStorage['locafacil_reservation']` —
-sessionStorage e não localStorage porque guarda PII do condutor e um `quoteId`
-que expira. Cada etapa tem guard: sem o estado da etapa anterior, redireciona
-para `/reservar`.
+**Checkout** (`/reservar/*`): busca → veículos → opcionais → dados → **revisão**
+→ confirmação, em `src/pages/Reservar/`. O `StepProgress` conta quatro etapas
+(veículos, opcionais, dados, revisão); busca e confirmação ficam fora dele.
+
+**A reserva nasce em `/reservar/revisao`**, não antes. As etapas de opcionais e
+de dados só guardam estado; `POST /api/reservation-confirm` sai de um único
+lugar, atrás do aceite dos termos e de um `useRef` que barra o envio duplo. É o
+único efeito irreversível do fluxo.
+
+`/reservar/consultar` é a porta de fora do funil: consulta por localizador +
+sobrenome e cancelamento com diálogo de confirmação.
+
+Estado entre etapas vive em `ReservationContext`, espelhado em
+`sessionStorage['locafacil_reservation']` — sessionStorage e não localStorage
+porque guarda PII do condutor e um `quoteId` que expira. Cada etapa tem guard:
+sem o estado da etapa anterior, redireciona para `/reservar`. O
+`ReservationProvider` envolve só `/reservar/*`; como o `SearchWidget` também
+vive no hero da Home, ele usa `useOptionalReservation()`, que degrada para
+no-op fora do provider.
 
 `App.jsx` monta o `BrowserRouter` (não `Routes.jsx`) justamente para que
 `MarketingPopups` possa usar `useLocation` e sumir dentro de `/reservar/*`, onde
@@ -81,10 +94,52 @@ O front nunca chama a API OTA direto; fala só com `/api/*` através de
 e lança `ReservationApiError` com as mensagens em português vindas da API.
 
 **Estado atual dos dados**: a conta da Locafacil ainda não está provisionada na
-API. `get-locais` devolve um único local da JCompany com `iata` vazio, e
-`get-personalizacao` devolve a empresa JCOMPANY RENT A CAR. Por isso
+API. Os endpoints públicos respondem, mas **pelo tenant de demonstração da
+JCompany** — `get-locais` devolve uma loja que não é nossa e
+`get-personalizacao` devolve JCOMPANY RENT A CAR. Por isso `locations`,
+`minimum-notice` e `minimum-period` só consultam a API real **quando há
+credenciais**; sem elas usam as fixtures da Locafacil e marcam `demo: true`.
 `api/locations.js` expõe um campo `code` derivado (`iata || String(id)`) — é ele,
 não `iata`, que o front usa como `LocationCode`.
+
+### Normalização da resposta OTA
+
+`api/_lib/otaNormalize.js` é o único lugar que conhece o formato OTA. Todo
+handler devolve `{ success, data: <normalizado>, errors, demo }` e nenhum
+componente toca em `VehVendorAvails`/`VehAvailCore`/`PricedCoverage`.
+
+A API mistura tipos e às vezes erra o encoding, então o normalizador existe para
+apagar três problemas de uma vez: `toNumber` aceita `"1.234,56"`, `"0.00"` e
+number; `toBool` traduz `"true"`; e `fixText` repara mojibake e acento perdido
+(o próprio portal da JCompany faz o mesmo remendo em
+`js/verificar-disponibilidade.js`). **Todo campo textual vindo da API passa por
+`fixText`.**
+
+`normalizeAvailability` achata os três níveis de aninhamento numa lista de
+`offers[]` com `id` estável, e guarda o `raw` de cada oferta — é dele que
+`buildConfirmPayload` remonta o envelope de confirmação.
+
+### Horário de funcionamento
+
+**A API não expõe horário de loja em endpoint nenhum** (o spec inteiro foi
+varrido). A validação só existe no servidor da JCompany, que recusa a busca
+depois do submit. `api/_lib/storeHours.js` é a fonte única da grade no nosso
+lado, servida por `GET /api/store-hours?LocationCode=` para que mudar o horário
+seja editar um objeto, sem rebuild.
+
+Grade confirmada para a loja 26015 sondando o SGLOC em 2026-09-23: segunda a
+sexta 08:00–17:30, sábado 08:00–12:00, domingo fechado, **48h de antecedência
+mínima**. A validação vale para retirada **e** devolução. Loja fora do mapa
+devolve `known: false`, e aí o front libera a grade inteira e deixa a API
+validar — nunca barrar uma loja nova por desconhecimento nosso.
+
+### Cenários de teste
+
+Fora de produção, `/api/availability?cenario=` troca a fixture: `ok`,
+`um-carro`, `com-opcionais`, `vazio`, `erro-422`, `lento`, `mojibake`,
+`expirado`. O seletor aparece no `SearchWidget` sob `import.meta.env.DEV`. As
+fixtures imitam o descuido de tipos da API real de propósito — um mock mais
+limpo que o real esconde bug de conversão.
 
 ### Rodar as serverless functions localmente
 
@@ -149,6 +204,15 @@ Padrões que se repetem e devem ser seguidos em UI nova:
   nem hex solto no JSX.
 - **Alvo de toque de 44px** em todo controle, crescendo o padding e não o
   desenho (`py-3 -my-1` num link de lista dá o alvo sem abrir o espaçamento).
+- **Camada em `position: fixed` não mora dentro de um `motion.*`.** O
+  framer-motion deixa `will-change: transform` no elemento animado, e
+  `.glass-dark` traz `backdrop-filter` — qualquer um dos dois transforma o
+  ancestral em bloco de contenção, e aí `inset-0` do filho mede a caixa dele em
+  vez da janela. Foi assim que o menu de toque abriu com 2px de altura dentro do
+  `<header>`. Camada que cobre a página vai por `createPortal` no `body`
+  (referência: `components/Topbar/Index.jsx`).
+- **O corte da navegação é `lg` (1024px), não `md`.** A 768px os cinco rótulos
+  e o botão não cabem na linha e quebram em duas e três linhas.
 - **Camada sobre a página é diálogo**, e passa pelo `src/hooks/useDialog.js`:
   `role="dialog"`, `aria-modal`, `aria-labelledby`, Escape, foco preso e
   devolvido, rolagem travada por contador. Os três popups usam o mesmo hook.
@@ -186,12 +250,31 @@ que o detector rode uma vez:
 .claude/skills/impeccable/scripts/impeccable detect --json <arquivos alterados>
 ```
 
+### Andaime temporário
+
+`src/components/DevSeed/Index.jsx` preenche o checkout inteiro com dados falsos
+num clique (busca válida pela grade da loja, primeiro grupo devolvido, primeira
+proteção, condutor fictício com CPF de dígito válido) e cai direto em
+`/reservar/revisao`. Existe só para exercitar a infraestrutura sem redigitar
+quatro telas a cada recarga.
+
+Devolve `null` fora de `import.meta.env.DEV` e some do `dist/` no build. **Para
+remover: apagar a pasta e a linha `<DevSeed />` em `src/Routes.jsx`** — as duas
+estão marcadas com o mesmo aviso.
+
 ## Fora do escopo do build
 
 `ui-ux-pro-max-skill/` é um checkout de plugin com `.git` próprio, ignorado pelo
 git e não incluído no bundle (o Vite só empacota a partir de `src/` e
 `index.html`).
 
-A API OTA não tem nenhum endpoint de pagamento: o checkout termina em "reserva
-confirmada" com o `ConfID`, modelo de pagamento no balcão. Não inventar
-integração de pagamento.
+A aba ReservaOTA não tem nenhum endpoint de pagamento: o checkout termina em
+"reserva confirmada" com o `ConfID`, modelo de pagamento no balcão. **Não
+inventar integração de pagamento.**
+
+Existe um caminho de boleto na API, mas fora da ReservaOTA: `POST
+/reservas/criar` com `gerar_boleto=true` (contas PJBANK, ASAAS ou Banco do
+Brasil) na tag `Reserva`. É outra autenticação, outro contrato comercial e
+trabalha com `local_retirada` como id interno, não com `LocationCode`. Fica
+registrado como a costura existente — implementar só depois de fechado com a
+JCompany, nunca por iniciativa própria.

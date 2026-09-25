@@ -14,14 +14,28 @@
   --text-primary: #F8FAFC;
   --text-secondary: #94A3B8;
   --text-dark: #1E293B;
+  --text-muted: #64748B;
   --white: #ffffff;
   --black: #000000;
   --surface-light: #F8FAFC;
   --surface-muted: #F1F5F9;
+  --surface-sunken: #E2E8F0;
   --line: #E2E8F0;
   --line-soft: #F1F5F9;
   --state-error: #DC2626;
+  --state-error-soft: #FEF2F2;
+  --state-error-line: #FECACA;
+  --state-error-dark: #FCA5A5;
+  --state-success-soft: #ECFDF5;
   --brand-whatsapp: #25D366;
+
+  /* Manual de Identidade Visual (fev/2025). Cores da marca, não de interação:
+     o azul clicável do site continua sendo --brand-accent. --brand-leaf nunca
+     carrega texto — dá ~1.6:1 sobre branco. */
+  --brand-brand: #0628DA;
+  --brand-leaf: #2AE82A;
+  --brand-stone: #939598;
+  --brand-ink: #424245;
 
   /* Compensação óptica. Texto claro sobre fundo escuro fecha e engrossa:
      ganha um fio de tracking e uma fração de entrelinha. Superfície clara
@@ -247,68 +261,60 @@ input[inputmode='numeric'] {
     animation: none !important;
   }
 
-  /* Marquee das montadoras: o trilho fica parado no lugar. */
-  .marcas-swiper .swiper-wrapper {
-    transition: none !important;
+  /* Marquee das montadoras: o trilho para e a faixa vira rolagem por dedo. */
+  .marquee__track {
+    animation: none !important;
+  }
+
+  .marquee {
+    overflow-x: auto;
   }
 }
 
-/* ===== SWIPER CUSTOMIZAÇÕES ===== */
-.marcas-swiper .swiper-wrapper {
-  transition-timing-function: linear !important;
+/* ===== MÁSCARA DA MARCA =====
+   O logotipo entra como máscara para a cor subir por dentro das letras (ver
+   Preloader). A `url()` fica inline no componente porque é o Vite que resolve
+   o caminho do asset; o enquadramento mora aqui. */
+.brand-mask {
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
 }
 
-.services-swiper .swiper-pagination-bullet {
-  background-color: var(--brand-accent) !important;
-}
+/* ===== FAIXA DE MONTADORAS =====
+   Marquee em CSS puro. O Swiper resolvia isto com ~101 kB de JavaScript para
+   um trilho que só anda em linha reta e nunca recebe clique.
 
-/* No celular o carrossel usa a largura toda: 50px de cada lado espremiam o
-   card a ponto de a palavra não caber na coluna. As setas só aparecem quando
-   há margem para elas. */
-.services-swiper {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
-.services-swiper .swiper-button-next,
-.services-swiper .swiper-button-prev {
-  display: none;
-}
-
-@media (min-width: 640px) {
-  .services-swiper {
-    padding-left: 50px !important;
-    padding-right: 50px !important;
+   A faixa duplica o conteúdo e desliza metade da própria largura: ao chegar em
+   -50% a segunda cópia está exatamente onde a primeira começou, e a volta ao
+   início não aparece. A máscara nas pontas evita o corte seco de uma logo pela
+   metade na borda da seção. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
   }
-
-  .services-swiper .swiper-button-next,
-  .services-swiper .swiper-button-prev {
-    display: flex;
+  to {
+    transform: translateX(-50%);
   }
 }
 
-.services-swiper .swiper-button-next,
-.services-swiper .swiper-button-prev {
-  color: var(--brand-accent) !important;
-  background-color: white;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  top: 50%;
-  margin-top: -20px;
+.marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, var(--black) 6%, var(--black) 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, var(--black) 6%, var(--black) 94%, transparent);
 }
 
-.services-swiper .swiper-button-prev {
-  left: 0 !important;
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee 45s linear infinite;
 }
 
-.services-swiper .swiper-button-next {
-  right: 0 !important;
-}
-
-.services-swiper .swiper-button-next::after,
-.services-swiper .swiper-button-prev::after {
-  font-size: 16px;
-  font-weight: bold;
+/* Parar sob o ponteiro dá tempo de ler a marca que interessa. */
+.marquee:hover .marquee__track,
+.marquee:focus-within .marquee__track {
+  animation-play-state: paused;
 }

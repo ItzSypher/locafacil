@@ -22,6 +22,14 @@ export default {
              para nunca mais aparecer como hex solto no meio do JSX. */
           whatsapp: '#25D366',
           'whatsapp-hover': '#1EBD5B',
+          /* Cores do Manual de Identidade Visual (fev/2025). Existem para o
+             logotipo e para superfícies que representam a marca — nunca para
+             sinalizar ação: quem é clicável continua sendo `accent`.
+             `leaf` dá ~1.6:1 sobre branco e por isso nunca carrega texto. */
+          brand: '#0628DA',
+          leaf: '#2AE82A',
+          stone: '#939598',
+          ink: '#424245',
         },
         text: {
           primary: '#F8FAFC',
