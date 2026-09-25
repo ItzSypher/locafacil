@@ -7,13 +7,18 @@ import { ReservationProvider } from './context/ReservationContext'
    checkout para quem só quer o telefone da loja. */
 import Home from './pages/Home/Index'
 
+// ANDAIME TEMPORÁRIO — REMOVER ANTES DE PUBLICAR (ver src/components/DevSeed)
+import DevSeed from './components/DevSeed/Index'
+
 const Empresas = lazy(() => import('./pages/Empresas/Index'))
 const Contato = lazy(() => import('./pages/Contato/Index'))
 const Reservar = lazy(() => import('./pages/Reservar/Index'))
 const ReservarVeiculos = lazy(() => import('./pages/Reservar/Veiculos/Index'))
 const ReservarExtras = lazy(() => import('./pages/Reservar/Extras/Index'))
 const ReservarDados = lazy(() => import('./pages/Reservar/Dados/Index'))
+const ReservarRevisao = lazy(() => import('./pages/Reservar/Revisao/Index'))
 const ReservarConfirmacao = lazy(() => import('./pages/Reservar/Confirmacao/Index'))
+const ReservarConsultar = lazy(() => import('./pages/Reservar/Consultar/Index'))
 
 /* Enquanto o pedaço da rota chega, a página fica no fundo da marca em vez de
    piscar branco. O texto é para quem ouve a tela, não para quem a vê. */
@@ -36,12 +41,16 @@ export default function Rotas() {
           path="/reservar/*"
           element={
             <ReservationProvider>
+              {/* ANDAIME TEMPORÁRIO — REMOVER ANTES DE PUBLICAR */}
+              <DevSeed />
               <Routes>
                 <Route index element={<Reservar />} />
                 <Route path="veiculos" element={<ReservarVeiculos />} />
                 <Route path="extras" element={<ReservarExtras />} />
                 <Route path="dados" element={<ReservarDados />} />
+                <Route path="revisao" element={<ReservarRevisao />} />
                 <Route path="confirmacao" element={<ReservarConfirmacao />} />
+                <Route path="consultar" element={<ReservarConsultar />} />
               </Routes>
             </ReservationProvider>
           }

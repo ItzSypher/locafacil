@@ -50,3 +50,13 @@ export function useReservation() {
   }
   return ctx
 }
+
+const NOOP_RESERVATION = { patch: () => {}, reset: () => {} }
+
+/* O SearchWidget também vive no hero da Home, fora do provider — lá ele só
+   navega com o estado da rota, e a etapa 1 é que espelha no contexto. Fora do
+   checkout, `patch` não tem onde escrever e não deve estourar. */
+// eslint-disable-next-line react-refresh/only-export-components
+export function useOptionalReservation() {
+  return useContext(ReservationContext) ?? NOOP_RESERVATION
+}

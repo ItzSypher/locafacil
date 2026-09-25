@@ -28,14 +28,21 @@ async function call(path, { method = 'GET', body, params } = {}) {
 
 export const getLocations = () => call('locations')
 
+export const getStoreHours = (locationCode) =>
+  call('store-hours', { params: { LocationCode: locationCode } })
+
+export const getPersonalizacao = (locationCode) =>
+  call('personalizacao', { params: { LocationCode: locationCode } })
+
 export const getMinimumNotice = (locationCode) =>
   call('minimum-notice', { params: { LocationCode: locationCode } })
 
 export const getMinimumPeriod = (locationCode) =>
   call('minimum-period', { params: { LocationCode: locationCode } })
 
-export const searchAvailability = (payload) =>
-  call('availability', { method: 'POST', body: payload })
+// `cenario` só tem efeito em desenvolvimento (ver api/availability.js).
+export const searchAvailability = (payload, cenario) =>
+  call('availability', { method: 'POST', body: payload, params: cenario ? { cenario } : undefined })
 
 export const getAgreementRate = (payload) =>
   call('agreement-rate', { method: 'POST', body: payload })

@@ -1,8 +1,11 @@
+/* Quatro etapas até a reserva nascer. A tela de confirmação fica fora daqui:
+   quando ela aparece a reserva já existe, e um passo "atual" depois do fim
+   sugeriria que ainda falta alguma coisa. */
 const STEPS = [
   { key: 'veiculos', label: 'Veículo' },
-  { key: 'extras', label: 'Extras' },
+  { key: 'extras', label: 'Opcionais' },
   { key: 'dados', label: 'Seus Dados' },
-  { key: 'confirmacao', label: 'Confirmação' },
+  { key: 'revisao', label: 'Revisão' },
 ]
 
 function CheckIcon() {

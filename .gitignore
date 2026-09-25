@@ -25,3 +25,6 @@ ui-ux-pro-max-skill
 *.njsproj
 *.sln
 *.sw?
+
+# Ferramenta local de skills/design — nao faz parte do site publicado
+.claude/

@@ -4,99 +4,72 @@ import { motion } from 'framer-motion'
 import Topbar from '../../../components/Topbar/Index'
 import Footer from '../../../components/Footer/Index'
 import StepProgress from '../StepProgress'
+import Field from '../Field'
 import { useReservation } from '../../../context/ReservationContext'
-import { confirmReservation, ReservationApiError } from '../../../lib/api/reservation'
-
-const inputClass = 'w-full bg-surface-light border border-line rounded-xl px-4 py-3 text-text-dark text-sm focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-colors'
-const labelClass = 'block type-label text-text-muted mb-2'
+import { digits, isValidCPF, maskAreaCode, maskCPF, maskPhone, UFS } from '../lib/masks'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-const CPF_RE = /^\d{11}$/
+
+const EMPTY = {
+  givenName: '', surname: '', areaCode: '', phone: '', email: '',
+  docId: '', passport: '', foreigner: false,
+  addressLine: '', complement: '', cityName: '', stateCode: '', countryCode: 'BR',
+}
+
+function validate(form) {
+  const errors = {}
+  if (!form.givenName.trim()) errors.givenName = 'Informe seu nome.'
+  if (!form.surname.trim()) errors.surname = 'Informe seu sobrenome.'
+  if (digits(form.areaCode).length !== 2) errors.areaCode = 'DDD com 2 dígitos.'
+  if (digits(form.phone).length < 8) errors.phone = 'Telefone incompleto.'
+  if (!EMAIL_RE.test(form.email)) errors.email = 'Informe um e-mail válido.'
+
+  if (form.foreigner) {
+    if (form.passport.trim().length < 5) errors.passport = 'Informe o número do passaporte.'
+  } else if (!isValidCPF(form.docId)) {
+    errors.docId = 'CPF inválido. Confira os números.'
+  }
+
+  if (!form.addressLine.trim()) errors.addressLine = 'Informe o endereço.'
+  if (!form.cityName.trim()) errors.cityName = 'Informe a cidade.'
+  if (!form.stateCode) errors.stateCode = 'Escolha o estado.'
+  return errors
+}
 
 export default function ReservarDados() {
   const navigate = useNavigate()
-  const { search, selectedVehicle, extras, patch } = useReservation()
+  const { selectedVehicle, driver, patch } = useReservation()
 
-  const [form, setForm] = useState({
-    givenName: '', surname: '', areaCode: '', phone: '', email: '',
-    docId: '', addressLine: '', cityName: '', stateCode: '',
-  })
-  const [error, setError] = useState('')
-  const [submitting, setSubmitting] = useState(false)
+  const [form, setForm] = useState(() => ({ ...EMPTY, ...(driver ?? {}) }))
+  const [errors, setErrors] = useState({})
+  const [touched, setTouched] = useState(false)
 
   useEffect(() => {
     if (!selectedVehicle) navigate('/reservar')
   }, [selectedVehicle, navigate])
 
-  const setField = (key) => (e) => setForm((prev) => ({ ...prev, [key]: e.target.value }))
-
-  const validate = () => {
-    if (!form.givenName || !form.surname) return 'Informe seu nome completo.'
-    if (!form.phone || !form.areaCode) return 'Informe um telefone válido com DDD.'
-    if (!EMAIL_RE.test(form.email)) return 'Informe um e-mail válido.'
-    if (!CPF_RE.test(form.docId.replace(/\D/g, ''))) return 'Informe um CPF válido (11 dígitos).'
-    if (!form.addressLine || !form.cityName || !form.stateCode) return 'Preencha o endereço completo.'
-    return ''
+  // Depois da primeira tentativa, o erro some assim que o campo é corrigido.
+  const setField = (key, transform) => (value) => {
+    const next = { ...form, [key]: transform ? transform(value) : value }
+    setForm(next)
+    if (touched) setErrors(validate(next))
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
-    const validationError = validate()
-    if (validationError) {
-      setError(validationError)
+    const found = validate(form)
+    setErrors(found)
+    setTouched(true)
+
+    if (Object.keys(found).length > 0) {
+      document.querySelector('[aria-invalid="true"]')?.focus()
       return
     }
-    setError('')
-    setSubmitting(true)
 
-    const payload = {
-      VehResRQCore: {
-        VehRentalCore: {
-          PickUpDateTime: search?.pickUpDateTime,
-          ReturnDateTime: search?.returnDateTime,
-          PickUpLocation: { LocationCode: search?.pickupLocationCode, CodeContext: 'IATA' },
-          ReturnLocation: { LocationCode: search?.returnLocationCode, CodeContext: 'IATA' },
-        },
-        Customer: {
-          Primary: {
-            PersonName: { GivenName: form.givenName, Surname: form.surname },
-            Telephone: { AreaCityCode: form.areaCode, PhoneNumber: form.phone, PhoneTechType: '1' },
-            Email: form.email,
-            Document: { DocID: form.docId.replace(/\D/g, ''), DocType: '5' },
-          },
-          Additional: {
-            Address: {
-              AddressLine: form.addressLine,
-              CityName: form.cityName,
-              StateProv: { StateCode: form.stateCode },
-              CountryName: { Code: 'BR' },
-            },
-            Document: { DocID: form.docId.replace(/\D/g, ''), DocType: '5' },
-          },
-        },
-        VehPrefs: { VehPref: { Code: selectedVehicle.VehAvailCore.Vehicle.Code, CodeContext: 'SIPP' } },
-        RateQualifier: { RateCategory: '3', RateQualifier: 'PADRAO', CorpDiscountNmbr: '' },
-        Status: 'Available',
-      },
-      VehResRQInfo: {
-        CoveragePrefs: {
-          CoveragePref: extras?.coverageType ? [{ CoverageType: extras.coverageType }] : [],
-        },
-        SpecialEquipPrefs: {
-          SpecialEquipPref: (extras?.equipTypes ?? []).map((type) => ({ Quantity: '1', EquipType: type })),
-        },
-      },
-    }
-
-    try {
-      const res = await confirmReservation(payload)
-      patch({ confirmation: res.data, driver: form })
-      navigate('/reservar/confirmacao')
-    } catch (err) {
-      setError(err instanceof ReservationApiError ? err.errors.join(' ') : 'Não foi possível confirmar a reserva.')
-    } finally {
-      setSubmitting(false)
-    }
+    // Só guarda e avança: a reserva nasce na etapa de revisão, com o resumo
+    // completo à vista e o aceite dos termos dado.
+    patch({ driver: form })
+    navigate('/reservar/revisao')
   }
 
   if (!selectedVehicle) return null
@@ -108,77 +81,90 @@ export default function ReservarDados() {
         <div className="container mx-auto max-w-2xl">
           <StepProgress current="dados" />
 
-          <h1 className="type-title text-text-primary text-center mb-3">
-            Seus dados
-          </h1>
+          <h1 className="type-title text-text-primary text-center mb-3">Seus dados</h1>
           <p className="type-meta text-text-secondary text-center mb-10">
-            Precisamos deles para emitir o contrato de locação.
+            Precisamos deles para emitir o contrato de locação. Nada é cobrado nesta etapa.
           </p>
 
-          <form onSubmit={handleSubmit} className="on-light bg-white rounded-2xl p-6 sm:p-8 space-y-4">
-            <div className="grid sm:grid-cols-2 gap-4">
-              <div>
-                <label className={labelClass}>Nome</label>
-                <input className={inputClass} value={form.givenName} onChange={setField('givenName')} placeholder="João" required />
-              </div>
-              <div>
-                <label className={labelClass}>Sobrenome</label>
-                <input className={inputClass} value={form.surname} onChange={setField('surname')} placeholder="Silva" required />
-              </div>
-            </div>
+          <form onSubmit={handleSubmit} className="on-light bg-white rounded-2xl p-6 sm:p-8 space-y-5" noValidate>
+            <fieldset className="space-y-5">
+              <legend className="type-subtitle text-text-dark mb-4">Condutor</legend>
 
-            <div className="grid grid-cols-3 gap-4">
-              <div>
-                <label className={labelClass}>DDD</label>
-                <input className={inputClass} inputMode="numeric" value={form.areaCode} onChange={setField('areaCode')} placeholder="21" maxLength={2} required />
+              <div className="grid sm:grid-cols-2 gap-4">
+                <Field label="Nome" value={form.givenName} onChange={setField('givenName')} error={errors.givenName} placeholder="João" autoComplete="given-name" />
+                <Field label="Sobrenome" value={form.surname} onChange={setField('surname')} error={errors.surname} placeholder="Silva" autoComplete="family-name" />
               </div>
-              <div className="col-span-2">
-                <label className={labelClass}>Telefone</label>
-                <input type="tel" className={inputClass} value={form.phone} onChange={setField('phone')} placeholder="968540185" required />
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <Field label="DDD" value={form.areaCode} onChange={setField('areaCode', maskAreaCode)} error={errors.areaCode} numeric inputMode="numeric" placeholder="21" autoComplete="tel-area-code" />
+                <Field className="sm:col-span-2" label="Telefone" value={form.phone} onChange={setField('phone', maskPhone)} error={errors.phone} numeric type="tel" inputMode="numeric" placeholder="98854-0185" autoComplete="tel-national" />
               </div>
-            </div>
 
-            <div>
-              <label className={labelClass}>E-mail</label>
-              <input type="email" className={inputClass} value={form.email} onChange={setField('email')} placeholder="seu.melhor@email.com" required />
-            </div>
+              <Field label="E-mail" value={form.email} onChange={setField('email')} error={errors.email} type="email" placeholder="seu.melhor@email.com" autoComplete="email" hint="Enviamos o comprovante da reserva para este endereço." />
 
-            <div>
-              <label className={labelClass}>CPF</label>
-              <input className={inputClass} inputMode="numeric" value={form.docId} onChange={setField('docId')} placeholder="Somente números" required />
-            </div>
+              <label className="flex items-center gap-3 cursor-pointer py-3 -my-1.5">
+                <input
+                  type="checkbox"
+                  checked={form.foreigner}
+                  onChange={(e) => {
+                    const next = { ...form, foreigner: e.target.checked }
+                    setForm(next)
+                    if (touched) setErrors(validate(next))
+                  }}
+                  className="w-5 h-5 rounded border-line text-brand-accent focus:ring-brand-accent cursor-pointer"
+                />
+                <span className="type-meta text-text-dark">Sou estrangeiro e não tenho CPF</span>
+              </label>
 
-            <div>
-              <label className={labelClass}>Endereço</label>
-              <input className={inputClass} value={form.addressLine} onChange={setField('addressLine')} placeholder="Rua, número, bairro" required />
-            </div>
+              {form.foreigner ? (
+                <Field label="Passaporte" value={form.passport} onChange={setField('passport')} error={errors.passport} numeric placeholder="AB123456" />
+              ) : (
+                <Field label="CPF" value={form.docId} onChange={setField('docId', maskCPF)} error={errors.docId} numeric inputMode="numeric" placeholder="000.000.000-00" autoComplete="off" />
+              )}
+            </fieldset>
 
-            <div className="grid grid-cols-3 gap-4">
-              <div className="col-span-2">
-                <label className={labelClass}>Cidade</label>
-                <input className={inputClass} value={form.cityName} onChange={setField('cityName')} placeholder="Rio de Janeiro" required />
+            <fieldset className="space-y-5 pt-2">
+              <legend className="type-subtitle text-text-dark mb-4">Endereço</legend>
+
+              <Field label="Endereço" value={form.addressLine} onChange={setField('addressLine')} error={errors.addressLine} placeholder="Rua, número, bairro" autoComplete="street-address" />
+              <Field label="Complemento" value={form.complement} onChange={setField('complement')} placeholder="Apartamento, bloco (opcional)" />
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <Field className="sm:col-span-2" label="Cidade" value={form.cityName} onChange={setField('cityName')} error={errors.cityName} placeholder="Rio de Janeiro" autoComplete="address-level2" />
+                <Field label="Estado" value={form.stateCode} onChange={setField('stateCode')} error={errors.stateCode}>
+                  {(props) => (
+                    <select {...props} value={form.stateCode} onChange={(e) => setField('stateCode')(e.target.value)} className={`${props.className} cursor-pointer`}>
+                      <option value="">UF</option>
+                      {UFS.map((uf) => <option key={uf} value={uf}>{uf}</option>)}
+                    </select>
+                  )}
+                </Field>
               </div>
-              <div>
-                <label className={labelClass}>UF</label>
-                <input className={inputClass} value={form.stateCode} onChange={setField('stateCode')} placeholder="RJ" maxLength={2} required />
-              </div>
-            </div>
+            </fieldset>
 
-            {error && (
+            {touched && Object.keys(errors).length > 0 && (
               <p className="type-meta text-state-error bg-state-error-soft border border-state-error-line rounded-xl px-4 py-3" role="alert">
-                {error}
+                Confira os campos marcados acima antes de continuar.
               </p>
             )}
 
-            <motion.button
-              whileHover={{ scale: 1.01 }}
-              whileTap={{ scale: 0.98 }}
-              type="submit"
-              disabled={submitting}
-              className="w-full bg-brand-accent hover:bg-brand-glow text-white font-bold text-base py-4 rounded-xl transition-colors cursor-pointer mt-2 disabled:opacity-60 disabled:cursor-default"
-            >
-              {submitting ? 'Confirmando reserva...' : 'Confirmar reserva'}
-            </motion.button>
+            <div className="flex flex-col-reverse sm:flex-row gap-3 pt-2">
+              <button
+                type="button"
+                onClick={() => navigate('/reservar/extras')}
+                className="sm:w-auto px-6 py-4 rounded-xl border border-line text-text-muted hover:text-text-dark hover:bg-surface-muted transition-colors cursor-pointer type-meta"
+              >
+                Voltar
+              </button>
+              <motion.button
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.98 }}
+                type="submit"
+                className="flex-1 bg-brand-accent hover:bg-brand-glow text-white font-bold text-base py-4 rounded-xl transition-colors cursor-pointer"
+              >
+                Revisar e confirmar
+              </motion.button>
+            </div>
           </form>
         </div>
       </main>
