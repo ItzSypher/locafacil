@@ -4,17 +4,22 @@ import Checklist from './Checklist'
 import Galeria from './Galeria'
 import Pendencias from './Pendencias'
 import TextosProntos from './TextosProntos'
+import { DadosTeste, Reuniao, Documentacao, ProximosPassos } from './Secoes'
 import { ASSUNTOS, linkWhatsApp } from '../../config/atendimento'
 import { SITE, CORES } from '../../content/documentacao'
 
 const SECOES = [
   { id: 'acesso', rotulo: 'Acesso' },
+  { id: 'reuniao', rotulo: 'Reunião' },
+  { id: 'dados-teste', rotulo: 'Dados de teste' },
   { id: 'telas', rotulo: 'Telas' },
   { id: 'marca', rotulo: 'Marca' },
   { id: 'frases', rotulo: 'Atendimento' },
   { id: 'precisamos', rotulo: 'O que precisamos' },
   { id: 'textos', rotulo: 'Textos prontos' },
   { id: 'roteiro', rotulo: 'Homologação' },
+  { id: 'documentacao', rotulo: 'Documentação' },
+  { id: 'proximos', rotulo: 'Próximos passos' },
 ]
 
 const ARQUIVOS_MARCA = [
@@ -52,20 +57,38 @@ export default function DocMarketing() {
           aparecem são de exemplo.
         </p>
 
-        <Aviso titulo="O que ainda não dá para usar em campanha">
+        <Aviso titulo="Ainda não é o endereço de campanha">
           <p>
-            O endereço é temporário e vai mudar quando o domínio da Locafácil for
-            apontado. E o link ainda não tem imagem de compartilhamento — quando
-            alguém manda no WhatsApp, aparece sem miniatura. As duas coisas estão
-            na lista de <a className="text-brand-accent hover:text-brand-glow transition-colors" href="#precisamos">o que precisamos</a>.
+            O endereço é temporário e muda quando o domínio da Locafácil for
+            apontado. Para conferir, serve; para divulgar, espere o domínio.
           </p>
         </Aviso>
+      </Secao>
+
+      {/* --------------------------------------------------------- reunião -- */}
+      <Secao
+        id="reuniao"
+        numero={2}
+        titulo="Reunião de validação"
+        resumo="A sugestão é fechar na segunda os pontos finais de design e a responsividade, com o fluxo de agendamento percorrido ao vivo."
+      >
+        <Reuniao />
+      </Secao>
+
+      {/* --------------------------------------------------- dados de teste -- */}
+      <Secao
+        id="dados-teste"
+        numero={3}
+        titulo="Dados de teste"
+        resumo="Dados fictícios para percorrer a reserva inteira até a proteção — onde está o upsell — e a tela final. O que se digita tem botão de copiar ao lado."
+      >
+        <DadosTeste />
       </Secao>
 
       {/* ----------------------------------------------------------- telas -- */}
       <Secao
         id="telas"
-        numero={2}
+        numero={4}
         titulo="As telas"
         resumo={`Capturas do site no ar, em ${SITE.atualizado}. Clique para ampliar e salvar.`}
       >
@@ -84,7 +107,7 @@ export default function DocMarketing() {
       {/* ----------------------------------------------------------- marca -- */}
       <Secao
         id="marca"
-        numero={3}
+        numero={5}
         titulo="Marca"
         resumo="Do Manual de Identidade Visual da Locafácil, de fevereiro de 2025."
       >
@@ -161,7 +184,7 @@ export default function DocMarketing() {
       {/* ---------------------------------------------------------- frases -- */}
       <Secao
         id="frases"
-        numero={4}
+        numero={6}
         titulo="Frases do atendimento"
         resumo="O botão flutuante do site oferece seis assuntos. Quem toca cai no WhatsApp com a frase já escrita na caixa de texto — é literalmente o que o cliente vai mandar. Estas são as que estão no ar agora."
       >
@@ -200,9 +223,9 @@ export default function DocMarketing() {
       {/* ------------------------------------------------------ precisamos -- */}
       <Secao
         id="precisamos"
-        numero={5}
+        numero={7}
         titulo="O que precisamos de vocês"
-        resumo={`Cada item diz por que importa e o que acontece enquanto ninguém resolve. O retorno é para ${SITE.prazoRotulo}.`}
+        resumo={`Cada item diz por que importa e o que acontece enquanto ninguém resolve. Se der, até a reunião de ${SITE.reuniaoRotulo}.`}
       >
         <Pendencias publico="marketing" />
       </Secao>
@@ -210,7 +233,7 @@ export default function DocMarketing() {
       {/* ---------------------------------------------------------- textos -- */}
       <Secao
         id="textos"
-        numero={6}
+        numero={8}
         titulo="Textos prontos para enviar"
         resumo="E-mails e mensagens de WhatsApp já escritos. Abra, copie e mande."
       >
@@ -232,11 +255,26 @@ export default function DocMarketing() {
       {/* --------------------------------------------------------- roteiro -- */}
       <Secao
         id="roteiro"
-        numero={7}
+        numero={9}
         titulo="Roteiro de homologação"
         resumo="Leva cerca de dez minutos. Faça uma vez no computador e uma vez no celular. Marque o que conferiu e escreva as observações aqui mesmo; no fim, um botão monta o retorno."
       >
         <Checklist publico="marketing" />
+      </Secao>
+
+      {/* ---------------------------------------------------- documentação -- */}
+      <Secao
+        id="documentacao"
+        numero={10}
+        titulo="Documentação do projeto"
+        resumo="O código está versionado no GitHub, com a arquitetura, o sistema visual, a integração com a API e a operação documentados."
+      >
+        <Documentacao />
+      </Secao>
+
+      {/* ------------------------------------------------------- próximos -- */}
+      <Secao id="proximos" numero={11} titulo="Próximos passos">
+        <ProximosPassos />
       </Secao>
     </DocShell>
   )

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import logo from '../../assets/brand/logo-lockup-white.svg'
 import { SITE } from '../../content/documentacao'
 
-/* Quantos dias faltam para o prazo. Meia-noite local dos dois lados: comparar
+/* Quantos dias faltam para a reunião. Meia-noite local dos dois lados: comparar
    com `new Date()` cru faria "hoje" virar zero ou um conforme a hora. */
 function diasAte(iso) {
   const alvo = new Date(`${iso}T00:00:00`)
@@ -60,7 +60,7 @@ export default function DocShell({ publico, titulo, tituloAba, resumo, secoes, p
     return () => observador.disconnect()
   }, [secoes])
 
-  const dias = diasAte(SITE.prazo)
+  const dias = diasAte(SITE.reuniao)
   const outro = publico === 'cliente'
     ? { para: '/doc/marketing', rotulo: 'Ver a versão do marketing' }
     : { para: '/doc/cliente', rotulo: 'Ver a versão do cliente' }
@@ -115,9 +115,9 @@ export default function DocShell({ publico, titulo, tituloAba, resumo, secoes, p
               <dd className="type-body text-text-primary mt-1">{SITE.atualizado}</dd>
             </div>
             <div>
-              <dt className="type-label text-text-secondary">Retorno esperado</dt>
+              <dt className="type-label text-text-secondary">Reunião de validação</dt>
               <dd className="type-body text-text-primary mt-1">
-                {SITE.prazoRotulo}
+                {SITE.reuniaoRotulo}
                 {dias > 0 && (
                   <span className="text-text-secondary">
                     {' '}· <span className="type-numeric">{dias}</span> {dias === 1 ? 'dia' : 'dias'}

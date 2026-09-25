@@ -15,13 +15,14 @@ export const SITE = {
   url: 'https://locafacil-nine.vercel.app',
   rotulo: 'locafacil-nine.vercel.app',
   atualizado: '25 de setembro de 2026',
-  /* Prazo combinado para o retorno das duas frentes. Data ISO para a conta de
-     dias; o rótulo é escrito à mão porque "segunda-feira, 28" lê melhor do que
-     qualquer formatação automática no meio de uma frase. */
-  prazo: '2026-09-28',
-  prazoRotulo: 'segunda-feira, 28 de setembro',
+  /* Reunião de validação. Data ISO para a conta de dias; o rótulo é escrito à
+     mão porque "segunda-feira, 28" lê melhor do que qualquer formatação
+     automática no meio de uma frase. */
+  reuniao: '2026-09-28',
+  reuniaoRotulo: 'segunda-feira, 28 de setembro',
   pdfCliente: '/doc/Locafacil-Apresentacao-Cliente.pdf',
   pdfMarketing: '/doc/Locafacil-Apresentacao-Marketing.pdf',
+  repositorio: 'https://github.com/ItzSypher/locafacil',
 }
 
 /* ---------------------------------------------------------------- status -- */
@@ -33,8 +34,8 @@ export const BLOCOS = [
   { nome: 'Publicação', situacao: 'No ar, e atualiza sozinho a cada ajuste aprovado', estado: 'pronto' },
   { nome: 'Preço e disponibilidade reais', situacao: 'Dependem das credenciais da JCompany', estado: 'travado' },
   { nome: 'Termos e cláusulas', situacao: 'O checkout pede o aceite, mas não há link para os documentos', estado: 'travado' },
+  { nome: 'Documentação do projeto', situacao: 'Código, arquitetura, sistema visual e integração, versionados no GitHub', estado: 'pronto' },
   { nome: 'Domínio próprio', situacao: 'Roda em endereço de teste; falta apontar o domínio', estado: 'a-fazer' },
-  { nome: 'Imagem de compartilhamento', situacao: 'Falta a arte que aparece ao mandar o link no WhatsApp', estado: 'a-fazer' },
 ]
 
 export const ESTADOS = {
@@ -56,32 +57,32 @@ export const ROTEIRO = [
   {
     id: 'busca',
     titulo: 'Clique em “Reservar” e faça uma busca',
-    texto: 'Escolha a loja, uma data de retirada e uma de devolução, com horário. O site não deixa escolher domingo nem horário fora do expediente — é proposital, é a grade que o sistema da loja aceita.',
+    texto: 'Use os dados de teste da busca. O site não deixa escolher domingo nem horário fora do expediente — é proposital, é a grade que o sistema da loja aceita.',
   },
   {
     id: 'veiculos',
     titulo: 'Veja a lista de grupos',
-    texto: 'Sete grupos, cada um com foto, características e preço do período. Use os filtros de câmbio, ar e passageiros, e abra “Ver detalhes” em um deles para ver a composição do valor.',
+    texto: 'Sete grupos, cada um com foto, características e preço do período. Teste os filtros (Automático, Ar-condicionado, 5 lugares) e abra “Ver detalhes e composição do valor” em um deles.',
   },
   {
     id: 'protecao',
-    titulo: 'Escolha a proteção',
-    texto: 'Básico, Padrão ou Completa, com o preço por dia e o total do período lado a lado. É obrigatório escolher uma para seguir.',
+    titulo: 'Escolha a proteção — é aqui o upsell',
+    texto: 'Comece pela Básico e troque para a Completa: o preço por dia e o total do período mudam na hora, lado a lado. É obrigatório escolher uma para seguir.',
   },
   {
     id: 'dados',
     titulo: 'Preencha os dados do condutor',
-    texto: 'CPF, telefone e CEP têm máscara e validação. Há também a opção de estrangeiro, que troca o CPF por passaporte.',
+    texto: 'Use os dados de teste do condutor. CPF e telefone têm máscara e validação — experimente errar um dígito do CPF. Há também a opção de estrangeiro, que troca o CPF por passaporte.',
   },
   {
     id: 'revisao',
     titulo: 'Revise e confirme',
-    texto: 'A tela de revisão mostra tudo outra vez, com o valor aberto em linhas e um link “editar” em cada bloco. Só aqui a reserva é criada.',
+    texto: 'Tudo outra vez, com o valor aberto em linhas e um atalho para trocar cada bloco. Confira se a proteção escolhida entrou na soma. Só aqui a reserva é criada.',
   },
   {
     id: 'confirmacao',
     titulo: 'Confira a tela final',
-    texto: 'Localizador em destaque, resumo e botão de WhatsApp. Olhe com atenção: é a tela que o cliente vai printar.',
+    texto: 'Localizador em destaque, resumo, “Adicionar ao calendário” e botão de WhatsApp. Olhe com atenção: é a tela que o cliente vai printar.',
   },
   {
     id: 'celular',
@@ -96,6 +97,93 @@ export const O_QUE_ANOTAR = [
   'Informação que falta e que o cliente perguntaria: documentos, idade mínima, o que está incluso.',
   'Preço, nome de grupo ou condição que não bata com a operação real.',
 ]
+
+/* -------------------------------------------------------- dados de teste -- */
+
+/* Dados fictícios para percorrer o fluxo inteiro sem inventar nada na hora.
+ *
+ * As datas caem numa segunda e numa quarta, dentro do expediente, e valem
+ * para qualquer teste feito até sábado, 3 de outubro — depois disso a
+ * antecedência de 48 horas passa a recusar a retirada, e é só avançar a
+ * semana. Duas diárias exatas, para o total bater com a tabela de grupos.
+ *
+ * O condutor é o mesmo do andaime de desenvolvimento, com duas trocas: o
+ * telefone e o e-mail. O telefone do andaime diferia do WhatsApp real da loja
+ * por um dígito, e podia ser de alguém; `example.com` é reservado por norma e
+ * nunca entrega nada. O CPF passa no dígito verificador e é um exemplo
+ * público, não o documento de uma pessoa. */
+export const DADOS_TESTE = [
+  {
+    tela: 'Busca',
+    campos: [
+      ['Local de retirada', 'LOCAFACIL NOVA IGUAÇU'],
+      ['Local de devolução', 'Mesmo local da retirada'],
+      ['Retirada', '05/10/2026', '09:00'],
+      ['Devolução', '07/10/2026', '09:00'],
+    ],
+    dica: 'Qualquer dia de segunda a sábado, a partir de 48 horas depois de hoje, também serve.',
+  },
+  {
+    tela: 'Veículo',
+    campos: [['Grupo', 'D — Argo ou similar']],
+    dica: 'Qualquer grupo funciona. O D fica no meio da tabela e deixa a diferença da proteção bem visível.',
+  },
+  {
+    tela: 'Proteção',
+    // O upsell do fluxo: o cartão ocupa a linha inteira e ganha destaque.
+    destaque: true,
+    campos: [
+      ['Primeiro', 'Básico — R$ 30,00 por dia'],
+      ['Depois troque para', 'Completa — R$ 95,00 por dia'],
+    ],
+    dica: 'É o upsell do fluxo: em duas diárias a proteção sai de R$ 60,00 para R$ 190,00, e a tela mostra o total mudar na hora.',
+  },
+  {
+    tela: 'Dados do condutor',
+    campos: [
+      ['Nome', 'Joana'],
+      ['Sobrenome', 'Ribeiro'],
+      ['DDD', '21'],
+      ['Telefone', '91234-5678'],
+      ['E-mail', 'joana.teste@example.com'],
+      ['CPF', '529.982.247-25'],
+      ['Endereço', 'Rua das Palmeiras, 240 - Centro'],
+      ['Complemento', 'Apto 402'],
+      ['Cidade', 'Nova Iguaçu'],
+      ['Estado', 'RJ'],
+    ],
+    dica: 'Para ver a validação trabalhar, troque o último dígito do CPF: o campo acusa na hora.',
+  },
+  {
+    tela: 'Revisão',
+    campos: [['Termos', 'Marcar “Li e aceito”'], ['Botão', 'Confirmar reserva']],
+    dica: 'Nada vira reserva de verdade: o site ainda não está ligado ao sistema da loja.',
+  },
+]
+
+/* --------------------------------------------------------------- reunião -- */
+
+export const REUNIAO = {
+  horario: 'horário a combinar',
+  pauta: [
+    {
+      titulo: 'Pontos finais de design',
+      texto: 'Tipografia, cores, fotos da frota e o tom dos textos. O que ainda incomoda antes de publicar.',
+    },
+    {
+      titulo: 'Responsividade',
+      texto: 'O site no celular, no tablet e no computador, lado a lado. Menu, formulário de busca e escolha de carro.',
+    },
+    {
+      titulo: 'O fluxo de agendamento',
+      texto: 'A reserva percorrida ao vivo com os dados de teste, da busca ao localizador — para validar se o front-end está de acordo com a operação.',
+    },
+    {
+      titulo: 'API e próximos passos',
+      texto: 'O que falta da JCompany para ligar os dados reais, e a ordem do que vem depois.',
+    },
+  ],
+}
 
 /* ----------------------------------------------------------------- telas -- */
 
@@ -217,6 +305,88 @@ export const API_NAO_ENTREGA = [
   },
 ]
 
+/* --------------------------------------------------- para fechar a API -- */
+
+/* O que falta para o site sair dos dados de exemplo e falar com o sistema da
+   loja, na ordem em que as coisas destravam umas às outras. `quem` separa o
+   que depende de terceiro do que é nosso — a primeira linha segura todas as
+   outras. */
+export const API_FALTA = [
+  {
+    passo: 'Credenciais de acesso da Locafácil',
+    quem: 'JCompany',
+    texto: 'Usuário e senha de sistema (client_id e client_secret) de produção e, se existir, de homologação. É o único item que segura todos os outros.',
+  },
+  {
+    passo: 'Código da loja e lista de lojas',
+    quem: 'JCompany',
+    texto: 'Confirmar o código da loja de Nova Iguaçu e que a lista de lojas passa a devolver as da Locafácil — hoje ela responde pela conta de demonstração deles.',
+  },
+  {
+    passo: 'Ligar as credenciais no site',
+    quem: 'Desenvolvimento',
+    texto: 'Cadastrar os dois valores no painel da hospedagem. Sem mudança de código e sem mudança de tela: o site troca sozinho os dados de exemplo pelos reais.',
+  },
+  {
+    passo: 'Rodada de homologação contra a API real',
+    quem: 'Desenvolvimento',
+    texto: 'Percorrer busca, disponibilidade e confirmação com dados verdadeiros e conferir a leitura da resposta — acentos, valores e campos que a documentação não mostra. A reserva de teste é cancelada em seguida pela loja.',
+  },
+  {
+    passo: 'Horário de funcionamento',
+    quem: 'JCompany e operação',
+    texto: 'Expor o horário da loja no sistema ou confirmar a grade que o site usa hoje. Enquanto não houver endpoint, a grade vive do nosso lado.',
+  },
+  {
+    passo: 'Links de termos e cláusulas',
+    quem: 'JCompany / jurídico',
+    texto: 'Preencher os dois links no cadastro deles, ou mandar os textos para hospedarmos no próprio site.',
+  },
+  {
+    passo: 'Tirar o andaime e publicar',
+    quem: 'Desenvolvimento',
+    texto: 'Remover o botão de dados falsos de desenvolvimento — ele já não sai no site publicado, mas some do código — e apontar o domínio da Locafácil.',
+  },
+]
+
+/* O repositório é público; os links vão direto para o arquivo no GitHub. */
+export const DOCUMENTACAO = [
+  { arquivo: 'README.md', para: 'Visão geral do projeto, como rodar, como publicar' },
+  { arquivo: 'CLAUDE.md', para: 'Arquitetura e convenções — para quem for mexer no código' },
+  { arquivo: 'DESIGN.md', para: 'Sistema visual: cores, tipografia, regras de interface' },
+  { arquivo: 'docs/API-JCOMPANY.md', para: 'O que a API entrega, o que falta e o que pedir ao time deles' },
+  { arquivo: 'docs/OPERACAO.md', para: 'Pendências de infraestrutura e de marketing, com responsável' },
+  { arquivo: 'SECURITY.md', para: 'Onde ficam as credenciais, assinatura de commit, bloqueio de segredo' },
+]
+
+export const PROXIMOS_PASSOS = [
+  {
+    quando: 'Até segunda',
+    titulo: 'Percorrer o roteiro com os dados de teste',
+    texto: 'Marcando o que conferiu e escrevendo as observações na própria página. O que não der para escrever, leva para a reunião.',
+  },
+  {
+    quando: 'Segunda, 28 de setembro',
+    titulo: 'Reunião de validação',
+    texto: 'Design final, responsividade e o fluxo de agendamento percorrido ao vivo.',
+  },
+  {
+    quando: 'Em paralelo',
+    titulo: 'Cobrança à JCompany',
+    texto: 'Credenciais, código da loja, horário por sistema e links de termos. É a resposta mais demorada, por isso já está sendo cobrada.',
+  },
+  {
+    quando: 'Depois da reunião',
+    titulo: 'Ajustes e publicação no domínio',
+    texto: 'Os pontos da reunião aplicados, e o site no domínio da Locafácil assim que os termos existirem. Pode ir ao ar mostrando a tabela.',
+  },
+  {
+    quando: 'Quando as credenciais chegarem',
+    titulo: 'Dados reais',
+    texto: 'Virada de configuração e rodada de homologação contra a API da JCompany. A partir daí, preço e disponibilidade são os da agenda da loja.',
+  },
+]
+
 /* ------------------------------------------------------------ pendências -- */
 
 /* `publicos` diz em qual página o item aparece. `trava` separa o que segura a
@@ -283,18 +453,6 @@ export const PENDENCIAS = [
     ],
   },
   {
-    id: 'og-image',
-    titulo: 'Imagem de compartilhamento',
-    responsavel: 'Marketing',
-    trava: false,
-    publicos: ['cliente', 'marketing'],
-    linhas: [
-      ['O que é', 'Uma arte de 1200 × 630 pixels com a marca, que aparece como miniatura quando alguém manda o link no WhatsApp, no Instagram ou no Facebook.'],
-      ['Enquanto não', 'O link é compartilhado sem imagem — no meio de uma conversa, some.'],
-      ['Formato', 'JPG ou PNG, texto grande e centralizado: em conversa a miniatura aparece pequena.'],
-    ],
-  },
-  {
     id: 'frases',
     titulo: 'Revisar as frases do atendimento',
     responsavel: 'Marketing',
@@ -345,36 +503,96 @@ export const CORES = [
 
 /* Os textos que vão para fora. Ficam aqui, e não num arquivo de documentação,
    porque a página de marketing os entrega com um botão de copiar — e texto
-   que se copia da tela não pode estar numa segunda cópia. */
+   que se copia da tela não pode estar numa segunda cópia.
+
+   Os destinatários não entram aqui de propósito: a página é pública para quem
+   tiver o link, e endereço de e-mail de cliente e de agência não se publica. */
 export const TEXTOS = [
   {
-    id: 'email-cliente',
+    id: 'email-geral',
     canal: 'E-mail',
-    titulo: 'Para o cliente e o time de marketing',
-    assunto: 'Novo site da Locafácil — no ar para homologação',
-    quando: 'Abre a homologação. É o e-mail principal.',
+    titulo: 'Para o cliente e a agência, juntos',
+    assunto: 'Locafácil — novo site para homologação e reunião de validação na segunda (28/09)',
+    quando: 'O e-mail principal: resumo, links, dados de teste, reunião, API e próximos passos.',
     corpo: `Olá, pessoal!
 
-O novo site da Locafácil está no ar, em endereço de teste, e já dá para percorrer inteiro:
+O novo site da Locafácil está no ar, em endereço de teste, pronto para homologação. Segue o resumo e tudo o que vocês precisam para conferir.
 
-https://locafacil-nine.vercel.app
+RESUMO
 
-Abre em qualquer navegador, no computador ou no celular, sem senha. Pode clicar à vontade: nada ali vira reserva de verdade — o site ainda não está ligado ao sistema da loja, então os carros, os preços e o localizador que aparece no fim são de exemplo. Ninguém do balcão recebe nada.
+- Todas as telas prontas, do celular ao computador.
+- Fluxo de reserva completo: busca, veículo, proteção, dados do condutor, revisão e confirmação com localizador.
+- Fotos da frota por grupo, identidade visual aplicada e atendimento por WhatsApp com frases prontas.
+- Preços e disponibilidade ainda são de exemplo: dependem das credenciais da JCompany (detalhe mais abaixo).
 
-Montei uma página com tudo o que vocês precisam: as telas, o roteiro de homologação passo a passo, o fluxo de reserva explicado, as cores e a tipografia para quem produz arte, e a lista do que ainda falta com o responsável de cada item. Dá para ir marcando o que já conferiu e escrever as observações na própria página, que no fim ela monta o retorno para me mandar.
+LINKS
 
-O que peço de vocês até segunda-feira, 28 de setembro:
+Site: https://locafacil-nine.vercel.app
+Página do cliente: https://locafacil-nine.vercel.app/doc/cliente
+Página do marketing: https://locafacil-nine.vercel.app/doc/marketing
 
-1. Percorrer o roteiro de homologação — leva uns dez minutos — uma vez no computador e uma vez no celular.
-2. Devolver os ajustes numa lista só: texto que soa errado, coisa desalinhada ou cortada, informação que falta e que o cliente perguntaria, preço ou condição que não bata com a operação real.
-3. Confirmar três coisas da operação: o horário de funcionamento da loja, os sete grupos de veículo e os preços de tabela.
+Para anexar ou baixar:
+PDF do cliente: https://locafacil-nine.vercel.app/doc/Locafacil-Apresentacao-Cliente.pdf
+PDF do marketing: https://locafacil-nine.vercel.app/doc/Locafacil-Apresentacao-Marketing.pdf
 
-O que ainda não dá para conferir: disponibilidade e preço por data. Eles vêm do sistema da JCompany, e a conta da Locafácil ainda não foi liberada por eles — já cobramos, em paralelo. Enquanto não chega, o site mostra a tabela fixa. No dia em que as credenciais chegarem, a virada é de configuração, sem mexer em código e sem mudar nenhuma tela.
+Nas duas páginas dá para marcar o que já conferiu e escrever as observações passo a passo. No fim, um botão monta o retorno pronto para mandar.
 
-Dois itens que dependem de vocês para publicar:
+COMO TESTAR — DADOS FICTÍCIOS, TELA A TELA
 
-- Termos de uso e cláusulas contratuais. O checkout já pede o aceite, mas não existe link para os documentos.
-- Arte de compartilhamento, 1200 x 630 px. É a miniatura que aparece quando alguém manda o link no WhatsApp ou no Instagram.
+Pode clicar à vontade: nada vira reserva de verdade.
+
+1. Busca — Loja LOCAFACIL NOVA IGUAÇU, devolução no mesmo local. Retirada em 05/10/2026 às 09:00; devolução em 07/10/2026 às 09:00.
+2. Veículo — Grupo D (Argo ou similar).
+3. Proteção — escolha a Básico e depois troque para a Completa. É aqui o upsell: em duas diárias a proteção vai de R$ 60,00 para R$ 190,00, e a tela mostra o total mudar na hora.
+4. Dados do condutor — Joana Ribeiro · (21) 91234-5678 · joana.teste@example.com · CPF 529.982.247-25 · Rua das Palmeiras, 240 - Centro, Apto 402 · Nova Iguaçu/RJ.
+5. Revisão — marque "Li e aceito" e clique em Confirmar reserva.
+6. Confirmação — localizador, resumo e WhatsApp.
+
+Vale fazer uma vez no computador e uma no celular. Os mesmos dados estão nas páginas, com botão de copiar ao lado de cada campo.
+
+REUNIÃO DE VALIDAÇÃO — SEGUNDA-FEIRA, 28 DE SETEMBRO
+
+Sugiro uma reunião na segunda para fechar:
+- os pontos finais de design;
+- a responsividade, no celular, no tablet e no computador;
+- o fluxo de agendamento percorrido ao vivo, para validar se o front-end está de acordo com a operação;
+- a API e os próximos passos.
+
+Me digam o melhor horário.
+
+ONDE ESTAMOS COM A API
+
+O site está pronto para os dados reais; falta a JCompany liberar a conta da Locafácil. Na ordem:
+1. Credenciais de acesso (client_id e client_secret) — JCompany. É o que segura todo o resto.
+2. Código da loja de Nova Iguaçu e lista de lojas da Locafácil — JCompany.
+3. Ligar as credenciais no site — nosso lado, sem mudança de código nem de tela.
+4. Rodada de homologação contra a API real — nosso lado.
+5. Horário de funcionamento por sistema e links de termos e cláusulas — JCompany e jurídico.
+
+A cobrança à JCompany já está correndo em paralelo.
+
+DOCUMENTAÇÃO DO PROJETO
+
+O código está versionado no GitHub, com documentação de arquitetura, sistema visual, integração com a API e operação:
+https://github.com/ItzSypher/locafacil
+
+- README — visão geral, como rodar e como publicar
+- DESIGN.md — sistema visual: cores, tipografia, regras de interface
+- docs/API-JCOMPANY.md — o que a API entrega, o que falta e o que pedir
+- docs/OPERACAO.md — pendências de infraestrutura e marketing, com responsável
+
+PRÓXIMOS PASSOS
+
+1. Até segunda: percorrer o roteiro com os dados de teste.
+2. Segunda, 28/09: reunião de validação.
+3. Em paralelo: cobrança à JCompany.
+4. Depois da reunião: ajustes e publicação no domínio da Locafácil.
+5. Com as credenciais: dados reais e homologação final.
+
+O QUE PRECISO DE VOCÊS
+
+- Locafácil: confirmar o horário de funcionamento, os sete grupos e os preços de tabela; os textos de termos e cláusulas; e apagar a chave antiga do Google AI Studio, que não é mais usada.
+- Marketing: a lista de ajustes da homologação e uma leitura nas frases de atendimento do WhatsApp.
 
 Qualquer dúvida, é só chamar.
 
@@ -411,16 +629,18 @@ Abraço,`,
     quando: 'Primeiro contato, junto com o link.',
     corpo: `Oi! O site novo da Locafácil já está no ar para você ver: https://locafacil-nine.vercel.app
 
-Dá para percorrer inteiro, no celular mesmo. Pode clicar à vontade que nada vira reserva de verdade — ainda estamos esperando a JCompany liberar o acesso ao sistema, então os carros e preços que aparecem são de exemplo.
+Montei uma página com tudo o que você precisa para conferir, com dados de teste prontos para percorrer a reserva inteira: https://locafacil-nine.vercel.app/doc/cliente
 
-Te mandei por e-mail uma página com as telas, o passo a passo do que conferir e a lista do que ainda falta. Qualquer coisa que te incomodar, me manda que ajusto. Se der, até segunda-feira, dia 28.`,
+Pode clicar à vontade que nada vira reserva de verdade — ainda estamos esperando a JCompany liberar o acesso ao sistema, então os carros e preços que aparecem são de exemplo.
+
+Sugiro uma reunião na segunda, dia 28, para fechar design, responsividade e o fluxo de agendamento. Qual horário fica bom para você?`,
   },
   {
     id: 'zap-cobranca',
     canal: 'WhatsApp',
     titulo: 'Para o cliente — os três itens que dependem dele',
     quando: 'Depois da apresentação, para destravar a publicação.',
-    corpo: `Oi! Para o site poder ir ao ar no domínio da Locafácil, preciso de três coisas de vocês até segunda, dia 28:
+    corpo: `Oi! Para o site poder ir ao ar no domínio da Locafácil, preciso de três coisas de vocês — se der, até a reunião de segunda, dia 28:
 
 1. Confirmar o horário de funcionamento da loja. O site hoje usa seg a sex das 08:00 às 17:30, sábado das 08:00 às 12:00, domingo fechado, com 48h de antecedência mínima. Esse é o horário que o sistema da JCompany aceita — se a loja atende em outro, o cadastro lá precisa ser corrigido primeiro.
 
@@ -435,9 +655,11 @@ Te mandei por e-mail uma página com as telas, o passo a passo do que conferir e
     quando: 'Junto com o link da página de marketing.',
     corpo: `Oi, pessoal! Site novo da Locafácil no ar para homologação: https://locafacil-nine.vercel.app
 
-Montei uma página com as telas em alta, as cores da marca, as frases do atendimento e o roteiro do que conferir. Leva uns dez minutos, e vale fazer uma vez no computador e uma no celular.
+Montei uma página com as telas em alta, as cores e os arquivos da marca, as frases do atendimento e dados de teste para percorrer a reserva inteira: https://locafacil-nine.vercel.app/doc/marketing
 
-Duas coisas que preciso de vocês até segunda, dia 28: uma arte 1200x630 com a marca, que é a miniatura que aparece quando o link é compartilhado, e uma lida nas frases de atendimento do WhatsApp do site — são seis assuntos prontos, e é literalmente o texto que o cliente vai mandar.`,
+Leva uns dez minutos, e vale fazer uma vez no computador e uma no celular. Dá para anotar na própria página e copiar o retorno no fim.
+
+Sugiro uma reunião na segunda, dia 28, para fechar os pontos finais de design e responsividade. Qual horário fica bom para vocês?`,
   },
   {
     id: 'zap-jcompany',

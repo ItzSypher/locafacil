@@ -122,14 +122,7 @@ sem origem custa mais confiança do que compra.
 Se a Locafacil quiser usá-los, precisamos da origem — avaliações do Google,
 número interno de locações — para citar junto. Com fonte, voltam.
 
-### 10. Imagem de compartilhamento (og:image)
-
-**Quem:** marketing.
-
-Quando alguém compartilha o link no WhatsApp ou no Instagram, o preview usa a
-`og:image`. Ainda não existe uma. Precisamos de uma arte 1200×630 com a marca.
-
-### 11. Revisar as frases do atendimento
+### 10. Revisar as frases do atendimento
 
 **Quem:** marketing.
 

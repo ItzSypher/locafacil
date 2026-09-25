@@ -3,21 +3,25 @@ import { Secao, Selo, Cartao, Aviso, Tabela } from './Pecas'
 import Checklist from './Checklist'
 import Galeria from './Galeria'
 import Pendencias from './Pendencias'
+import { DadosTeste, Reuniao, ApiFalta, Documentacao, ProximosPassos } from './Secoes'
 import Price from '../Reservar/Price'
 import {
-  SITE, BLOCOS, TELAS, ETAPAS, GRUPOS, PROTECOES, REGRAS,
+  SITE, BLOCOS, ETAPAS, GRUPOS, PROTECOES, REGRAS,
   API_ENTREGA, API_NAO_ENTREGA,
 } from '../../content/documentacao'
 
 const SECOES = [
   { id: 'resumo', rotulo: 'Resumo' },
   { id: 'acesso', rotulo: 'Acesso' },
+  { id: 'reuniao', rotulo: 'Reunião' },
+  { id: 'dados-teste', rotulo: 'Dados de teste' },
   { id: 'roteiro', rotulo: 'Homologação' },
   { id: 'telas', rotulo: 'Telas' },
   { id: 'reserva', rotulo: 'A reserva' },
-  { id: 'sistema', rotulo: 'O sistema' },
+  { id: 'api', rotulo: 'A API' },
+  { id: 'documentacao', rotulo: 'Documentação' },
   { id: 'pendencias', rotulo: 'O que falta' },
-  { id: 'proximo', rotulo: 'Próximo passo' },
+  { id: 'proximos', rotulo: 'Próximos passos' },
 ]
 
 export default function DocCliente() {
@@ -112,10 +116,30 @@ export default function DocCliente() {
         </p>
       </Secao>
 
+      {/* --------------------------------------------------------- reunião -- */}
+      <Secao
+        id="reuniao"
+        numero={3}
+        titulo="Reunião de validação"
+        resumo="A sugestão é fechar na segunda: os pontos finais de design, a responsividade e o fluxo de agendamento percorrido ao vivo, para validar se o front-end está de acordo com a operação."
+      >
+        <Reuniao />
+      </Secao>
+
+      {/* --------------------------------------------------- dados de teste -- */}
+      <Secao
+        id="dados-teste"
+        numero={4}
+        titulo="Dados de teste"
+        resumo="Dados fictícios para percorrer a reserva inteira, tela a tela, até a proteção — onde está o upsell — e a tela final. O que se digita tem botão de copiar ao lado."
+      >
+        <DadosTeste />
+      </Secao>
+
       {/* --------------------------------------------------------- roteiro -- */}
       <Secao
         id="roteiro"
-        numero={3}
+        numero={5}
         titulo="Roteiro de homologação"
         resumo="Leva cerca de dez minutos. Faça uma vez no computador e uma vez no celular — as duas versões são diferentes de propósito. Marque o que conferiu e escreva as observações aqui mesmo; no fim, um botão monta o retorno para me mandar."
       >
@@ -134,7 +158,7 @@ export default function DocCliente() {
       {/* ----------------------------------------------------------- telas -- */}
       <Secao
         id="telas"
-        numero={4}
+        numero={6}
         titulo="As telas"
         resumo={`Capturas do site no ar, em ${SITE.atualizado}. Clique para ampliar.`}
       >
@@ -144,7 +168,7 @@ export default function DocCliente() {
       {/* --------------------------------------------------------- reserva -- */}
       <Secao
         id="reserva"
-        numero={5}
+        numero={7}
         titulo="Como funciona a reserva"
         resumo="São cinco telas até o localizador."
       >
@@ -209,7 +233,7 @@ export default function DocCliente() {
         <h3 className="type-subtitle text-text-dark mt-10 mb-3">As regras que o site respeita</h3>
         <ul className="space-y-3">
           {REGRAS.map((item) => (
-            <li key={item.regra} className="border-l-0 pl-0">
+            <li key={item.regra}>
               <p className="type-body text-text-dark font-semibold">{item.regra}</p>
               <p className="type-body text-text-muted">{item.detalhe}</p>
             </li>
@@ -233,11 +257,12 @@ export default function DocCliente() {
 
       {/* --------------------------------------------------------- sistema -- */}
       <Secao
-        id="sistema"
-        numero={6}
-        titulo="O que o sistema da JCompany entrega"
-        resumo="O site não tem cadastro próprio de carros nem de reservas. Ele conversa com o SGLOC e mostra o que vem de lá."
+        id="api"
+        numero={8}
+        titulo="A API da JCompany"
+        resumo="O site não tem cadastro próprio de carros nem de reservas. Ele conversa com o SGLOC, o sistema da JCompany, e mostra o que vem de lá."
       >
+        <h3 className="type-subtitle text-text-dark mb-3">O que entrega</h3>
         <Tabela colunas={['Informação', 'Observação']}>
           {API_ENTREGA.map((linha) => (
             <tr key={linha.item} className="border-b border-line-soft">
@@ -247,7 +272,7 @@ export default function DocCliente() {
           ))}
         </Tabela>
 
-        <h3 className="type-subtitle text-text-dark mt-10 mb-3">O que ele não entrega</h3>
+        <h3 className="type-subtitle text-text-dark mt-10 mb-3">O que não entrega</h3>
         <div className="space-y-3">
           {API_NAO_ENTREGA.map((item) => (
             <Cartao
@@ -259,61 +284,48 @@ export default function DocCliente() {
             />
           ))}
         </div>
+
+        <h3 className="type-subtitle text-text-dark mt-12 mb-1">O que falta para fechar a API</h3>
+        <p className="type-body text-text-muted mb-6 max-w-2xl">
+          Na ordem em que as coisas destravam. O site já está pronto para os
+          dados reais — o primeiro passo segura todos os outros.
+        </p>
+        <ApiFalta />
+      </Secao>
+
+      {/* ---------------------------------------------------- documentação -- */}
+      <Secao
+        id="documentacao"
+        numero={9}
+        titulo="Documentação do projeto"
+        resumo="O código está versionado no GitHub, com a arquitetura, o sistema visual, a integração com a API e a operação documentados — para quem for manter o site depois, e para quem quiser conferir como foi feito."
+      >
+        <Documentacao />
       </Secao>
 
       {/* ------------------------------------------------------ pendências -- */}
       <Secao
         id="pendencias"
-        numero={7}
+        numero={10}
         titulo="O que falta"
         resumo="Cada item diz quem resolve, por que importa e o que acontece enquanto ninguém resolve."
       >
         <Pendencias publico="cliente" />
       </Secao>
 
-      {/* --------------------------------------------------------- próximo -- */}
-      <Secao id="proximo" numero={8} titulo="Próximo passo">
-        <ol className="space-y-5">
-          <li>
-            <p className="type-subtitle text-text-dark">
-              Homologação, até {SITE.prazoRotulo}
-            </p>
-            <p className="type-body text-text-muted mt-1">
-              Percorra o roteiro, marque o que conferiu e me mande o retorno pelo
-              botão de copiar. Junto com ele, a confirmação do horário de
-              funcionamento, dos sete grupos e dos preços de tabela.
-            </p>
-          </li>
-          <li>
-            <p className="type-subtitle text-text-dark">Cobrança à JCompany, em paralelo</p>
-            <p className="type-body text-text-muted mt-1">
-              Pedido formal das credenciais, do horário por sistema e dos links de
-              termos. O texto já está pronto e sai junto com este documento.
-            </p>
-          </li>
-          <li>
-            <p className="type-subtitle text-text-dark">Publicação no domínio próprio</p>
-            <p className="type-body text-text-muted mt-1">
-              Assim que os termos existirem e o domínio for apontado. As
-              credenciais podem chegar depois: o site vai ao ar mostrando a
-              tabela, e liga a disponibilidade real no dia em que elas chegarem.
-            </p>
-          </li>
-        </ol>
+      {/* ------------------------------------------------------- próximos -- */}
+      <Secao id="proximos" numero={11} titulo="Próximos passos">
+        <ProximosPassos />
 
         <Aviso titulo="Resumo do que precisamos de você">
           <p>
             Confirmação do horário de funcionamento, dos sete grupos e dos preços
             de tabela; os textos de termos e cláusulas; e a revogação da chave
-            antiga no Google AI Studio. As três coisas cabem numa mensagem.
+            antiga no Google AI Studio. As três coisas cabem numa mensagem — ou
+            na reunião de {SITE.reuniaoRotulo}.
           </p>
         </Aviso>
       </Secao>
-
-      <p className="type-meta text-text-muted">
-        {TELAS.length} telas capturadas em {SITE.atualizado}. Para uma versão que
-        se imprime, use o botão de PDF no topo.
-      </p>
     </DocShell>
   )
 }

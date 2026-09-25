@@ -103,6 +103,19 @@ export function Aviso({ titulo, children }) {
   )
 }
 
+function IconeCopia({ copiado }) {
+  return copiado ? (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+    </svg>
+  ) : (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+      <rect x="9" y="9" width="11" height="11" rx="2" />
+      <path d="M5 15V5a2 2 0 012-2h10" />
+    </svg>
+  )
+}
+
 /**
  * Botão de copiar.
  *
@@ -110,8 +123,12 @@ export function Aviso({ titulo, children }) {
  * feedback aparece onde o dedo acabou de tocar. Quando o navegador nega o
  * acesso à área de transferência — contexto inseguro, permissão recusada —, o
  * botão diz para selecionar à mão, em vez de fingir que copiou.
+ *
+ * `compacto` é a versão só de ícone, para linhas de dado — dez campos com
+ * "Copiar" escrito ao lado viram uma coluna de ruído. O alvo continua com
+ * 44px, e o rótulo vai para o leitor de tela junto com o aviso de copiado.
  */
-export function BotaoCopiar({ texto, rotulo = 'Copiar', className = '' }) {
+export function BotaoCopiar({ texto, rotulo = 'Copiar', compacto = false, className = '' }) {
   const [copiar, copiado] = useCopia()
   const [falhou, setFalhou] = useState(false)
 
@@ -120,23 +137,33 @@ export function BotaoCopiar({ texto, rotulo = 'Copiar', className = '' }) {
     setFalhou(!deuCerto)
   }
 
+  const aviso = falhou ? 'Selecione e copie' : copiado ? 'Copiado' : rotulo
+
+  if (compacto) {
+    return (
+      <button
+        type="button"
+        onClick={aoClicar}
+        aria-label={rotulo}
+        title={falhou ? 'Selecione e copie' : rotulo}
+        className={`w-11 h-11 shrink-0 inline-flex items-center justify-center rounded-xl transition-colors cursor-pointer print:hidden ${
+          copiado ? 'text-brand-success' : 'text-text-muted hover:text-brand-accent hover:bg-brand-accent/10'
+        } ${className}`}
+      >
+        <IconeCopia copiado={copiado} />
+        <span className="sr-only" aria-live="polite">{copiado ? 'Copiado' : ''}</span>
+      </button>
+    )
+  }
+
   return (
     <button
       type="button"
       onClick={aoClicar}
       className={`min-h-11 inline-flex items-center gap-2 px-4 rounded-xl border border-brand-accent/30 text-brand-accent hover:bg-brand-accent/10 transition-colors cursor-pointer type-label print:hidden ${className}`}
     >
-      {copiado ? (
-        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-        </svg>
-      ) : (
-        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-          <rect x="9" y="9" width="11" height="11" rx="2" />
-          <path d="M5 15V5a2 2 0 012-2h10" />
-        </svg>
-      )}
-      {falhou ? 'Selecione e copie' : copiado ? 'Copiado' : rotulo}
+      <IconeCopia copiado={copiado} />
+      {aviso}
     </button>
   )
 }
