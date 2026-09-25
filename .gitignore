@@ -28,3 +28,6 @@ ui-ux-pro-max-skill
 
 # Ferramenta local de skills/design — nao faz parte do site publicado
 .claude/
+
+# Prints gerados para a equipe de banners — artefato, nao fonte
+prints/
