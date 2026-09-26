@@ -5,7 +5,7 @@ import SearchWidget from '../Reservar/SearchWidget'
 /**
  * Hero Section premium com:
  * - Background gradient escuro
- * - Copy persuasiva com gatilhos psicológicos (Escassez + Urgência)
+ * - Promessa principal e condições de locação
  * - Imagem flutuante do veículo (animação infinita)
  * - Formulário glassmorphism sobrepondo hero e próxima seção
  */
@@ -50,22 +50,14 @@ export default function Header() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 lg:pt-36 pb-64 sm:pb-72 lg:pb-80 relative z-10">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
 
-          {/* Coluna de texto - Copy persuasiva */}
+          {/* Coluna de texto */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
             className="max-w-xl"
           >
-            {/* Badge de urgência */}
-            <motion.div variants={itemVariants}>
-              <span className="inline-flex items-center gap-2 bg-brand-gold/10 text-brand-gold type-label px-4 py-1.5 rounded-full border border-brand-gold/30 mb-6">
-                <span className="w-1.5 h-1.5 bg-brand-gold rounded-full" />
-                Últimas unidades com condições exclusivas
-              </span>
-            </motion.div>
-
-            {/* Headline principal absurdamente persuasiva */}
+            {/* Headline principal */}
             <motion.h1
               variants={itemVariants}
               className="type-display text-text-primary mb-6"
