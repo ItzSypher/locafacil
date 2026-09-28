@@ -2,7 +2,9 @@
 // client_id/client_secret NUNCA devem ir para o bundle do front-end —
 // só existem aqui, em código que roda como serverless function.
 
-const DEFAULT_BASE_URL = 'https://sgloc.apijcompany.com.br'
+// Cada locadora tem o próprio subdomínio. `sgloc.` é o tenant de demonstração
+// da JCompany; o da Locafácil é `locafacil.`.
+const DEFAULT_BASE_URL = 'https://locafacil.apijcompany.com.br'
 
 let cachedToken = null // { token, expiresAt }
 
@@ -10,11 +12,21 @@ function baseUrl() {
   return process.env.OTA_BASE_URL || DEFAULT_BASE_URL
 }
 
+// Dois jeitos de autenticar: um token Bearer já emitido pela JCompany
+// (OTA_ACCESS_TOKEN, usado como veio) ou o par client_credentials, trocado por
+// token a cada hora. Havendo os dois, o token fixo vence.
 function hasCredentials() {
-  return Boolean(process.env.OTA_CLIENT_ID && process.env.OTA_CLIENT_SECRET)
+  return Boolean(
+    process.env.OTA_ACCESS_TOKEN ||
+    (process.env.OTA_CLIENT_ID && process.env.OTA_CLIENT_SECRET),
+  )
 }
 
 async function getToken() {
+  if (process.env.OTA_ACCESS_TOKEN) {
+    return process.env.OTA_ACCESS_TOKEN
+  }
+
   if (cachedToken && cachedToken.expiresAt > Date.now()) {
     return cachedToken.token
   }

@@ -111,9 +111,12 @@ dados falsos e o seletor de cenário — e essas imagens vão para o cliente.
 
 ### Integração com a API OTA (JCompany/SGLOC)
 
-Base: `https://sgloc.apijcompany.com.br`. A spec Swagger completa está em
-`/docs/api-docs.json` (a página `/api/documentation` é uma SPA e não serve para
-leitura direta).
+Base: **`https://locafacil.apijcompany.com.br`** — cada locadora tem o próprio
+subdomínio, e `sgloc.` é o tenant de demonstração da JCompany (loja "Aeris
+Pátio", empresa JCOMPANY RENT A CAR). Apontar para `sgloc.` foi o que fez o
+token da Locafácil dar 401 por um dia inteiro. A spec Swagger completa está em
+`https://sgloc.apijcompany.com.br/docs/api-docs.json` (a página
+`/api/documentation` é uma SPA e não serve para leitura direta).
 
 Cada função em `api/*.js` é um proxy fino para uma operação ReservaOTA, e
 `api/_lib/otaClient.js` decide entre API real e fixture:
@@ -128,6 +131,11 @@ Cada função em `api/*.js` é um proxy fino para uma operação ReservaOTA, e
   `ConfID`, etc.). Preencher as credenciais desliga o mock sem tocar em código.
 
 O token é cacheado em variável de módulo e renovado 5 min antes de expirar.
+`OTA_ACCESS_TOKEN` é a alternativa ao par: um Bearer já emitido pela JCompany,
+usado como veio e com prioridade sobre ele. É o que está em uso: token do login
+de operador (usuário 37, emitido em 28/09/2026, validade de um ano), aceito pelo
+tenant `locafacil.`. Se ele é a credencial definitiva ou se virá um par
+client_credentials de parceiro, está perguntado à JCompany.
 **As credenciais nunca podem chegar ao bundle do cliente** — só existem nas
 serverless functions.
 
@@ -149,12 +157,30 @@ O front nunca chama a API OTA direto; fala só com `/api/*` através de
 `src/lib/api/reservation.js`, que normaliza o envelope `{success, data, errors}`
 e lança `ReservationApiError` com as mensagens em português vindas da API.
 
-**Estado atual dos dados**: a conta da Locafacil ainda não está provisionada na
-API. Os endpoints públicos respondem, mas **pelo tenant de demonstração da
-JCompany** — `get-locais` devolve uma loja que não é nossa e
-`get-personalizacao` devolve JCOMPANY RENT A CAR. Por isso `locations`,
-`minimum-notice` e `minimum-period` só consultam a API real **quando há
-credenciais**; sem elas usam as fixtures da Locafacil e marcam `demo: true`.
+**Estado atual dos dados** (28/09/2026): com `locafacil.` e o token, tudo vem
+real — loja 26015, 48 h de antecedência, 24 h de período mínimo, os sete grupos
+com diárias e as três proteções. `locations`, `minimum-notice` e
+`minimum-period` só consultam a API **quando há credencial**; sem ela usam as
+fixtures e marcam `demo: true`.
+
+Três diferenças do tenant real para o spec, todas tratadas no normalizador ou no
+payload:
+
+- `RateQualifier.CorpDiscountNmbr` vazio faz a busca responder
+  `validation.exists`. Não mandamos o campo.
+- O grupo vem em `Vehicle.Group_id` com espaço no fim (`"D "`), com `Code`
+  vazio; não há `VehType`/`VehMakeModel`; as portas vêm em `DoorQuantity`; o
+  câmbio vem em inglês; a descrição da proteção vem em `description` minúsculo.
+- A resposta não ecoa as datas em `VehRentalCore`: as diárias saem das datas do
+  pedido e da `Calculation.Quantity` da diária.
+
+**A confirmação ainda não fecha.** `confirmacao-reserva` responde "Grupo de
+veículo não disponível" com `VehPref.Code` `"D"` e `"D "`, logo depois de uma
+busca que devolveu o grupo. O formato esperado está perguntado à JCompany. A
+recusa fica registrada por `api/reservation-confirm.js` (sem dados do condutor)
+em Vercel → Logs.
+
+**Com credencial, reserva confirmada é reserva real no SGLOC da loja.**
 `api/locations.js` expõe um campo `code` derivado (`iata || String(id)`) — é ele,
 não `iata`, que o front usa como `LocationCode`.
 

@@ -62,6 +62,8 @@ const BROKEN_WORDS = [
   [/Padr\?o/g, 'Padrão'],
   [/padr\?o/g, 'padrão'],
   [/Ju\?/g, 'Juí'],
+  [/IGUA\?U/g, 'IGUAÇU'],
+  [/Igua\?u/g, 'Iguaçu'],
 ]
 
 // Repara mojibake e acento perdido. Aplicado em todo campo textual da API.
@@ -173,7 +175,8 @@ function normalizeCoverage(entry, days) {
     type: String(coverage.CoverageType ?? ''),
     code: fixText(coverage.Code),
     name: fixText(details.Value) || 'Proteção',
-    description: fixText(details.Description),
+    // O tenant da Locafácil manda `description` minúsculo; o spec diz `Description`.
+    description: fixText(details.Description ?? details.description),
     amountPerDay: perDay,
     amountTotal: total,
     includedInRate: toBool(charge.IncludedInRate),
@@ -204,21 +207,44 @@ function normalizeEquipment(entry, days) {
   }
 }
 
+// A loja real devolve o câmbio em inglês.
+const TRANSMISSAO = { automatic: 'Automático', manual: 'Manual' }
+
+function transmissaoDe(value) {
+  const texto = fixText(value)
+  return TRANSMISSAO[texto.toLowerCase()] ?? texto
+}
+
 function normalizeVehicle(vehicle = {}) {
   const vehType = vehicle.VehType ?? {}
   const vehClass = vehicle.VehClass ?? {}
   const makeModel = vehicle.VehMakeModel ?? {}
 
+  // A loja real manda `Code` vazio e o grupo em `Group_id`, com espaço no fim
+  // ("D "); também não manda VehType/VehMakeModel, e as portas vêm em
+  // `DoorQuantity`. Os dois formatos convivem aqui.
+  const groupCode = fixText(vehicle.Code) || fixText(vehicle.Group_id)
+  const doors = vehType.DoorCount ?? vehicle.DoorQuantity
+  const groupName = fixText(makeModel.Name) || fixText(vehicle.Description) || groupCode
+
+  // Quando a descrição é só o rótulo do grupo ("GRUPO - D"), repeti-la embaixo
+  // do título não diz nada; o motor diz.
+  let description = fixText(vehicle.Description)
+  if (description === groupName && vehicle.MotorLiters) {
+    const motor = fixText(vehicle.MotorType).toLowerCase()
+    description = `Motor ${fixText(vehicle.MotorLiters)}${motor ? ` ${motor}` : ''}`
+  }
+
   return {
-    groupCode: fixText(vehicle.Code),
-    groupName: fixText(makeModel.Name) || fixText(vehicle.Code),
-    description: fixText(vehicle.Description),
+    groupCode,
+    groupName,
+    description,
     category: fixText(vehType.VehicleCategory),
     size: fixText(vehClass.Size),
-    doors: vehType.DoorCount != null ? toNumber(vehType.DoorCount) : null,
+    doors: doors != null ? toNumber(doors) : null,
     passengers: toNumber(vehicle.PassengerQuantity),
     baggage: toNumber(vehicle.BaggageQuantity),
-    transmission: fixText(vehicle.TransmissionType),
+    transmission: transmissaoDe(vehicle.TransmissionType),
     airCondition: toBool(vehicle.AirConditionInd),
     codeContext: vehicle.CodeContext || 'ACRISS',
   }
@@ -278,7 +304,8 @@ function normalizeOffer(entry, index, days) {
     id: `${vehicle.groupCode || 'GRUPO'}-${index}`,
     ...vehicle,
     kmPolicy,
-    days,
+    // A resposta real não ecoa as datas; a quantidade da diária é a fonte fiel.
+    days: daily?.quantity || days,
     dailyRate: daily?.unitCharge ?? (days > 0 ? toNumber(totalCharge.RateTotalAmount) / days : 0),
     charges,
     coverages: asArray(info.PricedCoverages).map((c) => normalizeCoverage(c, days)).filter(Boolean),
@@ -297,12 +324,14 @@ function normalizeOffer(entry, index, days) {
 }
 
 // Achata os três níveis de aninhamento OTA numa lista de ofertas.
-export function normalizeAvailability(json) {
+// `pedido` são as datas da busca: a resposta real não as devolve em
+// VehRentalCore, e sem elas a conta de diárias cairia para 1.
+export function normalizeAvailability(json, pedido = {}) {
   const core = json?.data?.VehAvailRSCore ?? json?.VehAvailRSCore ?? {}
   const rentalCore = core.VehRentalCore ?? {}
 
-  const pickUpDateTime = rentalCore.PickUpDateTime ?? null
-  const returnDateTime = rentalCore.ReturnDateTime ?? null
+  const pickUpDateTime = rentalCore.PickUpDateTime ?? pedido.pickUpDateTime ?? null
+  const returnDateTime = rentalCore.ReturnDateTime ?? pedido.returnDateTime ?? null
   const days = diariasBetween(pickUpDateTime, returnDateTime)
 
   const offers = asArray(core.VehVendorAvails)

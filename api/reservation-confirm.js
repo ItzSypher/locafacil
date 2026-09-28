@@ -45,6 +45,18 @@ export default async function handler(req, res) {
   }
 
   if (!result.json?.success) {
+    // A API explica a recusa numa frase só; o registro guarda o que mandamos
+    // (sem dados do condutor) para cruzar com o log da JCompany. Aparece em
+    // Vercel → Logs e no terminal do `npm run dev`.
+    console.error('[reservation-confirm] recusada', JSON.stringify({
+      status: result.status,
+      resposta: result.json,
+      grupo: core.VehPrefs?.VehPref,
+      tarifa: core.RateQualifier,
+      periodo: core.VehRentalCore,
+      protecoes: payload.VehResRQInfo?.CoveragePrefs,
+      quoteId: payload.quoteId ?? null,
+    }))
     const errors = result.json?.errors?.length
       ? result.json.errors
       : ['Não foi possível confirmar a reserva. Tente novamente.']

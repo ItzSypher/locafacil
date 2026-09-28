@@ -68,7 +68,10 @@ export default async function handler(req, res) {
 
   return res.status(result.status).json({
     success: true,
-    data: normalizeAvailability(result.json),
+    data: normalizeAvailability(result.json, {
+      pickUpDateTime: core?.PickUpDateTime,
+      returnDateTime: core?.ReturnDateTime,
+    }),
     errors: [],
     demo: false,
   })

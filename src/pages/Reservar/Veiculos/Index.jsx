@@ -301,10 +301,13 @@ export default function ReservarVeiculos() {
                           <SpecIcon path={ICON_PASSENGERS} />
                           {offer.passengers} pessoas
                         </li>
-                        <li className="flex items-center gap-2">
-                          <SpecIcon path={ICON_BAGGAGE} />
-                          {offer.baggage} malas
-                        </li>
+                        {/* A loja real manda 0 quando o campo não foi preenchido. */}
+                        {offer.baggage > 0 && (
+                          <li className="flex items-center gap-2">
+                            <SpecIcon path={ICON_BAGGAGE} />
+                            {offer.baggage} malas
+                          </li>
+                        )}
                         <li className="flex items-center gap-2">
                           <SpecIcon path={ICON_TRANSMISSION} />
                           {offer.transmission}
@@ -385,7 +388,7 @@ function OfferDetails({ offer, days }) {
     ['Portas', offer.doors ? `${offer.doors}` : '—'],
     ['Transmissão', offer.transmission || '—'],
     ['Ar-condicionado', offer.airCondition ? 'Sim' : 'Não'],
-    ['Bagagem', `${offer.baggage} malas`],
+    ['Bagagem', offer.baggage > 0 ? `${offer.baggage} malas` : '—'],
     ['Quilometragem', offer.kmPolicy.label],
   ]
 

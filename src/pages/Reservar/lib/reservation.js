@@ -174,8 +174,10 @@ export function buildConfirmPayload({ search, offer, extras, driver, quoteId }) 
         ReturnLocation: { LocationCode: search.returnLocationCode, CodeContext: 'IATA' },
       },
       Customer: customer,
+      // A loja real recusa "D" e "D " com "Grupo de veículo não disponível"
+      // (28/09/2026). Formato certo pedido à JCompany.
       VehPrefs: { VehPref: { Code: offer.groupCode, CodeContext: 'SIPP' } },
-      RateQualifier: offer.rateQualifier ?? { RateCategory: '3', RateQualifier: 'PADRAO', CorpDiscountNmbr: '' },
+      RateQualifier: offer.rateQualifier ?? { RateCategory: '3', RateQualifier: 'PADRAO' },
     },
     VehResRQInfo: {
       CoveragePrefs: { CoveragePref: coveragePrefs },
@@ -199,7 +201,9 @@ export function buildAvailabilityPayload(search) {
         PickUpLocation: { LocationCode: search.pickupLocationCode, CodeContext: 'IATA' },
         ReturnLocation: { LocationCode: search.returnLocationCode, CodeContext: 'IATA' },
       },
-      RateQualifier: { RateCategory: '3', RateQualifier: 'PADRAO', CorpDiscountNmbr: '' },
+      // Sem CorpDiscountNmbr: vazio, a API da loja responde `validation.exists`.
+      // Só entra quando houver código de convênio de verdade.
+      RateQualifier: { RateCategory: '3', RateQualifier: 'PADRAO' },
     },
   }
 }

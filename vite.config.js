@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import { Buffer } from 'node:buffer'
 
@@ -9,6 +9,15 @@ function apiDevMiddleware() {
   return {
     name: 'ota-api-dev-middleware',
     configureServer(server) {
+      // Na Vercel as funções leem `process.env`; o Vite só carrega o `.env.local`
+      // para `import.meta.env`, e só as chaves VITE_. Sem isto, as credenciais da
+      // API nunca chegavam às funções locais e tudo caía nos dados de exemplo.
+      // Vai para o processo do servidor, não para o bundle.
+      const env = loadEnv(server.config.mode, server.config.root, '')
+      for (const [chave, valor] of Object.entries(env)) {
+        if (process.env[chave] === undefined) process.env[chave] = valor
+      }
+
       server.middlewares.use(async (req, res, next) => {
         if (!req.url.startsWith('/api/')) return next()
 
