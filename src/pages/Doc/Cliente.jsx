@@ -174,8 +174,8 @@ export default function DocCliente() {
       >
         <Aviso titulo="A regra que mais importa">
           <p>
-            A reserva só nasce quando o cliente clica em{' '}
-            <strong>“Confirmar reserva”</strong>, na tela de revisão. Antes disso
+            A pré-reserva só nasce quando o cliente clica em{' '}
+            <strong>“Confirmar pré-reserva”</strong>, na tela de revisão. Antes disso
             nada é enviado à loja — o cliente pode voltar, trocar de carro,
             corrigir o CPF, fechar a aba.
           </p>

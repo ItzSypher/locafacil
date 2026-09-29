@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Icon } from '@iconify-icon/react'
-import Logo from '../../assets/brand/logo-lockup-white.svg'
+import Logo from '../../assets/brand/logo-lockup-pingo.svg'
+import Raposa from '../../assets/images/fox-ti.webp'
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 16 },
@@ -100,11 +101,11 @@ export default function Footer() {
                 </svg>
                 (21) 96854-0185
               </a>
-              <a href="mailto:gerencia@locafacilaluguel.com" className="flex items-center gap-2 min-h-11 type-meta text-text-secondary hover:text-brand-accent transition-colors cursor-pointer -my-1">
+              <a href="mailto:reservas@locafacilaluguel.com" className="flex items-center gap-2 min-h-11 type-meta text-text-secondary hover:text-brand-accent transition-colors cursor-pointer -my-1">
                 <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
                 </svg>
-                gerencia@locafacilaluguel.com
+                reservas@locafacilaluguel.com
               </a>
             </div>
           </motion.div>
@@ -137,6 +138,18 @@ export default function Footer() {
               CNPJ 30.787.245/0001-71
             </p>
           </div>
+
+          {/* Assinatura de quem fez o site, combinada com a Locafácil na reunião
+              de 29/09/2026 — o site da Fox leva o link de volta. */}
+          <a
+            href="https://foxtisolutions.com.br"
+            target="_blank"
+            rel="noopener"
+            className="mt-6 mx-auto flex w-fit items-center gap-2 min-h-11 type-meta text-text-secondary hover:text-text-primary transition-colors cursor-pointer"
+          >
+            <img src={Raposa} alt="" width={96} height={96} loading="lazy" decoding="async" className="w-6 h-6 rounded-full" />
+            Feito com amor por Fox TI + Marketins
+          </a>
         </div>
       </div>
     </footer>

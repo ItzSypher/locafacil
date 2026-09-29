@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useDialog } from '../../hooks/useDialog'
-import Logo from '../../assets/brand/logo-lockup-white.svg'
+import Logo from '../../assets/brand/logo-lockup-pingo.svg'
 
 const NAV_LINKS = [
   { label: 'Início', href: '/' },

@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion'
 import ReasonList from '../../components/Global/ReasonList'
+import FormularioWhatsApp from '../../components/Global/FormularioWhatsApp'
+import { FORM_EMPRESAS } from '../../config/formularios'
 
 import Image1 from '../../assets/images/image-5.webp'
 import Image2 from '../../assets/images/image-6.webp'
@@ -53,15 +55,16 @@ export default function EmpresasContent() {
               <p className="type-body text-text-muted text-lg mb-8 max-w-[65ch]">
                 Com a Locafacil Business você pode expandir sua operação sem precisar se preocupar com custos de aquisição, gestão da frota e manutenção dos veículos. Oferecemos soluções completas em terceirização de frotas para você focar no que realmente importa — o crescimento da sua empresa.
               </p>
-              <a href="https://api.whatsapp.com/send?phone=5521993297697&text=Ol%C3%A1,%20Locafacil!%20Quero%20uma%20proposta%20para%20minha%20empresa." target="_blank" rel="noopener noreferrer">
-                <motion.button
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="bg-brand-accent hover:bg-brand-glow text-white font-semibold px-8 py-3.5 rounded-xl transition-colors duration-300 cursor-pointer"
-                >
-                  Solicitar Cotação Agora
-                </motion.button>
-              </a>
+              {/* Leva ao formulário: a cotação chega à loja já com o tamanho da
+                  frota e o prazo, em vez de um "Olá" que pede três perguntas. */}
+              <motion.a
+                href="#cotacao"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-block bg-brand-accent hover:bg-brand-glow text-white font-semibold px-8 py-3.5 rounded-xl transition-colors duration-300 cursor-pointer"
+              >
+                Solicitar Cotação Agora
+              </motion.a>
             </div>
             <motion.div
               whileHover={{ y: -8 }}
@@ -100,6 +103,25 @@ export default function EmpresasContent() {
               <img src={Image2} alt="Equipe Locafacil Business" loading="lazy" decoding="async" width={620} height={358} className="w-full rounded-2xl shadow-card" />
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* Cotação */}
+      <section id="cotacao" className="on-light py-16 sm:py-24 bg-surface-light scroll-mt-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.12 }}
+            variants={fadeInUp}
+            className="max-w-3xl mx-auto bg-white rounded-2xl p-6 sm:p-10 shadow-card"
+          >
+            <h2 className="type-headline text-text-dark text-balance">Peça sua cotação</h2>
+            <p className="type-body text-text-muted mt-3 mb-8 max-w-[60ch]">
+              Conte o tamanho da operação e a equipe comercial responde com uma proposta sob medida.
+            </p>
+            <FormularioWhatsApp {...FORM_EMPRESAS} />
+          </motion.div>
         </div>
       </section>
 

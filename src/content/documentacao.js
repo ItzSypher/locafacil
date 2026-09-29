@@ -156,7 +156,7 @@ export const DADOS_TESTE = [
   },
   {
     tela: 'Revisão',
-    campos: [['Termos', 'Marcar “Li e aceito”'], ['Botão', 'Confirmar reserva']],
+    campos: [['Termos', 'Marcar “Li e aceito”'], ['Botão', 'Confirmar pré-reserva']],
     dica: 'Nada vira reserva de verdade: o site ainda não está ligado ao sistema da loja.',
   },
 ]
@@ -545,7 +545,7 @@ Pode clicar à vontade: nada vira reserva de verdade.
 2. Veículo — Grupo D (Argo ou similar).
 3. Proteção — escolha a Básico e depois troque para a Completa. É aqui o upsell: em duas diárias a proteção vai de R$ 60,00 para R$ 190,00, e a tela mostra o total mudar na hora.
 4. Dados do condutor — Joana Ribeiro · (21) 91234-5678 · joana.teste@example.com · CPF 529.982.247-25 · Rua das Palmeiras, 240 - Centro, Apto 402 · Nova Iguaçu/RJ.
-5. Revisão — marque "Li e aceito" e clique em Confirmar reserva.
+5. Revisão — marque "Li e aceito" e clique em Confirmar pré-reserva.
 6. Confirmação — localizador, resumo e WhatsApp.
 
 Vale fazer uma vez no computador e uma no celular. Os mesmos dados estão nas páginas, com botão de copiar ao lado de cada campo.

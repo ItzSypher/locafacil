@@ -1,4 +1,4 @@
-import Simbolo from '../../assets/brand/symbol-white.svg'
+import Simbolo from '../../assets/brand/symbol-pingo.svg'
 
 /**
  * Rosto da assistente.
@@ -6,7 +6,8 @@ import Simbolo from '../../assets/brand/symbol-white.svg'
  * O avatar anterior era uma ilustração de banco de imagem: uma pessoa que não
  * trabalha aqui, sem nada da marca, e que a 32px virava um borrão colorido.
  * A Locagora não precisa fingir ser alguém — precisa ser reconhecível. Aqui
- * ela usa o símbolo da própria Locafacil sobre o azul do manual.
+ * ela usa o símbolo da própria Locafacil, corpo branco e pingo verde (versão
+ * aprovada em 29/09/2026), sobre o azul do manual.
  *
  * O azul de marca (`brand-brand`) e não o azul clicável (`brand-accent`):
  * pela Regra da Voz Única, quem carrega cor de ação é o botão, não o

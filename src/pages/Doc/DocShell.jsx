@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import logo from '../../assets/brand/logo-lockup-white.svg'
+import logo from '../../assets/brand/logo-lockup-pingo.svg'
 import { SITE } from '../../content/documentacao'
 import { useSemIndice } from './hooks'
 

@@ -22,7 +22,7 @@ function buildIcs({ confId, start, end, locationName }) {
     `DTSTAMP:${stamp(new Date().toISOString())}Z`,
     `DTSTART:${stamp(start)}`,
     `DTEND:${stamp(end)}`,
-    `SUMMARY:Retirada do veículo · Locafacil (reserva ${confId})`,
+    `SUMMARY:Retirada do veículo · Locafacil (pré-reserva ${confId})`,
     `LOCATION:${locationName ?? 'Locafacil'}`,
     'END:VEVENT',
     'END:VCALENDAR',
@@ -53,7 +53,7 @@ export default function ReservarConfirmacao() {
 
   const { confirmation: booking, confirmationTotals: totals, search: trip } = data
   const confId = booking.confId
-  const whatsappText = encodeURIComponent(`Olá, Locafacil! Minha reserva ${confId} foi confirmada e preciso de suporte.`)
+  const whatsappText = encodeURIComponent(`Olá, Locafacil! Fiz a pré-reserva ${confId} pelo site e preciso de suporte.`)
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-hero-gradient">
@@ -72,12 +72,12 @@ export default function ReservarConfirmacao() {
               </svg>
             </div>
 
-            <h1 className="type-title text-text-primary mb-2">Reserva confirmada</h1>
+            <h1 className="type-title text-text-primary mb-2">Pré-reserva enviada</h1>
             <p className="type-body text-text-secondary mb-8">
-              Guarde o número abaixo — é com ele que você consulta ou cancela a reserva.
+              Guarde o número abaixo: é com ele que nossa equipe vai falar com você.
             </p>
 
-            <p className="type-label text-text-secondary mb-2">Número da reserva</p>
+            <p className="type-label text-text-secondary mb-2">Número da pré-reserva</p>
             <p className="type-numeric type-display text-text-primary mb-8">{confId}</p>
 
             <div className="text-left bg-white/5 rounded-2xl p-6 space-y-3 mb-8">
@@ -102,9 +102,26 @@ export default function ReservarConfirmacao() {
               )}
             </div>
 
-            <p className="type-meta text-text-secondary mb-8">
-              O pagamento é feito na retirada, no balcão da loja. Leve CNH válida e um cartão em seu nome.
-            </p>
+            {/* Os dois contatos da pré-reserva, na mesma ordem do aviso da revisão. */}
+            <div className="text-left mb-8">
+              <h2 className="type-label text-text-secondary mb-3">Próximos passos</h2>
+              <ol className="space-y-3">
+                {[
+                  ['Em até 24 horas', 'nossa equipe entra em contato para confirmar a reserva e combinar o pagamento.'],
+                  ['Antes da retirada', 'mandamos uma mensagem no WhatsApp para lembrar o dia e o horário.'],
+                  ['No dia', 'leve CNH válida e um cartão em seu nome.'],
+                ].map(([quando, oque], i) => (
+                  <li key={quando} className="flex gap-3">
+                    <span className="type-label type-numeric w-7 h-7 shrink-0 rounded-full bg-white/10 text-text-primary flex items-center justify-center">
+                      {i + 1}
+                    </span>
+                    <p className="type-meta text-text-secondary">
+                      <strong className="text-text-primary">{quando}</strong>, {oque}
+                    </p>
+                  </li>
+                ))}
+              </ol>
+            </div>
 
             <div className="grid sm:grid-cols-2 gap-3">
               <a
@@ -142,19 +159,19 @@ export default function ReservarConfirmacao() {
             <p className="type-meta text-text-secondary mt-6">
               <a
                 href={`https://api.whatsapp.com/send?phone=5521968540185&text=${encodeURIComponent(
-                  `Olá! Vim pelo site e preciso falar sobre a reserva ${confId}.`,
+                  `Olá! Vim pelo site e preciso falar sobre a pré-reserva ${confId}.`,
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-text-primary underline underline-offset-4 hover:text-brand-glow transition-colors py-3 -my-1.5 inline-block"
               >
-                Alterar ou cancelar esta reserva
+                Alterar ou cancelar esta pré-reserva
               </a>
             </p>
 
             {data.demo && (
               <p className="type-meta text-text-secondary mt-6">
-                Reserva de demonstração: a integração com o sistema da loja ainda não foi liberada.
+                Pré-reserva de demonstração: a integração com o sistema da loja ainda não foi liberada.
               </p>
             )}
           </motion.div>

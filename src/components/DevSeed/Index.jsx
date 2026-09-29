@@ -50,10 +50,14 @@ function pickWindow(hours) {
   const noticeHours = hours?.antecedenciaMinimaHoras ?? 48
   const closed = new Set(hours?.diasFechados ?? [0])
 
-  const start = new Date()
-  start.setHours(start.getHours() + noticeHours + 2)
+  // A retirada é sempre às 09:00, então a antecedência conta a partir desse
+  // horário: "daqui a 50 h" às 16:00 vira 09:00 do mesmo dia, antes do limite,
+  // e a API real recusa.
+  const limite = Date.now() + noticeHours * 60 * 60 * 1000
+  const pickup = new Date()
+  pickup.setHours(9, 0, 0, 0)
+  while (pickup.getTime() < limite) pickup.setDate(pickup.getDate() + 1)
 
-  const pickup = new Date(start)
   for (let i = 0; i < 14; i += 1) {
     if (!closed.has(pickup.getDay()) && pickup.getDay() !== 6) break
     pickup.setDate(pickup.getDate() + 1)

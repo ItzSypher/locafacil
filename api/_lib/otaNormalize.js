@@ -342,7 +342,10 @@ export function normalizeAvailability(json, pedido = {}) {
   return {
     pickUpDateTime,
     returnDateTime,
-    days,
+    // A loja tem tolerância de horas: 73 h cobram 3 diárias, não as 4 da conta
+    // pelas datas. Vale o que a API cobra, para a lista e a etapa seguinte
+    // dizerem o mesmo número.
+    days: offers[0]?.days || days,
     offers,
     quoteId: json?.quoteId ?? null,
     expiresAt: json?.expiresAt ?? null,

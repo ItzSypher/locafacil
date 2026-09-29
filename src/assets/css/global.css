@@ -284,19 +284,6 @@ input[inputmode='numeric'] {
   }
 }
 
-/* ===== MÁSCARA DA MARCA =====
-   O logotipo entra como máscara para a cor subir por dentro das letras (ver
-   Preloader). A `url()` fica inline no componente porque é o Vite que resolve
-   o caminho do asset; o enquadramento mora aqui. */
-.brand-mask {
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
-}
-
 /* ===== FAIXA DE MONTADORAS =====
    Marquee em CSS puro. O Swiper resolvia isto com ~101 kB de JavaScript para
    um trilho que só anda em linha reta e nunca recebe clique.

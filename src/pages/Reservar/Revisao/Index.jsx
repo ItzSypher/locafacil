@@ -65,7 +65,7 @@ export default function ReservarRevisao() {
 
   const handleConfirm = async () => {
     if (!accepted) {
-      setError('É preciso aceitar os termos e as cláusulas contratuais para confirmar.')
+      setError('É preciso aceitar os termos e as cláusulas contratuais para enviar a pré-reserva.')
       return
     }
     if (sentRef.current) return
@@ -81,7 +81,7 @@ export default function ReservarRevisao() {
       navigate('/reservar/confirmacao')
     } catch (err) {
       sentRef.current = false
-      setError(err instanceof ReservationApiError ? err.errors.join(' ') : 'Não foi possível confirmar a reserva. Tente novamente.')
+      setError(err instanceof ReservationApiError ? err.errors.join(' ') : 'Não foi possível enviar a pré-reserva. Tente novamente.')
     } finally {
       setSubmitting(false)
     }
@@ -96,7 +96,7 @@ export default function ReservarRevisao() {
 
           <h1 className="type-title text-text-primary text-center mb-3">Revise e confirme</h1>
           <p className="type-meta text-text-secondary text-center mb-10">
-            Confira tudo antes de fechar. Nada é cobrado agora — o pagamento é feito na retirada.
+            Confira tudo antes de enviar. Nada é cobrado agora: o pagamento é combinado quando nossa equipe falar com você.
           </p>
 
           <div className="on-light bg-white rounded-2xl p-6 sm:p-8">
@@ -187,11 +187,13 @@ export default function ReservarRevisao() {
               {offer.noShowFee > 0 && (
                 <p className="type-meta text-text-muted mt-4">
                   Não comparecer para a retirada gera uma taxa de{' '}
-                  <span className="type-numeric">{BRL.format(offer.noShowFee)}</span>. Cancele pelo site se precisar desistir.
+                  <span className="type-numeric">{BRL.format(offer.noShowFee)}</span>. Se precisar desistir, avise a loja pelo WhatsApp.
                 </p>
               )}
             </Block>
           </div>
+
+          <AvisoPreReserva />
 
           <label className="flex items-start gap-3 mt-6 cursor-pointer py-3">
             <input
@@ -229,13 +231,40 @@ export default function ReservarRevisao() {
               disabled={submitting}
               className="flex-1 bg-brand-accent hover:bg-brand-glow text-white font-bold text-base py-4 rounded-xl transition-colors cursor-pointer disabled:opacity-60 disabled:cursor-default"
             >
-              {submitting ? 'Confirmando sua reserva' : 'Confirmar reserva'}
+              {submitting ? 'Enviando sua pré-reserva' : 'Confirmar pré-reserva'}
             </motion.button>
           </div>
         </div>
       </main>
       <Footer />
     </div>
+  )
+}
+
+/* O site faz pré-reserva, não reserva: a Locafácil aprova o cliente e combina
+   o pagamento no próprio sistema (reunião de 29/09/2026). São dois contatos
+   diferentes — um para confirmar, outro para lembrar — e o aviso fica antes
+   do botão para ninguém se assustar com a ligação depois. */
+function AvisoPreReserva() {
+  return (
+    <section className="mt-6 rounded-2xl border border-white/15 bg-white/5 p-5 sm:p-6" aria-labelledby="aviso-pre-reserva">
+      <h2 id="aviso-pre-reserva" className="type-subtitle text-text-primary">Isto é uma pré-reserva</h2>
+      <ol className="mt-4 space-y-3">
+        {[
+          ['Em até 24 horas', 'nossa equipe entra em contato pelo telefone ou WhatsApp que você informou, para confirmar a reserva e combinar o pagamento.'],
+          ['Antes da retirada', 'mandamos uma mensagem no WhatsApp para lembrar o dia e o horário.'],
+        ].map(([quando, oque], i) => (
+          <li key={quando} className="flex gap-3">
+            <span className="type-label type-numeric w-7 h-7 shrink-0 rounded-full bg-white/10 text-text-primary flex items-center justify-center">
+              {i + 1}
+            </span>
+            <p className="type-meta text-text-secondary">
+              <strong className="text-text-primary">{quando}</strong>, {oque}
+            </p>
+          </li>
+        ))}
+      </ol>
+    </section>
   )
 }
 

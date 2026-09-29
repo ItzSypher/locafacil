@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import logo from '../../assets/brand/logo-lockup-white.svg'
+import logo from '../../assets/brand/logo-lockup-pingo.svg'
 import { ROTEIRO } from '../../content/documentacao'
 import { useSemIndice } from './hooks'
 import { BotaoCopiar } from './Pecas'
