@@ -22,15 +22,17 @@ export const mockMinimumNotice = { antecedencia_minima: 48 }
 export const mockMinimumPeriod = { periodo_minimo_horas: 48, tempo_informacao: 'horas' }
 
 // Totais observados para 2 diárias; a diária é derivada.
+// A descrição repete o nome do grupo, como a loja real manda ("GRUPO - B"):
+// o modelo de referência e a foto moram em src/config/vehiclePhotos.js.
 const GRUPOS = [
-  { code: 'B', nome: 'GRUPO - B', total2d: 260, transmissao: 'Manual', porte: 'Compacto', categoria: 'Econômico', descricao: 'Econômico 1.0 com Ar e Direção - Kwid ou similar' },
-  { code: 'C', nome: 'GRUPO - C', total2d: 300, transmissao: 'Manual', porte: 'Compacto', categoria: 'Econômico', descricao: 'Econômico 1.0 com Ar e Direção - Mobi ou similar' },
-  { code: 'D', nome: 'GRUPO - D', total2d: 320, transmissao: 'Manual', porte: 'Compacto', categoria: 'Hatch', descricao: 'Hatch 1.0 completo - Argo ou similar' },
-  { code: 'DP', nome: 'GRUPO - D PLUS', total2d: 340, transmissao: 'Automático', porte: 'Compacto', categoria: 'Hatch', descricao: 'Hatch 1.0 turbo automático - Pulse ou similar' },
-  { code: 'E', nome: 'GRUPO - E', total2d: 380, transmissao: 'Manual', porte: 'Médio', categoria: 'Sedan', descricao: 'Sedan 1.3 completo - Cronos ou similar' },
-  { code: 'G', nome: 'GRUPO - G', total2d: 380, transmissao: 'Automático', porte: 'Médio', categoria: 'SUV', descricao: 'SUV compacto 1.0 turbo - Pulse ou similar' },
-  { code: 'GP', nome: 'GRUPO - G PLUS', total2d: 440, transmissao: 'Automático', porte: 'Médio', categoria: 'SUV', descricao: 'SUV compacto 1.0 turbo completo - Fastback ou similar' },
-]
+  { code: 'B', nome: 'GRUPO - B', total2d: 260, transmissao: 'Manual', porte: 'Compacto', categoria: 'Econômico' },
+  { code: 'C', nome: 'GRUPO - C', total2d: 300, transmissao: 'Manual', porte: 'Compacto', categoria: 'Hatch' },
+  { code: 'D', nome: 'GRUPO - D', total2d: 320, transmissao: 'Manual', porte: 'Compacto', categoria: 'Sedã' },
+  { code: 'DP', nome: 'GRUPO - D PLUS', total2d: 340, transmissao: 'Automático', porte: 'Compacto', categoria: 'Sedã' },
+  { code: 'E', nome: 'GRUPO - E', total2d: 380, transmissao: 'Manual', porte: 'Médio', categoria: 'Picape' },
+  { code: 'G', nome: 'GRUPO - G', total2d: 380, transmissao: 'Automático', porte: 'Médio', categoria: 'SUV' },
+  { code: 'GP', nome: 'GRUPO - G PLUS', total2d: 440, transmissao: 'Automático', porte: 'Médio', categoria: 'SUV' },
+].map((grupo) => ({ ...grupo, descricao: grupo.nome }))
 
 // Diárias/dia observadas no portal, com as descrições longas de "Ver mais".
 const COBERTURAS = [

@@ -6,6 +6,7 @@ import Footer from '../../../components/Footer/Index'
 import StepProgress from '../StepProgress'
 import TripSummary from '../TripSummary'
 import VehicleImage from '../VehicleImage'
+import { photoFor } from '../../../config/vehiclePhotos'
 import Dialog from '../Dialog'
 import Price from '../Price'
 import { useReservation } from '../../../context/ReservationContext'
@@ -287,14 +288,14 @@ export default function ReservarVeiculos() {
                 >
                   {visible.map((offer) => (
                     <motion.article key={offer.id} variants={fadeInUp} className="glass rounded-2xl p-6 flex flex-col">
-                      <p className="type-label text-text-secondary mb-2">{offer.category || 'Grupo'}</p>
+                      <p className="type-label text-text-secondary mb-2">{offer.category || photoFor(offer.groupCode)?.categoria || 'Grupo'}</p>
                       <h2 className="type-subtitle text-text-primary mb-4">{offer.groupName}</h2>
 
                       <div className="text-text-primary/80 mb-4 px-2">
                         <VehicleImage offer={offer} />
                       </div>
 
-                      <p className="type-meta text-text-secondary mb-5">{offer.description}</p>
+                      {offer.description && <p className="type-meta text-text-secondary mb-5">{offer.description}</p>}
 
                       <ul className="grid grid-cols-2 gap-x-3 gap-y-2.5 mb-6 type-meta text-text-secondary">
                         <li className="flex items-center gap-2">
@@ -394,7 +395,7 @@ function OfferDetails({ offer, days }) {
 
   return (
     <>
-      <p className="type-body text-text-muted text-sm mb-6">{offer.description}</p>
+      {offer.description && <p className="type-body text-text-muted text-sm mb-6">{offer.description}</p>}
 
       <h3 className="type-label text-text-muted mb-3">Características incluídas</h3>
       <dl className="grid grid-cols-2 gap-x-6 gap-y-2.5 mb-8">

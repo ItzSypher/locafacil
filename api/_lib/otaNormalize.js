@@ -62,6 +62,7 @@ const BROKEN_WORDS = [
   [/Padr\?o/g, 'Padrão'],
   [/padr\?o/g, 'padrão'],
   [/Ju\?/g, 'Juí'],
+  [/Sed\?(?!\p{L})/gu, 'Sedã'],
   [/IGUA\?U/g, 'IGUAÇU'],
   [/Igua\?u/g, 'Iguaçu'],
 ]
@@ -228,11 +229,11 @@ function normalizeVehicle(vehicle = {}) {
   const groupName = fixText(makeModel.Name) || fixText(vehicle.Description) || groupCode
 
   // Quando a descrição é só o rótulo do grupo ("GRUPO - D"), repeti-la embaixo
-  // do título não diz nada; o motor diz.
+  // do título não diz nada; o motor diz. Sem motor, fica vazia e a tela omite.
   let description = fixText(vehicle.Description)
-  if (description === groupName && vehicle.MotorLiters) {
+  if (description === groupName) {
     const motor = fixText(vehicle.MotorType).toLowerCase()
-    description = `Motor ${fixText(vehicle.MotorLiters)}${motor ? ` ${motor}` : ''}`
+    description = vehicle.MotorLiters ? `Motor ${fixText(vehicle.MotorLiters)}${motor ? ` ${motor}` : ''}` : ''
   }
 
   return {

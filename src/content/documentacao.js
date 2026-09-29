@@ -125,7 +125,7 @@ export const DADOS_TESTE = [
   },
   {
     tela: 'Veículo',
-    campos: [['Grupo', 'D — Argo ou similar']],
+    campos: [['Grupo', 'D — Onix Plus ou similar']],
     dica: 'Qualquer grupo funciona. O D fica no meio da tabela e deixa a diferença da proteção bem visível.',
   },
   {
@@ -230,13 +230,13 @@ export const ETAPAS = [
 ]
 
 export const GRUPOS = [
-  { codigo: 'B', perfil: 'Econômico 1.0 — Kwid ou similar', cambio: 'Manual', total: 260 },
-  { codigo: 'C', perfil: 'Econômico 1.0 — Mobi ou similar', cambio: 'Manual', total: 300 },
-  { codigo: 'D', perfil: 'Hatch 1.0 completo — Argo ou similar', cambio: 'Manual', total: 320 },
-  { codigo: 'D PLUS', perfil: 'Hatch 1.0 turbo — Pulse ou similar', cambio: 'Automático', total: 340 },
-  { codigo: 'E', perfil: 'Sedan 1.3 completo — Cronos ou similar', cambio: 'Manual', total: 380 },
-  { codigo: 'G', perfil: 'SUV compacto 1.0 turbo — Pulse ou similar', cambio: 'Automático', total: 380 },
-  { codigo: 'G PLUS', perfil: 'SUV 1.0 turbo completo — Fastback ou similar', cambio: 'Automático', total: 440 },
+  { codigo: 'B', perfil: 'Econômico — Mobi ou similar', cambio: 'Manual', total: 260 },
+  { codigo: 'C', perfil: 'Hatch — Polo ou similar', cambio: 'Manual', total: 300 },
+  { codigo: 'D', perfil: 'Sedã — Onix Plus ou similar', cambio: 'Manual', total: 320 },
+  { codigo: 'D PLUS', perfil: 'Sedã automático — Onix Plus ou similar', cambio: 'Automático', total: 340 },
+  { codigo: 'E', perfil: 'Picape — Strada ou similar', cambio: 'Manual', total: 380 },
+  { codigo: 'G', perfil: 'SUV automático — Basalt ou similar', cambio: 'Automático', total: 380 },
+  { codigo: 'G PLUS', perfil: 'SUV automático — Tera ou similar', cambio: 'Automático', total: 440 },
 ]
 
 export const PROTECOES = [
@@ -278,9 +278,9 @@ export const API_NAO_ENTREGA = [
     titulo: 'Foto do carro',
     responsavel: 'Resolvido por nós',
     linhas: [
-      ['O que falta', 'A reserva é por grupo, não por modelo, e o sistema não devolve imagem nenhuma.'],
-      ['Como resolvemos', 'Uma foto por grupo, do modelo que a própria descrição cita, com legenda avisando que é ilustrativa.'],
-      ['Observação', 'D PLUS e G usam a mesma foto de propósito: as duas descrições dizem “Pulse ou similar”.'],
+      ['O que falta', 'A reserva é por grupo, não por modelo. O sistema da loja devolve uma foto por grupo, mas pequena (366×192).'],
+      ['Como resolvemos', 'O site já usa as fotos que a Locafácil cadastrou no sistema, uma por grupo, com legenda avisando que é ilustrativa.'],
+      ['Observação', 'Boas no celular, moles numa tela grande. Com os originais em alta resolução, trocamos sem mexer em mais nada.'],
     ],
   },
   {
@@ -542,7 +542,7 @@ COMO TESTAR — DADOS FICTÍCIOS, TELA A TELA
 Pode clicar à vontade: nada vira reserva de verdade.
 
 1. Busca — Loja LOCAFACIL NOVA IGUAÇU, devolução no mesmo local. Retirada em 05/10/2026 às 09:00; devolução em 07/10/2026 às 09:00.
-2. Veículo — Grupo D (Argo ou similar).
+2. Veículo — Grupo D (Onix Plus ou similar).
 3. Proteção — escolha a Básico e depois troque para a Completa. É aqui o upsell: em duas diárias a proteção vai de R$ 60,00 para R$ 190,00, e a tela mostra o total mudar na hora.
 4. Dados do condutor — Joana Ribeiro · (21) 91234-5678 · joana.teste@example.com · CPF 529.982.247-25 · Rua das Palmeiras, 240 - Centro, Apto 402 · Nova Iguaçu/RJ.
 5. Revisão — marque "Li e aceito" e clique em Confirmar pré-reserva.

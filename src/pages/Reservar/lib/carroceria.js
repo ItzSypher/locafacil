@@ -42,7 +42,7 @@ const CARROCERIAS = {
    A ordem importa — "SUV compacto" tem as duas palavras, e SUV vence. */
 export function carroceriaDe(offer) {
   const texto = `${offer?.category ?? ''} ${offer?.description ?? ''} ${offer?.size ?? ''}`.toLowerCase()
-  if (/\bsuv\b|utilit|pick[- ]?up|crossover/.test(texto)) return CARROCERIAS.suv
+  if (/\bsuv\b|utilit|pick[- ]?up|picape|crossover/.test(texto)) return CARROCERIAS.suv
   if (/seda|sedã/.test(texto)) return CARROCERIAS.sedan
   return CARROCERIAS.hatch
 }

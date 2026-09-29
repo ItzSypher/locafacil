@@ -1,25 +1,22 @@
-/* Foto por grupo de veículo.
+/* Foto e modelo de referência por grupo de veículo.
  *
- * A API da JCompany não devolve imagem: a disponibilidade traz código ACRISS,
- * descrição e preço, e nada de mídia. Então a foto é nossa.
+ * As fotos são as que a Locafácil cadastrou no SGLOC: a disponibilidade da API
+ * traz `VehicleURLPhoto` em cada grupo, e o modelo sai do nome do arquivo que
+ * está lá (mobi_pronto.jpg, polo_pronto.jpg...). A descrição do grupo na API é
+ * só "GRUPO - B", então o modelo mora aqui, junto da foto que o representa.
  *
- * O grupo manda no arquivo, não o modelo. A API diz "Kwid ou similar" — a foto
- * mostra o Kwid porque é o representante daquele grupo, e a legenda avisa que
- * é ilustrativa. D PLUS e G usam a mesma foto de propósito: as duas descrições
- * dizem "Pulse ou similar", e inventar carro diferente para cada uma seria
- * prometer o que o contrato não separa.
+ * São PROVISÓRIAS (reunião de 29/09/2026): no SGLOC elas têm 366×192, boas no
+ * celular e moles numa tela grande. Ficam sobre fundo branco, como chegaram —
+ * recortar carro branco de fundo branco num JPEG desse tamanho come a lataria
+ * e deixa franja no card escuro. Quando o Marcelo mandar os originais em alta:
  *
- * PARA TROCAR UMA FOTO
- *
- *   1. PNG com fundo branco ou transparente, carro em três quartos, em
- *      `public/__tmp-veiculos/<CODIGO>.png` (B, C, D, DP, E, G, GP).
+ *   1. PNG em `public/__tmp-veiculos/<CODIGO>.png` (B, C, D, DP, E, G, GP).
  *   2. `node scripts/converter-veiculos.mjs` — recorta a moldura vazia, apaga
  *      o fundo e normaliza tudo em 800×600 sobre transparente.
- *   3. Apague `public/__tmp-veiculos/`.
+ *   3. Apague `public/__tmp-veiculos/` e tire o `fundo: 'branco'` daqui.
  *
- * A normalização não é capricho: as fotos chegaram em 623×401, 667×374 e
- * 1100×628. Postas direto no card, cada uma ocuparia uma altura e a grade
- * dançaria de linha em linha.
+ * O grupo manda no arquivo, não o modelo: a reserva é por grupo, e a legenda
+ * avisa que a imagem é ilustrativa.
  */
 
 import grupoB from '../assets/veiculos/grupo-b.webp'
@@ -30,18 +27,19 @@ import grupoE from '../assets/veiculos/grupo-e.webp'
 import grupoG from '../assets/veiculos/grupo-g.webp'
 import grupoGP from '../assets/veiculos/grupo-gp.webp'
 
-/** Código do grupo (ACRISS) → foto. Grupo fora daqui cai na ilustração. */
+/** Código do grupo (ACRISS) → foto, modelo e categoria. A categoria cobre a
+    loja real, que não manda VehType. Grupo fora daqui cai na ilustração. */
 export const VEHICLE_PHOTOS = {
-  B: grupoB,   // Kwid ou similar
-  C: grupoC,   // Mobi ou similar
-  D: grupoD,   // Argo ou similar
-  DP: grupoDP, // Pulse ou similar
-  E: grupoE,   // Cronos ou similar
-  G: grupoG,   // Pulse ou similar
-  GP: grupoGP, // Fastback ou similar
+  B: { foto: grupoB, modelo: 'Mobi', categoria: 'Econômico', fundo: 'branco' },
+  C: { foto: grupoC, modelo: 'Polo', categoria: 'Hatch', fundo: 'branco' },
+  D: { foto: grupoD, modelo: 'Onix Plus', categoria: 'Sedã', fundo: 'branco' },
+  DP: { foto: grupoDP, modelo: 'Onix Plus', categoria: 'Sedã', fundo: 'branco' },
+  E: { foto: grupoE, modelo: 'Strada', categoria: 'Picape', fundo: 'branco' },
+  G: { foto: grupoG, modelo: 'Basalt', categoria: 'SUV', fundo: 'branco' },
+  GP: { foto: grupoGP, modelo: 'Tera', categoria: 'SUV', fundo: 'branco' },
 }
 
 export function photoFor(groupCode) {
   if (!groupCode) return null
-  return VEHICLE_PHOTOS[String(groupCode).toUpperCase()] ?? null
+  return VEHICLE_PHOTOS[String(groupCode).trim().toUpperCase()] ?? null
 }

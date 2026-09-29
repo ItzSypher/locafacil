@@ -107,7 +107,7 @@ export default function ReservarRevisao() {
                 </div>
                 <div className="min-w-0">
                   <p className="type-subtitle text-text-dark">{offer.groupName}</p>
-                  <p className="type-meta text-text-muted mt-1">{offer.description}</p>
+                  {offer.description && <p className="type-meta text-text-muted mt-1">{offer.description}</p>}
                   <p className="type-meta text-text-muted mt-1">
                     {offer.transmission} · {offer.passengers} pessoas · {offer.kmPolicy.label}
                   </p>
