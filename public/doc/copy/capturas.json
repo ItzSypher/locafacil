@@ -1,0 +1,266 @@
+{
+  "home-01-menu": {
+    "desktop": "/doc/copy/home-01-menu-desktop.jpg",
+    "celular": "/doc/copy/home-01-menu-celular.jpg",
+    "larguraDesktop": 1440,
+    "alturaDesktop": 80,
+    "larguraCelular": 780,
+    "alturaCelular": 1688
+  },
+  "home-02-topo": {
+    "desktop": "/doc/copy/home-02-topo-desktop.jpg",
+    "celular": "/doc/copy/home-02-topo-celular.jpg",
+    "larguraDesktop": 1440,
+    "alturaDesktop": 1332,
+    "larguraCelular": 780,
+    "alturaCelular": 3552
+  },
+  "home-03-beneficios": {
+    "desktop": "/doc/copy/home-03-beneficios-desktop.jpg",
+    "celular": "/doc/copy/home-03-beneficios-celular.jpg",
+    "larguraDesktop": 1440,
+    "alturaDesktop": 657,
+    "larguraCelular": 780,
+    "alturaCelular": 2564
+  },
+  "home-04-montadoras": {
+    "desktop": "/doc/copy/home-04-montadoras-desktop.jpg",
+    "celular": "/doc/copy/home-04-montadoras-celular.jpg",
+    "larguraDesktop": 1440,
+    "alturaDesktop": 306,
+    "larguraCelular": 780,
+    "alturaCelular": 552
+  },
+  "home-05-solucoes": {
+    "desktop": "/doc/copy/home-05-solucoes-desktop.jpg",
+    "celular": "/doc/copy/home-05-solucoes-celular.jpg",
+    "larguraDesktop": 1440,
+    "alturaDesktop": 1010,
+    "larguraCelular": 780,
+    "alturaCelular": 2830
+  },
+  "home-06-por-que": {
+    "desktop": "/doc/copy/home-06-por-que-desktop.jpg",
+    "celular": "/doc/copy/home-06-por-que-celular.jpg",
+    "larguraDesktop": 1440,
+    "alturaDesktop": 814,
+    "larguraCelular": 780,
+    "alturaCelular": 2292
+  },
+  "home-07-chamada-final": {
+    "desktop": "/doc/copy/home-07-chamada-final-desktop.jpg",
+    "celular": "/doc/copy/home-07-chamada-final-celular.jpg",
+    "larguraDesktop": 1440,
+    "alturaDesktop": 557,
+    "larguraCelular": 780,
+    "alturaCelular": 1286
+  },
+  "home-08-rodape": {
+    "desktop": "/doc/copy/home-08-rodape-desktop.jpg",
+    "celular": "/doc/copy/home-08-rodape-celular.jpg",
+    "larguraDesktop": 1440,
+    "alturaDesktop": 495,
+    "larguraCelular": 780,
+    "alturaCelular": 2240
+  },
+  "home-09-popup-desconto": {
+    "desktop": "/doc/copy/home-09-popup-desconto-desktop.jpg",
+    "celular": "/doc/copy/home-09-popup-desconto-celular.jpg",
+    "larguraDesktop": 448,
+    "alturaDesktop": 464,
+    "larguraCelular": 716,
+    "alturaCelular": 868
+  },
+  "home-10-atendimento": {
+    "desktop": "/doc/copy/home-10-atendimento-desktop.jpg",
+    "celular": "/doc/copy/home-10-atendimento-celular.jpg",
+    "larguraDesktop": 360,
+    "alturaDesktop": 681,
+    "larguraCelular": 600,
+    "alturaCelular": 1682,
+    "extras": [
+      {
+        "estado": "balao",
+        "desktop": "/doc/copy/home-10-atendimento-balao-desktop.jpg",
+        "larguraDesktop": 250,
+        "alturaDesktop": 231,
+        "celular": "/doc/copy/home-10-atendimento-balao-celular.jpg",
+        "larguraCelular": 500,
+        "alturaCelular": 462
+      }
+    ]
+  },
+  "home-11-seo": {
+    "desktop": null,
+    "celular": null,
+    "larguraDesktop": null,
+    "alturaDesktop": null,
+    "larguraCelular": null,
+    "alturaCelular": null
+  },
+  "reserva-01-busca": {
+    "desktop": "/doc/copy/reserva-01-busca-desktop.jpg",
+    "celular": "/doc/copy/reserva-01-busca-celular.jpg",
+    "larguraDesktop": 1440,
+    "alturaDesktop": 900,
+    "larguraCelular": 780,
+    "alturaCelular": 1918
+  },
+  "reserva-02-veiculos": {
+    "desktop": "/doc/copy/reserva-02-veiculos-desktop.jpg",
+    "celular": "/doc/copy/reserva-02-veiculos-celular.jpg",
+    "larguraDesktop": 1440,
+    "alturaDesktop": 2260,
+    "larguraCelular": 780,
+    "alturaCelular": 10648
+  },
+  "reserva-03-veiculos-detalhes": {
+    "desktop": "/doc/copy/reserva-03-veiculos-detalhes-desktop.jpg",
+    "celular": "/doc/copy/reserva-03-veiculos-detalhes-celular.jpg",
+    "larguraDesktop": 512,
+    "alturaDesktop": 690,
+    "larguraCelular": 780,
+    "alturaCelular": 1456
+  },
+  "reserva-04-veiculos-avisos": {
+    "desktop": "/doc/copy/reserva-04-veiculos-avisos-desktop.jpg",
+    "celular": "/doc/copy/reserva-04-veiculos-avisos-celular.jpg",
+    "larguraDesktop": 1440,
+    "alturaDesktop": 833,
+    "larguraCelular": 780,
+    "alturaCelular": 1808,
+    "extras": [
+      {
+        "estado": "expirado",
+        "desktop": "/doc/copy/reserva-04-veiculos-avisos-expirado-desktop.jpg",
+        "larguraDesktop": 1440,
+        "alturaDesktop": 853,
+        "celular": "/doc/copy/reserva-04-veiculos-avisos-expirado-celular.jpg",
+        "larguraCelular": 780,
+        "alturaCelular": 1808
+      },
+      {
+        "estado": "vazio",
+        "desktop": "/doc/copy/reserva-04-veiculos-avisos-vazio-desktop.jpg",
+        "larguraDesktop": 1440,
+        "alturaDesktop": 833,
+        "celular": "/doc/copy/reserva-04-veiculos-avisos-vazio-celular.jpg",
+        "larguraCelular": 780,
+        "alturaCelular": 1808
+      },
+      {
+        "estado": "filtros",
+        "desktop": "/doc/copy/reserva-04-veiculos-avisos-filtros-desktop.jpg",
+        "larguraDesktop": 1440,
+        "alturaDesktop": 974,
+        "celular": "/doc/copy/reserva-04-veiculos-avisos-filtros-celular.jpg",
+        "larguraCelular": 780,
+        "alturaCelular": 2204
+      }
+    ]
+  },
+  "reserva-05-extras": {
+    "desktop": "/doc/copy/reserva-05-extras-desktop.jpg",
+    "celular": "/doc/copy/reserva-05-extras-celular.jpg",
+    "larguraDesktop": 1440,
+    "alturaDesktop": 1973,
+    "larguraCelular": 780,
+    "alturaCelular": 4886
+  },
+  "reserva-06-dados": {
+    "desktop": "/doc/copy/reserva-06-dados-desktop.jpg",
+    "celular": "/doc/copy/reserva-06-dados-celular.jpg",
+    "larguraDesktop": 1440,
+    "alturaDesktop": 1452,
+    "larguraCelular": 780,
+    "alturaCelular": 3494
+  },
+  "reserva-07-revisao": {
+    "desktop": "/doc/copy/reserva-07-revisao-desktop.jpg",
+    "celular": "/doc/copy/reserva-07-revisao-celular.jpg",
+    "larguraDesktop": 1440,
+    "alturaDesktop": 1711,
+    "larguraCelular": 780,
+    "alturaCelular": 3788
+  },
+  "reserva-08-confirmacao": {
+    "desktop": "/doc/copy/reserva-08-confirmacao-desktop.jpg",
+    "celular": "/doc/copy/reserva-08-confirmacao-celular.jpg",
+    "larguraDesktop": 1440,
+    "alturaDesktop": 1167,
+    "larguraCelular": 780,
+    "alturaCelular": 2662
+  },
+  "empresas-contato-01-empresas-topo": {
+    "desktop": "/doc/copy/empresas-contato-01-empresas-topo-desktop.jpg",
+    "celular": "/doc/copy/empresas-contato-01-empresas-topo-celular.jpg",
+    "larguraDesktop": 1440,
+    "alturaDesktop": 616,
+    "larguraCelular": 780,
+    "alturaCelular": 1448
+  },
+  "empresas-contato-02-empresas-crescer": {
+    "desktop": "/doc/copy/empresas-contato-02-empresas-crescer-desktop.jpg",
+    "celular": "/doc/copy/empresas-contato-02-empresas-crescer-celular.jpg",
+    "larguraDesktop": 1440,
+    "alturaDesktop": 542,
+    "larguraCelular": 780,
+    "alturaCelular": 1554
+  },
+  "empresas-contato-03-empresas-motivos": {
+    "desktop": "/doc/copy/empresas-contato-03-empresas-motivos-desktop.jpg",
+    "celular": "/doc/copy/empresas-contato-03-empresas-motivos-celular.jpg",
+    "larguraDesktop": 1440,
+    "alturaDesktop": 1031,
+    "larguraCelular": 780,
+    "alturaCelular": 3084
+  },
+  "empresas-contato-04-empresas-cotacao": {
+    "desktop": "/doc/copy/empresas-contato-04-empresas-cotacao-desktop.jpg",
+    "celular": "/doc/copy/empresas-contato-04-empresas-cotacao-celular.jpg",
+    "larguraDesktop": 1440,
+    "alturaDesktop": 921,
+    "larguraCelular": 780,
+    "alturaCelular": 2212
+  },
+  "empresas-contato-05-contato-topo": {
+    "desktop": "/doc/copy/empresas-contato-05-contato-topo-desktop.jpg",
+    "celular": "/doc/copy/empresas-contato-05-contato-topo-celular.jpg",
+    "larguraDesktop": 1440,
+    "alturaDesktop": 883,
+    "larguraCelular": 780,
+    "alturaCelular": 1712
+  },
+  "empresas-contato-06-contato-equipe": {
+    "desktop": "/doc/copy/empresas-contato-06-contato-equipe-desktop.jpg",
+    "celular": "/doc/copy/empresas-contato-06-contato-equipe-celular.jpg",
+    "larguraDesktop": 1216,
+    "alturaDesktop": 638,
+    "larguraCelular": 716,
+    "alturaCelular": 1854
+  },
+  "empresas-contato-07-contato-formulario": {
+    "desktop": "/doc/copy/empresas-contato-07-contato-formulario-desktop.jpg",
+    "celular": "/doc/copy/empresas-contato-07-contato-formulario-celular.jpg",
+    "larguraDesktop": 1216,
+    "alturaDesktop": 699,
+    "larguraCelular": 716,
+    "alturaCelular": 1958
+  },
+  "empresas-contato-08-contato-mapa": {
+    "desktop": "/doc/copy/empresas-contato-08-contato-mapa-desktop.jpg",
+    "celular": "/doc/copy/empresas-contato-08-contato-mapa-celular.jpg",
+    "larguraDesktop": 1216,
+    "alturaDesktop": 551,
+    "larguraCelular": 716,
+    "alturaCelular": 844
+  },
+  "empresas-contato-09-whatsapp": {
+    "desktop": null,
+    "celular": null,
+    "larguraDesktop": null,
+    "alturaDesktop": null,
+    "larguraCelular": null,
+    "alturaCelular": null
+  }
+}
