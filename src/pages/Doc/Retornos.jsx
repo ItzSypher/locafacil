@@ -5,6 +5,7 @@ import { ROTEIRO } from '../../content/documentacao'
 import { useSemIndice } from './hooks'
 import { BotaoCopiar } from './Pecas'
 import { listarRetornos, apagarRetorno } from './retornos'
+import RetornosCopy from './RetornosCopy'
 
 const CHAVE_SENHA = 'locafacil_doc_senha'
 
@@ -218,16 +219,22 @@ export default function DocRetornos() {
     if (senhaDaSessao) carregar(senhaDaSessao)
   }, [senhaDaSessao, carregar])
 
+  // A lista do servidor traz também a revisão de copy (`publico: 'copy'`),
+  // que tem forma própria e seção própria mais abaixo. Daqui para cima, só a
+  // homologação, como sempre foi.
+  const homologacao = useMemo(() => (retornos ?? []).filter((r) => r.publico !== 'copy'), [retornos])
+  const revisoesCopy = useMemo(() => (retornos ?? []).filter((r) => r.publico === 'copy'), [retornos])
+
   const contagem = useMemo(() => {
-    const lista = retornos ?? []
+    const lista = homologacao
     return {
       todos: lista.length,
       cliente: lista.filter((r) => r.publico === 'cliente').length,
       marketing: lista.filter((r) => r.publico === 'marketing').length,
     }
-  }, [retornos])
+  }, [homologacao])
 
-  const visiveis = (retornos ?? []).filter((r) => filtro === 'todos' || r.publico === filtro)
+  const visiveis = homologacao.filter((r) => filtro === 'todos' || r.publico === filtro)
 
   const apagar = async (retorno) => {
     try {
@@ -261,7 +268,7 @@ export default function DocRetornos() {
           <p className="type-body text-text-secondary mt-3 max-w-2xl">
             O que cada pessoa marcou e escreveu nas páginas do cliente e do
             marketing, salvo automaticamente — inclusive de quem não mandou pelo
-            WhatsApp.
+            WhatsApp. Mais abaixo, a revisão de copy do site.
           </p>
         </div>
       </header>
@@ -337,6 +344,12 @@ export default function DocRetornos() {
                   Atualizar
                 </button>
                 {visiveis.length > 0 && <BotaoCopiar texto={textoDe(visiveis)} rotulo="Copiar tudo" />}
+                <a
+                  href="#revisao-copy"
+                  className="min-h-11 inline-flex items-center px-4 type-label text-brand-accent hover:text-brand-glow transition-colors cursor-pointer"
+                >
+                  Revisão de copy <span className="type-numeric ml-1">{revisoesCopy.length}</span>
+                </a>
                 <button
                   type="button"
                   onClick={sair}
@@ -370,6 +383,13 @@ export default function DocRetornos() {
                 ))}
               </div>
             )}
+
+            <RetornosCopy
+              retornos={revisoesCopy}
+              senha={senha}
+              quando={quando}
+              acoesDe={(retorno) => <Apagar aoConfirmar={() => apagar(retorno)} />}
+            />
           </>
         )}
       </main>

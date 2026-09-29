@@ -1,0 +1,2886 @@
+{
+  "versao": 1,
+  "geradoEm": "2026-09-29",
+  "decks": [
+    {
+      "id": "home",
+      "numero": 1,
+      "titulo": "Home, menu e rodapé",
+      "pptx": "Locafacil-Copy-1-Home.pptx",
+      "dobras": [
+        {
+          "id": "home-01-menu",
+          "titulo": "Menu do topo (computador e celular)",
+          "rota": "/",
+          "seletor": "header",
+          "estado": null,
+          "obs": "No celular (largura menor que 1024px) os links ficam numa camada que abre pelo botão 'Abrir menu' (#menu-principal, fora do header).",
+          "textos": [
+            {
+              "id": "home-01-menu-inicio",
+              "tipo": "link",
+              "texto": "Início",
+              "arquivo": "src/components/Topbar/Index.jsx",
+              "linha": 9,
+              "obs": "Vale para o menu do computador e o do celular."
+            },
+            {
+              "id": "home-01-menu-reservar",
+              "tipo": "link",
+              "texto": "Reservar",
+              "arquivo": "src/components/Topbar/Index.jsx",
+              "linha": 10
+            },
+            {
+              "id": "home-01-menu-para-empresas",
+              "tipo": "link",
+              "texto": "Para Empresas",
+              "arquivo": "src/components/Topbar/Index.jsx",
+              "linha": 11
+            },
+            {
+              "id": "home-01-menu-contato",
+              "tipo": "link",
+              "texto": "Contato",
+              "arquivo": "src/components/Topbar/Index.jsx",
+              "linha": 12
+            },
+            {
+              "id": "home-01-menu-botao",
+              "tipo": "botao",
+              "texto": "Garanta seu veículo",
+              "arquivo": "src/components/Topbar/Index.jsx",
+              "linha": 113,
+              "obs": "Botão do menu no computador. A linha do menu já está no limite em telas de 1024px: manter perto de 20 caracteres."
+            },
+            {
+              "id": "home-01-menu-botao-2",
+              "tipo": "botao",
+              "texto": "Garanta seu veículo",
+              "arquivo": "src/components/Topbar/Index.jsx",
+              "linha": 230,
+              "obs": "Botão no fim do menu do celular."
+            },
+            {
+              "id": "home-01-menu-whatsapp",
+              "tipo": "mensagem-whatsapp",
+              "texto": "Olá, Locafacil! Quero alugar um veículo.",
+              "arquivo": "src/components/Topbar/Index.jsx",
+              "linha": 15,
+              "obs": "Texto que já vem escrito no WhatsApp ao tocar em 'Garanta seu veículo' (os dois botões)."
+            }
+          ]
+        },
+        {
+          "id": "home-02-topo",
+          "titulo": "Topo da página (primeira tela)",
+          "rota": "/",
+          "seletor": "#hero",
+          "estado": null,
+          "textos": [
+            {
+              "id": "home-02-topo-titulo",
+              "tipo": "titulo",
+              "texto": "Sua Liberdade\nSobre Rodas.",
+              "arquivo": "src/pages/Home/Header.jsx",
+              "linha": 65,
+              "obs": "Título principal, em duas linhas. O formulário de busca logo abaixo é revisado na apresentação 2 (Reserva), lâmina 'Busca'."
+            },
+            {
+              "id": "home-02-topo-subtitulo",
+              "tipo": "subtitulo",
+              "texto": "Alugue carros sem caução e com o dobro da franquia. Retirada em Nova Iguaçu, contrato na hora.",
+              "arquivo": "src/pages/Home/Header.jsx",
+              "linha": 73,
+              "obs": "'sem caução' e 'dobro da franquia' aparecem em destaque."
+            },
+            {
+              "id": "home-02-topo-botao",
+              "tipo": "botao",
+              "texto": "Garantir meu carro agora",
+              "arquivo": "src/pages/Home/Header.jsx",
+              "linha": 86,
+              "obs": "Não quebra linha: até ~30 caracteres para caber no celular."
+            },
+            {
+              "id": "home-02-topo-whatsapp",
+              "tipo": "mensagem-whatsapp",
+              "texto": "Olá, Locafacil! Quero garantir meu veículo agora!",
+              "arquivo": "src/pages/Home/Header.jsx",
+              "linha": 81,
+              "obs": "Texto que já vem escrito no WhatsApp ao tocar em 'Garantir meu carro agora'."
+            },
+            {
+              "id": "home-02-topo-botao-beneficios",
+              "tipo": "botao",
+              "texto": "Descubra os benefícios",
+              "arquivo": "src/pages/Home/Header.jsx",
+              "linha": 92,
+              "obs": "Desce a página até os benefícios."
+            },
+            {
+              "id": "home-02-topo-selo",
+              "tipo": "selo",
+              "texto": "Sem caução",
+              "arquivo": "src/pages/Home/Header.jsx",
+              "linha": 104,
+              "obs": "Três selos com visto, embaixo dos botões."
+            },
+            {
+              "id": "home-02-topo-selo-2",
+              "tipo": "selo",
+              "texto": "Dobro da franquia",
+              "arquivo": "src/pages/Home/Header.jsx",
+              "linha": 104
+            },
+            {
+              "id": "home-02-topo-selo-3",
+              "tipo": "selo",
+              "texto": "Retirada em Nova Iguaçu",
+              "arquivo": "src/pages/Home/Header.jsx",
+              "linha": 104
+            }
+          ]
+        },
+        {
+          "id": "home-03-beneficios",
+          "titulo": "Benefícios",
+          "rota": "/",
+          "seletor": "#beneficios",
+          "estado": null,
+          "textos": [
+            {
+              "id": "home-03-beneficios-titulo",
+              "tipo": "titulo",
+              "texto": "Aluguel de carro não é tudo igual.",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 157
+            },
+            {
+              "id": "home-03-beneficios-subtitulo",
+              "tipo": "subtitulo",
+              "texto": "Quatro condições que estão no contrato, não só no anúncio.",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 160
+            },
+            {
+              "id": "home-03-beneficios-caucao-titulo",
+              "tipo": "subtitulo",
+              "texto": "0% de caução",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 41,
+              "obs": "Cartão 1 de 4."
+            },
+            {
+              "id": "home-03-beneficios-caucao-texto",
+              "tipo": "paragrafo",
+              "texto": "Por que prender seu limite de cartão se o carro já está pago? Saia dirigindo sem depositar um centavo de garantia.",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 42
+            },
+            {
+              "id": "home-03-beneficios-protecao-titulo",
+              "tipo": "subtitulo",
+              "texto": "Proteção do seu jeito",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 53,
+              "obs": "Cartão 2 de 4. Substituiu \"Seguro total sem pegadinhas\" (reunião de 29/09/2026)."
+            },
+            {
+              "id": "home-03-beneficios-protecao-texto",
+              "tipo": "paragrafo",
+              "texto": "Básica, Padrão ou Completa: você escolhe na reserva e vê o valor antes de confirmar.",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 54
+            },
+            {
+              "id": "home-03-beneficios-km-titulo",
+              "tipo": "subtitulo",
+              "texto": "Dobro de quilometragem",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 63,
+              "obs": "Cartão 3 de 4."
+            },
+            {
+              "id": "home-03-beneficios-km-texto",
+              "tipo": "paragrafo",
+              "texto": "Não fique contando quilômetros de olho no painel. Nossos planos entregam o dobro de franquia. Rode livre e sem surpresa na fatura.",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 64
+            },
+            {
+              "id": "home-03-beneficios-cancele-titulo",
+              "tipo": "subtitulo",
+              "texto": "Cancele quando quiser",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 72,
+              "obs": "Cartão 4 de 4."
+            },
+            {
+              "id": "home-03-beneficios-cancele-texto",
+              "tipo": "paragrafo",
+              "texto": "Seu carro não pode ser uma prisão. Planos de assinatura sem período mínimo absurdo. Não quer mais? É só devolver.",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 73
+            }
+          ]
+        },
+        {
+          "id": "home-04-montadoras",
+          "titulo": "Montadoras da frota",
+          "rota": "/",
+          "seletor": "main > section:nth-of-type(2)",
+          "estado": null,
+          "textos": [
+            {
+              "id": "home-04-montadoras-titulo",
+              "tipo": "titulo",
+              "texto": "Montadoras que fazem parte da nossa frota",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 202,
+              "obs": "Embaixo, faixa com os logotipos (Nissan, Hyundai, Chevrolet, Renault, Ford) correndo sozinha."
+            }
+          ]
+        },
+        {
+          "id": "home-05-solucoes",
+          "titulo": "Soluções: assinatura e empresas",
+          "rota": "/",
+          "seletor": "main > section:nth-of-type(3)",
+          "estado": null,
+          "textos": [
+            {
+              "id": "home-05-solucoes-titulo",
+              "tipo": "titulo",
+              "texto": "Soluções que movem você.",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 254
+            },
+            {
+              "id": "home-05-solucoes-assinatura-titulo",
+              "tipo": "subtitulo",
+              "texto": "Assinatura Locafacil Express",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 92,
+              "obs": "Primeiro bloco."
+            },
+            {
+              "id": "home-05-solucoes-assinatura-chamada",
+              "tipo": "legenda",
+              "texto": "Esqueça tudo o que você sabe sobre ter carro.",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 93
+            },
+            {
+              "id": "home-05-solucoes-assinatura-texto",
+              "tipo": "paragrafo",
+              "texto": "Esqueça oficina, IPVA, seguro caro e depreciação. Você assina um carro zero, pega a chave e o resto do trabalho é nosso. O caminho mais rápido e inteligente para andar de carro novo hoje.",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 94
+            },
+            {
+              "id": "home-05-solucoes-assinatura-botao",
+              "tipo": "botao",
+              "texto": "Quero saber da assinatura",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 95
+            },
+            {
+              "id": "home-05-solucoes-assinatura-whatsapp",
+              "tipo": "mensagem-whatsapp",
+              "texto": "Olá, Locafacil! Tenho interesse na Assinatura.",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 96,
+              "obs": "Texto que já vem escrito no WhatsApp ao tocar em 'Quero saber da assinatura'."
+            },
+            {
+              "id": "home-05-solucoes-empresas-titulo",
+              "tipo": "subtitulo",
+              "texto": "Locafacil Empresas",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 100,
+              "obs": "Segundo bloco."
+            },
+            {
+              "id": "home-05-solucoes-empresas-chamada",
+              "tipo": "legenda",
+              "texto": "Seu negócio não pode parar.",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 101
+            },
+            {
+              "id": "home-05-solucoes-empresas-texto",
+              "tipo": "paragrafo",
+              "texto": "Terceirizar a frota da sua empresa é a jogada de mestre para salvar o fluxo de caixa. Modelos ideais para a sua operação girar forte, sem você esquentar a cabeça com burocracia.",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 102
+            },
+            {
+              "id": "home-05-solucoes-empresas-botao",
+              "tipo": "botao",
+              "texto": "Receber proposta comercial",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 103,
+              "obs": "Leva para a página Para Empresas."
+            }
+          ]
+        },
+        {
+          "id": "home-06-por-que",
+          "titulo": "Por que alugar com a Locafacil",
+          "rota": "/",
+          "seletor": "main > section:nth-of-type(4)",
+          "estado": null,
+          "textos": [
+            {
+              "id": "home-06-por-que-titulo",
+              "tipo": "titulo",
+              "texto": "Por que alugar com a Locafacil?",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 322
+            },
+            {
+              "id": "home-06-por-que-aprovacao-titulo",
+              "tipo": "subtitulo",
+              "texto": "Aceleração de aprovação",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 112
+            },
+            {
+              "id": "home-06-por-que-aprovacao-texto",
+              "tipo": "paragrafo",
+              "texto": "Você tem pressa. Então cortamos a burocracia inútil. Do orçamento à chave na mão num piscar de olhos.",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 113
+            },
+            {
+              "id": "home-06-por-que-preco-titulo",
+              "tipo": "subtitulo",
+              "texto": "O que você vê é o que você paga",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 116
+            },
+            {
+              "id": "home-06-por-que-preco-texto",
+              "tipo": "paragrafo",
+              "texto": "Esqueça as taxas ocultas de \"proteção extra\" no balcão. O combinado não sai caro, o nosso contrato é reto e direto.",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 117
+            },
+            {
+              "id": "home-06-por-que-maquinas-titulo",
+              "tipo": "subtitulo",
+              "texto": "Máquinas selecionadas a dedo",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 120
+            },
+            {
+              "id": "home-06-por-que-maquinas-texto",
+              "tipo": "paragrafo",
+              "texto": "Só trabalhamos com veículos novos ou recém-revisados das melhores marcas. Sente, ligue e sinta o conforto.",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 121
+            },
+            {
+              "id": "home-06-por-que-atendimento-titulo",
+              "tipo": "subtitulo",
+              "texto": "Atendimento corpo a corpo",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 124
+            },
+            {
+              "id": "home-06-por-que-atendimento-texto",
+              "tipo": "paragrafo",
+              "texto": "Quando ligar, não falará com um robô burro. Falará com alguém da equipe focado em resolver seu problema real.",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 125
+            }
+          ]
+        },
+        {
+          "id": "home-07-chamada-final",
+          "titulo": "Chamada final",
+          "rota": "/",
+          "seletor": "main > section:nth-of-type(5)",
+          "estado": null,
+          "textos": [
+            {
+              "id": "home-07-chamada-final-titulo",
+              "tipo": "titulo",
+              "texto": "Não deixe outro motorista\npegar o seu carro.",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 374,
+              "obs": "Em duas linhas."
+            },
+            {
+              "id": "home-07-chamada-final-texto",
+              "tipo": "paragrafo",
+              "texto": "As unidades são limitadas e a procura é alta. Garanta agora a liberdade de dirigir sem complicação e com o melhor custo-benefício do Rio de Janeiro.",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 381
+            },
+            {
+              "id": "home-07-chamada-final-botao",
+              "tipo": "botao",
+              "texto": "Garantir meu carro agora",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 394,
+              "obs": "Não quebra linha: até ~30 caracteres para caber no celular."
+            },
+            {
+              "id": "home-07-chamada-final-whatsapp",
+              "tipo": "mensagem-whatsapp",
+              "texto": "Olá, Locafacil! Quero garantir meu veículo agora!",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 129,
+              "obs": "Texto que já vem escrito no WhatsApp ao tocar em 'Garantir meu carro agora'."
+            },
+            {
+              "id": "home-07-chamada-final-botao-ligar",
+              "tipo": "botao",
+              "texto": "Ligar: (21) 96854-0185",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 400,
+              "obs": "Abre a ligação no celular."
+            },
+            {
+              "id": "home-07-chamada-final-selo",
+              "tipo": "selo",
+              "texto": "Sem caução",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 409
+            },
+            {
+              "id": "home-07-chamada-final-selo-2",
+              "tipo": "selo",
+              "texto": "Dobro da franquia",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 409
+            },
+            {
+              "id": "home-07-chamada-final-selo-3",
+              "tipo": "selo",
+              "texto": "Cancele quando quiser",
+              "arquivo": "src/pages/Home/Content.jsx",
+              "linha": 409
+            }
+          ]
+        },
+        {
+          "id": "home-08-rodape",
+          "titulo": "Rodapé (todas as páginas)",
+          "rota": "/",
+          "seletor": "footer",
+          "estado": null,
+          "textos": [
+            {
+              "id": "home-08-rodape-frase",
+              "tipo": "paragrafo",
+              "texto": "A melhor experiência em locação de veículos do Rio de Janeiro. Mobilidade que descomplica.",
+              "arquivo": "src/components/Footer/Index.jsx",
+              "linha": 43,
+              "obs": "Embaixo do logotipo. O mesmo rodapé aparece em todas as páginas."
+            },
+            {
+              "id": "home-08-rodape-whatsapp",
+              "tipo": "mensagem-whatsapp",
+              "texto": "Olá, Locafacil!",
+              "arquivo": "src/components/Footer/Index.jsx",
+              "linha": 56,
+              "obs": "Texto que já vem escrito ao tocar no ícone do WhatsApp do rodapé."
+            },
+            {
+              "id": "home-08-rodape-links-titulo",
+              "tipo": "rotulo",
+              "texto": "Links Rápidos",
+              "arquivo": "src/components/Footer/Index.jsx",
+              "linha": 69
+            },
+            {
+              "id": "home-08-rodape-link-inicio",
+              "tipo": "link",
+              "texto": "Início",
+              "arquivo": "src/components/Footer/Index.jsx",
+              "linha": 72,
+              "obs": "Links do rodapé: mudar o menu do topo não muda estes."
+            },
+            {
+              "id": "home-08-rodape-link-reservar",
+              "tipo": "link",
+              "texto": "Reservar",
+              "arquivo": "src/components/Footer/Index.jsx",
+              "linha": 73
+            },
+            {
+              "id": "home-08-rodape-link-empresas",
+              "tipo": "link",
+              "texto": "Para Empresas",
+              "arquivo": "src/components/Footer/Index.jsx",
+              "linha": 74
+            },
+            {
+              "id": "home-08-rodape-link-contato",
+              "tipo": "link",
+              "texto": "Contato",
+              "arquivo": "src/components/Footer/Index.jsx",
+              "linha": 75
+            },
+            {
+              "id": "home-08-rodape-contatos-titulo",
+              "tipo": "rotulo",
+              "texto": "Contatos",
+              "arquivo": "src/components/Footer/Index.jsx",
+              "linha": 90
+            },
+            {
+              "id": "home-08-rodape-telefone-fixo",
+              "tipo": "link",
+              "texto": "(21) 2786-1404",
+              "arquivo": "src/components/Footer/Index.jsx",
+              "linha": 96
+            },
+            {
+              "id": "home-08-rodape-celular",
+              "tipo": "link",
+              "texto": "(21) 96854-0185",
+              "arquivo": "src/components/Footer/Index.jsx",
+              "linha": 102
+            },
+            {
+              "id": "home-08-rodape-email",
+              "tipo": "link",
+              "texto": "reservas@locafacilaluguel.com",
+              "arquivo": "src/components/Footer/Index.jsx",
+              "linha": 108
+            },
+            {
+              "id": "home-08-rodape-endereco-titulo",
+              "tipo": "rotulo",
+              "texto": "Endereço",
+              "arquivo": "src/components/Footer/Index.jsx",
+              "linha": 115
+            },
+            {
+              "id": "home-08-rodape-endereco",
+              "tipo": "paragrafo",
+              "texto": "Cidade da Moda\nRod. Pres. Dutra, 13900\nJardim Tropical - Nova Iguaçu\nRio de Janeiro",
+              "arquivo": "src/components/Footer/Index.jsx",
+              "linha": 122,
+              "obs": "Quatro linhas."
+            },
+            {
+              "id": "home-08-rodape-direitos",
+              "tipo": "legenda",
+              "texto": "© {ano} Locafacil Aluguel de Veículos. Todos os direitos reservados.",
+              "arquivo": "src/components/Footer/Index.jsx",
+              "linha": 135,
+              "obs": "O ano muda sozinho."
+            },
+            {
+              "id": "home-08-rodape-cnpj",
+              "tipo": "legenda",
+              "texto": "CNPJ 30.787.245/0001-71",
+              "arquivo": "src/components/Footer/Index.jsx",
+              "linha": 138
+            },
+            {
+              "id": "home-08-rodape-assinatura",
+              "tipo": "link",
+              "texto": "Feito com amor por Fox TI + Marketins",
+              "arquivo": "src/components/Footer/Index.jsx",
+              "linha": 151,
+              "obs": "Assinatura de quem fez o site, combinada na reunião de 29/09/2026."
+            }
+          ]
+        },
+        {
+          "id": "home-09-popup-desconto",
+          "titulo": "Popup de desconto",
+          "rota": "/",
+          "seletor": "[role=\"dialog\"][aria-labelledby=\"desconto-titulo\"]",
+          "estado": null,
+          "obs": "Capturar sem ?print=1: abre sozinho 1,5 s depois de carregar, uma vez por sessão (fechar grava 'locafacil_desconto_dispensado' na sessionStorage). Não aparece nas telas de reserva.",
+          "textos": [
+            {
+              "id": "home-09-popup-desconto-titulo",
+              "tipo": "titulo",
+              "texto": "Quer um desconto no primeiro aluguel?",
+              "arquivo": "src/components/Global/DescontoPopup.jsx",
+              "linha": 103,
+              "obs": "Abre sozinho 1,5 segundo depois de a pessoa entrar no site, uma vez por visita. Não aparece durante a reserva."
+            },
+            {
+              "id": "home-09-popup-desconto-texto",
+              "tipo": "paragrafo",
+              "texto": "Faz contato com a gente. A equipe confere a condição para o seu período e fecha com você na hora.",
+              "arquivo": "src/components/Global/DescontoPopup.jsx",
+              "linha": 107
+            },
+            {
+              "id": "home-09-popup-desconto-botao",
+              "tipo": "botao",
+              "texto": "Falar no WhatsApp",
+              "arquivo": "src/components/Global/DescontoPopup.jsx",
+              "linha": 123
+            },
+            {
+              "id": "home-09-popup-desconto-whatsapp",
+              "tipo": "mensagem-whatsapp",
+              "texto": "Olá! Vim pelo site e quero saber do desconto no primeiro aluguel.",
+              "arquivo": "src/components/Global/DescontoPopup.jsx",
+              "linha": 6,
+              "obs": "Texto que já vem escrito no WhatsApp ao tocar em 'Falar no WhatsApp'."
+            },
+            {
+              "id": "home-09-popup-desconto-fechar",
+              "tipo": "botao",
+              "texto": "Agora não",
+              "arquivo": "src/components/Global/DescontoPopup.jsx",
+              "linha": 131,
+              "obs": "Fecha o popup."
+            }
+          ]
+        },
+        {
+          "id": "home-10-atendimento",
+          "titulo": "Botão flutuante de atendimento",
+          "rota": "/",
+          "seletor": ".fixed.bottom-6.right-6",
+          "estado": null,
+          "obs": "Capturar sem ?print=1. O balão aparece sozinho após 4 s; o painel com os assuntos abre ao clicar no botão redondo (aria-label 'Falar com a Locafacil'). O seletor é o conjunto fixo do canto inferior direito, nos três estados.",
+          "textos": [
+            {
+              "id": "home-10-atendimento-balao-nome",
+              "tipo": "rotulo",
+              "texto": "Locafacil",
+              "arquivo": "src/components/Global/FaleConosco.jsx",
+              "linha": 86,
+              "obs": "Balão que aparece sozinho 4 segundos depois de abrir a página (em todas as páginas, menos na reserva)."
+            },
+            {
+              "id": "home-10-atendimento-balao-texto",
+              "tipo": "paragrafo",
+              "texto": "Olá! Quer falar com a gente pelo WhatsApp?",
+              "arquivo": "src/components/Global/FaleConosco.jsx",
+              "linha": 69
+            },
+            {
+              "id": "home-10-atendimento-balao-botao",
+              "tipo": "botao",
+              "texto": "Quero falar",
+              "arquivo": "src/components/Global/FaleConosco.jsx",
+              "linha": 95,
+              "obs": "Abre o painel de assuntos."
+            },
+            {
+              "id": "home-10-atendimento-painel-titulo",
+              "tipo": "titulo",
+              "texto": "Fale com a Locafacil",
+              "arquivo": "src/components/Global/FaleConosco.jsx",
+              "linha": 131,
+              "obs": "Painel que abre ao tocar no botão redondo."
+            },
+            {
+              "id": "home-10-atendimento-painel-subtitulo",
+              "tipo": "subtitulo",
+              "texto": "Atendimento pelo WhatsApp",
+              "arquivo": "src/components/Global/FaleConosco.jsx",
+              "linha": 132
+            },
+            {
+              "id": "home-10-atendimento-painel-instrucao",
+              "tipo": "paragrafo",
+              "texto": "Escolha o assunto. A mensagem já vai escrita.",
+              "arquivo": "src/components/Global/FaleConosco.jsx",
+              "linha": 148,
+              "obs": "Os seis assuntos da lista (e as mensagens que eles abrem) estão na apresentação 3, lâmina 'Mensagens prontas do WhatsApp'."
+            },
+            {
+              "id": "home-10-atendimento-painel-telefone",
+              "tipo": "link",
+              "texto": "Prefere telefone? (21) 2786-1404",
+              "arquivo": "src/components/Global/FaleConosco.jsx",
+              "linha": 187,
+              "obs": "Rodapé do painel; abre a ligação."
+            }
+          ]
+        },
+        {
+          "id": "home-11-seo",
+          "titulo": "Título e descrição no Google e ao compartilhar",
+          "rota": "/",
+          "seletor": null,
+          "estado": null,
+          "textos": [
+            {
+              "id": "home-11-seo-title",
+              "tipo": "seo",
+              "texto": "Locafacil | Aluguel de Veículos Sem Burocracia - Carros e Motos no RJ",
+              "arquivo": "index.html",
+              "linha": 7,
+              "obs": "Título da aba do navegador e do resultado no Google. Ideal até ~60 caracteres."
+            },
+            {
+              "id": "home-11-seo-description",
+              "tipo": "seo",
+              "texto": "Alugue carros e motos sem caução e com o dobro da franquia. A Locafacil oferece a melhor experiência em locação de veículos no Rio de Janeiro.",
+              "arquivo": "index.html",
+              "linha": 8,
+              "obs": "Descrição embaixo do título no Google. Ideal até ~155 caracteres."
+            },
+            {
+              "id": "home-11-seo-og-title",
+              "tipo": "seo",
+              "texto": "Locafacil | Sua Liberdade Sobre Rodas. Zero Burocracia.",
+              "arquivo": "index.html",
+              "linha": 9,
+              "obs": "Título do cartão quando o link é compartilhado (WhatsApp, Facebook)."
+            },
+            {
+              "id": "home-11-seo-og-description",
+              "tipo": "seo",
+              "texto": "Aluguel de veículos sem caução e com o dobro da franquia. Frota premium no RJ.",
+              "arquivo": "index.html",
+              "linha": 10,
+              "obs": "Texto do cartão quando o link é compartilhado."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "reserva",
+      "numero": 2,
+      "titulo": "Reserva: da busca à pré-reserva",
+      "pptx": "Locafacil-Copy-2-Reserva.pptx",
+      "dobras": [
+        {
+          "id": "reserva-01-busca",
+          "titulo": "Busca (página Reservar)",
+          "rota": "/reservar",
+          "seletor": "#reservar",
+          "estado": "reserva-busca",
+          "obs": "Abrir /reservar?print=1; não precisa de preparo. É o mesmo formulário do topo da Home.",
+          "textos": [
+            {
+              "id": "reserva-01-busca-titulo",
+              "tipo": "titulo",
+              "texto": "Reserve seu veículo",
+              "arquivo": "src/pages/Reservar/Index.jsx",
+              "linha": 16,
+              "obs": "O nome da loja e os horários de atendimento vêm do sistema da locadora e não são copy do site. O formulário abaixo do título é o mesmo do topo da Home."
+            },
+            {
+              "id": "reserva-01-busca-formulario-titulo",
+              "tipo": "subtitulo",
+              "texto": "Encontre o veículo perfeito em segundos",
+              "arquivo": "src/pages/Reservar/SearchWidget.jsx",
+              "linha": 210
+            },
+            {
+              "id": "reserva-01-busca-retirada-local",
+              "tipo": "rotulo",
+              "texto": "Local de retirada",
+              "arquivo": "src/pages/Reservar/SearchWidget.jsx",
+              "linha": 218
+            },
+            {
+              "id": "reserva-01-busca-selecione",
+              "tipo": "opcao",
+              "texto": "Selecione",
+              "arquivo": "src/pages/Reservar/SearchWidget.jsx",
+              "linha": 230,
+              "obs": "Só aparece se houver mais de uma loja; com uma loja só, ela já vem escolhida."
+            },
+            {
+              "id": "reserva-01-busca-devolucao-local",
+              "tipo": "rotulo",
+              "texto": "Local de devolução",
+              "arquivo": "src/pages/Reservar/SearchWidget.jsx",
+              "linha": 241
+            },
+            {
+              "id": "reserva-01-busca-mesmo-local",
+              "tipo": "opcao",
+              "texto": "Mesmo local da retirada",
+              "arquivo": "src/pages/Reservar/SearchWidget.jsx",
+              "linha": 251
+            },
+            {
+              "id": "reserva-01-busca-retirada",
+              "tipo": "rotulo",
+              "texto": "Retirada",
+              "arquivo": "src/pages/Reservar/SearchWidget.jsx",
+              "linha": 262,
+              "obs": "Em cima do par data + hora."
+            },
+            {
+              "id": "reserva-01-busca-devolucao",
+              "tipo": "rotulo",
+              "texto": "Devolução",
+              "arquivo": "src/pages/Reservar/SearchWidget.jsx",
+              "linha": 275
+            },
+            {
+              "id": "reserva-01-busca-hora",
+              "tipo": "opcao",
+              "texto": "Hora",
+              "arquivo": "src/pages/Reservar/SearchWidget.jsx",
+              "linha": 370,
+              "obs": "Aparece na caixa de horário antes da escolha."
+            },
+            {
+              "id": "reserva-01-busca-horario-loja",
+              "tipo": "legenda",
+              "texto": "{loja} atende {horários}",
+              "arquivo": "src/pages/Reservar/SearchWidget.jsx",
+              "linha": 289,
+              "obs": "Horário de atendimento da loja, embaixo dos campos."
+            },
+            {
+              "id": "reserva-01-busca-botao",
+              "tipo": "botao",
+              "texto": "Buscar veículo",
+              "arquivo": "src/pages/Reservar/SearchWidget.jsx",
+              "linha": 335
+            },
+            {
+              "id": "reserva-01-busca-botao-carregando",
+              "tipo": "botao",
+              "texto": "Buscando veículos",
+              "arquivo": "src/pages/Reservar/SearchWidget.jsx",
+              "linha": 335,
+              "obs": "Aparece no botão enquanto a busca carrega."
+            },
+            {
+              "id": "reserva-01-busca-loja-fechada",
+              "tipo": "aviso",
+              "texto": "A loja não abre {dias}.",
+              "arquivo": "src/pages/Reservar/SearchWidget.jsx",
+              "linha": 380,
+              "obs": "Embaixo da data, quando o dia escolhido é fechado. {dias} vira, por exemplo, 'aos domingos'."
+            },
+            {
+              "id": "reserva-01-busca-erro-locais",
+              "tipo": "aviso",
+              "texto": "Não foi possível carregar os locais disponíveis. Tente novamente em instantes.",
+              "arquivo": "src/pages/Reservar/SearchWidget.jsx",
+              "linha": 103,
+              "obs": "Mensagem de erro: a lista de lojas não carregou."
+            },
+            {
+              "id": "reserva-01-busca-erro-campos",
+              "tipo": "aviso",
+              "texto": "Preencha o local de retirada e as duas datas para buscar.",
+              "arquivo": "src/pages/Reservar/SearchWidget.jsx",
+              "linha": 160
+            },
+            {
+              "id": "reserva-01-busca-erro-dia-fechado",
+              "tipo": "aviso",
+              "texto": "A loja não abre {dias}. Escolha outro dia para a retirada.",
+              "arquivo": "src/pages/Reservar/SearchWidget.jsx",
+              "linha": 165,
+              "obs": "Ou 'para a devolução', conforme a data com problema."
+            },
+            {
+              "id": "reserva-01-busca-erro-horario",
+              "tipo": "aviso",
+              "texto": "Escolha o horário de retirada e de devolução.",
+              "arquivo": "src/pages/Reservar/SearchWidget.jsx",
+              "linha": 170
+            },
+            {
+              "id": "reserva-01-busca-erro-antecedencia",
+              "tipo": "aviso",
+              "texto": "A retirada precisa de pelo menos {horas}h de antecedência nesta loja.",
+              "arquivo": "src/pages/Reservar/SearchWidget.jsx",
+              "linha": 179
+            },
+            {
+              "id": "reserva-01-busca-erro-periodo",
+              "tipo": "aviso",
+              "texto": "O período mínimo de locação é de {horas}h.",
+              "arquivo": "src/pages/Reservar/SearchWidget.jsx",
+              "linha": 185
+            },
+            {
+              "id": "reserva-01-busca-limpar-datas",
+              "tipo": "link",
+              "texto": "Limpar as datas",
+              "arquivo": "src/pages/Reservar/SearchWidget.jsx",
+              "linha": 301,
+              "obs": "Aparece ao lado das mensagens de erro."
+            }
+          ]
+        },
+        {
+          "id": "reserva-02-veiculos",
+          "titulo": "Escolha do veículo",
+          "rota": "/reservar/veiculos",
+          "seletor": "main",
+          "estado": "reserva-veiculos",
+          "obs": "Preparo em dev: abrir /reservar sem ?print=1 e clicar em 'Dados falsos' (andaime DevSeed, canto inferior esquerdo). Ele consulta a disponibilidade, grava busca, veículo, proteção e condutor em sessionStorage['locafacil_reservation'] e leva a /reservar/revisao. Depois, na mesma aba, abrir a rota da dobra com ?print=1 (esconde preloader, popups e o andaime). A lista refaz a busca ao abrir. A tela é alta (cerca de 2,5 telas no computador com seis grupos).",
+          "textos": [
+            {
+              "id": "reserva-02-veiculos-etapa-1",
+              "tipo": "rotulo",
+              "texto": "Veículo",
+              "arquivo": "src/pages/Reservar/StepProgress.jsx",
+              "linha": 5,
+              "obs": "Nomes de carro, preços e proteções vêm do sistema da locadora e não são copy do site. A barra de etapas aparece no topo das quatro etapas; no celular mostra só a etapa atual."
+            },
+            {
+              "id": "reserva-02-veiculos-etapa-2",
+              "tipo": "rotulo",
+              "texto": "Opcionais",
+              "arquivo": "src/pages/Reservar/StepProgress.jsx",
+              "linha": 6
+            },
+            {
+              "id": "reserva-02-veiculos-etapa-3",
+              "tipo": "rotulo",
+              "texto": "Seus Dados",
+              "arquivo": "src/pages/Reservar/StepProgress.jsx",
+              "linha": 7
+            },
+            {
+              "id": "reserva-02-veiculos-etapa-4",
+              "tipo": "rotulo",
+              "texto": "Revisão",
+              "arquivo": "src/pages/Reservar/StepProgress.jsx",
+              "linha": 8
+            },
+            {
+              "id": "reserva-02-veiculos-titulo",
+              "tipo": "titulo",
+              "texto": "Escolha seu veículo",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 171
+            },
+            {
+              "id": "reserva-02-veiculos-resumo-retirada",
+              "tipo": "rotulo",
+              "texto": "Retirada",
+              "arquivo": "src/pages/Reservar/TripSummary.jsx",
+              "linha": 40,
+              "obs": "Resumo da busca; aparece também em Proteções e opcionais."
+            },
+            {
+              "id": "reserva-02-veiculos-resumo-devolucao",
+              "tipo": "rotulo",
+              "texto": "Devolução",
+              "arquivo": "src/pages/Reservar/TripSummary.jsx",
+              "linha": 41
+            },
+            {
+              "id": "reserva-02-veiculos-resumo-periodo",
+              "tipo": "legenda",
+              "texto": "Período de {n} diárias",
+              "arquivo": "src/pages/Reservar/TripSummary.jsx",
+              "linha": 47
+            },
+            {
+              "id": "reserva-02-veiculos-diarias",
+              "tipo": "legenda",
+              "texto": "{n} diárias",
+              "arquivo": "src/pages/Reservar/lib/reservation.js",
+              "linha": 39,
+              "obs": "Forma usada em todas as etapas; no singular, '1 diária'."
+            },
+            {
+              "id": "reserva-02-veiculos-resumo-alterar",
+              "tipo": "link",
+              "texto": "Alterar datas ou loja",
+              "arquivo": "src/pages/Reservar/TripSummary.jsx",
+              "linha": 55
+            },
+            {
+              "id": "reserva-02-veiculos-demonstracao",
+              "tipo": "aviso",
+              "texto": "Valores de demonstração enquanto a integração com o sistema da loja é liberada.",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 177,
+              "obs": "Só aparece enquanto o site usa dados de exemplo."
+            },
+            {
+              "id": "reserva-02-veiculos-filtro-automatico",
+              "tipo": "botao",
+              "texto": "Automático",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 245,
+              "obs": "Filtros acima da lista."
+            },
+            {
+              "id": "reserva-02-veiculos-filtro-ar",
+              "tipo": "botao",
+              "texto": "Ar-condicionado",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 246
+            },
+            {
+              "id": "reserva-02-veiculos-filtro-lugares",
+              "tipo": "botao",
+              "texto": "5 lugares",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 247
+            },
+            {
+              "id": "reserva-02-veiculos-limpar-filtros",
+              "tipo": "link",
+              "texto": "Limpar filtros",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 254,
+              "obs": "Aparece quando algum filtro está ligado."
+            },
+            {
+              "id": "reserva-02-veiculos-contagem",
+              "tipo": "legenda",
+              "texto": "{n} grupos disponíveis · preços por mais {tempo}",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 259,
+              "obs": "No singular: '1 grupo disponível'. {tempo} é a contagem regressiva da cotação."
+            },
+            {
+              "id": "reserva-02-veiculos-imagem-legenda",
+              "tipo": "legenda",
+              "texto": "{modelo} ou similar · imagem ilustrativa",
+              "arquivo": "src/pages/Reservar/VehicleImage.jsx",
+              "linha": 45,
+              "obs": "Embaixo da foto de cada grupo. O modelo vem do cadastro de fotos do site; grupo sem foto mostra o porte (hatch, sedã ou SUV) no lugar de '{modelo} ou similar'."
+            },
+            {
+              "id": "reserva-02-veiculos-pessoas",
+              "tipo": "item",
+              "texto": "{n} pessoas",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 303
+            },
+            {
+              "id": "reserva-02-veiculos-malas",
+              "tipo": "item",
+              "texto": "{n} malas",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 309
+            },
+            {
+              "id": "reserva-02-veiculos-ar",
+              "tipo": "item",
+              "texto": "Ar-condicionado",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 318
+            },
+            {
+              "id": "reserva-02-veiculos-sem-ar",
+              "tipo": "item",
+              "texto": "Sem ar",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 318
+            },
+            {
+              "id": "reserva-02-veiculos-km-livre",
+              "tipo": "item",
+              "texto": "Km livre",
+              "arquivo": "api/_lib/otaNormalize.js",
+              "linha": 263,
+              "obs": "Montado pelo site a partir da franquia que o sistema da locadora informa."
+            },
+            {
+              "id": "reserva-02-veiculos-km-controlada",
+              "tipo": "item",
+              "texto": "Km controlada ({franquia} km)",
+              "arquivo": "api/_lib/otaNormalize.js",
+              "linha": 264
+            },
+            {
+              "id": "reserva-02-veiculos-detalhes",
+              "tipo": "link",
+              "texto": "Ver detalhes e composição do valor",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 332,
+              "obs": "Abre a janela de detalhes (próxima lâmina)."
+            },
+            {
+              "id": "reserva-02-veiculos-total-rotulo",
+              "tipo": "rotulo",
+              "texto": "Total do período",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 335
+            },
+            {
+              "id": "reserva-02-veiculos-por-dia",
+              "tipo": "legenda",
+              "texto": "{n} diárias · {valor} por dia",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 339
+            },
+            {
+              "id": "reserva-02-veiculos-escolher",
+              "tipo": "botao",
+              "texto": "Escolher {grupo}",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 348
+            },
+            {
+              "id": "reserva-02-veiculos-nota-grupo",
+              "tipo": "aviso",
+              "texto": "A reserva é feita por grupo de veículos, não por modelo específico. O carro entregue pertence ao grupo escolhido.",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 357,
+              "obs": "Nota no fim da lista."
+            }
+          ]
+        },
+        {
+          "id": "reserva-03-veiculos-detalhes",
+          "titulo": "Janela de detalhes do veículo",
+          "rota": "/reservar/veiculos",
+          "seletor": "[role=\"dialog\"]",
+          "estado": "reserva-veiculos",
+          "obs": "Preparo em dev: abrir /reservar sem ?print=1 e clicar em 'Dados falsos' (andaime DevSeed, canto inferior esquerdo). Ele consulta a disponibilidade, grava busca, veículo, proteção e condutor em sessionStorage['locafacil_reservation'] e leva a /reservar/revisao. Depois, na mesma aba, abrir a rota da dobra com ?print=1 (esconde preloader, popups e o andaime). Depois clicar em 'Ver detalhes e composição do valor' no primeiro cartão; o seletor é a janela aberta.",
+          "textos": [
+            {
+              "id": "reserva-03-veiculos-detalhes-titulo",
+              "tipo": "titulo",
+              "texto": "{grupo} · detalhes",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 369,
+              "obs": "Nomes de carro, preços e proteções vêm do sistema da locadora e não são copy do site. Janela que abre em 'Ver detalhes e composição do valor'."
+            },
+            {
+              "id": "reserva-03-veiculos-detalhes-caracteristicas",
+              "tipo": "rotulo",
+              "texto": "Características incluídas",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 400
+            },
+            {
+              "id": "reserva-03-veiculos-detalhes-passageiros",
+              "tipo": "rotulo",
+              "texto": "Passageiros",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 388
+            },
+            {
+              "id": "reserva-03-veiculos-detalhes-portas",
+              "tipo": "rotulo",
+              "texto": "Portas",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 389
+            },
+            {
+              "id": "reserva-03-veiculos-detalhes-transmissao",
+              "tipo": "rotulo",
+              "texto": "Transmissão",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 390
+            },
+            {
+              "id": "reserva-03-veiculos-detalhes-ar",
+              "tipo": "rotulo",
+              "texto": "Ar-condicionado",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 391
+            },
+            {
+              "id": "reserva-03-veiculos-detalhes-ar-sim",
+              "tipo": "legenda",
+              "texto": "Sim",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 391,
+              "obs": "Resposta ao lado de 'Ar-condicionado'."
+            },
+            {
+              "id": "reserva-03-veiculos-detalhes-ar-nao",
+              "tipo": "legenda",
+              "texto": "Não",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 391
+            },
+            {
+              "id": "reserva-03-veiculos-detalhes-bagagem",
+              "tipo": "rotulo",
+              "texto": "Bagagem",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 392
+            },
+            {
+              "id": "reserva-03-veiculos-detalhes-quilometragem",
+              "tipo": "rotulo",
+              "texto": "Quilometragem",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 393
+            },
+            {
+              "id": "reserva-03-veiculos-detalhes-composicao",
+              "tipo": "rotulo",
+              "texto": "Composição do valor",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 410
+            },
+            {
+              "id": "reserva-03-veiculos-detalhes-total",
+              "tipo": "rotulo",
+              "texto": "Total de {n} diárias",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 436
+            },
+            {
+              "id": "reserva-03-veiculos-detalhes-nota",
+              "tipo": "aviso",
+              "texto": "Proteções e itens opcionais são escolhidos na próxima etapa e somam ao total.",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 441
+            },
+            {
+              "id": "reserva-03-veiculos-detalhes-botao",
+              "tipo": "botao",
+              "texto": "Escolher este grupo",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 376
+            }
+          ]
+        },
+        {
+          "id": "reserva-04-veiculos-avisos",
+          "titulo": "Escolha do veículo: sem resultado ou com erro",
+          "rota": "/reservar/veiculos",
+          "seletor": "main",
+          "estado": "reserva-veiculos",
+          "obs": "Estados alternativos da tela de veículos. Com a API de exemplo (sem credenciais) dá para forçar pelo campo 'Cenário de teste' da busca, sem ?print=1: 'Erro da API', 'Quote expirada', 'Sem veículos'. Com a API real a captura mostra a lista normal; 'filtros sem resultado' aparece combinando filtros que nenhum grupo atende.",
+          "textos": [
+            {
+              "id": "reserva-04-veiculos-avisos-erro-titulo",
+              "tipo": "titulo",
+              "texto": "Não foi possível buscar os veículos",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 201,
+              "obs": "Nomes de carro, preços e proteções vêm do sistema da locadora e não são copy do site. Quando a busca falha. Embaixo do título vai a explicação do sistema ou uma das três frases seguintes."
+            },
+            {
+              "id": "reserva-04-veiculos-avisos-erro-rede",
+              "tipo": "aviso",
+              "texto": "Não foi possível buscar veículos disponíveis.",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 127,
+              "obs": "Quando a busca não chega ao sistema."
+            },
+            {
+              "id": "reserva-04-veiculos-avisos-erro-sistema",
+              "tipo": "aviso",
+              "texto": "Não há veículos disponíveis para o período solicitado.",
+              "arquivo": "api/availability.js",
+              "linha": 65,
+              "obs": "Quando o sistema recusa a busca sem explicar."
+            },
+            {
+              "id": "reserva-04-veiculos-avisos-erro-inesperado",
+              "tipo": "aviso",
+              "texto": "Erro inesperado. Tente novamente.",
+              "arquivo": "src/lib/api/reservation.js",
+              "linha": 22,
+              "obs": "Quando o sistema falha sem mensagem; pode aparecer em qualquer etapa."
+            },
+            {
+              "id": "reserva-04-veiculos-avisos-erro-botao",
+              "tipo": "botao",
+              "texto": "Refazer a busca",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 207
+            },
+            {
+              "id": "reserva-04-veiculos-avisos-expirou-titulo",
+              "tipo": "titulo",
+              "texto": "Os preços desta busca expiraram",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 214,
+              "obs": "Quando a contagem regressiva da cotação chega a zero."
+            },
+            {
+              "id": "reserva-04-veiculos-avisos-expirou-texto",
+              "tipo": "paragrafo",
+              "texto": "A cotação vale por tempo limitado. Refaça a busca para ver os valores atualizados.",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 216
+            },
+            {
+              "id": "reserva-04-veiculos-avisos-expirou-botao",
+              "tipo": "botao",
+              "texto": "Buscar de novo",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 222
+            },
+            {
+              "id": "reserva-04-veiculos-avisos-vazio-titulo",
+              "tipo": "titulo",
+              "texto": "Nenhum veículo para este período",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 229,
+              "obs": "Quando não há nenhum grupo livre nas datas."
+            },
+            {
+              "id": "reserva-04-veiculos-avisos-vazio-texto",
+              "tipo": "paragrafo",
+              "texto": "Tente ampliar as datas ou escolher outra loja de retirada.",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 231
+            },
+            {
+              "id": "reserva-04-veiculos-avisos-vazio-botao",
+              "tipo": "botao",
+              "texto": "Alterar busca",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 237
+            },
+            {
+              "id": "reserva-04-veiculos-avisos-filtros-titulo",
+              "tipo": "titulo",
+              "texto": "Nenhum grupo com esses filtros",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 271,
+              "obs": "Quando os filtros escolhidos deixam a lista vazia."
+            },
+            {
+              "id": "reserva-04-veiculos-avisos-filtros-texto",
+              "tipo": "paragrafo",
+              "texto": "Há {n} grupos disponíveis no período — os filtros escolhidos deixaram todos de fora.",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 273
+            },
+            {
+              "id": "reserva-04-veiculos-avisos-filtros-botao",
+              "tipo": "botao",
+              "texto": "Limpar filtros",
+              "arquivo": "src/pages/Reservar/Veiculos/Index.jsx",
+              "linha": 279
+            }
+          ]
+        },
+        {
+          "id": "reserva-05-extras",
+          "titulo": "Proteções e opcionais",
+          "rota": "/reservar/extras",
+          "seletor": "main",
+          "estado": "reserva-extras",
+          "obs": "Preparo em dev: abrir /reservar sem ?print=1 e clicar em 'Dados falsos' (andaime DevSeed, canto inferior esquerdo). Ele consulta a disponibilidade, grava busca, veículo, proteção e condutor em sessionStorage['locafacil_reservation'] e leva a /reservar/revisao. Depois, na mesma aba, abrir a rota da dobra com ?print=1 (esconde preloader, popups e o andaime). A tela é alta (cerca de 2,2 telas no computador).",
+          "textos": [
+            {
+              "id": "reserva-05-extras-titulo",
+              "tipo": "titulo",
+              "texto": "Proteções e opcionais",
+              "arquivo": "src/pages/Reservar/Extras/Index.jsx",
+              "linha": 83,
+              "obs": "Nomes de carro, preços e proteções vêm do sistema da locadora e não são copy do site. O nome, a descrição e o preço de cada proteção e de cada item opcional também vêm do sistema."
+            },
+            {
+              "id": "reserva-05-extras-veiculo-rotulo",
+              "tipo": "rotulo",
+              "texto": "Veículo escolhido",
+              "arquivo": "src/pages/Reservar/Extras/Index.jsx",
+              "linha": 90
+            },
+            {
+              "id": "reserva-05-extras-trocar-grupo",
+              "tipo": "link",
+              "texto": "Trocar de grupo",
+              "arquivo": "src/pages/Reservar/Extras/Index.jsx",
+              "linha": 101
+            },
+            {
+              "id": "reserva-05-extras-protecao-titulo",
+              "tipo": "subtitulo",
+              "texto": "Proteção",
+              "arquivo": "src/pages/Reservar/Extras/Index.jsx",
+              "linha": 108
+            },
+            {
+              "id": "reserva-05-extras-protecao-texto",
+              "tipo": "paragrafo",
+              "texto": "Obrigatória para retirar o veículo. Escolha uma das opções.",
+              "arquivo": "src/pages/Reservar/Extras/Index.jsx",
+              "linha": 110
+            },
+            {
+              "id": "reserva-05-extras-inclusa",
+              "tipo": "legenda",
+              "texto": "Inclusa na diária",
+              "arquivo": "src/pages/Reservar/Extras/Index.jsx",
+              "linha": 136,
+              "obs": "No lugar do preço, quando a proteção já está na diária."
+            },
+            {
+              "id": "reserva-05-extras-por-dia",
+              "tipo": "legenda",
+              "texto": "{valor}/dia",
+              "arquivo": "src/pages/Reservar/Extras/Index.jsx",
+              "linha": 139
+            },
+            {
+              "id": "reserva-05-extras-o-que-cobre",
+              "tipo": "link",
+              "texto": "O que esta proteção cobre",
+              "arquivo": "src/pages/Reservar/Extras/Index.jsx",
+              "linha": 165,
+              "obs": "Abre uma janela com a descrição da proteção (texto do sistema)."
+            },
+            {
+              "id": "reserva-05-extras-janela-titulo",
+              "tipo": "titulo",
+              "texto": "Proteção {nome}",
+              "arquivo": "src/pages/Reservar/Extras/Index.jsx",
+              "linha": 274,
+              "obs": "Título da janela 'O que esta proteção cobre'."
+            },
+            {
+              "id": "reserva-05-extras-janela-diarias",
+              "tipo": "legenda",
+              "texto": "{n} diárias de proteção",
+              "arquivo": "src/pages/Reservar/Extras/Index.jsx",
+              "linha": 280,
+              "obs": "Rodapé da janela, ao lado do preço."
+            },
+            {
+              "id": "reserva-05-extras-janela-inclusa",
+              "tipo": "legenda",
+              "texto": "Inclusa na diária",
+              "arquivo": "src/pages/Reservar/Extras/Index.jsx",
+              "linha": 280,
+              "obs": "Rodapé da janela, quando a proteção já está na diária."
+            },
+            {
+              "id": "reserva-05-extras-opcionais-titulo",
+              "tipo": "subtitulo",
+              "texto": "Itens opcionais",
+              "arquivo": "src/pages/Reservar/Extras/Index.jsx",
+              "linha": 175
+            },
+            {
+              "id": "reserva-05-extras-opcionais-texto",
+              "tipo": "paragrafo",
+              "texto": "Adicione o que precisar. Pode ficar para depois.",
+              "arquivo": "src/pages/Reservar/Extras/Index.jsx",
+              "linha": 176
+            },
+            {
+              "id": "reserva-05-extras-opcionais-vazio",
+              "tipo": "aviso",
+              "texto": "Esta loja não oferece itens opcionais para o período escolhido.",
+              "arquivo": "src/pages/Reservar/Extras/Index.jsx",
+              "linha": 180
+            },
+            {
+              "id": "reserva-05-extras-opcional-preco",
+              "tipo": "legenda",
+              "texto": "{valor} por dia · {valor} no período",
+              "arquivo": "src/pages/Reservar/Extras/Index.jsx",
+              "linha": 197
+            },
+            {
+              "id": "reserva-05-extras-resumo-protecao",
+              "tipo": "legenda",
+              "texto": "Proteção {nome}",
+              "arquivo": "src/pages/Reservar/Extras/Index.jsx",
+              "linha": 228,
+              "obs": "Resumo do valor, no fim da tela."
+            },
+            {
+              "id": "reserva-05-extras-resumo-inclusa",
+              "tipo": "legenda",
+              "texto": "Inclusa",
+              "arquivo": "src/pages/Reservar/Extras/Index.jsx",
+              "linha": 230
+            },
+            {
+              "id": "reserva-05-extras-total",
+              "tipo": "rotulo",
+              "texto": "Total",
+              "arquivo": "src/pages/Reservar/Extras/Index.jsx",
+              "linha": 243
+            },
+            {
+              "id": "reserva-05-extras-erro-protecao",
+              "tipo": "aviso",
+              "texto": "Escolha uma proteção para continuar.",
+              "arquivo": "src/pages/Reservar/Extras/Index.jsx",
+              "linha": 68,
+              "obs": "Mensagem de erro ao tentar seguir sem proteção."
+            },
+            {
+              "id": "reserva-05-extras-voltar",
+              "tipo": "botao",
+              "texto": "Voltar",
+              "arquivo": "src/pages/Reservar/Extras/Index.jsx",
+              "linha": 258
+            },
+            {
+              "id": "reserva-05-extras-continuar",
+              "tipo": "botao",
+              "texto": "Continuar para seus dados",
+              "arquivo": "src/pages/Reservar/Extras/Index.jsx",
+              "linha": 267
+            }
+          ]
+        },
+        {
+          "id": "reserva-06-dados",
+          "titulo": "Seus dados",
+          "rota": "/reservar/dados",
+          "seletor": "main",
+          "estado": "reserva-extras",
+          "obs": "Preparo em dev: abrir /reservar sem ?print=1 e clicar em 'Dados falsos' (andaime DevSeed, canto inferior esquerdo). Ele consulta a disponibilidade, grava busca, veículo, proteção e condutor em sessionStorage['locafacil_reservation'] e leva a /reservar/revisao. Depois, na mesma aba, abrir a rota da dobra com ?print=1 (esconde preloader, popups e o andaime). Esta etapa só exige o veículo escolhido (mesmo preparo da etapa de opcionais). O 'Dados falsos' também preenche o condutor: para a captura mostrar os exemplos de dentro dos campos, apagar a chave driver do objeto em sessionStorage['locafacil_reservation'] antes de abrir a rota.",
+          "textos": [
+            {
+              "id": "reserva-06-dados-titulo",
+              "tipo": "titulo",
+              "texto": "Seus dados",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 84,
+              "obs": "Nomes de carro, preços e proteções vêm do sistema da locadora e não são copy do site."
+            },
+            {
+              "id": "reserva-06-dados-subtitulo",
+              "tipo": "subtitulo",
+              "texto": "Precisamos deles para emitir o contrato de locação. Nada é cobrado nesta etapa.",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 86
+            },
+            {
+              "id": "reserva-06-dados-condutor",
+              "tipo": "subtitulo",
+              "texto": "Condutor",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 91
+            },
+            {
+              "id": "reserva-06-dados-nome",
+              "tipo": "rotulo",
+              "texto": "Nome",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 94
+            },
+            {
+              "id": "reserva-06-dados-nome-exemplo",
+              "tipo": "campo",
+              "texto": "João",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 94,
+              "obs": "Exemplo que aparece dentro do campo vazio."
+            },
+            {
+              "id": "reserva-06-dados-sobrenome",
+              "tipo": "rotulo",
+              "texto": "Sobrenome",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 95
+            },
+            {
+              "id": "reserva-06-dados-sobrenome-exemplo",
+              "tipo": "campo",
+              "texto": "Silva",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 95
+            },
+            {
+              "id": "reserva-06-dados-ddd",
+              "tipo": "rotulo",
+              "texto": "DDD",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 99
+            },
+            {
+              "id": "reserva-06-dados-ddd-exemplo",
+              "tipo": "campo",
+              "texto": "21",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 99
+            },
+            {
+              "id": "reserva-06-dados-telefone",
+              "tipo": "rotulo",
+              "texto": "Telefone",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 100
+            },
+            {
+              "id": "reserva-06-dados-telefone-exemplo",
+              "tipo": "campo",
+              "texto": "98854-0185",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 100
+            },
+            {
+              "id": "reserva-06-dados-email",
+              "tipo": "rotulo",
+              "texto": "E-mail",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 103
+            },
+            {
+              "id": "reserva-06-dados-email-exemplo",
+              "tipo": "campo",
+              "texto": "seu.melhor@email.com",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 103
+            },
+            {
+              "id": "reserva-06-dados-email-dica",
+              "tipo": "legenda",
+              "texto": "Enviamos o comprovante da reserva para este endereço.",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 103
+            },
+            {
+              "id": "reserva-06-dados-estrangeiro",
+              "tipo": "rotulo",
+              "texto": "Sou estrangeiro e não tenho CPF",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 116,
+              "obs": "Caixa de marcar; troca o campo CPF por Passaporte."
+            },
+            {
+              "id": "reserva-06-dados-cpf",
+              "tipo": "rotulo",
+              "texto": "CPF",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 122
+            },
+            {
+              "id": "reserva-06-dados-cpf-exemplo",
+              "tipo": "campo",
+              "texto": "000.000.000-00",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 122
+            },
+            {
+              "id": "reserva-06-dados-passaporte",
+              "tipo": "rotulo",
+              "texto": "Passaporte",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 120,
+              "obs": "Só para quem marca que é estrangeiro."
+            },
+            {
+              "id": "reserva-06-dados-passaporte-exemplo",
+              "tipo": "campo",
+              "texto": "AB123456",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 120
+            },
+            {
+              "id": "reserva-06-dados-endereco-grupo",
+              "tipo": "subtitulo",
+              "texto": "Endereço",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 127
+            },
+            {
+              "id": "reserva-06-dados-endereco",
+              "tipo": "rotulo",
+              "texto": "Endereço",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 129
+            },
+            {
+              "id": "reserva-06-dados-endereco-exemplo",
+              "tipo": "campo",
+              "texto": "Rua, número, bairro",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 129
+            },
+            {
+              "id": "reserva-06-dados-complemento",
+              "tipo": "rotulo",
+              "texto": "Complemento",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 130
+            },
+            {
+              "id": "reserva-06-dados-complemento-exemplo",
+              "tipo": "campo",
+              "texto": "Apartamento, bloco (opcional)",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 130
+            },
+            {
+              "id": "reserva-06-dados-cidade",
+              "tipo": "rotulo",
+              "texto": "Cidade",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 133
+            },
+            {
+              "id": "reserva-06-dados-cidade-exemplo",
+              "tipo": "campo",
+              "texto": "Rio de Janeiro",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 133
+            },
+            {
+              "id": "reserva-06-dados-estado",
+              "tipo": "rotulo",
+              "texto": "Estado",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 134
+            },
+            {
+              "id": "reserva-06-dados-estado-exemplo",
+              "tipo": "opcao",
+              "texto": "UF",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 137
+            },
+            {
+              "id": "reserva-06-dados-erro-nome",
+              "tipo": "aviso",
+              "texto": "Informe seu nome.",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 21,
+              "obs": "Mensagens de erro: aparecem embaixo de cada campo depois da primeira tentativa de seguir."
+            },
+            {
+              "id": "reserva-06-dados-erro-sobrenome",
+              "tipo": "aviso",
+              "texto": "Informe seu sobrenome.",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 22
+            },
+            {
+              "id": "reserva-06-dados-erro-ddd",
+              "tipo": "aviso",
+              "texto": "DDD com 2 dígitos.",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 23
+            },
+            {
+              "id": "reserva-06-dados-erro-telefone",
+              "tipo": "aviso",
+              "texto": "Telefone incompleto.",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 24
+            },
+            {
+              "id": "reserva-06-dados-erro-email",
+              "tipo": "aviso",
+              "texto": "Informe um e-mail válido.",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 25
+            },
+            {
+              "id": "reserva-06-dados-erro-passaporte",
+              "tipo": "aviso",
+              "texto": "Informe o número do passaporte.",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 28
+            },
+            {
+              "id": "reserva-06-dados-erro-cpf",
+              "tipo": "aviso",
+              "texto": "CPF inválido. Confira os números.",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 30
+            },
+            {
+              "id": "reserva-06-dados-erro-endereco",
+              "tipo": "aviso",
+              "texto": "Informe o endereço.",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 33
+            },
+            {
+              "id": "reserva-06-dados-erro-cidade",
+              "tipo": "aviso",
+              "texto": "Informe a cidade.",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 34
+            },
+            {
+              "id": "reserva-06-dados-erro-estado",
+              "tipo": "aviso",
+              "texto": "Escolha o estado.",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 35
+            },
+            {
+              "id": "reserva-06-dados-erro-geral",
+              "tipo": "aviso",
+              "texto": "Confira os campos marcados acima antes de continuar.",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 147,
+              "obs": "Aparece acima dos botões quando algum campo tem erro."
+            },
+            {
+              "id": "reserva-06-dados-voltar",
+              "tipo": "botao",
+              "texto": "Voltar",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 157
+            },
+            {
+              "id": "reserva-06-dados-continuar",
+              "tipo": "botao",
+              "texto": "Revisar e confirmar",
+              "arquivo": "src/pages/Reservar/Dados/Index.jsx",
+              "linha": 165
+            }
+          ]
+        },
+        {
+          "id": "reserva-07-revisao",
+          "titulo": "Revisão e pré-reserva",
+          "rota": "/reservar/revisao",
+          "seletor": "main",
+          "estado": "reserva-revisao",
+          "obs": "Preparo em dev: abrir /reservar sem ?print=1 e clicar em 'Dados falsos' (andaime DevSeed, canto inferior esquerdo). Ele consulta a disponibilidade, grava busca, veículo, proteção e condutor em sessionStorage['locafacil_reservation'] e leva a /reservar/revisao. Depois, na mesma aba, abrir a rota da dobra com ?print=1 (esconde preloader, popups e o andaime). Não clicar em 'Confirmar pré-reserva': com as credenciais do .env.local a pré-reserva vai para o sistema real da locadora. A tela é alta (cerca de 1,9 tela no computador).",
+          "textos": [
+            {
+              "id": "reserva-07-revisao-titulo",
+              "tipo": "titulo",
+              "texto": "Revise e confirme",
+              "arquivo": "src/pages/Reservar/Revisao/Index.jsx",
+              "linha": 97,
+              "obs": "Nomes de carro, preços e proteções vêm do sistema da locadora e não são copy do site. Os dados do condutor também são o que a pessoa digitou."
+            },
+            {
+              "id": "reserva-07-revisao-subtitulo",
+              "tipo": "subtitulo",
+              "texto": "Confira tudo antes de enviar. Nada é cobrado agora: o pagamento é combinado quando nossa equipe falar com você.",
+              "arquivo": "src/pages/Reservar/Revisao/Index.jsx",
+              "linha": 99
+            },
+            {
+              "id": "reserva-07-revisao-veiculo",
+              "tipo": "rotulo",
+              "texto": "Veículo",
+              "arquivo": "src/pages/Reservar/Revisao/Index.jsx",
+              "linha": 103
+            },
+            {
+              "id": "reserva-07-revisao-veiculo-trocar",
+              "tipo": "link",
+              "texto": "Trocar",
+              "arquivo": "src/pages/Reservar/Revisao/Index.jsx",
+              "linha": 103
+            },
+            {
+              "id": "reserva-07-revisao-veiculo-resumo",
+              "tipo": "legenda",
+              "texto": "{câmbio} · {n} pessoas · {quilometragem}",
+              "arquivo": "src/pages/Reservar/Revisao/Index.jsx",
+              "linha": 112
+            },
+            {
+              "id": "reserva-07-revisao-datas",
+              "tipo": "rotulo",
+              "texto": "Retirada e devolução",
+              "arquivo": "src/pages/Reservar/Revisao/Index.jsx",
+              "linha": 118
+            },
+            {
+              "id": "reserva-07-revisao-datas-alterar",
+              "tipo": "link",
+              "texto": "Alterar",
+              "arquivo": "src/pages/Reservar/Revisao/Index.jsx",
+              "linha": 118
+            },
+            {
+              "id": "reserva-07-revisao-retirada",
+              "tipo": "rotulo",
+              "texto": "Retirada",
+              "arquivo": "src/pages/Reservar/Revisao/Index.jsx",
+              "linha": 121
+            },
+            {
+              "id": "reserva-07-revisao-devolucao",
+              "tipo": "rotulo",
+              "texto": "Devolução",
+              "arquivo": "src/pages/Reservar/Revisao/Index.jsx",
+              "linha": 128
+            },
+            {
+              "id": "reserva-07-revisao-condutor",
+              "tipo": "rotulo",
+              "texto": "Condutor",
+              "arquivo": "src/pages/Reservar/Revisao/Index.jsx",
+              "linha": 137
+            },
+            {
+              "id": "reserva-07-revisao-condutor-editar",
+              "tipo": "link",
+              "texto": "Editar",
+              "arquivo": "src/pages/Reservar/Revisao/Index.jsx",
+              "linha": 137
+            },
+            {
+              "id": "reserva-07-revisao-condutor-documento",
+              "tipo": "legenda",
+              "texto": "CPF {número}",
+              "arquivo": "src/pages/Reservar/Revisao/Index.jsx",
+              "linha": 143,
+              "obs": "Para estrangeiro: 'Passaporte {número}'."
+            },
+            {
+              "id": "reserva-07-revisao-protecao",
+              "tipo": "rotulo",
+              "texto": "Proteção e opcionais",
+              "arquivo": "src/pages/Reservar/Revisao/Index.jsx",
+              "linha": 150
+            },
+            {
+              "id": "reserva-07-revisao-protecao-alterar",
+              "tipo": "link",
+              "texto": "Alterar",
+              "arquivo": "src/pages/Reservar/Revisao/Index.jsx",
+              "linha": 150
+            },
+            {
+              "id": "reserva-07-revisao-protecao-nome",
+              "tipo": "legenda",
+              "texto": "Proteção {nome}",
+              "arquivo": "src/pages/Reservar/Revisao/Index.jsx",
+              "linha": 152
+            },
+            {
+              "id": "reserva-07-revisao-sem-protecao",
+              "tipo": "legenda",
+              "texto": "Sem proteção adicional",
+              "arquivo": "src/pages/Reservar/Revisao/Index.jsx",
+              "linha": 154
+            },
+            {
+              "id": "reserva-07-revisao-sem-opcionais",
+              "tipo": "legenda",
+              "texto": "Nenhum item opcional",
+              "arquivo": "src/pages/Reservar/Revisao/Index.jsx",
+              "linha": 163
+            },
+            {
+              "id": "reserva-07-revisao-valor",
+              "tipo": "rotulo",
+              "texto": "Valor",
+              "arquivo": "src/pages/Reservar/Revisao/Index.jsx",
+              "linha": 167
+            },
+            {
+              "id": "reserva-07-revisao-inclusa",
+              "tipo": "legenda",
+              "texto": "inclusa",
+              "arquivo": "src/pages/Reservar/Revisao/Index.jsx",
+              "linha": 176,
+              "obs": "No lugar do preço, para taxas que já estão na diária."
+            },
+            {
+              "id": "reserva-07-revisao-total",
+              "tipo": "rotulo",
+              "texto": "Total de {n} diárias",
+              "arquivo": "src/pages/Reservar/Revisao/Index.jsx",
+              "linha": 183
+            },
+            {
+              "id": "reserva-07-revisao-no-show",
+              "tipo": "aviso",
+              "texto": "Não comparecer para a retirada gera uma taxa de {valor}. Se precisar desistir, avise a loja pelo WhatsApp.",
+              "arquivo": "src/pages/Reservar/Revisao/Index.jsx",
+              "linha": 189,
+              "obs": "Só aparece quando a loja cobra taxa de não comparecimento."
+            },
+            {
+              "id": "reserva-07-revisao-pre-titulo",
+              "tipo": "titulo",
+              "texto": "Isto é uma pré-reserva",
+              "arquivo": "src/pages/Reservar/Revisao/Index.jsx",
+              "linha": 251,
+              "obs": "Bloco logo abaixo do resumo, antes do aceite."
+            },
+            {
+              "id": "reserva-07-revisao-pre-passo-1",
+              "tipo": "item",
+              "texto": "Em até 24 horas, nossa equipe entra em contato pelo telefone ou WhatsApp que você informou, para confirmar a reserva e combinar o pagamento.",
+              "arquivo": "src/pages/Reservar/Revisao/Index.jsx",
+              "linha": 254,
+              "obs": "Passo 1; 'Em até 24 horas' em destaque."
+            },
+            {
+              "id": "reserva-07-revisao-pre-passo-2",
+              "tipo": "item",
+              "texto": "Antes da retirada, mandamos uma mensagem no WhatsApp para lembrar o dia e o horário.",
+              "arquivo": "src/pages/Reservar/Revisao/Index.jsx",
+              "linha": 255,
+              "obs": "Passo 2; 'Antes da retirada' em destaque."
+            },
+            {
+              "id": "reserva-07-revisao-aceite",
+              "tipo": "rotulo",
+              "texto": "Li e aceito os termos de uso e as cláusulas contratuais da locação.",
+              "arquivo": "src/pages/Reservar/Revisao/Index.jsx",
+              "linha": 206,
+              "obs": "Caixa de marcar. 'termos de uso' e 'cláusulas contratuais' viram links quando a loja cadastra os documentos no sistema."
+            },
+            {
+              "id": "reserva-07-revisao-erro-aceite",
+              "tipo": "aviso",
+              "texto": "É preciso aceitar os termos e as cláusulas contratuais para enviar a pré-reserva.",
+              "arquivo": "src/pages/Reservar/Revisao/Index.jsx",
+              "linha": 68,
+              "obs": "Mensagem de erro ao tentar enviar sem marcar o aceite."
+            },
+            {
+              "id": "reserva-07-revisao-erro-envio",
+              "tipo": "aviso",
+              "texto": "Não foi possível enviar a pré-reserva. Tente novamente.",
+              "arquivo": "src/pages/Reservar/Revisao/Index.jsx",
+              "linha": 84,
+              "obs": "Quando o envio não chega ao sistema."
+            },
+            {
+              "id": "reserva-07-revisao-erro-sistema",
+              "tipo": "aviso",
+              "texto": "Não foi possível confirmar a reserva. Tente novamente.",
+              "arquivo": "api/reservation-confirm.js",
+              "linha": 62,
+              "obs": "Quando o sistema da locadora recusa sem explicar."
+            },
+            {
+              "id": "reserva-07-revisao-voltar",
+              "tipo": "botao",
+              "texto": "Voltar",
+              "arquivo": "src/pages/Reservar/Revisao/Index.jsx",
+              "linha": 224
+            },
+            {
+              "id": "reserva-07-revisao-confirmar",
+              "tipo": "botao",
+              "texto": "Confirmar pré-reserva",
+              "arquivo": "src/pages/Reservar/Revisao/Index.jsx",
+              "linha": 234
+            },
+            {
+              "id": "reserva-07-revisao-confirmar-enviando",
+              "tipo": "botao",
+              "texto": "Enviando sua pré-reserva",
+              "arquivo": "src/pages/Reservar/Revisao/Index.jsx",
+              "linha": 234,
+              "obs": "Aparece no botão enquanto envia."
+            }
+          ]
+        },
+        {
+          "id": "reserva-08-confirmacao",
+          "titulo": "Pré-reserva enviada",
+          "rota": "/reservar/confirmacao",
+          "seletor": "main",
+          "estado": "reserva-confirmacao",
+          "obs": "Não gerar pelo botão 'Confirmar pré-reserva': com as credenciais do .env.local a pré-reserva vai para o sistema real da locadora. Depois do preparo das outras etapas ('Dados falsos'), gravar no objeto de sessionStorage['locafacil_reservation'] um confirmation falso ({ confId, vehicle: { groupName }, days }) e confirmationTotals ({ total, coverageItem }), e abrir /reservar/confirmacao?print=1. A tela limpa a sessionStorage ao sair.",
+          "textos": [
+            {
+              "id": "reserva-08-confirmacao-titulo",
+              "tipo": "titulo",
+              "texto": "Pré-reserva enviada",
+              "arquivo": "src/pages/Reservar/Confirmacao/Index.jsx",
+              "linha": 75,
+              "obs": "Nomes de carro, preços e proteções vêm do sistema da locadora e não são copy do site. O número da pré-reserva também vem do sistema."
+            },
+            {
+              "id": "reserva-08-confirmacao-subtitulo",
+              "tipo": "subtitulo",
+              "texto": "Guarde o número abaixo: é com ele que nossa equipe vai falar com você.",
+              "arquivo": "src/pages/Reservar/Confirmacao/Index.jsx",
+              "linha": 77
+            },
+            {
+              "id": "reserva-08-confirmacao-numero",
+              "tipo": "rotulo",
+              "texto": "Número da pré-reserva",
+              "arquivo": "src/pages/Reservar/Confirmacao/Index.jsx",
+              "linha": 80
+            },
+            {
+              "id": "reserva-08-confirmacao-veiculo",
+              "tipo": "rotulo",
+              "texto": "Veículo",
+              "arquivo": "src/pages/Reservar/Confirmacao/Index.jsx",
+              "linha": 84
+            },
+            {
+              "id": "reserva-08-confirmacao-retirada",
+              "tipo": "rotulo",
+              "texto": "Retirada",
+              "arquivo": "src/pages/Reservar/Confirmacao/Index.jsx",
+              "linha": 86
+            },
+            {
+              "id": "reserva-08-confirmacao-devolucao",
+              "tipo": "rotulo",
+              "texto": "Devolução",
+              "arquivo": "src/pages/Reservar/Confirmacao/Index.jsx",
+              "linha": 90
+            },
+            {
+              "id": "reserva-08-confirmacao-protecao",
+              "tipo": "rotulo",
+              "texto": "Proteção",
+              "arquivo": "src/pages/Reservar/Confirmacao/Index.jsx",
+              "linha": 93
+            },
+            {
+              "id": "reserva-08-confirmacao-total",
+              "tipo": "rotulo",
+              "texto": "Total de {n} diárias",
+              "arquivo": "src/pages/Reservar/Confirmacao/Index.jsx",
+              "linha": 98
+            },
+            {
+              "id": "reserva-08-confirmacao-passos-titulo",
+              "tipo": "subtitulo",
+              "texto": "Próximos passos",
+              "arquivo": "src/pages/Reservar/Confirmacao/Index.jsx",
+              "linha": 107
+            },
+            {
+              "id": "reserva-08-confirmacao-passo-1",
+              "tipo": "item",
+              "texto": "Em até 24 horas, nossa equipe entra em contato para confirmar a reserva e combinar o pagamento.",
+              "arquivo": "src/pages/Reservar/Confirmacao/Index.jsx",
+              "linha": 110,
+              "obs": "O começo de cada passo aparece em destaque."
+            },
+            {
+              "id": "reserva-08-confirmacao-passo-2",
+              "tipo": "item",
+              "texto": "Antes da retirada, mandamos uma mensagem no WhatsApp para lembrar o dia e o horário.",
+              "arquivo": "src/pages/Reservar/Confirmacao/Index.jsx",
+              "linha": 111
+            },
+            {
+              "id": "reserva-08-confirmacao-passo-3",
+              "tipo": "item",
+              "texto": "No dia, leve CNH válida e um cartão em seu nome.",
+              "arquivo": "src/pages/Reservar/Confirmacao/Index.jsx",
+              "linha": 112
+            },
+            {
+              "id": "reserva-08-confirmacao-suporte",
+              "tipo": "botao",
+              "texto": "Falar com o suporte",
+              "arquivo": "src/pages/Reservar/Confirmacao/Index.jsx",
+              "linha": 138
+            },
+            {
+              "id": "reserva-08-confirmacao-suporte-whatsapp",
+              "tipo": "mensagem-whatsapp",
+              "texto": "Olá, Locafacil! Fiz a pré-reserva {número} pelo site e preciso de suporte.",
+              "arquivo": "src/pages/Reservar/Confirmacao/Index.jsx",
+              "linha": 56,
+              "obs": "Texto que já vem escrito no WhatsApp ao tocar em 'Falar com o suporte'."
+            },
+            {
+              "id": "reserva-08-confirmacao-calendario",
+              "tipo": "botao",
+              "texto": "Adicionar ao calendário",
+              "arquivo": "src/pages/Reservar/Confirmacao/Index.jsx",
+              "linha": 152,
+              "obs": "Baixa um lembrete para a agenda do celular."
+            },
+            {
+              "id": "reserva-08-confirmacao-calendario-evento",
+              "tipo": "legenda",
+              "texto": "Retirada do veículo · Locafacil (pré-reserva {número})",
+              "arquivo": "src/pages/Reservar/Confirmacao/Index.jsx",
+              "linha": 25,
+              "obs": "Nome do compromisso que entra na agenda."
+            },
+            {
+              "id": "reserva-08-confirmacao-alterar",
+              "tipo": "link",
+              "texto": "Alterar ou cancelar esta pré-reserva",
+              "arquivo": "src/pages/Reservar/Confirmacao/Index.jsx",
+              "linha": 168
+            },
+            {
+              "id": "reserva-08-confirmacao-alterar-whatsapp",
+              "tipo": "mensagem-whatsapp",
+              "texto": "Olá! Vim pelo site e preciso falar sobre a pré-reserva {número}.",
+              "arquivo": "src/pages/Reservar/Confirmacao/Index.jsx",
+              "linha": 162,
+              "obs": "Texto que já vem escrito no WhatsApp ao tocar em 'Alterar ou cancelar esta pré-reserva'."
+            },
+            {
+              "id": "reserva-08-confirmacao-demonstracao",
+              "tipo": "aviso",
+              "texto": "Pré-reserva de demonstração: a integração com o sistema da loja ainda não foi liberada.",
+              "arquivo": "src/pages/Reservar/Confirmacao/Index.jsx",
+              "linha": 174,
+              "obs": "Só aparece enquanto o site usa dados de exemplo."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "empresas-contato",
+      "numero": 3,
+      "titulo": "Empresas, Contato e atendimento",
+      "pptx": "Locafacil-Copy-3-Empresas-Contato.pptx",
+      "dobras": [
+        {
+          "id": "empresas-contato-01-empresas-topo",
+          "titulo": "Para Empresas: topo da página",
+          "rota": "/para-empresas",
+          "seletor": "header + div",
+          "estado": null,
+          "textos": [
+            {
+              "id": "empresas-contato-01-empresas-topo-titulo",
+              "tipo": "titulo",
+              "texto": "Locafacil Business",
+              "arquivo": "src/pages/Empresas/Header.jsx",
+              "linha": 25
+            },
+            {
+              "id": "empresas-contato-01-empresas-topo-subtitulo",
+              "tipo": "subtitulo",
+              "texto": "Eficiência em movimento: soluções completas em terceirização de frota.",
+              "arquivo": "src/pages/Empresas/Header.jsx",
+              "linha": 28
+            },
+            {
+              "id": "empresas-contato-01-empresas-topo-botao",
+              "tipo": "botao",
+              "texto": "Solicitar Proposta Comercial",
+              "arquivo": "src/pages/Empresas/Header.jsx",
+              "linha": 36
+            },
+            {
+              "id": "empresas-contato-01-empresas-topo-whatsapp",
+              "tipo": "mensagem-whatsapp",
+              "texto": "Olá, Locafacil! Quero saber sobre frota para empresas.",
+              "arquivo": "src/pages/Empresas/Header.jsx",
+              "linha": 30,
+              "obs": "Texto que já vem escrito no WhatsApp comercial, (21) 99329-7697, ao tocar em 'Solicitar Proposta Comercial'."
+            }
+          ]
+        },
+        {
+          "id": "empresas-contato-02-empresas-crescer",
+          "titulo": "Para Empresas: crescer sem dor",
+          "rota": "/para-empresas",
+          "seletor": "main > section:nth-of-type(1)",
+          "estado": null,
+          "textos": [
+            {
+              "id": "empresas-contato-02-empresas-crescer-titulo",
+              "tipo": "titulo",
+              "texto": "Crescer dói, mas não precisa ser assim.",
+              "arquivo": "src/pages/Empresas/Content.jsx",
+              "linha": 53
+            },
+            {
+              "id": "empresas-contato-02-empresas-crescer-texto",
+              "tipo": "paragrafo",
+              "texto": "Com a Locafacil Business você pode expandir sua operação sem precisar se preocupar com custos de aquisição, gestão da frota e manutenção dos veículos. Oferecemos soluções completas em terceirização de frotas para você focar no que realmente importa — o crescimento da sua empresa.",
+              "arquivo": "src/pages/Empresas/Content.jsx",
+              "linha": 56
+            },
+            {
+              "id": "empresas-contato-02-empresas-crescer-botao",
+              "tipo": "botao",
+              "texto": "Solicitar Cotação Agora",
+              "arquivo": "src/pages/Empresas/Content.jsx",
+              "linha": 66,
+              "obs": "Desce até o formulário de cotação."
+            }
+          ]
+        },
+        {
+          "id": "empresas-contato-03-empresas-motivos",
+          "titulo": "Para Empresas: 4 motivos",
+          "rota": "/para-empresas",
+          "seletor": "main > section:nth-of-type(2)",
+          "estado": null,
+          "textos": [
+            {
+              "id": "empresas-contato-03-empresas-motivos-titulo",
+              "tipo": "titulo",
+              "texto": "4 motivos para contratar hoje",
+              "arquivo": "src/pages/Empresas/Content.jsx",
+              "linha": 90
+            },
+            {
+              "id": "empresas-contato-03-empresas-motivos-custos-titulo",
+              "tipo": "subtitulo",
+              "texto": "Custos",
+              "arquivo": "src/pages/Empresas/Content.jsx",
+              "linha": 21
+            },
+            {
+              "id": "empresas-contato-03-empresas-motivos-custos-texto",
+              "tipo": "paragrafo",
+              "texto": "Com a terceirização de frota da Locafacil você reduz custos e elimina gastos inesperados com manutenções e substituição de veículos. Na prática é a sua empresa operando forte, com custo fixo mensal e sem surpresas desagradáveis.",
+              "arquivo": "src/pages/Empresas/Content.jsx",
+              "linha": 22
+            },
+            {
+              "id": "empresas-contato-03-empresas-motivos-agilidade-titulo",
+              "tipo": "subtitulo",
+              "texto": "Agilidade",
+              "arquivo": "src/pages/Empresas/Content.jsx",
+              "linha": 25
+            },
+            {
+              "id": "empresas-contato-03-empresas-motivos-agilidade-texto",
+              "tipo": "paragrafo",
+              "texto": "A Locafacil Business garante o processo de contratação mais ágil do mercado. Sem sua empresa pagar caução, com atendimento humanizado e planos 100% personalizados de acordo com sua necessidade.",
+              "arquivo": "src/pages/Empresas/Content.jsx",
+              "linha": 26
+            },
+            {
+              "id": "empresas-contato-03-empresas-motivos-foco-titulo",
+              "tipo": "subtitulo",
+              "texto": "Foco",
+              "arquivo": "src/pages/Empresas/Content.jsx",
+              "linha": 29
+            },
+            {
+              "id": "empresas-contato-03-empresas-motivos-foco-texto",
+              "tipo": "paragrafo",
+              "texto": "Você, empresário, sabe bem que tempo + foco = resultado! Terceirizando sua frota com a Locafacil Business você ganha tempo para pensar no que realmente importa — o crescimento da sua empresa.",
+              "arquivo": "src/pages/Empresas/Content.jsx",
+              "linha": 30
+            },
+            {
+              "id": "empresas-contato-03-empresas-motivos-planejamento-titulo",
+              "tipo": "subtitulo",
+              "texto": "Planejamento",
+              "arquivo": "src/pages/Empresas/Content.jsx",
+              "linha": 33
+            },
+            {
+              "id": "empresas-contato-03-empresas-motivos-planejamento-texto",
+              "tipo": "paragrafo",
+              "texto": "Transformar despesas variáveis em custos fixos auxiliará todo o seu processo de gestão financeira e planejamento operacional. Além disso, você conta com a nossa flexibilidade de poder aumentar a frota sempre que quiser.",
+              "arquivo": "src/pages/Empresas/Content.jsx",
+              "linha": 34
+            }
+          ]
+        },
+        {
+          "id": "empresas-contato-04-empresas-cotacao",
+          "titulo": "Para Empresas: pedido de cotação",
+          "rota": "/para-empresas",
+          "seletor": "#cotacao",
+          "estado": null,
+          "textos": [
+            {
+              "id": "empresas-contato-04-empresas-cotacao-titulo",
+              "tipo": "titulo",
+              "texto": "Peça sua cotação",
+              "arquivo": "src/pages/Empresas/Content.jsx",
+              "linha": 119,
+              "obs": "Os campos são provisórios (reunião de 29/09/2026). As respostas viram uma mensagem no WhatsApp comercial, uma linha por campo, no formato \"Nome: …\"."
+            },
+            {
+              "id": "empresas-contato-04-empresas-cotacao-texto",
+              "tipo": "paragrafo",
+              "texto": "Conte o tamanho da operação e a equipe comercial responde com uma proposta sob medida.",
+              "arquivo": "src/pages/Empresas/Content.jsx",
+              "linha": 121
+            },
+            {
+              "id": "empresas-contato-04-empresas-cotacao-nome",
+              "tipo": "rotulo",
+              "texto": "Nome",
+              "arquivo": "src/config/formularios.js",
+              "linha": 19
+            },
+            {
+              "id": "empresas-contato-04-empresas-cotacao-empresa",
+              "tipo": "rotulo",
+              "texto": "Empresa",
+              "arquivo": "src/config/formularios.js",
+              "linha": 20
+            },
+            {
+              "id": "empresas-contato-04-empresas-cotacao-telefone",
+              "tipo": "rotulo",
+              "texto": "Telefone",
+              "arquivo": "src/config/formularios.js",
+              "linha": 21
+            },
+            {
+              "id": "empresas-contato-04-empresas-cotacao-telefone-exemplo",
+              "tipo": "campo",
+              "texto": "(21) 99999-9999",
+              "arquivo": "src/config/formularios.js",
+              "linha": 21,
+              "obs": "Exemplo que aparece dentro do campo vazio."
+            },
+            {
+              "id": "empresas-contato-04-empresas-cotacao-cnpj",
+              "tipo": "rotulo",
+              "texto": "CNPJ",
+              "arquivo": "src/config/formularios.js",
+              "linha": 22
+            },
+            {
+              "id": "empresas-contato-04-empresas-cotacao-opcional",
+              "tipo": "rotulo",
+              "texto": "(opcional)",
+              "arquivo": "src/components/Global/FormularioWhatsApp.jsx",
+              "linha": 52,
+              "obs": "Aparece depois do nome dos campos que não são obrigatórios."
+            },
+            {
+              "id": "empresas-contato-04-empresas-cotacao-quantidade",
+              "tipo": "rotulo",
+              "texto": "Quantos veículos",
+              "arquivo": "src/config/formularios.js",
+              "linha": 25
+            },
+            {
+              "id": "empresas-contato-04-empresas-cotacao-selecione",
+              "tipo": "opcao",
+              "texto": "Selecione",
+              "arquivo": "src/components/Global/FormularioWhatsApp.jsx",
+              "linha": 56,
+              "obs": "Primeira linha das listas de escolha. O mesmo texto aparece no formulário do Contato."
+            },
+            {
+              "id": "empresas-contato-04-empresas-cotacao-quantidade-1",
+              "tipo": "opcao",
+              "texto": "1 a 5",
+              "arquivo": "src/config/formularios.js",
+              "linha": 28
+            },
+            {
+              "id": "empresas-contato-04-empresas-cotacao-quantidade-2",
+              "tipo": "opcao",
+              "texto": "6 a 10",
+              "arquivo": "src/config/formularios.js",
+              "linha": 28
+            },
+            {
+              "id": "empresas-contato-04-empresas-cotacao-quantidade-3",
+              "tipo": "opcao",
+              "texto": "11 a 30",
+              "arquivo": "src/config/formularios.js",
+              "linha": 28
+            },
+            {
+              "id": "empresas-contato-04-empresas-cotacao-quantidade-4",
+              "tipo": "opcao",
+              "texto": "Mais de 30",
+              "arquivo": "src/config/formularios.js",
+              "linha": 28
+            },
+            {
+              "id": "empresas-contato-04-empresas-cotacao-prazo",
+              "tipo": "rotulo",
+              "texto": "Por quanto tempo",
+              "arquivo": "src/config/formularios.js",
+              "linha": 32
+            },
+            {
+              "id": "empresas-contato-04-empresas-cotacao-prazo-1",
+              "tipo": "opcao",
+              "texto": "Até 3 meses",
+              "arquivo": "src/config/formularios.js",
+              "linha": 34
+            },
+            {
+              "id": "empresas-contato-04-empresas-cotacao-prazo-2",
+              "tipo": "opcao",
+              "texto": "De 3 a 12 meses",
+              "arquivo": "src/config/formularios.js",
+              "linha": 34
+            },
+            {
+              "id": "empresas-contato-04-empresas-cotacao-prazo-3",
+              "tipo": "opcao",
+              "texto": "Mais de 12 meses",
+              "arquivo": "src/config/formularios.js",
+              "linha": 34
+            },
+            {
+              "id": "empresas-contato-04-empresas-cotacao-prazo-4",
+              "tipo": "opcao",
+              "texto": "Ainda não sei",
+              "arquivo": "src/config/formularios.js",
+              "linha": 34
+            },
+            {
+              "id": "empresas-contato-04-empresas-cotacao-mensagem",
+              "tipo": "rotulo",
+              "texto": "Conte mais sobre a operação",
+              "arquivo": "src/config/formularios.js",
+              "linha": 36
+            },
+            {
+              "id": "empresas-contato-04-empresas-cotacao-mensagem-exemplo",
+              "tipo": "campo",
+              "texto": "Tipo de veículo, cidade, quando precisa começar…",
+              "arquivo": "src/config/formularios.js",
+              "linha": 36
+            },
+            {
+              "id": "empresas-contato-04-empresas-cotacao-botao",
+              "tipo": "botao",
+              "texto": "Enviar pedido de cotação",
+              "arquivo": "src/config/formularios.js",
+              "linha": 16,
+              "obs": "Abre o WhatsApp comercial com as respostas já escritas."
+            },
+            {
+              "id": "empresas-contato-04-empresas-cotacao-nota",
+              "tipo": "legenda",
+              "texto": "As respostas abrem prontas no seu WhatsApp. É só apertar enviar.",
+              "arquivo": "src/config/formularios.js",
+              "linha": 17
+            }
+          ]
+        },
+        {
+          "id": "empresas-contato-05-contato-topo",
+          "titulo": "Contato: topo da página",
+          "rota": "/contato",
+          "seletor": "header + div",
+          "estado": null,
+          "textos": [
+            {
+              "id": "empresas-contato-05-contato-topo-titulo",
+              "tipo": "titulo",
+              "texto": "Estamos aqui por você.",
+              "arquivo": "src/pages/Contato/Header.jsx",
+              "linha": 21
+            },
+            {
+              "id": "empresas-contato-05-contato-topo-subtitulo",
+              "tipo": "subtitulo",
+              "texto": "Conheça a equipe por trás da Locafacil e entre em contato conosco.",
+              "arquivo": "src/pages/Contato/Header.jsx",
+              "linha": 24
+            }
+          ]
+        },
+        {
+          "id": "empresas-contato-06-contato-equipe",
+          "titulo": "Contato: equipe",
+          "rota": "/contato",
+          "seletor": "main > div > div:nth-of-type(1)",
+          "estado": null,
+          "textos": [
+            {
+              "id": "empresas-contato-06-contato-equipe-titulo",
+              "tipo": "titulo",
+              "texto": "Pessoas que fazem acontecer.",
+              "arquivo": "src/pages/Contato/Content.jsx",
+              "linha": 33
+            },
+            {
+              "id": "empresas-contato-06-contato-equipe-subtitulo",
+              "tipo": "subtitulo",
+              "texto": "Nossa equipe é formada por especialistas apaixonados por mobilidade. Mais do que alugar carros, trabalhamos para oferecer a melhor experiência.",
+              "arquivo": "src/pages/Contato/Content.jsx",
+              "linha": 36
+            },
+            {
+              "id": "empresas-contato-06-contato-equipe-bloco-titulo",
+              "tipo": "subtitulo",
+              "texto": "Um atendimento humano e próximo",
+              "arquivo": "src/pages/Contato/Content.jsx",
+              "linha": 49
+            },
+            {
+              "id": "empresas-contato-06-contato-equipe-bloco-texto",
+              "tipo": "paragrafo",
+              "texto": "Acreditamos que a tecnologia deve facilitar processos, mas o atendimento precisa ser humano. Nossa equipe de especialistas está sempre pronta para entender a sua necessidade e encontrar o plano ideal para você ou para a sua empresa.",
+              "arquivo": "src/pages/Contato/Content.jsx",
+              "linha": 51
+            },
+            {
+              "id": "empresas-contato-06-contato-equipe-bloco-texto-2",
+              "tipo": "paragrafo",
+              "texto": "Sem robôs, sem burocracia desnecessária. Fale diretamente com quem pode resolver o seu problema.",
+              "arquivo": "src/pages/Contato/Content.jsx",
+              "linha": 54
+            }
+          ]
+        },
+        {
+          "id": "empresas-contato-07-contato-formulario",
+          "titulo": "Contato: informações e formulário",
+          "rota": "/contato",
+          "seletor": "main > div > div:nth-of-type(2)",
+          "estado": null,
+          "textos": [
+            {
+              "id": "empresas-contato-07-contato-formulario-info-titulo",
+              "tipo": "subtitulo",
+              "texto": "Informações de contato",
+              "arquivo": "src/pages/Contato/Content.jsx",
+              "linha": 70
+            },
+            {
+              "id": "empresas-contato-07-contato-formulario-telefone-rotulo",
+              "tipo": "rotulo",
+              "texto": "Telefone / WhatsApp",
+              "arquivo": "src/pages/Contato/Content.jsx",
+              "linha": 79
+            },
+            {
+              "id": "empresas-contato-07-contato-formulario-telefone",
+              "tipo": "link",
+              "texto": "(21) 96854-0185",
+              "arquivo": "src/pages/Contato/Content.jsx",
+              "linha": 80
+            },
+            {
+              "id": "empresas-contato-07-contato-formulario-telefone-empresas",
+              "tipo": "link",
+              "texto": "(21) 99329-7697 (Empresas)",
+              "arquivo": "src/pages/Contato/Content.jsx",
+              "linha": 81
+            },
+            {
+              "id": "empresas-contato-07-contato-formulario-email-rotulo",
+              "tipo": "rotulo",
+              "texto": "E-mail",
+              "arquivo": "src/pages/Contato/Content.jsx",
+              "linha": 92
+            },
+            {
+              "id": "empresas-contato-07-contato-formulario-email",
+              "tipo": "link",
+              "texto": "reservas@locafacilaluguel.com",
+              "arquivo": "src/pages/Contato/Content.jsx",
+              "linha": 93
+            },
+            {
+              "id": "empresas-contato-07-contato-formulario-form-titulo",
+              "tipo": "subtitulo",
+              "texto": "Fale com a gente",
+              "arquivo": "src/pages/Contato/Content.jsx",
+              "linha": 100
+            },
+            {
+              "id": "empresas-contato-07-contato-formulario-form-texto",
+              "tipo": "paragrafo",
+              "texto": "Conte o que precisa e a mensagem chega pronta no WhatsApp da loja.",
+              "arquivo": "src/pages/Contato/Content.jsx",
+              "linha": 102
+            },
+            {
+              "id": "empresas-contato-07-contato-formulario-nome",
+              "tipo": "rotulo",
+              "texto": "Nome",
+              "arquivo": "src/config/formularios.js",
+              "linha": 46
+            },
+            {
+              "id": "empresas-contato-07-contato-formulario-assunto",
+              "tipo": "rotulo",
+              "texto": "Assunto",
+              "arquivo": "src/config/formularios.js",
+              "linha": 47,
+              "obs": "As opções desta lista são os seis assuntos do botão de WhatsApp (lâmina 'Mensagens prontas do WhatsApp'); a primeira linha é 'Selecione', revisado no formulário de cotação."
+            },
+            {
+              "id": "empresas-contato-07-contato-formulario-mensagem",
+              "tipo": "rotulo",
+              "texto": "Mensagem",
+              "arquivo": "src/config/formularios.js",
+              "linha": 48
+            },
+            {
+              "id": "empresas-contato-07-contato-formulario-botao",
+              "tipo": "botao",
+              "texto": "Enviar pelo WhatsApp",
+              "arquivo": "src/config/formularios.js",
+              "linha": 43,
+              "obs": "Abre o WhatsApp da loja com as respostas já escritas."
+            },
+            {
+              "id": "empresas-contato-07-contato-formulario-nota",
+              "tipo": "legenda",
+              "texto": "As respostas abrem prontas no seu WhatsApp. É só apertar enviar.",
+              "arquivo": "src/config/formularios.js",
+              "linha": 44
+            }
+          ]
+        },
+        {
+          "id": "empresas-contato-08-contato-mapa",
+          "titulo": "Contato: mapa",
+          "rota": "/contato",
+          "seletor": "main > div > div:nth-of-type(3)",
+          "estado": null,
+          "textos": [
+            {
+              "id": "empresas-contato-08-contato-mapa-titulo",
+              "tipo": "titulo",
+              "texto": "Nossa localização central",
+              "arquivo": "src/pages/Contato/Content.jsx",
+              "linha": 117,
+              "obs": "Embaixo, mapa do Google em Nova Iguaçu."
+            }
+          ]
+        },
+        {
+          "id": "empresas-contato-09-whatsapp",
+          "titulo": "Mensagens prontas do WhatsApp",
+          "rota": "/contato",
+          "seletor": null,
+          "estado": null,
+          "textos": [
+            {
+              "id": "empresas-contato-09-whatsapp-alugar",
+              "tipo": "rotulo",
+              "texto": "Quero alugar um carro",
+              "arquivo": "src/config/atendimento.js",
+              "linha": 16,
+              "obs": "Assunto 1 de 6. Os assuntos aparecem no botão flutuante de WhatsApp (todas as páginas, menos a documentação) e na lista 'Assunto' do formulário do Contato. O nome do assunto é curto para caber no botão; a frase é o que chega à loja."
+            },
+            {
+              "id": "empresas-contato-09-whatsapp-alugar-detalhe",
+              "tipo": "legenda",
+              "texto": "Diárias, grupos disponíveis e como retirar",
+              "arquivo": "src/config/atendimento.js",
+              "linha": 17
+            },
+            {
+              "id": "empresas-contato-09-whatsapp-alugar-frase",
+              "tipo": "mensagem-whatsapp",
+              "texto": "Olá! Vim pelo site e quero alugar um carro. Pode me passar os valores e a disponibilidade?",
+              "arquivo": "src/config/atendimento.js",
+              "linha": 18
+            },
+            {
+              "id": "empresas-contato-09-whatsapp-assinar",
+              "tipo": "rotulo",
+              "texto": "Quero assinar um carro por mês",
+              "arquivo": "src/config/atendimento.js",
+              "linha": 21,
+              "obs": "Assunto 2 de 6."
+            },
+            {
+              "id": "empresas-contato-09-whatsapp-assinar-detalhe",
+              "tipo": "legenda",
+              "texto": "Locafacil Express, sem IPVA nem manutenção",
+              "arquivo": "src/config/atendimento.js",
+              "linha": 22
+            },
+            {
+              "id": "empresas-contato-09-whatsapp-assinar-frase",
+              "tipo": "mensagem-whatsapp",
+              "texto": "Olá! Vim pelo site e tenho interesse na assinatura mensal. Como funciona e quais são os planos?",
+              "arquivo": "src/config/atendimento.js",
+              "linha": 23
+            },
+            {
+              "id": "empresas-contato-09-whatsapp-empresa",
+              "tipo": "rotulo",
+              "texto": "Preciso de carro para minha empresa",
+              "arquivo": "src/config/atendimento.js",
+              "linha": 26,
+              "obs": "Assunto 3 de 6."
+            },
+            {
+              "id": "empresas-contato-09-whatsapp-empresa-detalhe",
+              "tipo": "legenda",
+              "texto": "Frota, contrato e proposta comercial",
+              "arquivo": "src/config/atendimento.js",
+              "linha": 27
+            },
+            {
+              "id": "empresas-contato-09-whatsapp-empresa-frase",
+              "tipo": "mensagem-whatsapp",
+              "texto": "Olá! Vim pelo site e preciso de veículos para a minha empresa. Gostaria de receber uma proposta comercial.",
+              "arquivo": "src/config/atendimento.js",
+              "linha": 28
+            },
+            {
+              "id": "empresas-contato-09-whatsapp-documentos",
+              "tipo": "rotulo",
+              "texto": "Quais documentos eu preciso levar",
+              "arquivo": "src/config/atendimento.js",
+              "linha": 31,
+              "obs": "Assunto 4 de 6."
+            },
+            {
+              "id": "empresas-contato-09-whatsapp-documentos-detalhe",
+              "tipo": "legenda",
+              "texto": "Requisitos para retirar o veículo",
+              "arquivo": "src/config/atendimento.js",
+              "linha": 32
+            },
+            {
+              "id": "empresas-contato-09-whatsapp-documentos-frase",
+              "tipo": "mensagem-whatsapp",
+              "texto": "Olá! Vim pelo site. Quais documentos e requisitos eu preciso para retirar um veículo?",
+              "arquivo": "src/config/atendimento.js",
+              "linha": 33
+            },
+            {
+              "id": "empresas-contato-09-whatsapp-reserva",
+              "tipo": "rotulo",
+              "texto": "Tenho dúvida sobre a minha reserva",
+              "arquivo": "src/config/atendimento.js",
+              "linha": 36,
+              "obs": "Assunto 5 de 6."
+            },
+            {
+              "id": "empresas-contato-09-whatsapp-reserva-detalhe",
+              "tipo": "legenda",
+              "texto": "Alterar, confirmar ou cancelar",
+              "arquivo": "src/config/atendimento.js",
+              "linha": 37
+            },
+            {
+              "id": "empresas-contato-09-whatsapp-reserva-frase",
+              "tipo": "mensagem-whatsapp",
+              "texto": "Olá! Vim pelo site e tenho uma dúvida sobre uma reserva que já fiz.",
+              "arquivo": "src/config/atendimento.js",
+              "linha": 38
+            },
+            {
+              "id": "empresas-contato-09-whatsapp-outro",
+              "tipo": "rotulo",
+              "texto": "Outro assunto",
+              "arquivo": "src/config/atendimento.js",
+              "linha": 41,
+              "obs": "Assunto 6 de 6."
+            },
+            {
+              "id": "empresas-contato-09-whatsapp-outro-detalhe",
+              "tipo": "legenda",
+              "texto": "Fale direto com a equipe",
+              "arquivo": "src/config/atendimento.js",
+              "linha": 42
+            },
+            {
+              "id": "empresas-contato-09-whatsapp-outro-frase",
+              "tipo": "mensagem-whatsapp",
+              "texto": "Olá! Vim pelo site da Locafacil e gostaria de falar com um atendente.",
+              "arquivo": "src/config/atendimento.js",
+              "linha": 43
+            },
+            {
+              "id": "empresas-contato-09-whatsapp-abertura-cotacao",
+              "tipo": "mensagem-whatsapp",
+              "texto": "Olá! Vim pelo site e quero uma proposta de frota para a minha empresa.",
+              "arquivo": "src/config/formularios.js",
+              "linha": 15,
+              "obs": "Primeira linha da mensagem que o formulário de cotação (Para Empresas) manda ao WhatsApp comercial; as respostas vêm embaixo, uma por linha."
+            },
+            {
+              "id": "empresas-contato-09-whatsapp-abertura-contato",
+              "tipo": "mensagem-whatsapp",
+              "texto": "Olá! Vim pelo site da Locafacil.",
+              "arquivo": "src/config/formularios.js",
+              "linha": 42,
+              "obs": "Primeira linha da mensagem que o formulário do Contato manda ao WhatsApp da loja; as respostas vêm embaixo, uma por linha."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

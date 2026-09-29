@@ -25,6 +25,7 @@ const ReservarConfirmacao = lazy(() => import('./pages/Reservar/Confirmacao/Inde
 const DocCliente = lazy(() => import('./pages/Doc/Cliente'))
 const DocMarketing = lazy(() => import('./pages/Doc/Marketing'))
 const DocRetornos = lazy(() => import('./pages/Doc/Retornos'))
+const DocCopy = lazy(() => import('./pages/Doc/Copy'))
 
 /* Enquanto o pedaço da rota chega, a página fica no fundo da marca em vez de
    piscar branco. O texto é para quem ouve a tela, não para quem a vê. */
@@ -66,6 +67,8 @@ export default function Rotas() {
         />
         <Route path="/doc/cliente" element={<DocCliente />} />
         <Route path="/doc/marketing" element={<DocMarketing />} />
+        {/* Revisão de copy, texto por texto. Salva sozinha em /api/retornos. */}
+        <Route path="/doc/copy" element={<DocCopy />} />
         {/* Lista dos retornos salvos. Pede a senha de DOC_RETORNOS_SENHA. */}
         <Route path="/doc/retornos" element={<DocRetornos />} />
         {/* `/doc` sozinho não tem o que mostrar: quem chegou sem o resto do

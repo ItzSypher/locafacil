@@ -40,14 +40,24 @@ function apiDevMiddleware() {
         req.query = Object.fromEntries(new URLSearchParams(queryString ?? ''))
         req.body = rawBody ? JSON.parse(rawBody) : undefined
 
+        // `setHeader` e `send` existem na Vercel e faltavam aqui: sem eles o
+        // anexo de imagem de /api/retornos, que devolve bytes e não JSON, só
+        // funcionaria em produção.
         const response = {
           status(code) {
             res.statusCode = code
             return response
           },
+          setHeader(nome, valor) {
+            res.setHeader(nome, valor)
+            return response
+          },
           json(payload) {
             res.setHeader('Content-Type', 'application/json')
             res.end(JSON.stringify(payload))
+          },
+          send(corpo) {
+            res.end(corpo)
           },
         }
 
