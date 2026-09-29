@@ -1,12 +1,12 @@
-import { memo, useCallback, useEffect, useRef, useState } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 import {
-  ROTULO_TIPO, LIMITE_TEXTO_NOVO, LIMITE_NOTA, enderecoCaptura, contarMarcados, classeCampo,
+  ROTULO_TIPO, LIMITE_TEXTO_NOVO, classeCampo, capturaDe, formaDaDobra, ICONES,
 } from './copyRevisao'
 import { prepararAnexo, ErroImagem } from './imagem'
 import { enviarAnexo } from './retornos'
 
-/* Peças da revisão de copy (`/doc/copy`). A página monta; aqui fica o que se
-   repete por texto e por dobra. */
+/* Peças da revisão de copy (`/doc/copy`). A página e o painel montam; aqui
+   fica o que se repete por texto e por dobra. */
 
 const hora = (iso) =>
   new Date(iso).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
@@ -14,15 +14,10 @@ const hora = (iso) =>
 /* Altura do campo pelo tamanho do texto: um botão de três palavras não pede
    uma caixa de seis linhas, e um parágrafo não cabe em duas. */
 const linhasPara = (valor) =>
-  Math.min(10, Math.max(2, String(valor).split('\n').length + Math.floor(String(valor).length / 70)))
+  Math.min(10, Math.max(2, String(valor).split('\n').length + Math.floor(String(valor).length / 60)))
 
-const ICONES = {
-  manter: 'M5 13l4 4L19 7',
-  trocar: 'M15.2 5.2l3.6 3.6M4 20l4.3-1 10.4-10.4a2.5 2.5 0 00-3.6-3.6L4.7 15.4 4 20z',
-  tirar: 'M6 6l12 12M18 6L6 18',
-}
 
-function Icone({ caminho, className = 'w-4 h-4' }) {
+export function Icone({ caminho, className = 'w-4 h-4' }) {
   return (
     <svg className={`${className} shrink-0`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} aria-hidden="true">
       <path strokeLinecap="round" strokeLinejoin="round" d={caminho} />
@@ -30,35 +25,28 @@ function Icone({ caminho, className = 'w-4 h-4' }) {
   )
 }
 
-/* Cada decisão tem uma cor só quando marcada: na lista de trezentos textos, o
-   olho acha o que vai mudar sem ler — azul é o que troca, vermelho o que sai. */
-const OPCOES = [
-  { valor: 'manter', rotulo: 'Manter', ativa: 'bg-white text-text-dark shadow-card' },
-  { valor: 'trocar', rotulo: 'Trocar', ativa: 'bg-brand-accent text-white' },
-  { valor: 'tirar', rotulo: 'Tirar', ativa: 'bg-state-error text-white' },
-]
+const BOTAO_SECUNDARIO =
+  'min-h-11 inline-flex items-center justify-center gap-2 px-4 rounded-xl border border-line bg-white type-label text-text-dark hover:border-brand-accent hover:text-brand-accent transition-colors cursor-pointer'
 
 /**
- * Um texto do site com a decisão sobre ele.
+ * Um texto do site dentro do painel da dobra.
  *
- * O controle é um grupo de rádios de verdade, só vestido de botões: o teclado
- * anda entre as três opções com as setas e o leitor de tela anuncia qual está
- * marcada, sem nenhum código a mais. Nenhuma vem marcada — "Manter" pré-
- * marcado viraria a resposta de quem só rolou a página.
+ * O padrão é manter: quem abre uma parte só mexe no que incomoda, e o resto
+ * fica como está sem precisar de um clique por texto. "Trocar" abre o campo
+ * já com o texto de hoje; "Tirar" risca. Os dois se desfazem no mesmo lugar.
  *
- * `memo` porque a página tem centenas destes, e digitar num deles não deve
- * redesenhar os outros.
+ * `memo` porque uma dobra chega a ter quarenta textos, e digitar num deles
+ * não deve redesenhar os outros.
  */
 export const TextoRevisao = memo(function TextoRevisao({ texto, resposta, aoDecidir, aoEscrever }) {
-  const decisao = resposta?.decisao
+  const decisao = resposta?.decisao === 'trocar' || resposta?.decisao === 'tirar' ? resposta.decisao : null
   const novo = resposta?.novo ?? texto.texto
   const campoRef = useRef(null)
   const anterior = useRef(decisao)
+  const idCampo = `novo-${texto.id}`
 
-  /* Trocar abre o campo já com o texto atual e o cursor no fim: quem troca
-     quase sempre ajusta uma palavra, não reescreve do zero. Só na passagem
-     para "trocar" — quem volta à página não pode ter o foco roubado pelo
-     último campo aberto. */
+  /* Foco no campo só na passagem para "trocar": quem abre a parte de novo não
+     pode ter o foco roubado pelo último campo aberto. */
   useEffect(() => {
     if (decisao === 'trocar' && anterior.current !== 'trocar') {
       const campo = campoRef.current
@@ -70,57 +58,28 @@ export const TextoRevisao = memo(function TextoRevisao({ texto, resposta, aoDeci
     anterior.current = decisao
   }, [decisao])
 
-  const idCampo = `novo-${texto.id}`
-
   return (
-    <li className="px-5 py-5 sm:px-6">
+    <li
+      className={`py-5 border-l-2 pl-4 -ml-4 sm:pl-5 sm:-ml-5 transition-colors ${
+        decisao === 'trocar' ? 'border-brand-accent' : decisao === 'tirar' ? 'border-state-error' : 'border-transparent'
+      }`}
+    >
       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
         <span className="type-label text-text-muted">{ROTULO_TIPO[texto.tipo] ?? texto.tipo}</span>
-        {texto.obs && <span className="type-meta text-text-muted">{texto.obs}</span>}
+        {decisao && (
+          <span className={`type-label ${decisao === 'tirar' ? 'text-state-error' : 'text-text-dark'}`}>
+            · {decisao === 'tirar' ? 'Sai do site' : 'Texto trocado'}
+          </span>
+        )}
       </div>
+      {texto.obs && <p className="type-meta text-text-muted mt-1">{texto.obs}</p>}
 
-      <p
-        className={`type-body mt-1.5 whitespace-pre-line break-words ${
-          decisao === 'tirar' ? 'line-through decoration-state-error text-text-muted' : 'text-text-dark'
-        }`}
-      >
-        {decisao === 'tirar' && <span className="sr-only">Marcado para tirar: </span>}
-        {texto.texto}
-      </p>
-
-      <fieldset className="mt-3">
-        <legend className="sr-only">O que fazer com este texto</legend>
-        <div className="grid grid-cols-3 gap-1 p-1 rounded-xl bg-surface-muted sm:inline-grid">
-          {OPCOES.map((opcao) => {
-            const marcada = decisao === opcao.valor
-            return (
-              <label key={opcao.valor} className="block">
-                <input
-                  type="radio"
-                  name={`decisao-${texto.id}`}
-                  value={opcao.valor}
-                  checked={marcada}
-                  onChange={() => aoDecidir(texto.id, opcao.valor, texto.texto)}
-                  className="peer sr-only"
-                />
-                <span
-                  className={`min-h-11 sm:min-w-[7rem] px-3 flex items-center justify-center gap-1.5 rounded-lg type-label cursor-pointer transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-brand-accent peer-focus-visible:ring-offset-1 ${
-                    marcada ? opcao.ativa : 'text-text-muted hover:text-text-dark hover:bg-white/70'
-                  }`}
-                >
-                  <Icone caminho={ICONES[opcao.valor]} />
-                  {opcao.rotulo}
-                </span>
-              </label>
-            )
-          })}
-        </div>
-      </fieldset>
-
-      {decisao === 'trocar' && (
-        <div className="mt-4">
-          <label htmlFor={idCampo} className="type-label text-text-dark block mb-2">
-            Texto novo
+      {decisao === 'trocar' ? (
+        <div className="mt-2">
+          <p className="type-meta text-text-muted">Antes</p>
+          <p className="type-body text-text-muted whitespace-pre-line break-words">{texto.texto}</p>
+          <label htmlFor={idCampo} className="type-meta text-text-dark block mt-3 mb-1.5">
+            Depois
           </label>
           <textarea
             id={idCampo}
@@ -132,73 +91,219 @@ export const TextoRevisao = memo(function TextoRevisao({ texto, resposta, aoDeci
             className={classeCampo()}
           />
           <p className="type-meta text-text-muted mt-1.5">
-            <span className="type-numeric">{novo.length}</span> caracteres · o texto de hoje tem{' '}
+            <span className="type-numeric">{novo.length}</span> caracteres · antes eram{' '}
             <span className="type-numeric">{texto.texto.length}</span>
           </p>
         </div>
+      ) : (
+        <p
+          className={`type-body mt-1.5 whitespace-pre-line break-words ${
+            decisao === 'tirar' ? 'line-through decoration-state-error text-text-muted' : 'text-text-dark'
+          }`}
+        >
+          {decisao === 'tirar' && <span className="sr-only">Marcado para tirar: </span>}
+          {texto.texto}
+        </p>
       )}
+
+      <div className="flex flex-wrap gap-2 mt-3">
+        {decisao ? (
+          <button type="button" onClick={() => aoDecidir(texto.id, null)} className={BOTAO_SECUNDARIO}>
+            <Icone caminho={ICONES.desfazer} />
+            {decisao === 'tirar' ? 'Desfazer, manter o texto' : 'Desfazer a troca'}
+          </button>
+        ) : (
+          <>
+            <button
+              type="button"
+              onClick={() => aoDecidir(texto.id, 'trocar', texto.texto)}
+              className={BOTAO_SECUNDARIO}
+            >
+              <Icone caminho={ICONES.lapis} />
+              Trocar
+            </button>
+            <button
+              type="button"
+              onClick={() => aoDecidir(texto.id, 'tirar')}
+              className={`${BOTAO_SECUNDARIO} hover:!border-state-error hover:!text-state-error`}
+            >
+              <Icone caminho={ICONES.x} />
+              Tirar
+            </button>
+          </>
+        )}
+      </div>
     </li>
   )
 })
 
+/* ------------------------------------------------------------ desenhos -- */
+
 /**
- * Captura da dobra como está hoje, no computador ou no celular.
- *
- * As imagens são geradas à parte e podem ainda não existir: a que falha some
- * (`onError`), a outra assume, e sem nenhuma a dobra fica só com os textos.
- * Tocar abre a imagem inteira em outra aba — no celular, é onde dá para usar
- * o zoom de pinça.
+ * Desenho simples para a dobra que não é uma tela do site: o resultado do
+ * Google e as mensagens do WhatsApp. Só formas, nas cores de superfície —
+ * é um ícone grande, não uma captura falsa.
  */
-function Captura({ idDobra, titulo, falhas, aoFalhar }) {
+function DesenhoDobra({ forma }) {
+  if (forma === 'seo') {
+    return (
+      <svg viewBox="0 0 160 100" className="w-full h-full" aria-hidden="true">
+        <rect x="18" y="14" width="124" height="14" rx="7" className="fill-white stroke-line" />
+        <circle cx="130" cy="21" r="3.5" className="fill-none stroke-text-muted" strokeWidth="1.5" />
+        <rect x="18" y="40" width="46" height="4" rx="2" className="fill-text-muted" />
+        <rect x="18" y="50" width="96" height="7" rx="3.5" className="fill-brand-accent/70" />
+        <rect x="18" y="63" width="124" height="4" rx="2" className="fill-line" />
+        <rect x="18" y="71" width="110" height="4" rx="2" className="fill-line" />
+        <rect x="18" y="79" width="70" height="4" rx="2" className="fill-line" />
+      </svg>
+    )
+  }
+  if (forma === 'whatsapp') {
+    return (
+      <svg viewBox="0 0 160 100" className="w-full h-full" aria-hidden="true">
+        <rect x="16" y="14" width="86" height="20" rx="8" className="fill-white" />
+        <rect x="24" y="21" width="60" height="4" rx="2" className="fill-line" />
+        <rect x="58" y="42" width="86" height="26" rx="8" className="fill-brand-whatsapp/30" />
+        <rect x="66" y="49" width="68" height="4" rx="2" className="fill-brand-whatsapp/70" />
+        <rect x="66" y="57" width="44" height="4" rx="2" className="fill-brand-whatsapp/70" />
+        <rect x="16" y="76" width="64" height="14" rx="7" className="fill-white" />
+        <rect x="24" y="81" width="40" height="4" rx="2" className="fill-line" />
+      </svg>
+    )
+  }
+  return (
+    <svg viewBox="0 0 160 100" className="w-full h-full" aria-hidden="true">
+      <rect x="16" y="14" width="128" height="10" rx="3" className="fill-white" />
+      <rect x="16" y="32" width="80" height="8" rx="3" className="fill-text-muted/60" />
+      <rect x="16" y="46" width="110" height="4" rx="2" className="fill-line" />
+      <rect x="16" y="54" width="96" height="4" rx="2" className="fill-line" />
+      <rect x="16" y="68" width="44" height="14" rx="5" className="fill-brand-accent/60" />
+    </svg>
+  )
+}
+
+/**
+ * Prévia da dobra no cartão: o topo da captura de computador, sempre na
+ * mesma proporção, para a grade não dançar. Faixa muito baixa (o menu tem
+ * 1440×80) não cabe cortada — ela entra inteira, centrada.
+ */
+export function Previa({ dobra, capturas, className = '' }) {
+  const [falhou, setFalhou] = useState(false)
+  const captura = capturaDe(capturas, dobra.id, 'desktop')
+  const faixa = captura?.largura && captura?.altura && captura.altura / captura.largura < 0.3
+  const semImagem = !captura || falhou
+
+  return (
+    <div className={`relative aspect-[16/10] overflow-hidden bg-surface-muted ${className}`}>
+      {semImagem ? (
+        <div className="absolute inset-0 p-4">
+          <DesenhoDobra forma={formaDaDobra(dobra)} />
+        </div>
+      ) : (
+        <img
+          src={captura.endereco}
+          alt=""
+          width={captura.largura ?? undefined}
+          height={captura.altura ?? undefined}
+          loading="lazy"
+          decoding="async"
+          onError={() => setFalhou(true)}
+          className={`absolute inset-0 w-full h-full ${faixa ? 'object-contain object-center px-3' : 'object-cover object-top'}`}
+        />
+      )}
+    </div>
+  )
+}
+
+/* Situação da dobra em palavras, com ícone: a cor ajuda, mas não carrega a
+   informação sozinha. */
+export function SeloSituacao({ situacao }) {
+  const estilo = {
+    pendente: { classe: 'border border-line text-text-muted', icone: null },
+    revisada: { classe: 'bg-state-success-soft text-text-dark', icone: ICONES.check },
+    alterada: { classe: 'bg-brand-gold/15 text-text-dark', icone: ICONES.lapis },
+  }[situacao.tipo]
+  return (
+    <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 type-label ${estilo.classe}`}>
+      {estilo.icone && <Icone caminho={estilo.icone} className="w-3.5 h-3.5" />}
+      {situacao.rotulo}
+    </span>
+  )
+}
+
+/**
+ * Captura grande do painel, no computador ou no celular.
+ *
+ * A imagem inteira, na largura da coluna, rolando dentro da própria caixa —
+ * a captura do celular tem mais de três telas de altura. Tocar abre em outra
+ * aba, onde dá para usar o zoom de pinça.
+ */
+export function CapturaGrande({ dobra, capturas }) {
+  const desktop = capturaDe(capturas, dobra.id, 'desktop')
+  const celular = capturaDe(capturas, dobra.id, 'celular')
   const [formato, setFormato] = useState('desktop')
-  const atual = falhas[formato] ? (formato === 'desktop' ? 'celular' : 'desktop') : formato
-  const endereco = enderecoCaptura(idDobra, atual)
-  const celular = atual === 'celular'
-  const podeTrocar = !falhas.desktop && !falhas.celular
+  const [falhas, setFalhas] = useState({})
+
+  const disponivel = {
+    desktop: Boolean(desktop) && !falhas.desktop,
+    celular: Boolean(celular) && !falhas.celular,
+  }
+  const atual = disponivel[formato] ? formato : disponivel.desktop ? 'desktop' : disponivel.celular ? 'celular' : null
+  const captura = atual === 'celular' ? celular : desktop
+
+  if (!atual) {
+    return (
+      <div className="rounded-xl bg-surface-muted aspect-[16/10] p-6">
+        <DesenhoDobra forma={formaDaDobra(dobra)} />
+        <span className="sr-only">Esta parte não é uma tela do site: não há captura.</span>
+      </div>
+    )
+  }
 
   return (
     <figure>
+      {disponivel.desktop && disponivel.celular && (
+        <div className="inline-flex p-1 rounded-xl bg-surface-muted mb-3" role="group" aria-label="Formato da captura">
+          {[
+            ['desktop', 'Computador'],
+            ['celular', 'Celular'],
+          ].map(([chave, rotulo]) => (
+            <button
+              key={chave}
+              type="button"
+              onClick={() => setFormato(chave)}
+              aria-pressed={atual === chave}
+              className={`min-h-11 px-4 rounded-lg type-label transition-colors cursor-pointer ${
+                atual === chave ? 'bg-white text-text-dark shadow-card' : 'text-text-muted hover:text-text-dark'
+              }`}
+            >
+              {rotulo}
+            </button>
+          ))}
+        </div>
+      )}
       <a
-        href={endereco}
+        href={captura.endereco}
         target="_blank"
         rel="noopener noreferrer"
         className={`block rounded-xl overflow-hidden border border-line bg-white hover:border-brand-accent transition-colors cursor-zoom-in ${
-          celular ? 'w-fit max-w-full mx-auto' : ''
+          atual === 'celular' ? 'max-w-[20rem] mx-auto' : ''
         }`}
       >
         <img
-          key={endereco}
-          src={endereco}
-          alt={`${titulo}, como está hoje no ${celular ? 'celular' : 'computador'}`}
-          loading="lazy"
+          key={captura.endereco}
+          src={captura.endereco}
+          alt={`${dobra.titulo}, como está hoje no ${atual === 'celular' ? 'celular' : 'computador'}`}
+          width={captura.largura ?? undefined}
+          height={captura.altura ?? undefined}
           decoding="async"
-          onError={() => aoFalhar(atual)}
-          className={celular ? 'block h-auto w-auto max-w-full max-h-[70vh]' : 'block w-full h-auto'}
+          onError={() => setFalhas((antes) => ({ ...antes, [atual]: true }))}
+          // No celular a captura divide a tela com os textos: inteira, mas
+          // baixa. No computador ela tem a coluna própria e vai no tamanho real.
+          className="block w-full h-auto max-h-[45vh] object-contain object-top lg:max-h-none"
         />
       </a>
-      <figcaption className="flex flex-wrap items-center justify-between gap-3 mt-3">
-        <span className="type-meta text-text-muted">Como está hoje. Toque para ampliar.</span>
-        {podeTrocar && (
-          <span className="inline-flex p-1 rounded-xl bg-surface-muted" role="group" aria-label="Formato da captura">
-            {[
-              ['desktop', 'Computador'],
-              ['celular', 'Celular'],
-            ].map(([chave, rotulo]) => (
-              <button
-                key={chave}
-                type="button"
-                onClick={() => setFormato(chave)}
-                aria-pressed={atual === chave}
-                className={`min-h-11 px-3 rounded-lg type-label transition-colors cursor-pointer ${
-                  atual === chave ? 'bg-white text-text-dark shadow-card' : 'text-text-muted hover:text-text-dark'
-                }`}
-              >
-                {rotulo}
-              </button>
-            ))}
-          </span>
-        )}
-      </figcaption>
+      <figcaption className="type-meta text-text-muted mt-2">Como está hoje. Toque para ampliar.</figcaption>
     </figure>
   )
 }
@@ -247,7 +352,7 @@ export function CampoAnexo({ alvo, idPessoa, liberado, anexo, miniatura, aoAnexa
   }
 
   const aviso = !liberado
-    ? 'Escreva seu nome no topo da página para anexar.'
+    ? 'Escreva seu nome para anexar.'
     : {
         preparando: 'Reduzindo a imagem…',
         enviando: 'Enviando a imagem…',
@@ -268,7 +373,7 @@ export function CampoAnexo({ alvo, idPessoa, liberado, anexo, miniatura, aoAnexa
             />
           ) : (
             <span className="w-24 h-16 rounded-lg border border-line bg-white flex items-center justify-center text-text-muted">
-              <Icone caminho="M4 16l4.6-4.6a2 2 0 012.8 0L16 16m-2-2l1.6-1.6a2 2 0 012.8 0L20 14M14 8h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" className="w-6 h-6" />
+              <Icone caminho={ICONES.imagem} className="w-6 h-6" />
             </span>
           )}
           <div className="min-w-0">
@@ -297,7 +402,7 @@ export function CampoAnexo({ alvo, idPessoa, liberado, anexo, miniatura, aoAnexa
             onChange={escolher}
             className="sr-only"
           />
-          <Icone caminho="M12 16V4m0 0L8 8m4-4l4 4M5 20h14" />
+          <Icone caminho={ICONES.subir} />
           {ocupado ? 'Aguarde…' : temImagem ? 'Trocar imagem' : 'Anexar imagem'}
         </label>
         {temImagem && !ocupado && (
@@ -324,119 +429,10 @@ export function CampoAnexo({ alvo, idPessoa, liberado, anexo, miniatura, aoAnexa
   )
 }
 
-/**
- * Uma dobra do site: captura ao lado, textos dela, observação e anexo.
- *
- * No computador a captura fica parada à esquerda enquanto a lista rola — a
- * pessoa lê o texto e confere onde ele está sem subir a página. No celular
- * ela vem em cima, antes dos textos.
- */
-export function Dobra({
-  dobra, posicao, total, respostas, bloco, miniatura, idPessoa, liberado,
-  aoDecidir, aoEscrever, aoAnotar, aoAnexar, aoRemover,
-}) {
-  const [falhas, setFalhas] = useState({})
-  const textos = Array.isArray(dobra.textos) ? dobra.textos : []
-  const marcados = contarMarcados(textos, respostas)
-  const completa = textos.length > 0 && marcados === textos.length
-  const temCaptura = !(falhas.desktop && falhas.celular)
-  const nota = bloco?.nota ?? ''
-
-  const aoFalhar = useCallback(
-    (formato) => setFalhas((atual) => (atual[formato] ? atual : { ...atual, [formato]: true })),
-    [],
-  )
-
-  return (
-    <article
-      id={`dobra-${dobra.id}`}
-      aria-labelledby={`titulo-${dobra.id}`}
-      className="scroll-mt-28 rounded-2xl border border-line bg-white overflow-clip"
-    >
-      <header className="px-5 py-5 sm:px-6 border-b border-line-soft flex flex-wrap items-start justify-between gap-x-6 gap-y-2">
-        <div className="min-w-0">
-          <h3 id={`titulo-${dobra.id}`} className="type-subtitle text-text-dark">{dobra.titulo}</h3>
-          <p className="type-meta text-text-muted mt-1">
-            Parte <span className="type-numeric">{posicao}</span> de <span className="type-numeric">{total}</span>
-          </p>
-        </div>
-        <div className="flex flex-wrap items-center gap-x-4">
-          <span className="type-label text-text-dark inline-flex items-center gap-1.5">
-            {completa && <Icone caminho={ICONES.manter} className="w-4 h-4 text-brand-success" />}
-            <span className="type-numeric">{marcados}</span>/<span className="type-numeric">{textos.length}</span>
-            <span className="sr-only">textos marcados nesta parte</span>
-          </span>
-          {dobra.rota && (
-            <a
-              href={dobra.rota}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="min-h-11 inline-flex items-center gap-1.5 type-label text-brand-accent hover:text-brand-glow transition-colors cursor-pointer"
-            >
-              Abrir no site
-              <Icone caminho="M14 5h5v5M19 5l-8 8M18 14v5H5V6h5" />
-            </a>
-          )}
-        </div>
-      </header>
-
-      <div className={temCaptura ? 'lg:grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]' : ''}>
-        {temCaptura && (
-          <div className="p-5 sm:p-6 bg-surface-light border-b border-line-soft lg:border-b-0 lg:border-r">
-            <div className="lg:sticky lg:top-24">
-              <Captura idDobra={dobra.id} titulo={dobra.titulo} falhas={falhas} aoFalhar={aoFalhar} />
-            </div>
-          </div>
-        )}
-
-        <div className="min-w-0">
-          <ul className="divide-y divide-line-soft">
-            {textos.map((texto) => (
-              <TextoRevisao
-                key={texto.id}
-                texto={texto}
-                resposta={respostas?.[texto.id]}
-                aoDecidir={aoDecidir}
-                aoEscrever={aoEscrever}
-              />
-            ))}
-          </ul>
-
-          <div className="px-5 py-5 sm:px-6 border-t border-line-soft bg-surface-light">
-            <label htmlFor={`nota-${dobra.id}`} className="type-label text-text-dark block mb-2">
-              Observações desta parte
-            </label>
-            <textarea
-              id={`nota-${dobra.id}`}
-              value={nota}
-              onChange={(evento) => aoAnotar(dobra.id, evento.target.value)}
-              rows={nota ? 3 : 2}
-              maxLength={LIMITE_NOTA}
-              placeholder="Algo que vale para a parte inteira: o tom, a ordem, o que está faltando."
-              className={classeCampo('bg-white')}
-            />
-            <div className="mt-4">
-              <CampoAnexo
-                alvo={dobra.id}
-                idPessoa={idPessoa}
-                liberado={liberado}
-                anexo={bloco?.anexo}
-                miniatura={miniatura}
-                aoAnexar={aoAnexar}
-                aoRemover={aoRemover}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </article>
-  )
-}
-
-/* Bolinha e frase do salvamento, na barra fixa: é o que responde "chegou?"
-   sem a pessoa precisar procurar. */
+/* Bolinha e frase do salvamento: é o que responde "chegou?" sem a pessoa
+   precisar procurar. */
 const SALVAMENTO = {
-  ocioso: { ponto: 'bg-line', texto: () => 'Tudo o que você marcar salva sozinho' },
+  ocioso: { ponto: 'bg-line', texto: () => 'O que você mudar salva sozinho' },
   'sem-nome': { ponto: 'bg-brand-gold', texto: () => 'Guardado só neste navegador. Escreva seu nome para chegar à equipe' },
   salvando: { ponto: 'bg-text-muted', texto: () => 'Salvando…' },
   salvo: { ponto: 'bg-brand-success', texto: ({ em }) => `Salvo — já chegou para a equipe${em ? ` · ${hora(em)}` : ''}` },

@@ -139,8 +139,10 @@ function anexoConfere(caminho, id, alvo) {
   return Boolean(partes) && partes[1] === id && partes[2] === alvo
 }
 
-/* Observação e anexo de uma dobra (ou do espaço livre). Devolve `null` quando
-   não há nada, para o arquivo guardar só o que foi escrito. */
+/* Observação, anexo e "parte concluída" de uma dobra (ou do espaço livre).
+   Devolve `null` quando não há nada, para o arquivo guardar só o que foi
+   escrito. `revisada` só é guardado quando é verdadeiro: parte não concluída
+   é o estado de quem nem abriu, e não precisa de linha no arquivo. */
 function validarBloco(valor, { id, alvo, limite }) {
   if (!valor || typeof valor !== 'object' || Array.isArray(valor)) {
     return { erro: `Bloco “${alvo}” em formato inválido.` }
@@ -149,10 +151,14 @@ function validarBloco(valor, { id, alvo, limite }) {
   if (nota.length > limite) return { erro: `Observação de “${alvo}” passa de ${limite} caracteres.` }
   const anexo = valor.anexo == null || valor.anexo === '' ? '' : String(valor.anexo)
   if (anexo && !anexoConfere(anexo, id, alvo)) return { erro: `Anexo de “${alvo}” inválido.` }
+  if (valor.revisada != null && typeof valor.revisada !== 'boolean') {
+    return { erro: `Marcação de concluída em “${alvo}” inválida.` }
+  }
 
   const bloco = {}
   if (nota.trim()) bloco.nota = nota.trim()
   if (anexo) bloco.anexo = anexo
+  if (valor.revisada === true && alvo !== 'livre') bloco.revisada = true
   return { bloco: Object.keys(bloco).length ? bloco : null }
 }
 

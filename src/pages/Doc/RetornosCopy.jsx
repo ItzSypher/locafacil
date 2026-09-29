@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { BotaoCopiar } from './Pecas'
 import { lerAnexo } from './retornos'
-import { INVENTARIO, TOTAL_TEXTOS, ROTULO_TIPO, mudancasDe, comoLista } from './copyRevisao'
+import { INVENTARIO, TODAS_AS_DOBRAS, ROTULO_TIPO, mudancasDe, comoLista } from './copyRevisao'
 
 /* Revisão de copy dentro de `/doc/retornos`. Mostra só o que muda — trocar,
    tirar, observação, anexo, espaço livre —, na ordem em que os textos
@@ -141,8 +141,10 @@ function Mudanca({ texto, resposta }) {
 }
 
 function CartaoCopy({ retorno, senha, quando, acoes }) {
-  const { grupos, soltos, dobrasSoltas, contagem, livre } = useMemo(() => mudancasDe(retorno), [retorno])
-  const marcados = contagem.manter + contagem.trocar + contagem.tirar
+  const { grupos, soltos, dobrasSoltas, contagem, concluidas, livre } = useMemo(
+    () => mudancasDe(retorno, { incluirConcluidas: true }),
+    [retorno],
+  )
   const temLivre = Boolean(livre.nota || livre.anexo)
   const nada = !grupos.length && !soltos.length && !dobrasSoltas.length && !temLivre
   const lista = useMemo(() => comoLista(retorno, { quando }), [retorno, quando])
@@ -163,10 +165,18 @@ function CartaoCopy({ retorno, senha, quando, acoes }) {
             )}
           </p>
           <p className="type-meta text-text-dark mt-1">
-            <span className="type-numeric">{marcados}</span> de <span className="type-numeric">{TOTAL_TEXTOS}</span>{' '}
-            textos marcados · <span className="type-numeric">{contagem.trocar}</span> trocar ·{' '}
-            <span className="type-numeric">{contagem.tirar}</span> tirar ·{' '}
-            <span className="type-numeric">{contagem.manter}</span> manter
+            <span className="type-numeric">{concluidas.length}</span> de{' '}
+            <span className="type-numeric">{TODAS_AS_DOBRAS.length}</span> partes concluídas ·{' '}
+            <span className="type-numeric">{contagem.trocar}</span> trocar ·{' '}
+            <span className="type-numeric">{contagem.tirar}</span> tirar
+            {/* "Manter" só existe em retornos da primeira versão da página,
+                em que cada texto pedia uma escolha. */}
+            {contagem.manter > 0 && (
+              <>
+                {' · '}
+                <span className="type-numeric">{contagem.manter}</span> manter
+              </>
+            )}
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
@@ -187,9 +197,9 @@ function CartaoCopy({ retorno, senha, quando, acoes }) {
 
       {nada ? (
         <p className="type-body text-text-muted mt-5">
-          {marcados
+          {contagem.manter
             ? 'Nada para mudar até agora: tudo o que foi marcado fica como está.'
-            : 'Ainda não marcou nenhum texto.'}
+            : 'Ainda não concluiu nem alterou nenhuma parte.'}
         </p>
       ) : (
         <div className="mt-6 space-y-8">
@@ -199,11 +209,19 @@ function CartaoCopy({ retorno, senha, quando, acoes }) {
                 <span className="type-numeric">{deck.numero}</span> · {deck.titulo}
               </h4>
               <div className="mt-3 space-y-6">
-                {dobras.map(({ dobra, textos, nota, anexo }) => (
-                  <div key={dobra.id} className="border-l-2 border-line pl-4">
+                {dobras.map(({ dobra, textos, nota, anexo, revisada }) => (
+                  <div key={dobra.id} className={`border-l-2 pl-4 ${revisada ? 'border-brand-success' : 'border-line'}`}>
                     <p className="type-body text-text-dark font-semibold">
                       {dobra.titulo} <span className="type-meta text-text-muted font-normal">{dobra.id}</span>
                     </p>
+                    {revisada && (
+                      <p className="type-label text-text-dark mt-1 inline-flex items-center gap-1.5">
+                        <svg className="w-3.5 h-3.5 text-brand-success" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                        {textos.length || String(nota).trim() || anexo ? 'Parte concluída' : 'Parte concluída, sem mudanças'}
+                      </p>
+                    )}
                     {textos.length > 0 && (
                       <ul className="mt-3 space-y-5">
                         {textos.map(({ texto, resposta }) => (
@@ -211,7 +229,7 @@ function CartaoCopy({ retorno, senha, quando, acoes }) {
                         ))}
                       </ul>
                     )}
-                    {nota && <Observacao rotulo="Observação desta parte" texto={nota} />}
+                    {String(nota).trim() && <Observacao rotulo="Observação desta parte" texto={nota} />}
                     {anexo && (
                       <div className="mt-3">
                         <p className="type-label text-text-muted mb-1">Imagem anexada</p>
@@ -281,7 +299,8 @@ export default function RetornosCopy({ retornos, senha, quando, acoesDe }) {
       <p className="type-body text-text-muted mt-3 max-w-2xl">
         O que cada pessoa pediu em <span className="whitespace-nowrap">/doc/copy</span>: texto
         a trocar (antes e depois), texto a tirar, observações e imagens por
-        parte, e o espaço livre. O que foi mantido só entra na contagem.
+        parte, as partes que ela marcou como concluídas e o espaço livre. O
+        que não foi mexido fica como está.
       </p>
 
       {retornos.length === 0 ? (
