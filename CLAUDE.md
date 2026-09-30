@@ -94,6 +94,14 @@ escrita — a página é pública para quem tiver o link — e por isso valida f
 tamanho de tudo o que recebe. Sem `BLOB_READ_WRITE_TOKEN` (rodando local), o
 `POST` responde `salvo: false` e a página diz "Salvo neste navegador".
 
+**`/doc/copy`** é a revisão de copy do cliente (reunião de 29/09/2026). Lê
+`src/content/copy/inventario.json` (todos os textos do site, por deck e dobra)
+e as capturas de `public/doc/copy/` (`capturas.json`). Cada dobra é um cartão
+com prévia; o painel da dobra deixa trocar ou tirar texto, e manter é o padrão.
+Grava no mesmo endpoint com `publico: 'copy'` (`copy/<id>.json`, anexos em
+`copy-anexos/`), e `/doc/retornos` mostra a seção "Revisão de copy". Quando a
+copy mudar: `node scripts/capturar-copy.mjs` refaz as capturas.
+
 Cada página põe e tira o próprio `<meta name="robots" content="noindex">` — o
 projeto não usa biblioteca de `<head>`, e um `noindex` esquecido derrubaria a
 home do Google. `public/robots.txt` é a segunda tranca.
