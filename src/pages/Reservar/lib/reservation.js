@@ -174,8 +174,10 @@ export function buildConfirmPayload({ search, offer, extras, driver, quoteId }) 
         ReturnLocation: { LocationCode: search.returnLocationCode, CodeContext: 'IATA' },
       },
       Customer: customer,
-      // A loja real recusa "D" e "D " com "Grupo de veículo não disponível"
-      // (28/09/2026). Formato certo pedido à JCompany.
+      // A loja real recusa "B", "D" e "D " com "Grupo de veículo não disponível"
+      // (28 e 30/09/2026). CodeContext tem de ser SIPP: com ACRISS, o que a
+      // disponibilidade devolve, a API ainda soma "validation.in". O código do
+      // grupo que ela espera é o que falta a JCompany dizer.
       VehPrefs: { VehPref: { Code: offer.groupCode, CodeContext: 'SIPP' } },
       RateQualifier: offer.rateQualifier ?? { RateCategory: '3', RateQualifier: 'PADRAO' },
     },

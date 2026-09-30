@@ -286,3 +286,79 @@ export function comoLista(retorno, { quando = (iso) => iso } = {}) {
 
   return linhas.join('\n')
 }
+
+/* ------------------------------------------------ diferença de palavras --- */
+
+/**
+ * Diferença por palavras entre o texto de hoje e o pedido, para a tela de
+ * retornos destacar o que saiu e o que entrou em vez de obrigar a comparar
+ * duas frases de olho.
+ *
+ * Maior subsequência comum sobre as palavras (os espaços viajam junto, como
+ * pedaços iguais). O texto de copy é curto — o maior do inventário tem 280
+ * caracteres, e o limite de um texto novo é 2000 —, então a tabela quadrática
+ * cabe com folga e dispensa biblioteca.
+ *
+ * Devolve `{ antes, depois }`, cada um uma lista de `{ texto, tipo }` com
+ * `tipo` em `igual`, `saiu` (só em `antes`) ou `entrou` (só em `depois`).
+ */
+export function diferencaDePalavras(antes, depois) {
+  const pedacos = (valor) => String(valor ?? '').split(/(\s+)/).filter(Boolean)
+  const a = pedacos(antes)
+  const b = pedacos(depois)
+
+  // Texto grande demais para a tabela: marca tudo, sem travar a página.
+  if (a.length * b.length > 400_000) {
+    return {
+      antes: [{ texto: String(antes ?? ''), tipo: 'saiu' }],
+      depois: [{ texto: String(depois ?? ''), tipo: 'entrou' }],
+    }
+  }
+
+  const tabela = Array.from({ length: a.length + 1 }, () => new Uint16Array(b.length + 1))
+  for (let i = a.length - 1; i >= 0; i -= 1) {
+    for (let j = b.length - 1; j >= 0; j -= 1) {
+      tabela[i][j] = a[i] === b[j] ? tabela[i + 1][j + 1] + 1 : Math.max(tabela[i + 1][j], tabela[i][j + 1])
+    }
+  }
+
+  const saidaAntes = []
+  const saidaDepois = []
+  // Pedaços vizinhos do mesmo tipo viram um só: "palavra palavra" riscada
+  // numa faixa só lê melhor que duas faixas com um espaço limpo no meio.
+  const juntar = (lista, texto, tipo) => {
+    const ultimo = lista[lista.length - 1]
+    const espaco = /^\s+$/.test(texto)
+    if (ultimo && (ultimo.tipo === tipo || (espaco && ultimo.tipo !== 'igual'))) ultimo.texto += texto
+    else lista.push({ texto, tipo: espaco ? 'igual' : tipo })
+  }
+
+  let i = 0
+  let j = 0
+  while (i < a.length && j < b.length) {
+    if (a[i] === b[j]) {
+      juntar(saidaAntes, a[i], 'igual')
+      juntar(saidaDepois, b[j], 'igual')
+      i += 1
+      j += 1
+    } else if (tabela[i + 1][j] >= tabela[i][j + 1]) {
+      juntar(saidaAntes, a[i], 'saiu')
+      i += 1
+    } else {
+      juntar(saidaDepois, b[j], 'entrou')
+      j += 1
+    }
+  }
+  while (i < a.length) juntar(saidaAntes, a[i++], 'saiu')
+  while (j < b.length) juntar(saidaDepois, b[j++], 'entrou')
+
+  // O espaço que sobra na ponta de um trecho marcado sai da marcação: a faixa
+  // colorida acaba na palavra, não no vão até a próxima.
+  const aparar = (lista) =>
+    lista.flatMap((pedaco) => {
+      const ponta = pedaco.tipo !== 'igual' && /^([\s\S]*?\S)(\s+)$/.exec(pedaco.texto)
+      return ponta ? [{ texto: ponta[1], tipo: pedaco.tipo }, { texto: ponta[2], tipo: 'igual' }] : [pedaco]
+    })
+
+  return { antes: aparar(saidaAntes), depois: aparar(saidaDepois) }
+}

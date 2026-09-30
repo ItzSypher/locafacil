@@ -264,11 +264,11 @@ export default function DocRetornos() {
               Acesso restrito
             </span>
           </div>
-          <h1 className="type-headline text-text-primary mt-10">Retornos da homologação</h1>
+          <h1 className="type-headline text-text-primary mt-10">Retornos</h1>
           <p className="type-body text-text-secondary mt-3 max-w-2xl">
-            O que cada pessoa marcou e escreveu nas páginas do cliente e do
-            marketing, salvo automaticamente — inclusive de quem não mandou pelo
-            WhatsApp. Mais abaixo, a revisão de copy do site.
+            Duas partes, salvas sozinhas: a homologação (o que cada pessoa
+            conferiu nas páginas do cliente e do marketing) e, mais abaixo, a
+            revisão de copy do site.
           </p>
         </div>
       </header>
@@ -312,6 +312,13 @@ export default function DocRetornos() {
 
         {retornos && (
           <>
+            {/* Mesmo cabeçalho de seção da revisão de copy, mais abaixo: as
+                duas metades da página se leem do mesmo jeito. */}
+            <h2 className="type-title text-text-dark">Homologação</h2>
+            <p className="type-body text-text-muted mt-3 mb-6 max-w-2xl">
+              O roteiro de /doc/cliente e /doc/marketing: o que cada pessoa
+              conferiu e as observações por passo.
+            </p>
             <div className="flex flex-wrap items-center gap-2 mb-8">
               {[
                 ['todos', 'Todos'],
