@@ -27,7 +27,7 @@ export default function Header() {
             <p className="type-body text-text-secondary text-xl mb-8 max-w-[45ch]">
               Eficiência em movimento: soluções completas em terceirização de frota.
             </p>
-            <a href="https://api.whatsapp.com/send?phone=5521993297697&text=Ol%C3%A1,%20Locafacil!%20Quero%20saber%20sobre%20frota%20para%20empresas." target="_blank" rel="noopener noreferrer">
+            <a href="https://api.whatsapp.com/send?phone=5521968540185&text=Ol%C3%A1,%20Locafacil!%20Quero%20saber%20sobre%20frota%20para%20empresas." target="_blank" rel="noopener noreferrer">
               <motion.button
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}

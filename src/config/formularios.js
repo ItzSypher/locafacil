@@ -7,11 +7,10 @@
 
 import { ASSUNTOS, TELEFONE } from './atendimento'
 
-// WhatsApp comercial, o mesmo dos botões de cotação da página de empresas.
-export const TELEFONE_EMPRESAS = '5521993297697'
-
 export const FORM_EMPRESAS = {
-  telefone: TELEFONE_EMPRESAS,
+  // Desde 01/10/2026 a cotação cai no mesmo WhatsApp do atendimento; o
+  // número comercial (99329-7697) saiu do site a pedido do Marcelo.
+  telefone: TELEFONE,
   abertura: 'Olá! Vim pelo site e quero uma proposta de frota para a minha empresa.',
   rotuloBotao: 'Enviar pedido de cotação',
   nota: 'As respostas abrem prontas no seu WhatsApp. É só apertar enviar.',

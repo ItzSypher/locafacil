@@ -286,7 +286,7 @@ export default function SearchWidget() {
 
       {hours?.known && (
         <p className="mt-5 type-meta text-text-secondary text-center">
-          {hours.nome} atende <span className="type-numeric">{hours.resumo.join(' · ')}</span>
+          Locafacil atende <span className="type-numeric">{hours.resumo.join(' · ')}</span>
         </p>
       )}
 

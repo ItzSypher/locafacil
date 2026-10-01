@@ -38,6 +38,9 @@ export default function ReservarRevisao() {
   const { search, selectedVehicle: offer, extras, driver, quote, patch } = useReservation()
 
   const [accepted, setAccepted] = useState(false)
+  // Pedido do Marcelo (01/10/2026): a frota não atende motorista de aplicativo,
+  // e o cliente declara isso antes de enviar.
+  const [cienteApp, setCienteApp] = useState(false)
   const [error, setError] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [legal, setLegal] = useState({ termosUrl: null, clausulasUrl: null })
@@ -66,6 +69,10 @@ export default function ReservarRevisao() {
   const handleConfirm = async () => {
     if (!accepted) {
       setError('É preciso aceitar os termos e as cláusulas contratuais para enviar a pré-reserva.')
+      return
+    }
+    if (!cienteApp) {
+      setError('É preciso confirmar que o veículo não será usado em aplicativos de transporte, como Uber ou 99.')
       return
     }
     if (sentRef.current) return
@@ -194,6 +201,24 @@ export default function ReservarRevisao() {
           </div>
 
           <AvisoPreReserva />
+
+          <section className="mt-4 rounded-2xl border border-white/15 bg-white/5 p-5 sm:p-6" aria-labelledby="aviso-aplicativos">
+            <h2 id="aviso-aplicativos" className="type-subtitle text-text-primary">Importante</h2>
+            <p className="type-meta text-text-secondary mt-3">
+              Os veículos da Locafácil são destinados exclusivamente ao uso particular ou empresarial. Não realizamos locações para utilização em aplicativos de transporte de passageiros, como Uber, 99 ou similares.
+            </p>
+            <label className="flex items-start gap-3 mt-4 cursor-pointer py-1">
+              <input
+                type="checkbox"
+                checked={cienteApp}
+                onChange={(e) => { setCienteApp(e.target.checked); if (e.target.checked) setError('') }}
+                className="mt-0.5 w-5 h-5 rounded border-white/30 bg-white/10 text-brand-accent focus:ring-brand-accent cursor-pointer shrink-0"
+              />
+              <span className="type-meta text-text-primary">
+                Declaro estar ciente e de acordo com essa condição.
+              </span>
+            </label>
+          </section>
 
           <label className="flex items-start gap-3 mt-6 cursor-pointer py-3">
             <input

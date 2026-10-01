@@ -27,7 +27,7 @@ const motivos = [
   },
   {
     titulo: 'Foco',
-    descricao: 'Você, empresário, sabe bem que tempo + foco = resultado! Terceirizando sua frota com a Locafacil Business você ganha tempo para pensar no que realmente importa — o crescimento da sua empresa.',
+    descricao: 'Você, empresário, sabe bem que tempo + foco = resultado! Terceirizando sua frota com a Locafacil Business você ganha tempo para pensar no que realmente importa. O crescimento da sua empresa.',
   },
   {
     titulo: 'Planejamento',
@@ -52,9 +52,17 @@ export default function EmpresasContent() {
               <h2 className="type-headline text-text-dark mb-6 text-balance">
                 Crescer dói, mas não precisa ser assim.
               </h2>
-              <p className="type-body text-text-muted text-lg mb-8 max-w-[65ch]">
-                Com a Locafacil Business você pode expandir sua operação sem precisar se preocupar com custos de aquisição, gestão da frota e manutenção dos veículos. Oferecemos soluções completas em terceirização de frotas para você focar no que realmente importa — o crescimento da sua empresa.
-              </p>
+              <div className="type-body text-text-muted text-lg mb-8 max-w-[65ch] space-y-4">
+                <p>
+                  Com a Locafacil Business, sua empresa conta com muito mais do que uma frota: conta com uma consultoria especializada em mobilidade.
+                </p>
+                <p>
+                  Entendemos a necessidade da sua operação, analisamos o perfil de uso dos veículos e desenvolvemos uma solução sob medida para reduzir custos, simplificar a gestão e dar mais eficiência ao seu negócio.
+                </p>
+                <p>
+                  Cuidamos da gestão da frota, manutenção e suporte, para que sua empresa possa focar no que realmente importa: crescer com segurança e eficiência.
+                </p>
+              </div>
               {/* Leva ao formulário: a cotação chega à loja já com o tamanho da
                   frota e o prazo, em vez de um "Olá" que pede três perguntas. */}
               <motion.a

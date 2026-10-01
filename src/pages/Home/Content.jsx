@@ -51,17 +51,18 @@ const beneficios = [
     // seguro incluso (reunião de 29/09/2026). A proteção é escolhida e paga na
     // reserva, e é isso que o card diz agora.
     titulo: 'Proteção do seu jeito',
-    descricao: 'Básica, Padrão ou Completa: você escolhe na reserva e vê o valor antes de confirmar.',
+    descricao: 'Você escolhe a proteção que mais combina com sua locação: Básica, Padrão ou Completa, com valores claros antes da confirmação da reserva.',
   },
   {
     icone: (
       <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
       </svg>
     ),
-    titulo: 'Dobro de quilometragem',
-    descricao: 'Não fique contando quilômetros de olho no painel. Nossos planos entregam o dobro de franquia. Rode livre e sem surpresa na fatura.',
+    // Era "Dobro de quilometragem" (revisão do Marcelo, 01/10/2026). O selo do
+    // topo já diz "Atendimento humanizado"; aqui o título varia para não repetir.
+    titulo: 'Atendimento feito por humanos',
+    descricao: 'Na Locafacil, você conta com um atendimento próximo, rápido e humanizado, do primeiro contato até a devolução do veículo.',
   },
   {
     icone: (
@@ -89,9 +90,9 @@ const marcas = [
 const servicos = [
   {
     imagem: Image1,
-    titulo: 'Assinatura Locafacil Express',
+    titulo: 'Assinatura Locafacil',
     subtitulo: 'Esqueça tudo o que você sabe sobre ter carro.',
-    descricao: 'Esqueça oficina, IPVA, seguro caro e depreciação. Você assina um carro zero, pega a chave e o resto do trabalho é nosso. O caminho mais rápido e inteligente para andar de carro novo hoje.',
+    descricao: 'Esqueça as preocupações com oficina, IPVA, seguro e depreciação. Com a Assinatura Locafacil, você escolhe o carro, pega a chave e deixa o restante com a gente. Uma forma prática, inteligente e sem complicação de ter um carro à sua disposição.',
     cta: 'Quero saber da assinatura',
     link: 'https://api.whatsapp.com/send?phone=5521968540185&text=Ol%C3%A1,%20Locafacil!%20Tenho%20interesse%20na%20Assinatura.',
   },
@@ -114,15 +115,15 @@ const diferenciais = [
   },
   {
     titulo: 'O que você vê é o que você paga',
-    descricao: 'Esqueça as taxas ocultas de "proteção extra" no balcão. O combinado não sai caro, o nosso contrato é reto e direto.',
+    descricao: 'Sem surpresas na hora de fechar a locação. Na Locafacil, você conhece as condições e os valores com clareza desde o início, com um contrato simples, transparente e direto.',
   },
   {
     titulo: 'Máquinas selecionadas a dedo',
     descricao: 'Só trabalhamos com veículos novos ou recém-revisados das melhores marcas. Sente, ligue e sinta o conforto.',
   },
   {
-    titulo: 'Atendimento corpo a corpo',
-    descricao: 'Quando ligar, não falará com um robô burro. Falará com alguém da equipe focado em resolver seu problema real.',
+    titulo: 'Gente de verdade do outro lado',
+    descricao: 'Nada de atendimento frio ou respostas automáticas. Na Locafácil, você fala com uma equipe preparada para ouvir, entender e resolver o que você precisa.',
   },
 ]
 
@@ -371,14 +372,14 @@ export default function HomeContent() {
               variants={fadeInUp}
               className="type-headline text-text-primary mb-6 text-balance"
             >
-              Não deixe outro motorista<br />pegar o seu carro.
+              Escolha seu carro, faça sua reserva e deixe o resto com a Locafacil.
             </motion.h2>
 
             <motion.p
               variants={fadeInUp}
               className="type-body text-text-secondary text-lg mb-10 max-w-[58ch] mx-auto text-balance"
             >
-              As unidades são limitadas e a procura é alta. Garanta agora a liberdade de dirigir sem complicação e com o melhor custo-benefício do Rio de Janeiro.
+              Reserve de forma rápida e simples, escolha a opção que melhor atende sua necessidade e siga com mais praticidade desde o primeiro contato.
             </motion.p>
 
             <motion.div
@@ -406,7 +407,7 @@ export default function HomeContent() {
               variants={fadeInUp}
               className="type-meta text-text-secondary mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2"
             >
-              {['Sem caução', 'Dobro da franquia', 'Cancele quando quiser'].map((item) => (
+              {['Sem caução', 'Atendimento próximo', 'Cancele quando quiser'].map((item) => (
                 <li key={item} className="flex items-center gap-2">
                   <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />

@@ -109,7 +109,7 @@ export default function ReservarConfirmacao() {
                 {[
                   ['Em até 24 horas', 'nossa equipe entra em contato para confirmar a reserva e combinar o pagamento.'],
                   ['Antes da retirada', 'mandamos uma mensagem no WhatsApp para lembrar o dia e o horário.'],
-                  ['No dia', 'leve CNH válida e um cartão em seu nome.'],
+                  ['No dia da retirada', 'basta apresentar sua CNH válida e os documentos solicitados para finalizar a locação.'],
                 ].map(([quando, oque], i) => (
                   <li key={quando} className="flex gap-3">
                     <span className="type-label type-numeric w-7 h-7 shrink-0 rounded-full bg-white/10 text-text-primary flex items-center justify-center">

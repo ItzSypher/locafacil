@@ -62,7 +62,7 @@ export default function Header() {
               variants={itemVariants}
               className="type-display text-text-primary mb-6"
             >
-              Sua Liberdade<br />Sobre Rodas.
+              Alugue Fácil<br />Vá Mais Longe.
             </motion.h1>
 
             {/* Subtítulo com trigger de autoridade */}
@@ -70,7 +70,7 @@ export default function Header() {
               variants={itemVariants}
               className="type-body text-text-secondary sm:text-lg mb-8 max-w-[38ch]"
             >
-              Alugue carros <strong className="text-text-primary">sem caução</strong> e com o <strong className="text-text-primary">dobro da franquia</strong>. Retirada em Nova Iguaçu, contrato na hora.
+              Mobilidade com praticidade, segurança e atendimento de verdade. Alugue seu carro <strong className="text-text-primary">sem caução</strong> e aproveite cada caminho.
             </motion.p>
 
             {/* CTAs — o <a> É o botão. Envolver um <button> num <a> sem
@@ -101,7 +101,7 @@ export default function Header() {
               variants={itemVariants}
               className="type-meta text-text-secondary mt-10 flex flex-wrap items-center gap-x-6 gap-y-2"
             >
-              {['Sem caução', 'Dobro da franquia', 'Retirada em Nova Iguaçu'].map((selo) => (
+              {['Sem caução', 'Atendimento humanizado', 'Contratação simples e rápida'].map((selo) => (
                 <li key={selo} className="flex items-center gap-2">
                   <svg className="w-3.5 h-3.5 shrink-0 text-brand-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />

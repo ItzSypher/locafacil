@@ -78,7 +78,6 @@ export default function Content() {
                   <div>
                     <h4 className="type-subtitle text-text-dark">Telefone / WhatsApp</h4>
                     <a href="tel:5521968540185" className="type-body type-numeric text-text-muted hover:text-brand-accent transition-colors block mt-1">(21) 96854-0185</a>
-                    <a href="tel:5521993297697" className="type-body type-numeric text-text-muted hover:text-brand-accent transition-colors block mt-1">(21) 99329-7697 (Empresas)</a>
                   </div>
                 </div>
                 
