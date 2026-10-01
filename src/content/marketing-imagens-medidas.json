@@ -1,0 +1,807 @@
+{
+  "medidoEm": "2026-10-01",
+  "home-04-montadoras": {
+    "rota": "/",
+    "formatos": {
+      "desktop": {
+        "janela": 1440,
+        "imagens": [
+          {
+            "alt": "Nissan",
+            "arquivo": "nissan.webp",
+            "largura": 64.4,
+            "altura": 56,
+            "naturalLargura": 115,
+            "naturalAltura": 100,
+            "objectFit": "contain",
+            "objectPosition": "50% 50%",
+            "filtro": "grayscale(1)",
+            "opacidade": 0.5
+          },
+          {
+            "alt": "Hyundai",
+            "arquivo": "hyundai.webp",
+            "largura": 95.4,
+            "altura": 56,
+            "naturalLargura": 121,
+            "naturalAltura": 71,
+            "objectFit": "contain",
+            "objectPosition": "50% 50%",
+            "filtro": "grayscale(1)",
+            "opacidade": 0.5
+          },
+          {
+            "alt": "Chevrolet",
+            "arquivo": "chevrolet.webp",
+            "largura": 101.5,
+            "altura": 56,
+            "naturalLargura": 107,
+            "naturalAltura": 59,
+            "objectFit": "contain",
+            "objectPosition": "50% 50%",
+            "filtro": "grayscale(1)",
+            "opacidade": 0.5
+          },
+          {
+            "alt": "Renault",
+            "arquivo": "renault.webp",
+            "largura": 67.4,
+            "altura": 56,
+            "naturalLargura": 118,
+            "naturalAltura": 98,
+            "objectFit": "contain",
+            "objectPosition": "50% 50%",
+            "filtro": "grayscale(1)",
+            "opacidade": 0.5
+          },
+          {
+            "alt": "Ford",
+            "arquivo": "ford.webp",
+            "largura": 150.8,
+            "altura": 56,
+            "naturalLargura": 167,
+            "naturalAltura": 62,
+            "objectFit": "contain",
+            "objectPosition": "50% 50%",
+            "filtro": "grayscale(1)",
+            "opacidade": 0.5
+          }
+        ],
+        "recorte": {
+          "caminho": "/doc/marketing/espacos/home-04-montadoras.jpg",
+          "largura": 1440,
+          "altura": 306
+        }
+      },
+      "tablet": {
+        "janela": 768,
+        "imagens": [
+          {
+            "alt": "Nissan",
+            "arquivo": "nissan.webp",
+            "largura": 55.2,
+            "altura": 48,
+            "naturalLargura": 115,
+            "naturalAltura": 100,
+            "objectFit": "contain",
+            "objectPosition": "50% 50%",
+            "filtro": "grayscale(1)",
+            "opacidade": 0.5
+          },
+          {
+            "alt": "Hyundai",
+            "arquivo": "hyundai.webp",
+            "largura": 81.8,
+            "altura": 48,
+            "naturalLargura": 121,
+            "naturalAltura": 71,
+            "objectFit": "contain",
+            "objectPosition": "50% 50%",
+            "filtro": "grayscale(1)",
+            "opacidade": 0.5
+          },
+          {
+            "alt": "Chevrolet",
+            "arquivo": "chevrolet.webp",
+            "largura": 87,
+            "altura": 48,
+            "naturalLargura": 107,
+            "naturalAltura": 59,
+            "objectFit": "contain",
+            "objectPosition": "50% 50%",
+            "filtro": "grayscale(1)",
+            "opacidade": 0.5
+          },
+          {
+            "alt": "Renault",
+            "arquivo": "renault.webp",
+            "largura": 57.8,
+            "altura": 48,
+            "naturalLargura": 118,
+            "naturalAltura": 98,
+            "objectFit": "contain",
+            "objectPosition": "50% 50%",
+            "filtro": "grayscale(1)",
+            "opacidade": 0.5
+          },
+          {
+            "alt": "Ford",
+            "arquivo": "ford.webp",
+            "largura": 129.3,
+            "altura": 48,
+            "naturalLargura": 167,
+            "naturalAltura": 62,
+            "objectFit": "contain",
+            "objectPosition": "50% 50%",
+            "filtro": "grayscale(1)",
+            "opacidade": 0.5
+          }
+        ]
+      },
+      "celular": {
+        "janela": 390,
+        "imagens": [
+          {
+            "alt": "Nissan",
+            "arquivo": "nissan.webp",
+            "largura": 46,
+            "altura": 40,
+            "naturalLargura": 115,
+            "naturalAltura": 100,
+            "objectFit": "contain",
+            "objectPosition": "50% 50%",
+            "filtro": "grayscale(1)",
+            "opacidade": 0.5
+          },
+          {
+            "alt": "Hyundai",
+            "arquivo": "hyundai.webp",
+            "largura": 68.2,
+            "altura": 40,
+            "naturalLargura": 121,
+            "naturalAltura": 71,
+            "objectFit": "contain",
+            "objectPosition": "50% 50%",
+            "filtro": "grayscale(1)",
+            "opacidade": 0.5
+          },
+          {
+            "alt": "Chevrolet",
+            "arquivo": "chevrolet.webp",
+            "largura": 72.5,
+            "altura": 40,
+            "naturalLargura": 107,
+            "naturalAltura": 59,
+            "objectFit": "contain",
+            "objectPosition": "50% 50%",
+            "filtro": "grayscale(1)",
+            "opacidade": 0.5
+          },
+          {
+            "alt": "Renault",
+            "arquivo": "renault.webp",
+            "largura": 48.2,
+            "altura": 40,
+            "naturalLargura": 118,
+            "naturalAltura": 98,
+            "objectFit": "contain",
+            "objectPosition": "50% 50%",
+            "filtro": "grayscale(1)",
+            "opacidade": 0.5
+          },
+          {
+            "alt": "Ford",
+            "arquivo": "ford.webp",
+            "largura": 107.7,
+            "altura": 40,
+            "naturalLargura": 167,
+            "naturalAltura": 62,
+            "objectFit": "contain",
+            "objectPosition": "50% 50%",
+            "filtro": "grayscale(1)",
+            "opacidade": 0.5
+          }
+        ],
+        "recorte": {
+          "caminho": "/doc/marketing/espacos/home-04-montadoras-celular.jpg",
+          "largura": 780,
+          "altura": 552
+        }
+      }
+    }
+  },
+  "home-05-solucoes-assinatura": {
+    "rota": "/",
+    "formatos": {
+      "desktop": {
+        "janela": 1440,
+        "imagens": [
+          {
+            "alt": null,
+            "arquivo": "image-1.webp",
+            "largura": 512,
+            "altura": 374.3,
+            "naturalLargura": 620,
+            "naturalAltura": 358,
+            "objectFit": "cover",
+            "objectPosition": "50% 50%",
+            "filtro": null,
+            "opacidade": 1
+          }
+        ],
+        "recorte": {
+          "caminho": "/doc/marketing/espacos/home-05-solucoes-assinatura.jpg",
+          "largura": 1440,
+          "altura": 1035
+        }
+      },
+      "tablet": {
+        "janela": 768,
+        "imagens": [
+          {
+            "alt": null,
+            "arquivo": "image-1.webp",
+            "largura": 360,
+            "altura": 418.3,
+            "naturalLargura": 620,
+            "naturalAltura": 358,
+            "objectFit": "cover",
+            "objectPosition": "50% 50%",
+            "filtro": null,
+            "opacidade": 1
+          }
+        ]
+      },
+      "celular": {
+        "janela": 390,
+        "imagens": [
+          {
+            "alt": null,
+            "arquivo": "image-1.webp",
+            "largura": 358,
+            "altura": 224,
+            "naturalLargura": 620,
+            "naturalAltura": 358,
+            "objectFit": "cover",
+            "objectPosition": "50% 50%",
+            "filtro": null,
+            "opacidade": 1
+          }
+        ],
+        "recorte": {
+          "caminho": "/doc/marketing/espacos/home-05-solucoes-assinatura-celular.jpg",
+          "largura": 780,
+          "altura": 2874
+        }
+      }
+    }
+  },
+  "home-05-solucoes-empresas": {
+    "rota": "/",
+    "formatos": {
+      "desktop": {
+        "janela": 1440,
+        "imagens": [
+          {
+            "alt": null,
+            "arquivo": "image-3.webp",
+            "largura": 512,
+            "altura": 323.2,
+            "naturalLargura": 620,
+            "naturalAltura": 358,
+            "objectFit": "cover",
+            "objectPosition": "50% 50%",
+            "filtro": null,
+            "opacidade": 1
+          }
+        ],
+        "recorte": {
+          "caminho": "/doc/marketing/espacos/home-05-solucoes-empresas.jpg",
+          "largura": 1440,
+          "altura": 1035
+        }
+      },
+      "tablet": {
+        "janela": 768,
+        "imagens": [
+          {
+            "alt": null,
+            "arquivo": "image-3.webp",
+            "largura": 360,
+            "altura": 367.1,
+            "naturalLargura": 620,
+            "naturalAltura": 358,
+            "objectFit": "cover",
+            "objectPosition": "50% 50%",
+            "filtro": null,
+            "opacidade": 1
+          }
+        ]
+      },
+      "celular": {
+        "janela": 390,
+        "imagens": [
+          {
+            "alt": null,
+            "arquivo": "image-3.webp",
+            "largura": 358,
+            "altura": 224,
+            "naturalLargura": 620,
+            "naturalAltura": 358,
+            "objectFit": "cover",
+            "objectPosition": "50% 50%",
+            "filtro": null,
+            "opacidade": 1
+          }
+        ],
+        "recorte": {
+          "caminho": "/doc/marketing/espacos/home-05-solucoes-empresas-celular.jpg",
+          "largura": 780,
+          "altura": 2874
+        }
+      }
+    }
+  },
+  "home-06-por-que": {
+    "rota": "/",
+    "formatos": {
+      "desktop": {
+        "janela": 1440,
+        "imagens": [
+          {
+            "alt": "Equipe Locafacil pronta para atender com excelência",
+            "arquivo": "image-4.webp",
+            "largura": 576,
+            "altura": 446.1,
+            "naturalLargura": 727,
+            "naturalAltura": 563,
+            "objectFit": "fill",
+            "objectPosition": "50% 50%",
+            "filtro": null,
+            "opacidade": 1
+          }
+        ],
+        "recorte": {
+          "caminho": "/doc/marketing/espacos/home-06-por-que.jpg",
+          "largura": 1440,
+          "altura": 839
+        }
+      },
+      "tablet": {
+        "janela": 768,
+        "imagens": [
+          {
+            "alt": "Equipe Locafacil pronta para atender com excelência",
+            "arquivo": "image-4.webp",
+            "largura": 720,
+            "altura": 557.6,
+            "naturalLargura": 727,
+            "naturalAltura": 563,
+            "objectFit": "fill",
+            "objectPosition": "50% 50%",
+            "filtro": null,
+            "opacidade": 1
+          }
+        ]
+      },
+      "celular": {
+        "janela": 390,
+        "imagens": [
+          {
+            "alt": "Equipe Locafacil pronta para atender com excelência",
+            "arquivo": "image-4.webp",
+            "largura": 358,
+            "altura": 277.2,
+            "naturalLargura": 727,
+            "naturalAltura": 563,
+            "objectFit": "fill",
+            "objectPosition": "50% 50%",
+            "filtro": null,
+            "opacidade": 1
+          }
+        ],
+        "recorte": {
+          "caminho": "/doc/marketing/espacos/home-06-por-que-celular.jpg",
+          "largura": 780,
+          "altura": 2394
+        }
+      }
+    }
+  },
+  "empresas-contato-01-empresas-topo": {
+    "rota": "/para-empresas",
+    "formatos": {
+      "desktop": {
+        "janela": 1440,
+        "imagens": [
+          {
+            "alt": "Frota corporativa Locafacil Business",
+            "arquivo": "header-empresas.webp",
+            "largura": 512,
+            "altura": 391.3,
+            "naturalLargura": 899,
+            "naturalAltura": 687,
+            "objectFit": "fill",
+            "objectPosition": "50% 50%",
+            "filtro": "drop-shadow(rgba(0, 0, 0, 0.15) 0px 25px 25px)",
+            "opacidade": 1
+          }
+        ],
+        "recorte": {
+          "caminho": "/doc/marketing/espacos/empresas-contato-01-empresas-topo.jpg",
+          "largura": 1440,
+          "altura": 616
+        }
+      },
+      "tablet": {
+        "janela": 768,
+        "imagens": [
+          {
+            "alt": "Frota corporativa Locafacil Business",
+            "arquivo": "header-empresas.webp",
+            "largura": 344,
+            "altura": 262.9,
+            "naturalLargura": 899,
+            "naturalAltura": 687,
+            "objectFit": "fill",
+            "objectPosition": "50% 50%",
+            "filtro": "drop-shadow(rgba(0, 0, 0, 0.15) 0px 25px 25px)",
+            "opacidade": 1
+          }
+        ]
+      },
+      "celular": {
+        "janela": 390,
+        "imagens": [
+          {
+            "alt": "Frota corporativa Locafacil Business",
+            "arquivo": "header-empresas.webp",
+            "largura": 358,
+            "altura": 273.6,
+            "naturalLargura": 899,
+            "naturalAltura": 687,
+            "objectFit": "fill",
+            "objectPosition": "50% 50%",
+            "filtro": "drop-shadow(rgba(0, 0, 0, 0.15) 0px 25px 25px)",
+            "opacidade": 1
+          }
+        ],
+        "recorte": {
+          "caminho": "/doc/marketing/espacos/empresas-contato-01-empresas-topo-celular.jpg",
+          "largura": 780,
+          "altura": 1448
+        }
+      }
+    }
+  },
+  "empresas-contato-02-empresas-crescer": {
+    "rota": "/para-empresas",
+    "formatos": {
+      "desktop": {
+        "janela": 1440,
+        "imagens": [
+          {
+            "alt": "Frota empresarial Locafacil",
+            "arquivo": "image-5.webp",
+            "largura": 576,
+            "altura": 318.1,
+            "naturalLargura": 766,
+            "naturalAltura": 423,
+            "objectFit": "fill",
+            "objectPosition": "50% 50%",
+            "filtro": null,
+            "opacidade": 1
+          }
+        ],
+        "recorte": {
+          "caminho": "/doc/marketing/espacos/empresas-contato-02-empresas-crescer.jpg",
+          "largura": 1440,
+          "altura": 658
+        }
+      },
+      "tablet": {
+        "janela": 768,
+        "imagens": [
+          {
+            "alt": "Frota empresarial Locafacil",
+            "arquivo": "image-5.webp",
+            "largura": 720,
+            "altura": 397.6,
+            "naturalLargura": 766,
+            "naturalAltura": 423,
+            "objectFit": "fill",
+            "objectPosition": "50% 50%",
+            "filtro": null,
+            "opacidade": 1
+          }
+        ]
+      },
+      "celular": {
+        "janela": 390,
+        "imagens": [
+          {
+            "alt": "Frota empresarial Locafacil",
+            "arquivo": "image-5.webp",
+            "largura": 358,
+            "altura": 197.7,
+            "naturalLargura": 766,
+            "naturalAltura": 423,
+            "objectFit": "fill",
+            "objectPosition": "50% 50%",
+            "filtro": null,
+            "opacidade": 1
+          }
+        ],
+        "recorte": {
+          "caminho": "/doc/marketing/espacos/empresas-contato-02-empresas-crescer-celular.jpg",
+          "largura": 780,
+          "altura": 1896
+        }
+      }
+    }
+  },
+  "empresas-contato-03-empresas-motivos": {
+    "rota": "/para-empresas",
+    "formatos": {
+      "desktop": {
+        "janela": 1440,
+        "imagens": [
+          {
+            "alt": "Equipe Locafacil Business",
+            "arquivo": "image-6.webp",
+            "largura": 576,
+            "altura": 740.7,
+            "naturalLargura": 794,
+            "naturalAltura": 1021,
+            "objectFit": "fill",
+            "objectPosition": "50% 50%",
+            "filtro": null,
+            "opacidade": 1
+          }
+        ],
+        "recorte": {
+          "caminho": "/doc/marketing/espacos/empresas-contato-03-empresas-motivos.jpg",
+          "largura": 1440,
+          "altura": 1030
+        }
+      },
+      "tablet": {
+        "janela": 768,
+        "imagens": [
+          {
+            "alt": "Equipe Locafacil Business",
+            "arquivo": "image-6.webp",
+            "largura": 720,
+            "altura": 925.8,
+            "naturalLargura": 794,
+            "naturalAltura": 1021,
+            "objectFit": "fill",
+            "objectPosition": "50% 50%",
+            "filtro": null,
+            "opacidade": 1
+          }
+        ]
+      },
+      "celular": {
+        "janela": 390,
+        "imagens": [
+          {
+            "alt": "Equipe Locafacil Business",
+            "arquivo": "image-6.webp",
+            "largura": 358,
+            "altura": 460.3,
+            "naturalLargura": 794,
+            "naturalAltura": 1021,
+            "objectFit": "fill",
+            "objectPosition": "50% 50%",
+            "filtro": null,
+            "opacidade": 1
+          }
+        ],
+        "recorte": {
+          "caminho": "/doc/marketing/espacos/empresas-contato-03-empresas-motivos-celular.jpg",
+          "largura": 780,
+          "altura": 3040
+        }
+      }
+    }
+  },
+  "empresas-contato-05-contato-topo": {
+    "rota": "/contato",
+    "formatos": {
+      "desktop": {
+        "janela": 1440,
+        "imagens": [
+          {
+            "alt": "Equipe Locafacil",
+            "arquivo": "image-6.webp",
+            "largura": 512,
+            "altura": 658.4,
+            "naturalLargura": 794,
+            "naturalAltura": 1021,
+            "objectFit": "fill",
+            "objectPosition": "50% 50%",
+            "filtro": "drop-shadow(rgba(0, 0, 0, 0.15) 0px 25px 25px)",
+            "opacidade": 1
+          }
+        ],
+        "recorte": {
+          "caminho": "/doc/marketing/espacos/empresas-contato-05-contato-topo.jpg",
+          "largura": 1440,
+          "altura": 883
+        }
+      },
+      "tablet": {
+        "janela": 768,
+        "imagens": [
+          {
+            "alt": "Equipe Locafacil",
+            "arquivo": "image-6.webp",
+            "largura": 344,
+            "altura": 442.3,
+            "naturalLargura": 794,
+            "naturalAltura": 1021,
+            "objectFit": "fill",
+            "objectPosition": "50% 50%",
+            "filtro": "drop-shadow(rgba(0, 0, 0, 0.15) 0px 25px 25px)",
+            "opacidade": 1
+          }
+        ]
+      },
+      "celular": {
+        "janela": 390,
+        "imagens": [
+          {
+            "alt": "Equipe Locafacil",
+            "arquivo": "image-6.webp",
+            "largura": 358,
+            "altura": 460.3,
+            "naturalLargura": 794,
+            "naturalAltura": 1021,
+            "objectFit": "fill",
+            "objectPosition": "50% 50%",
+            "filtro": "drop-shadow(rgba(0, 0, 0, 0.15) 0px 25px 25px)",
+            "opacidade": 1
+          }
+        ],
+        "recorte": {
+          "caminho": "/doc/marketing/espacos/empresas-contato-05-contato-topo-celular.jpg",
+          "largura": 780,
+          "altura": 1712
+        }
+      }
+    }
+  },
+  "empresas-contato-06-contato-equipe": {
+    "rota": "/contato",
+    "formatos": {
+      "desktop": {
+        "janela": 1440,
+        "imagens": [
+          {
+            "alt": "Nossa Equipe",
+            "arquivo": "image-4.webp",
+            "largura": 584,
+            "altura": 452.3,
+            "naturalLargura": 727,
+            "naturalAltura": 563,
+            "objectFit": "fill",
+            "objectPosition": "50% 50%",
+            "filtro": null,
+            "opacidade": 1
+          }
+        ],
+        "recorte": {
+          "caminho": "/doc/marketing/espacos/empresas-contato-06-contato-equipe.jpg",
+          "largura": 1440,
+          "altura": 638
+        }
+      },
+      "tablet": {
+        "janela": 768,
+        "imagens": [
+          {
+            "alt": "Nossa Equipe",
+            "arquivo": "image-4.webp",
+            "largura": 720,
+            "altura": 557.6,
+            "naturalLargura": 727,
+            "naturalAltura": 563,
+            "objectFit": "fill",
+            "objectPosition": "50% 50%",
+            "filtro": null,
+            "opacidade": 1
+          }
+        ]
+      },
+      "celular": {
+        "janela": 390,
+        "imagens": [
+          {
+            "alt": "Nossa Equipe",
+            "arquivo": "image-4.webp",
+            "largura": 358,
+            "altura": 277.2,
+            "naturalLargura": 727,
+            "naturalAltura": 563,
+            "objectFit": "fill",
+            "objectPosition": "50% 50%",
+            "filtro": null,
+            "opacidade": 1
+          }
+        ],
+        "recorte": {
+          "caminho": "/doc/marketing/espacos/empresas-contato-06-contato-equipe-celular.jpg",
+          "largura": 780,
+          "altura": 1854
+        }
+      }
+    }
+  },
+  "frota": {
+    "rota": "/reservar/veiculos",
+    "formatos": {
+      "desktop": {
+        "janela": 1440,
+        "imagens": [
+          {
+            "alt": null,
+            "arquivo": "grupo-b.webp",
+            "largura": 302,
+            "altura": 226.5,
+            "naturalLargura": 800,
+            "naturalAltura": 600,
+            "objectFit": "contain",
+            "objectPosition": "50% 50%",
+            "filtro": null,
+            "opacidade": 1
+          }
+        ],
+        "recorte": {
+          "caminho": "/doc/marketing/espacos/frota.jpg",
+          "largura": 1440,
+          "altura": 765
+        }
+      },
+      "tablet": {
+        "janela": 768,
+        "imagens": [
+          {
+            "alt": null,
+            "arquivo": "grupo-b.webp",
+            "largura": 282,
+            "altura": 211.5,
+            "naturalLargura": 800,
+            "naturalAltura": 600,
+            "objectFit": "contain",
+            "objectPosition": "50% 50%",
+            "filtro": null,
+            "opacidade": 1
+          }
+        ]
+      },
+      "celular": {
+        "janela": 390,
+        "imagens": [
+          {
+            "alt": null,
+            "arquivo": "grupo-b.webp",
+            "largura": 292,
+            "altura": 219,
+            "naturalLargura": 800,
+            "naturalAltura": 600,
+            "objectFit": "contain",
+            "objectPosition": "50% 50%",
+            "filtro": null,
+            "opacidade": 1
+          }
+        ],
+        "recorte": {
+          "caminho": "/doc/marketing/espacos/frota-celular.jpg",
+          "largura": 780,
+          "altura": 1436
+        }
+      }
+    }
+  }
+}

@@ -90,3 +90,92 @@ export function novoIdentificador() {
   if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID()
   return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 12)}`
 }
+
+/* ------------------------------------------------- arquivos do design -- */
+
+/* Lê o arquivo inteiro como veio, sem passar por canvas: o que a agência
+   entrega é o arquivo final, e redesenhar recomprimiria a foto e apagaria a
+   transparência. O tipo vem da extensão quando o navegador não sabe dizer
+   (acontece com SVG e WEBP em alguns sistemas); o servidor confere pelos
+   primeiros bytes de qualquer jeito. */
+function lerComoDataUrl(arquivo, tipo) {
+  return new Promise((resolve, reject) => {
+    const leitor = new FileReader()
+    leitor.onload = () => {
+      const bruto = String(leitor.result)
+      resolve(`data:${tipo};base64,${bruto.slice(bruto.indexOf(',') + 1)}`)
+    }
+    leitor.onerror = () => reject(new Error('Não consegui ler esse arquivo. Tente de novo.'))
+    leitor.readAsDataURL(arquivo)
+  })
+}
+
+/**
+ * Envia um arquivo do design para um espaço de imagem. Devolve
+ * `{ salvo, caminho, arquivo, tamanho, substituiu }` — `salvo: false` quando o
+ * ambiente não tem armazenamento (rodando local).
+ */
+export async function enviarArquivoDesign({ id, nome, espaco, arquivo, tipo }) {
+  const dataUrl = await lerComoDataUrl(arquivo, tipo)
+  const resposta = await fetch('/api/retornos?arquivo=1', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ publico: 'marketing', id, nome, espaco, arquivo: arquivo.name, dataUrl }),
+  })
+  const corpo = await resposta.json().catch(() => null)
+  if (!resposta.ok || !corpo?.success) {
+    throw new Error(
+      corpo?.errors?.[0] ??
+        (resposta.status === 413 ? 'Arquivo grande demais: o limite é 3 MB.' : 'Não foi possível enviar o arquivo.'),
+    )
+  }
+  return corpo.data
+}
+
+/** Lista os arquivos do design. Exige a senha de `DOC_RETORNOS_SENHA`. */
+export async function listarArquivosDesign(senha) {
+  const resposta = await fetch('/api/retornos?arquivos=1', {
+    headers: { Authorization: `Bearer ${senha}` },
+  })
+  const corpo = await resposta.json().catch(() => null)
+  if (!resposta.ok || !corpo?.success) {
+    throw new Error(corpo?.errors?.[0] ?? 'Não foi possível carregar os arquivos do design.')
+  }
+  return corpo.data
+}
+
+/** Bytes de um arquivo do design, com a senha. Devolve um `Blob`. */
+export async function lerArquivoDesign(senha, caminho) {
+  const resposta = await fetch(`/api/retornos?${new URLSearchParams({ arquivo: caminho })}`, {
+    headers: { Authorization: `Bearer ${senha}` },
+  })
+  if (!resposta.ok) {
+    const corpo = await resposta.json().catch(() => null)
+    throw new Error(corpo?.errors?.[0] ?? 'Não foi possível abrir o arquivo.')
+  }
+  return resposta.blob()
+}
+
+/** Apaga um arquivo do design. Exige a senha. */
+export async function apagarArquivoDesign(senha, caminho) {
+  const resposta = await fetch(`/api/retornos?${new URLSearchParams({ arquivo: caminho })}`, {
+    method: 'DELETE',
+    headers: { Authorization: `Bearer ${senha}` },
+  })
+  const corpo = await resposta.json().catch(() => null)
+  if (!resposta.ok || !corpo?.success) {
+    throw new Error(corpo?.errors?.[0] ?? 'Não foi possível apagar.')
+  }
+}
+
+/** Faz o navegador baixar um `Blob` com o nome dado. */
+export function baixarBlob(blob, nome) {
+  const endereco = URL.createObjectURL(blob)
+  const link = document.createElement('a')
+  link.href = endereco
+  link.download = nome
+  document.body.appendChild(link)
+  link.click()
+  link.remove()
+  setTimeout(() => URL.revokeObjectURL(endereco), 1000)
+}

@@ -6,6 +6,7 @@ import { useSemIndice } from './hooks'
 import { BotaoCopiar } from './Pecas'
 import { listarRetornos, apagarRetorno } from './retornos'
 import RetornosCopy from './RetornosCopy'
+import RetornosDesign from './RetornosDesign'
 
 const CHAVE_SENHA = 'locafacil_doc_senha'
 
@@ -266,9 +267,9 @@ export default function DocRetornos() {
           </div>
           <h1 className="type-headline text-text-primary mt-10">Retornos</h1>
           <p className="type-body text-text-secondary mt-3 max-w-2xl">
-            Duas partes, salvas sozinhas: a homologação (o que cada pessoa
-            conferiu nas páginas do cliente e do marketing) e, mais abaixo, a
-            revisão de copy do site.
+            Três partes, salvas sozinhas: a homologação (o que cada pessoa
+            conferiu nas páginas do cliente e do marketing), a revisão de copy
+            do site e, por último, os arquivos de imagem enviados pelo design.
           </p>
         </div>
       </header>
@@ -357,6 +358,12 @@ export default function DocRetornos() {
                 >
                   Revisão de copy <span className="type-numeric ml-1">{revisoesCopy.length}</span>
                 </a>
+                <a
+                  href="#arquivos-design"
+                  className="min-h-11 inline-flex items-center px-4 type-label text-brand-accent hover:text-brand-glow transition-colors cursor-pointer"
+                >
+                  Arquivos do design
+                </a>
                 <button
                   type="button"
                   onClick={sair}
@@ -396,6 +403,12 @@ export default function DocRetornos() {
               senha={senha}
               quando={quando}
               acoesDe={(retorno) => <Apagar aoConfirmar={() => apagar(retorno)} />}
+            />
+
+            <RetornosDesign
+              senha={senha}
+              quando={quando}
+              acoesDe={(aoConfirmar) => <Apagar aoConfirmar={aoConfirmar} />}
             />
           </>
         )}

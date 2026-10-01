@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from 'react'
 import { ROTEIRO, O_QUE_ANOTAR, SITE } from '../../content/documentacao'
-import { useArmazenamento } from './hooks'
+import { useArmazenamento, usePessoa } from './hooks'
 import { BotaoCopiar } from './Pecas'
 import { ehImpressao } from './modoImpressao'
-import { salvarRetorno, novoIdentificador } from './retornos'
+import { salvarRetorno } from './retornos'
 
 const hora = (iso) =>
   new Date(iso).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
@@ -27,10 +27,8 @@ const hora = (iso) =>
 export default function Checklist({ publico }) {
   const impressao = ehImpressao()
   const [estado, setEstado] = useArmazenamento(`locafacil_doc_${publico}_roteiro`, {})
-  const [pessoa, setPessoa] = useArmazenamento('locafacil_doc_pessoa', {
-    id: novoIdentificador(),
-    nome: '',
-  })
+  // A mesma pessoa do envio de imagens, na mesma página: um id e um nome só.
+  const [pessoa, setPessoa] = usePessoa()
   const [enviadoEm, setEnviadoEm] = useArmazenamento(`locafacil_doc_${publico}_enviado`, null)
   const [salvamento, setSalvamento] = useState({ tipo: 'ocioso' })
   const [confirmandoLimpeza, setConfirmandoLimpeza] = useState(false)

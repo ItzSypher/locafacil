@@ -102,6 +102,17 @@ Grava no mesmo endpoint com `publico: 'copy'` (`copy/<id>.json`, anexos em
 `copy-anexos/`), e `/doc/retornos` mostra a seção "Revisão de copy". Quando a
 copy mudar: `node scripts/capturar-copy.mjs` refaz as capturas.
 
+**Entrega de imagens do design** (seção 1 de `/doc/marketing`): uma ficha
+por espaço de imagem, lida de `src/content/marketing-imagens.js` (pedido do
+cliente, copy no ar, especificação) e de `marketing-imagens-medidas.json` +
+`public/doc/marketing/espacos/`, que `node scripts/capturar-espacos.mjs`
+refaz medindo cada imagem em 1440, 768 e 390. Os arquivos sobem inteiros por
+`POST /api/retornos?arquivo=1` (JPG/PNG/WEBP/SVG, até 3 MB, magic bytes
+conferidos) para `marketing-arquivos/<pessoa>/<espaço>/<nome>`; com a senha,
+`GET ?arquivos=1` lista, `GET ?arquivo=<caminho>` devolve (SVG sempre como
+`attachment`) e `DELETE ?arquivo=` apaga. `/doc/retornos` mostra a seção
+"Arquivos do design".
+
 Cada página põe e tira o próprio `<meta name="robots" content="noindex">` — o
 projeto não usa biblioteca de `<head>`, e um `noindex` esquecido derrubaria a
 home do Google. `public/robots.txt` é a segunda tranca.

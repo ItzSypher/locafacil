@@ -19,6 +19,11 @@ import { put, list, get, del } from '@vercel/blob'
 // imagem por dobra) e por isso validação própria, mas o resto — senha,
 // armazenamento, sobrescrita — é o mesmo dos outros retornos.
 //
+// Os arquivos de imagem do design (a agência entrega por /doc/marketing) também
+// passam por aqui, pelo mesmo motivo: `?arquivo=1` no POST grava, e no GET e
+// no DELETE, com a senha, devolve ou apaga um arquivo. Ver "arquivos do
+// design" mais abaixo.
+//
 // O armazenamento é o Vercel Blob `locafacil-retornos`, privado: os arquivos
 // não têm URL pública, e só esta função, com BLOB_READ_WRITE_TOKEN, lê e
 // escreve. Sem o token — rodando local com `npm run dev` — o POST responde
@@ -314,6 +319,211 @@ async function gravarAnexo(req, res) {
   return res.status(200).json({ success: true, data: { salvo: true, anexo: caminho }, errors: [] })
 }
 
+/* ------------------------------------------------- arquivos do design -- */
+
+/* A agência de design entrega as imagens do site por /doc/marketing: fotos
+   das seções, logos das montadoras, fotos da frota. Diferente do anexo da
+   copy, aqui o arquivo é o produto final — vai para o site como chegou. Por
+   isso não há redução no navegador nem recompressão aqui: os bytes são
+   gravados exatamente como saíram do programa de quem desenhou.
+
+   O caminho é `marketing-arquivos/<pessoa>/<espaço>/<nome>`. Vários arquivos
+   por espaço (duas opções de foto, a logo em SVG e em PNG); mandar de novo
+   com o mesmo nome substitui. Ao lado, `marketing-arquivos/<pessoa>/quem.json`
+   guarda o nome de quem enviou, para /doc/retornos dizer de quem é cada um. */
+
+// 3 MB de arquivo viram 4 MB em base64. Com o resto do JSON, o corpo fica
+// abaixo dos 4,5 MB que a Vercel aceita numa função.
+const LIMITE_ARQUIVO = 3 * 1024 * 1024
+const LIMITE_DATA_URL_ARQUIVO = Math.ceil((LIMITE_ARQUIVO * 4) / 3) + 64
+// Folga para opções e versões, e teto para quem tenta encher o armazenamento.
+const LIMITE_ARQUIVOS_POR_ESPACO = 12
+const LIMITE_ARQUIVOS_POR_PESSOA = 150
+
+const PREFIXO_ARQUIVOS = 'marketing-arquivos/'
+
+const EXTENSAO_ARQUIVO = { ...EXTENSAO, 'image/svg+xml': 'svg' }
+const TIPO_DO_ARQUIVO = { ...TIPO_DA_EXTENSAO, svg: 'image/svg+xml' }
+const DATA_URL_ARQUIVO = /^data:(image\/(?:jpeg|png|webp|svg\+xml));base64,([A-Za-z0-9+/]+={0,2})$/
+const CAMINHO_ARQUIVO =
+  /^marketing-arquivos\/([a-z0-9-]{8,64})\/([a-z0-9-]{1,80})\/([a-z0-9]+(?:[._-][a-z0-9]+)*)\.(jpg|png|webp|svg)$/
+const CAMINHO_QUEM = /^marketing-arquivos\/([a-z0-9-]{8,64})\/quem\.json$/
+
+const caminhoDeQuem = (id) => `${PREFIXO_ARQUIVOS}${id}/quem.json`
+
+/* Nome que vai para o caminho: sem acento, minúsculo, só letra, número e
+   separador simples, e a extensão do tipo que os bytes provaram ter — não a
+   que o arquivo trazia. `Logo FIAT (final).PNG` vira `logo-fiat-final.png`. */
+function nomeDoArquivo(original, extensao) {
+  const base = String(original ?? '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/\.[a-z0-9]{1,5}$/, '')
+    .replace(/[^a-z0-9._-]+/g, '-')
+    .replace(/[._-]{2,}/g, '-')
+    .replace(/^[._-]+|[._-]+$/g, '')
+    .slice(0, 60)
+    .replace(/[._-]+$/, '')
+  return `${base || 'arquivo'}.${extensao}`
+}
+
+/* SVG é texto: começa por `<svg` ou pela declaração `<?xml` (que é como o
+   Illustrator e o Figma exportam), e em algum ponto abre a tag `<svg`. Byte
+   nulo denuncia binário com nome de SVG. */
+function svgConfere(bytes) {
+  if (!bytes.length || bytes.includes(0)) return false
+  let conteudo = bytes.toString('utf8')
+  if (conteudo.charCodeAt(0) === 0xfeff) conteudo = conteudo.slice(1)
+  conteudo = conteudo.trimStart()
+  if (!conteudo.startsWith('<svg') && !conteudo.startsWith('<?xml')) return false
+  return /<svg[\s>]/.test(conteudo)
+}
+
+async function gravarArquivo(req, res) {
+  const corpo = req.body
+  if (!corpo || typeof corpo !== 'object') return recusa(res, 400, 'Corpo vazio.')
+  if (corpo.publico !== 'marketing') return recusa(res, 400, 'Arquivo do design só existe na página do marketing.')
+
+  const id = String(corpo.id ?? '')
+  const espaco = String(corpo.espaco ?? '')
+  if (!ID.test(id)) return recusa(res, 400, 'Identificador inválido.')
+  if (!CHAVE.test(espaco)) return recusa(res, 400, 'Espaço de imagem inválido.')
+  const nome = texto(corpo.nome, LIMITE_NOME)
+  if (!nome) return recusa(res, 400, 'Diga quem está enviando.')
+
+  const dataUrl = String(corpo.dataUrl ?? '')
+  if (dataUrl.length > LIMITE_DATA_URL_ARQUIVO) return recusa(res, 413, 'Arquivo grande demais: o limite é 3 MB.')
+  const partes = DATA_URL_ARQUIVO.exec(dataUrl)
+  if (!partes) return recusa(res, 415, 'Formato não aceito: use JPG, PNG, WEBP ou SVG.')
+
+  const tipo = partes[1]
+  const bytes = Buffer.from(partes[2], 'base64')
+  if (bytes.length > LIMITE_ARQUIVO) return recusa(res, 413, 'Arquivo grande demais: o limite é 3 MB.')
+  const confere = tipo === 'image/svg+xml' ? svgConfere(bytes) : assinaturaConfere(bytes, tipo)
+  if (!confere) return recusa(res, 415, 'O arquivo não é a imagem que diz ser.')
+
+  const arquivo = nomeDoArquivo(corpo.arquivo, EXTENSAO_ARQUIVO[tipo])
+
+  if (!temArmazenamento()) {
+    return res.status(200).json({ success: true, data: { salvo: false, arquivo, tamanho: bytes.length }, errors: [] })
+  }
+
+  const pasta = `${PREFIXO_ARQUIVOS}${id}/${espaco}/`
+  const caminho = `${pasta}${arquivo}`
+  const daPessoa = (await listarPrefixo(`${PREFIXO_ARQUIVOS}${id}/`)).filter((blob) => CAMINHO_ARQUIVO.test(blob.pathname))
+  const substitui = daPessoa.some((blob) => blob.pathname === caminho)
+  if (!substitui) {
+    if (daPessoa.filter((blob) => blob.pathname.startsWith(pasta)).length >= LIMITE_ARQUIVOS_POR_ESPACO) {
+      return recusa(
+        res,
+        400,
+        `Este espaço já tem ${LIMITE_ARQUIVOS_POR_ESPACO} arquivos seus. Mande com o nome de um deles para substituir.`,
+      )
+    }
+    if (daPessoa.length >= LIMITE_ARQUIVOS_POR_PESSOA) return recusa(res, 400, 'Arquivos demais. Fale com a equipe do projeto.')
+  }
+
+  await put(caminho, bytes, {
+    access: 'private',
+    addRandomSuffix: false,
+    allowOverwrite: true,
+    contentType: tipo,
+  })
+  const enviadoEm = new Date().toISOString()
+  await put(caminhoDeQuem(id), JSON.stringify({ nome, atualizadoEm: enviadoEm }), {
+    access: 'private',
+    addRandomSuffix: false,
+    allowOverwrite: true,
+    contentType: 'application/json',
+  })
+
+  return res.status(200).json({
+    success: true,
+    data: { salvo: true, caminho, arquivo, tamanho: bytes.length, substituiu: substitui, enviadoEm },
+    errors: [],
+  })
+}
+
+/* Bytes de um arquivo do design, só com a senha e só com o caminho na forma
+   que `gravarArquivo` monta. SVG sai sempre como download: aberto no
+   navegador, um SVG é documento e roda o script que trouxer. A CSP com
+   `sandbox` é a segunda tranca, para o caso de alguém abrir mesmo assim. */
+async function lerArquivo(req, res) {
+  const caminho = String(req.query?.arquivo ?? '')
+  const partes = CAMINHO_ARQUIVO.exec(caminho)
+  if (!partes) return recusa(res, 400, 'Arquivo inválido.')
+
+  let resultado = null
+  try {
+    resultado = await get(caminho, { access: 'private', useCache: false })
+  } catch {
+    resultado = null
+  }
+  if (resultado?.statusCode !== 200) return recusa(res, 404, 'Arquivo não encontrado.')
+
+  const extensao = partes[4]
+  const bytes = Buffer.from(await new Response(resultado.stream).arrayBuffer())
+  res.setHeader?.('Content-Type', TIPO_DO_ARQUIVO[extensao])
+  res.setHeader?.('X-Content-Type-Options', 'nosniff')
+  res.setHeader?.('Content-Security-Policy', "default-src 'none'; style-src 'unsafe-inline'; sandbox")
+  res.setHeader?.(
+    'Content-Disposition',
+    `${extensao === 'svg' ? 'attachment' : 'inline'}; filename="${partes[3]}.${extensao}"`,
+  )
+  res.status(200)
+  return typeof res.send === 'function' ? res.send(bytes) : res.end(bytes)
+}
+
+/* Todos os arquivos do design, do mais novo para o mais antigo, com o nome
+   de quem mandou. Só a lista: os bytes vêm um a um por `lerArquivo`. */
+async function listarArquivos(req, res) {
+  const blobs = await listarPrefixo(PREFIXO_ARQUIVOS)
+  const pessoas = new Map()
+  await Promise.all(
+    blobs
+      .filter((blob) => CAMINHO_QUEM.test(blob.pathname))
+      .map(async (blob) => {
+        try {
+          const resultado = await get(blob.pathname, { access: 'private', useCache: false })
+          if (resultado?.statusCode !== 200) return
+          const quem = JSON.parse(await new Response(resultado.stream).text())
+          pessoas.set(CAMINHO_QUEM.exec(blob.pathname)[1], texto(quem?.nome, LIMITE_NOME))
+        } catch {
+          // Sem o nome, o arquivo aparece como "sem nome"; não some.
+        }
+      }),
+  )
+
+  const arquivos = blobs
+    .map((blob) => {
+      const partes = CAMINHO_ARQUIVO.exec(blob.pathname)
+      if (!partes) return null
+      const enviadoEm = blob.uploadedAt instanceof Date ? blob.uploadedAt.toISOString() : String(blob.uploadedAt ?? '')
+      return {
+        caminho: blob.pathname,
+        pessoa: partes[1],
+        nome: pessoas.get(partes[1]) ?? '',
+        espaco: partes[2],
+        arquivo: `${partes[3]}.${partes[4]}`,
+        tipo: TIPO_DO_ARQUIVO[partes[4]],
+        tamanho: blob.size,
+        enviadoEm,
+      }
+    })
+    .filter(Boolean)
+    .sort((a, b) => b.enviadoEm.localeCompare(a.enviadoEm))
+
+  return res.status(200).json({ success: true, data: arquivos, errors: [] })
+}
+
+async function apagarArquivo(req, res) {
+  const caminho = String(req.query?.arquivo ?? '')
+  if (!CAMINHO_ARQUIVO.test(caminho)) return recusa(res, 400, 'Arquivo inválido.')
+  await del(caminho)
+  return res.status(200).json({ success: true, data: { apagado: true }, errors: [] })
+}
+
 async function listarPrefixo(prefix) {
   const blobs = []
   let cursor
@@ -353,6 +563,8 @@ async function listar(req, res) {
   if (!temArmazenamento()) return recusa(res, 503, 'Armazenamento não configurado neste ambiente.')
 
   if (req.query?.anexo) return lerAnexo(req, res)
+  if (req.query?.arquivo) return lerArquivo(req, res)
+  if (req.query?.arquivos) return listarArquivos(req, res)
 
   // Os dois prefixos numa lista só: cada retorno diz de que página veio pelo
   // `publico`, e é por ele que /doc/retornos separa a homologação da copy.
@@ -386,6 +598,10 @@ async function apagar(req, res) {
   if (!senhaConfere(req.headers?.authorization)) return recusa(res, 401, 'Senha não confere.')
   if (!temArmazenamento()) return recusa(res, 503, 'Armazenamento não configurado neste ambiente.')
 
+  // Arquivo do design: o caminho chega pronto, mas só passa na forma exata de
+  // `marketing-arquivos/<pessoa>/<espaço>/<nome>.<ext>`.
+  if (req.query?.arquivo) return apagarArquivo(req, res)
+
   // O caminho é remontado aqui, nunca recebido pronto: com a senha certa ainda
   // não se apaga nada fora de `retornos/`, `copy/` e `copy-anexos/`.
   const publico = String(req.query?.publico ?? '')
@@ -410,6 +626,7 @@ export default async function handler(req, res) {
 
   try {
     if (req.method === 'POST') {
+      if (req.query?.arquivo) return await gravarArquivo(req, res)
       return req.query?.anexo ? await gravarAnexo(req, res) : await gravar(req, res)
     }
     if (req.method === 'GET') return await listar(req, res)

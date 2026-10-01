@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState, useSyncExternalStore } from 'react'
+import { novoIdentificador } from './retornos'
 
 /* Estado que sobrevive ao refresh, guardado no navegador de quem lê.
  *
@@ -88,4 +89,61 @@ export function useSemIndice(titulo) {
       document.title = TITULO_DO_SITE
     }
   }, [titulo])
+}
+
+/* ------------------------------------------------------------- pessoa -- */
+
+/* Quem está respondendo: o mesmo `{ id, nome }` para tudo o que uma página
+ * grava. Em /doc/marketing são dois lugares — o roteiro de homologação e o
+ * envio de imagens — e com dois `useArmazenamento` na mesma chave cada um
+ * nascia com um id próprio no primeiro acesso, e o nome digitado num não
+ * aparecia no outro. Aqui é uma fonte só, que avisa a todos quando muda.
+ */
+const CHAVE_PESSOA = 'locafacil_doc_pessoa'
+const ouvintesDaPessoa = new Set()
+let pessoaAtual = null
+
+function lerPessoa() {
+  if (pessoaAtual) return pessoaAtual
+  try {
+    const salva = JSON.parse(localStorage.getItem(CHAVE_PESSOA) ?? 'null')
+    if (salva && typeof salva.id === 'string' && salva.id) {
+      pessoaAtual = { id: salva.id, nome: String(salva.nome ?? '') }
+    }
+  } catch {
+    // Sem armazenamento: a pessoa vale só até recarregar.
+  }
+  if (!pessoaAtual) {
+    // Gravado já na primeira leitura: quem marca um passo sem escrever o nome
+    // e volta amanhã continua o mesmo retorno, não abre outro.
+    pessoaAtual = { id: novoIdentificador(), nome: '' }
+    try {
+      localStorage.setItem(CHAVE_PESSOA, JSON.stringify(pessoaAtual))
+    } catch {
+      // Segue sem lembrar.
+    }
+  }
+  return pessoaAtual
+}
+
+function ouvirPessoa(avisar) {
+  ouvintesDaPessoa.add(avisar)
+  return () => ouvintesDaPessoa.delete(avisar)
+}
+
+/** `[pessoa, setPessoa]`, como um `useState` compartilhado entre componentes. */
+export function usePessoa() {
+  const pessoa = useSyncExternalStore(ouvirPessoa, lerPessoa, lerPessoa)
+  const setPessoa = useCallback((atualizar) => {
+    const atual = lerPessoa()
+    const nova = typeof atualizar === 'function' ? atualizar(atual) : atualizar
+    pessoaAtual = { id: nova?.id || atual.id, nome: String(nova?.nome ?? '') }
+    try {
+      localStorage.setItem(CHAVE_PESSOA, JSON.stringify(pessoaAtual))
+    } catch {
+      // Segue sem lembrar.
+    }
+    ouvintesDaPessoa.forEach((avisar) => avisar())
+  }, [])
+  return [pessoa, setPessoa]
 }

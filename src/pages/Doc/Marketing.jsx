@@ -4,11 +4,13 @@ import Checklist from './Checklist'
 import Galeria from './Galeria'
 import Pendencias from './Pendencias'
 import TextosProntos from './TextosProntos'
+import ImagensDesign from './ImagensDesign'
 import { DadosTeste, Reuniao, Documentacao, ProximosPassos } from './Secoes'
 import { ASSUNTOS, linkWhatsApp } from '../../config/atendimento'
 import { SITE, CORES } from '../../content/documentacao'
 
 const SECOES = [
+  { id: 'imagens', rotulo: 'Imagens do site' },
   { id: 'acesso', rotulo: 'Acesso' },
   { id: 'reuniao', rotulo: 'Reunião' },
   { id: 'dados-teste', rotulo: 'Dados de teste' },
@@ -35,12 +37,22 @@ export default function DocMarketing() {
     <DocShell
       publico="marketing"
       titulo="Material para o marketing"
-      resumo="Do novo site da Locafácil: as telas em alta, as cores da marca, as frases que o cliente manda, e os textos prontos para disparar."
+      resumo="Do novo site da Locafácil: a entrega das imagens pelo design, as telas em alta, as cores da marca, as frases que o cliente manda, e os textos prontos para disparar."
       secoes={SECOES}
       pdf={SITE.pdfMarketing}
     >
+      {/* --------------------------------------------------------- imagens -- */}
+      <Secao
+        id="imagens"
+        numero={1}
+        titulo="Imagens do site: entrega do design"
+        resumo="Da revisão do cliente em 01/10/2026, todas as imagens do site passam pelo time de design: as fotos das seções, as logos das montadoras e as fotos da frota. Cada espaço tem uma ficha com o recorte da tela, o pedido do cliente, a copy aprovada e o tamanho do arquivo. A imagem de hoje se baixa ali, e a nova se envia ali mesmo."
+      >
+        <ImagensDesign />
+      </Secao>
+
       {/* ---------------------------------------------------------- acesso -- */}
-      <Secao id="acesso" numero={1} titulo="O site está no ar">
+      <Secao id="acesso" numero={2} titulo="O site está no ar">
         <a
           href={SITE.url}
           target="_blank"
@@ -68,7 +80,7 @@ export default function DocMarketing() {
       {/* --------------------------------------------------------- reunião -- */}
       <Secao
         id="reuniao"
-        numero={2}
+        numero={3}
         titulo="Reunião de validação"
         resumo="A sugestão é fechar na segunda os pontos finais de design e a responsividade, com o fluxo de agendamento percorrido ao vivo."
       >
@@ -78,7 +90,7 @@ export default function DocMarketing() {
       {/* --------------------------------------------------- dados de teste -- */}
       <Secao
         id="dados-teste"
-        numero={3}
+        numero={4}
         titulo="Dados de teste"
         resumo="Dados fictícios para percorrer a reserva inteira até a proteção — onde está o upsell — e a tela final. O que se digita tem botão de copiar ao lado."
       >
@@ -88,7 +100,7 @@ export default function DocMarketing() {
       {/* ----------------------------------------------------------- telas -- */}
       <Secao
         id="telas"
-        numero={4}
+        numero={5}
         titulo="As telas"
         resumo={`Capturas do site no ar, em ${SITE.atualizado}. Clique para ampliar e salvar.`}
       >
@@ -107,7 +119,7 @@ export default function DocMarketing() {
       {/* ----------------------------------------------------------- marca -- */}
       <Secao
         id="marca"
-        numero={5}
+        numero={6}
         titulo="Marca"
         resumo="Do Manual de Identidade Visual da Locafácil, de fevereiro de 2025."
       >
@@ -184,7 +196,7 @@ export default function DocMarketing() {
       {/* ---------------------------------------------------------- frases -- */}
       <Secao
         id="frases"
-        numero={6}
+        numero={7}
         titulo="Frases do atendimento"
         resumo="O botão flutuante do site oferece seis assuntos. Quem toca cai no WhatsApp com a frase já escrita na caixa de texto — é literalmente o que o cliente vai mandar. Estas são as que estão no ar agora."
       >
@@ -223,7 +235,7 @@ export default function DocMarketing() {
       {/* ------------------------------------------------------ precisamos -- */}
       <Secao
         id="precisamos"
-        numero={7}
+        numero={8}
         titulo="O que precisamos de vocês"
         resumo={`Cada item diz por que importa e o que acontece enquanto ninguém resolve. Se der, até a reunião de ${SITE.reuniaoRotulo}.`}
       >
@@ -233,7 +245,7 @@ export default function DocMarketing() {
       {/* ---------------------------------------------------------- textos -- */}
       <Secao
         id="textos"
-        numero={8}
+        numero={9}
         titulo="Textos prontos para enviar"
         resumo="E-mails e mensagens de WhatsApp já escritos. Abra, copie e mande."
       >
@@ -255,7 +267,7 @@ export default function DocMarketing() {
       {/* --------------------------------------------------------- roteiro -- */}
       <Secao
         id="roteiro"
-        numero={9}
+        numero={10}
         titulo="Roteiro de homologação"
         resumo="Leva cerca de dez minutos. Faça uma vez no computador e uma vez no celular. Diga quem está respondendo, marque o que conferiu e escreva as observações aqui mesmo: tudo é salvo sozinho e chega à equipe do projeto. No fim, mande também pelo WhatsApp."
       >
@@ -265,7 +277,7 @@ export default function DocMarketing() {
       {/* ---------------------------------------------------- documentação -- */}
       <Secao
         id="documentacao"
-        numero={10}
+        numero={11}
         titulo="Documentação do projeto"
         resumo="O código está versionado no GitHub, com a arquitetura, o sistema visual, a integração com a API e a operação documentados."
       >
@@ -273,7 +285,7 @@ export default function DocMarketing() {
       </Secao>
 
       {/* ------------------------------------------------------- próximos -- */}
-      <Secao id="proximos" numero={11} titulo="Próximos passos">
+      <Secao id="proximos" numero={12} titulo="Próximos passos">
         <ProximosPassos />
       </Secao>
     </DocShell>
