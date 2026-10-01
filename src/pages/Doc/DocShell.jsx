@@ -19,8 +19,11 @@ function diasAte(iso) {
  * Não entra no menu do site e não é indexada: é um link que se manda para
  * alguém, não uma página que se acha (ver `useSemIndice`).
  */
-export default function DocShell({ publico, titulo, tituloAba, resumo, secoes, pdf, children }) {
+export default function DocShell({ publico, titulo, tituloAba, resumo, secoes, pdf, abas, aba, aoTrocarAba, children }) {
   const [ativa, setAtiva] = useState(secoes[0]?.id)
+
+  // Trocar de aba troca as seções do índice: a primeira da aba nova acende.
+  useEffect(() => { setAtiva(secoes[0]?.id) }, [secoes])
 
   useSemIndice(tituloAba ?? titulo)
 
@@ -122,6 +125,32 @@ export default function DocShell({ publico, titulo, tituloAba, resumo, secoes, p
         aria-label="Seções deste documento"
         className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-line print:hidden"
       >
+        {/* Abas: página longa demais dividida pelo que a pessoa veio fazer.
+            Ficam na faixa fixa para a troca estar sempre à mão. */}
+        {abas && (
+          <div className="border-b border-line">
+            <div className="max-w-5xl mx-auto px-5 sm:px-8 py-2">
+              <div role="tablist" aria-label="Partes desta página" className="flex gap-1 overflow-x-auto scrollbar-none">
+                {abas.map((item) => (
+                  <button
+                    key={item.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={aba === item.id}
+                    onClick={() => aoTrocarAba(item.id)}
+                    className={`min-h-11 px-4 rounded-xl whitespace-nowrap type-label transition-colors cursor-pointer ${
+                      aba === item.id
+                        ? 'bg-brand-accent text-white'
+                        : 'text-text-muted hover:text-text-dark hover:bg-surface-muted'
+                    }`}
+                  >
+                    {item.rotulo}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
         <div className="max-w-5xl mx-auto px-5 sm:px-8">
           <ul className="flex gap-1 overflow-x-auto scrollbar-none -mx-1 px-1">
             {secoes.map((secao) => (

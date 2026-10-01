@@ -1,3 +1,4 @@
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import DocShell from './DocShell'
 import { Secao, Aviso, BotaoCopiar } from './Pecas'
 import Checklist from './Checklist'
@@ -11,20 +12,37 @@ import { ASSUNTOS, linkWhatsApp } from '../../config/atendimento'
 import { SITE, CORES } from '../../content/documentacao'
 
 const SECOES = [
-  { id: 'imagens', rotulo: 'Imagens do site' },
-  { id: 'quebras', rotulo: 'Quebras de linha' },
-  { id: 'acesso', rotulo: 'Acesso' },
-  { id: 'reuniao', rotulo: 'Reunião' },
-  { id: 'dados-teste', rotulo: 'Dados de teste' },
-  { id: 'telas', rotulo: 'Telas' },
-  { id: 'marca', rotulo: 'Marca' },
-  { id: 'frases', rotulo: 'Atendimento' },
-  { id: 'precisamos', rotulo: 'O que precisamos' },
-  { id: 'textos', rotulo: 'Textos prontos' },
-  { id: 'roteiro', rotulo: 'Homologação' },
-  { id: 'documentacao', rotulo: 'Documentação' },
-  { id: 'proximos', rotulo: 'Próximos passos' },
+  { id: 'imagens', rotulo: 'Imagens do site', aba: 'imagens' },
+  { id: 'quebras', rotulo: 'Quebras de linha', aba: 'textos' },
+  { id: 'acesso', rotulo: 'Acesso', aba: 'material' },
+  { id: 'reuniao', rotulo: 'Reunião', aba: 'material' },
+  { id: 'dados-teste', rotulo: 'Dados de teste', aba: 'material' },
+  { id: 'telas', rotulo: 'Telas', aba: 'material' },
+  { id: 'marca', rotulo: 'Marca', aba: 'material' },
+  { id: 'frases', rotulo: 'Atendimento', aba: 'material' },
+  { id: 'precisamos', rotulo: 'O que precisamos', aba: 'material' },
+  { id: 'textos', rotulo: 'Textos prontos', aba: 'material' },
+  { id: 'roteiro', rotulo: 'Homologação', aba: 'material' },
+  { id: 'documentacao', rotulo: 'Documentação', aba: 'material' },
+  { id: 'proximos', rotulo: 'Próximos passos', aba: 'material' },
 ]
+
+/* A página ficou longa demais com imagens, quebras e o material de antes no
+   mesmo rolo. Cada aba é uma tarefa; a escolhida vai para o endereço
+   (`?aba=textos`), e um link para uma seção (`#quebras`) abre a aba dela. */
+const ABAS = [
+  { id: 'imagens', rotulo: '1 · Imagens' },
+  { id: 'textos', rotulo: '2 · Textos' },
+  { id: 'material', rotulo: '3 · Material e roteiro' },
+]
+
+function abaInicial() {
+  if (typeof window === 'undefined') return 'imagens'
+  const pedida = new URLSearchParams(window.location.search).get('aba')
+  if (ABAS.some((a) => a.id === pedida)) return pedida
+  const ancora = window.location.hash.slice(1)
+  return SECOES.find((secao) => secao.id === ancora)?.aba ?? 'imagens'
+}
 
 const ARQUIVOS_MARCA = [
   { arquivo: '/doc/marca/logo-lockup-color.svg', nome: 'Logotipo colorido', uso: 'Fundo claro' },
@@ -35,15 +53,37 @@ const ARQUIVOS_MARCA = [
 ]
 
 export default function DocMarketing() {
+  const [aba, setAba] = useState(abaInicial)
+  const secoes = useMemo(() => SECOES.filter((secao) => secao.aba === aba), [aba])
+
+  const trocarAba = useCallback((nova) => {
+    setAba(nova)
+    const url = new URL(window.location.href)
+    url.searchParams.set('aba', nova)
+    url.hash = ''
+    window.history.replaceState(null, '', url)
+    window.scrollTo({ top: 0 })
+  }, [])
+
+  // Voltar e avançar do navegador entre abas.
+  useEffect(() => {
+    const aoNavegar = () => setAba(abaInicial())
+    window.addEventListener('popstate', aoNavegar)
+    return () => window.removeEventListener('popstate', aoNavegar)
+  }, [])
+
   return (
     <DocShell
       publico="marketing"
       titulo="Material para o marketing"
-      resumo="Do novo site da Locafácil: a entrega das imagens pelo design, as telas em alta, as cores da marca, as frases que o cliente manda, e os textos prontos para disparar."
-      secoes={SECOES}
+      resumo="Do novo site da Locafácil: a entrega das imagens pelo design, as quebras de linha dos textos, as telas em alta, as cores da marca, as frases que o cliente manda e os textos prontos para disparar."
+      secoes={secoes}
       pdf={SITE.pdfMarketing}
+      abas={ABAS}
+      aba={aba}
+      aoTrocarAba={trocarAba}
     >
-      {/* --------------------------------------------------------- imagens -- */}
+      {aba === 'imagens' && (
       <Secao
         id="imagens"
         numero={1}
@@ -52,19 +92,24 @@ export default function DocMarketing() {
       >
         <ImagensDesign />
       </Secao>
+      )}
 
-      {/* --------------------------------------------------------- quebras -- */}
+      {aba === 'textos' && (
       <Secao
         id="quebras"
-        numero={2}
+        numero={1}
         titulo="Textos: quebras de linha e leitura"
         resumo="Algumas quebras de linha dos textos novos não ficaram boas. Aqui cada bloco do site aparece como está hoje, no computador e no celular, e você indica onde cada título, botão e selo deve quebrar."
       >
         <QuebrasTexto />
       </Secao>
+      )}
+
+      {aba === 'material' && (
+      <>
 
       {/* ---------------------------------------------------------- acesso -- */}
-      <Secao id="acesso" numero={3} titulo="O site está no ar">
+      <Secao id="acesso" numero={1} titulo="O site está no ar">
         <a
           href={SITE.url}
           target="_blank"
@@ -92,7 +137,7 @@ export default function DocMarketing() {
       {/* --------------------------------------------------------- reunião -- */}
       <Secao
         id="reuniao"
-        numero={4}
+        numero={2}
         titulo="Reunião de validação"
         resumo="A sugestão é fechar na segunda os pontos finais de design e a responsividade, com o fluxo de agendamento percorrido ao vivo."
       >
@@ -102,7 +147,7 @@ export default function DocMarketing() {
       {/* --------------------------------------------------- dados de teste -- */}
       <Secao
         id="dados-teste"
-        numero={5}
+        numero={3}
         titulo="Dados de teste"
         resumo="Dados fictícios para percorrer a reserva inteira até a proteção — onde está o upsell — e a tela final. O que se digita tem botão de copiar ao lado."
       >
@@ -112,7 +157,7 @@ export default function DocMarketing() {
       {/* ----------------------------------------------------------- telas -- */}
       <Secao
         id="telas"
-        numero={6}
+        numero={4}
         titulo="As telas"
         resumo={`Capturas do site no ar, em ${SITE.atualizado}. Clique para ampliar e salvar.`}
       >
@@ -131,7 +176,7 @@ export default function DocMarketing() {
       {/* ----------------------------------------------------------- marca -- */}
       <Secao
         id="marca"
-        numero={7}
+        numero={5}
         titulo="Marca"
         resumo="Do Manual de Identidade Visual da Locafácil, de fevereiro de 2025."
       >
@@ -208,7 +253,7 @@ export default function DocMarketing() {
       {/* ---------------------------------------------------------- frases -- */}
       <Secao
         id="frases"
-        numero={8}
+        numero={6}
         titulo="Frases do atendimento"
         resumo="O botão flutuante do site oferece seis assuntos. Quem toca cai no WhatsApp com a frase já escrita na caixa de texto — é literalmente o que o cliente vai mandar. Estas são as que estão no ar agora."
       >
@@ -247,7 +292,7 @@ export default function DocMarketing() {
       {/* ------------------------------------------------------ precisamos -- */}
       <Secao
         id="precisamos"
-        numero={9}
+        numero={7}
         titulo="O que precisamos de vocês"
         resumo={`Cada item diz por que importa e o que acontece enquanto ninguém resolve. Se der, até a reunião de ${SITE.reuniaoRotulo}.`}
       >
@@ -257,7 +302,7 @@ export default function DocMarketing() {
       {/* ---------------------------------------------------------- textos -- */}
       <Secao
         id="textos"
-        numero={10}
+        numero={8}
         titulo="Textos prontos para enviar"
         resumo="E-mails e mensagens de WhatsApp já escritos. Abra, copie e mande."
       >
@@ -279,7 +324,7 @@ export default function DocMarketing() {
       {/* --------------------------------------------------------- roteiro -- */}
       <Secao
         id="roteiro"
-        numero={11}
+        numero={9}
         titulo="Roteiro de homologação"
         resumo="Leva cerca de dez minutos. Faça uma vez no computador e uma vez no celular. Diga quem está respondendo, marque o que conferiu e escreva as observações aqui mesmo: tudo é salvo sozinho e chega à equipe do projeto. No fim, mande também pelo WhatsApp."
       >
@@ -289,7 +334,7 @@ export default function DocMarketing() {
       {/* ---------------------------------------------------- documentação -- */}
       <Secao
         id="documentacao"
-        numero={12}
+        numero={10}
         titulo="Documentação do projeto"
         resumo="O código está versionado no GitHub, com a arquitetura, o sistema visual, a integração com a API e a operação documentados."
       >
@@ -297,9 +342,11 @@ export default function DocMarketing() {
       </Secao>
 
       {/* ------------------------------------------------------- próximos -- */}
-      <Secao id="proximos" numero={13} titulo="Próximos passos">
+      <Secao id="proximos" numero={11} titulo="Próximos passos">
         <ProximosPassos />
       </Secao>
+      </>
+      )}
     </DocShell>
   )
 }

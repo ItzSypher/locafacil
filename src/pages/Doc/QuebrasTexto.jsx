@@ -448,6 +448,14 @@ export default function QuebrasTexto() {
   const [enviados, setEnviados] = useArmazenamento('locafacil_doc_quebras_envios', {})
   const [salvamento, setSalvamento] = useState({ tipo: 'ocioso' })
   const [mexeu, setMexeu] = useState(false)
+  // Um bloco por vez: os doze juntos davam uma página de dezenas de telas.
+  // Na impressão saem todos.
+  const [ativo, setAtivo] = useState(BLOCOS_TEXTO[0]?.id)
+  const posicaoAtiva = Math.max(0, BLOCOS_TEXTO.findIndex((bloco) => bloco.id === ativo))
+  const irPara = (posicao) => {
+    setAtivo(BLOCOS_TEXTO[posicao].id)
+    document.getElementById('quebras-blocos')?.scrollIntoView({ block: 'start' })
+  }
 
   const nome = pessoa.nome.trim()
   const temConteudo = Object.keys(quebras).length > 0
@@ -540,22 +548,26 @@ export default function QuebrasTexto() {
         </div>
       </div>
 
-      <nav aria-label="Blocos de texto" className="flex flex-wrap gap-2">
+      <nav id="quebras-blocos" aria-label="Blocos de texto" className="flex flex-wrap gap-2 scroll-mt-32 print:hidden">
         {BLOCOS_TEXTO.map((bloco, posicao) => (
-          <a
+          <button
             key={bloco.id}
-            href={`#quebras-${bloco.id}`}
+            type="button"
+            onClick={() => irPara(posicao)}
+            aria-current={posicao === posicaoAtiva ? 'true' : undefined}
             className={`min-h-11 inline-flex items-center gap-2 px-3 rounded-xl border type-label transition-colors cursor-pointer ${
-              quebras[bloco.id] ? 'border-brand-success/40 bg-state-success-soft text-text-dark' : 'border-line text-text-muted hover:text-text-dark'
+              posicao === posicaoAtiva
+                ? 'border-brand-accent bg-brand-accent/10 text-text-dark'
+                : quebras[bloco.id] ? 'border-brand-success/40 bg-state-success-soft text-text-dark' : 'border-line text-text-muted hover:text-text-dark'
             }`}
           >
             <span className="type-numeric text-brand-accent">{String(posicao + 1).padStart(2, '0')}</span>
             {bloco.pagina} · {bloco.parte.split(':')[0]}
-          </a>
+          </button>
         ))}
       </nav>
 
-      {BLOCOS_TEXTO.map((bloco, posicao) => (
+      {BLOCOS_TEXTO.map((bloco, posicao) => (impressao || posicao === posicaoAtiva) && (
         <FichaBloco
           key={bloco.id}
           bloco={bloco}
@@ -568,6 +580,30 @@ export default function QuebrasTexto() {
           salvamento={salvamento}
         />
       ))}
+
+      {!impressao && (
+        <div className="flex flex-wrap items-center justify-between gap-3 print:hidden">
+          <button
+            type="button"
+            onClick={() => irPara(posicaoAtiva - 1)}
+            disabled={posicaoAtiva === 0}
+            className="min-h-11 px-4 rounded-xl border border-line type-label text-text-dark hover:border-brand-accent transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-default"
+          >
+            ← Bloco anterior
+          </button>
+          <span className="type-meta text-text-muted type-numeric">
+            Bloco {posicaoAtiva + 1} de {BLOCOS_TEXTO.length}
+          </span>
+          <button
+            type="button"
+            onClick={() => irPara(posicaoAtiva + 1)}
+            disabled={posicaoAtiva === BLOCOS_TEXTO.length - 1}
+            className="min-h-11 px-4 rounded-xl bg-brand-accent text-white type-label hover:bg-brand-glow transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-default"
+          >
+            Próximo bloco →
+          </button>
+        </div>
+      )}
     </div>
   )
 }
