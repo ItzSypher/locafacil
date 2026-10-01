@@ -40,6 +40,16 @@ const LIMITE_NOME = 80
 const LIMITE_NOTA = 2000
 const LIMITE_PASSOS = 30
 const LIMITE_CORPO = 40_000
+// O marketing carrega também as quebras de linha pedidas pelo design: um
+// texto por título, botão e selo do site, às vezes em duas versões.
+const LIMITE_CORPO_MARKETING = 150_000
+
+/* Quebras de linha (`quebras` do público marketing). O id do bloco e do texto
+   são os de `src/content/marketing-quebras.js`. */
+const LIMITE_BLOCOS_QUEBRA = 40
+const LIMITE_TEXTOS_QUEBRA = 40
+const LIMITE_TEXTO_QUEBRA = 600
+const LIMITE_LINHAS_QUEBRA = 12
 
 const PREFIXO = 'retornos/'
 
@@ -97,7 +107,8 @@ const recusa = (res, status, mensagem) =>
 function validar(corpo) {
   if (!corpo || typeof corpo !== 'object') return { erro: 'Corpo vazio.' }
   if (corpo.publico === 'copy') return validarCopy(corpo)
-  if (JSON.stringify(corpo).length > LIMITE_CORPO) return { erro: 'Retorno grande demais.' }
+  const limite = corpo.publico === 'marketing' ? LIMITE_CORPO_MARKETING : LIMITE_CORPO
+  if (JSON.stringify(corpo).length > limite) return { erro: 'Retorno grande demais.' }
 
   const publico = String(corpo.publico ?? '')
   const id = String(corpo.id ?? '')
@@ -116,16 +127,88 @@ function validar(corpo) {
 
   const enviadoEm = DATA_ISO.test(String(corpo.enviadoEm ?? '')) ? corpo.enviadoEm : null
 
+  // Campo novo, só do marketing e só quando veio: o retorno de quem nunca
+  // abriu as quebras continua com a forma de antes.
+  let quebras = null
+  if (publico === 'marketing' && corpo.quebras != null) {
+    const resultado = validarQuebras(corpo.quebras)
+    if (resultado.erro) return { erro: resultado.erro }
+    quebras = resultado.quebras
+  }
+
   return {
     retorno: {
       publico,
       id,
       nome: texto(corpo.nome, LIMITE_NOME),
       passos,
+      ...(quebras ? { quebras } : {}),
       enviadoEm,
       atualizadoEm: new Date().toISOString(),
     },
   }
+}
+
+const simples = (valor) => Boolean(valor) && typeof valor === 'object' && !Array.isArray(valor)
+
+/* Um texto com as quebras pedidas: string com `\n` onde o designer apertou
+   Enter. Devolve o texto limpo, `''` quando não veio, ou `null` se inválido. */
+function textoQuebrado(valor) {
+  if (valor == null) return ''
+  if (typeof valor !== 'string') return null
+  const limpo = valor.replace(/\r\n?/g, '\n').trim()
+  if (limpo.length > LIMITE_TEXTO_QUEBRA) return null
+  if (limpo.split('\n').length > LIMITE_LINHAS_QUEBRA) return null
+  return limpo
+}
+
+/* As quebras recusam em vez de descartar, como a revisão de copy: um pedido
+   que some sem aviso é trabalho do designer perdido. A página já impede tudo
+   o que é recusado aqui. Guarda só o que tem conteúdo. */
+function validarQuebras(valor) {
+  if (!simples(valor)) return { erro: 'Quebras de linha em formato inválido.' }
+  const entradas = Object.entries(valor)
+  if (entradas.length > LIMITE_BLOCOS_QUEBRA) return { erro: 'Blocos de texto demais.' }
+
+  const quebras = {}
+  for (const [bloco, conteudo] of entradas) {
+    if (!CHAVE.test(bloco)) return { erro: 'Bloco de texto com identificador inválido.' }
+    if (!simples(conteudo)) return { erro: `Bloco “${bloco}” em formato inválido.` }
+    const textosEntrada = conteudo.textos == null ? {} : conteudo.textos
+    if (!simples(textosEntrada) && conteudo.textos != null) return { erro: `Textos de “${bloco}” em formato inválido.` }
+    if (Object.keys(textosEntrada).length > LIMITE_TEXTOS_QUEBRA) return { erro: `Textos demais em “${bloco}”.` }
+
+    const textos = {}
+    for (const [chave, pedido] of Object.entries(textosEntrada)) {
+      if (!CHAVE.test(chave)) return { erro: `Texto com identificador inválido em “${bloco}”.` }
+      if (!simples(pedido)) return { erro: `Texto “${chave}” de “${bloco}” em formato inválido.` }
+      if (pedido.mesma != null && typeof pedido.mesma !== 'boolean') return { erro: `Opção “a mesma quebra” inválida em “${chave}”.` }
+      const desktop = textoQuebrado(pedido.desktop)
+      const celular = textoQuebrado(pedido.celular)
+      if (desktop === null || celular === null) {
+        return { erro: `Texto “${chave}” de “${bloco}” passa de ${LIMITE_TEXTO_QUEBRA} caracteres ou ${LIMITE_LINHAS_QUEBRA} linhas.` }
+      }
+      const mesma = pedido.mesma !== false
+      if (mesma ? desktop : desktop || celular) {
+        textos[chave] = mesma ? { mesma: true, desktop } : { mesma: false, desktop, celular }
+      }
+    }
+
+    // `nota` é a observação livre; `destaque`, o pedido de ênfase (negrito,
+    // termo que não pode quebrar). Dois campos porque a equipe aplica os dois
+    // em lugares diferentes do código.
+    const nota = conteudo.nota == null ? '' : String(conteudo.nota)
+    if (nota.length > LIMITE_NOTA) return { erro: `Observação de “${bloco}” passa de ${LIMITE_NOTA} caracteres.` }
+    const destaque = conteudo.destaque == null ? '' : String(conteudo.destaque)
+    if (destaque.length > LIMITE_NOTA) return { erro: `Pedido de destaque de “${bloco}” passa de ${LIMITE_NOTA} caracteres.` }
+
+    const saida = {}
+    if (Object.keys(textos).length) saida.textos = textos
+    if (nota.trim()) saida.nota = nota.trim()
+    if (destaque.trim()) saida.destaque = destaque.trim()
+    if (Object.keys(saida).length) quebras[bloco] = saida
+  }
+  return { quebras: Object.keys(quebras).length ? quebras : null }
 }
 
 /* Objeto simples, ou vazio quando não veio. Lista e texto no lugar de objeto

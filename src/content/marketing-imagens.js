@@ -20,6 +20,7 @@
  */
 
 import medidas from './marketing-imagens-medidas.json'
+import { BLOCOS_TEXTO, destinoDoBloco } from './marketing-quebras'
 
 import image1 from '../assets/images/image-1.webp'
 import image3 from '../assets/images/image-3.webp'
@@ -524,6 +525,11 @@ export const DESTINOS = [
   ...FROTA.grupos.map((grupo) => ({
     id: `frota-${grupo.codigo.toLowerCase()}`,
     rotulo: `Frota · Grupo ${grupo.codigo} (${grupo.modelo})`,
+  })),
+  // Prints marcados da seção de quebras de linha.
+  ...BLOCOS_TEXTO.map((bloco) => ({
+    id: destinoDoBloco(bloco.id),
+    rotulo: `Quebras de linha · ${bloco.pagina} · ${bloco.parte}`,
   })),
 ]
 

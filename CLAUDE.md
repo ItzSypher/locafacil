@@ -113,6 +113,16 @@ conferidos) para `marketing-arquivos/<pessoa>/<espaço>/<nome>`; com a senha,
 `attachment`) e `DELETE ?arquivo=` apaga. `/doc/retornos` mostra a seção
 "Arquivos do design".
 
+**Quebras de linha** (seção 2 de `/doc/marketing`): um bloco por parte do
+site (`src/content/marketing-quebras.js`, com o seletor de cada texto), com
+recortes em 1440 e 390 e as linhas de hoje medidas letra a letra por
+`node scripts/capturar-textos.mjs` (`marketing-quebras-medidas.json`,
+`public/doc/marketing/textos/`). O pedido do design vai no campo `quebras` do
+retorno do marketing — o roteiro e as quebras gravam o mesmo arquivo, e cada
+um manda a parte do outro (`retornoMarketing.js`). Prints vão pelo envio de
+arquivos, destino `quebras-<bloco>`. Em `/doc/retornos`, subseção "Quebras de
+linha" e "Baixar JSON" do design.
+
 Cada página põe e tira o próprio `<meta name="robots" content="noindex">` — o
 projeto não usa biblioteca de `<head>`, e um `noindex` esquecido derrubaria a
 home do Google. `public/robots.txt` é a segunda tranca.

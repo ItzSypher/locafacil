@@ -408,6 +408,7 @@ export default function DocRetornos() {
             <RetornosDesign
               senha={senha}
               quando={quando}
+              retornos={homologacao.filter((r) => r.publico === 'marketing' && r.quebras)}
               acoesDe={(aoConfirmar) => <Apagar aoConfirmar={aoConfirmar} />}
             />
           </>

@@ -1,0 +1,1306 @@
+{
+  "medidoEm": "2026-10-01",
+  "blocos": {
+    "home-topo": {
+      "rota": "/",
+      "textos": {
+        "titulo": "Alugue Fácil\nVá Mais Longe.",
+        "apoio": "Mobilidade com praticidade, segurança e atendimento de verdade. Alugue seu carro sem caução e aproveite cada caminho.",
+        "botao-1": "Garantir meu carro agora",
+        "botao-2": "Descubra os benefícios",
+        "selo-1": "Sem caução",
+        "selo-2": "Atendimento humanizado",
+        "selo-3": "Contratação simples e rápida"
+      },
+      "formatos": {
+        "desktop": {
+          "recorte": {
+            "caminho": "/doc/marketing/textos/home-topo-desktop.jpg",
+            "largura": 1440,
+            "altura": 508
+          },
+          "textos": {
+            "titulo": {
+              "linhas": [
+                "Alugue Fácil",
+                "Vá Mais Longe."
+              ],
+              "caracteresPorLinha": 14,
+              "largura": 576
+            },
+            "apoio": {
+              "linhas": [
+                "Mobilidade com praticidade, segurança e",
+                "atendimento de verdade. Alugue seu carro sem",
+                "caução e aproveite cada caminho."
+              ],
+              "caracteresPorLinha": 44,
+              "largura": 392
+            },
+            "botao-1": {
+              "linhas": [
+                "Garantir meu carro agora"
+              ],
+              "caracteresPorLinha": 24,
+              "largura": 249
+            },
+            "botao-2": {
+              "linhas": [
+                "Descubra os benefícios"
+              ],
+              "caracteresPorLinha": 22,
+              "largura": 237
+            },
+            "selo-1": {
+              "linhas": [
+                "Sem caução"
+              ],
+              "caracteresPorLinha": 10,
+              "largura": 95
+            },
+            "selo-2": {
+              "linhas": [
+                "Atendimento humanizado"
+              ],
+              "caracteresPorLinha": 22,
+              "largura": 172
+            },
+            "selo-3": {
+              "linhas": [
+                "Contratação simples e rápida"
+              ],
+              "caracteresPorLinha": 28,
+              "largura": 192
+            }
+          }
+        },
+        "celular": {
+          "recorte": {
+            "caminho": "/doc/marketing/textos/home-topo-celular.jpg",
+            "largura": 780,
+            "altura": 1058
+          },
+          "textos": {
+            "titulo": {
+              "linhas": [
+                "Alugue Fácil",
+                "Vá Mais Longe."
+              ],
+              "caracteresPorLinha": 14,
+              "largura": 358
+            },
+            "apoio": {
+              "linhas": [
+                "Mobilidade com praticidade, segurança e",
+                "atendimento de verdade. Alugue seu carro sem",
+                "caução e aproveite cada caminho."
+              ],
+              "caracteresPorLinha": 44,
+              "largura": 348
+            },
+            "botao-1": {
+              "linhas": [
+                "Garantir meu carro agora"
+              ],
+              "caracteresPorLinha": 24,
+              "largura": 358
+            },
+            "botao-2": {
+              "linhas": [
+                "Descubra os benefícios"
+              ],
+              "caracteresPorLinha": 22,
+              "largura": 358
+            },
+            "selo-1": {
+              "linhas": [
+                "Sem caução"
+              ],
+              "caracteresPorLinha": 10,
+              "largura": 95
+            },
+            "selo-2": {
+              "linhas": [
+                "Atendimento humanizado"
+              ],
+              "caracteresPorLinha": 22,
+              "largura": 172
+            },
+            "selo-3": {
+              "linhas": [
+                "Contratação simples e rápida"
+              ],
+              "caracteresPorLinha": 28,
+              "largura": 192
+            }
+          }
+        }
+      }
+    },
+    "home-beneficios": {
+      "rota": "/",
+      "textos": {
+        "titulo": "Aluguel de carro não é tudo igual.",
+        "apoio": "Quatro condições que estão no contrato, não só no anúncio.",
+        "card-1": "0% de caução",
+        "card-2": "Proteção do seu jeito",
+        "card-3": "Atendimento feito por humanos",
+        "card-4": "Cancele quando quiser"
+      },
+      "formatos": {
+        "desktop": {
+          "recorte": {
+            "caminho": "/doc/marketing/textos/home-beneficios-desktop.jpg",
+            "largura": 1440,
+            "altura": 416
+          },
+          "textos": {
+            "titulo": {
+              "linhas": [
+                "Aluguel de carro não é tudo igual."
+              ],
+              "caracteresPorLinha": 34,
+              "largura": 1216
+            },
+            "apoio": {
+              "linhas": [
+                "Quatro condições que estão no contrato, não só no anúncio."
+              ],
+              "caracteresPorLinha": 58,
+              "largura": 619
+            },
+            "card-1": {
+              "linhas": [
+                "0% de caução"
+              ],
+              "caracteresPorLinha": 12,
+              "largura": 230
+            },
+            "card-2": {
+              "linhas": [
+                "Proteção do seu jeito"
+              ],
+              "caracteresPorLinha": 21,
+              "largura": 230
+            },
+            "card-3": {
+              "linhas": [
+                "Atendimento feito",
+                "por humanos"
+              ],
+              "caracteresPorLinha": 17,
+              "largura": 230
+            },
+            "card-4": {
+              "linhas": [
+                "Cancele quando quiser"
+              ],
+              "caracteresPorLinha": 21,
+              "largura": 230
+            }
+          }
+        },
+        "celular": {
+          "recorte": {
+            "caminho": "/doc/marketing/textos/home-beneficios-celular.jpg",
+            "largura": 780,
+            "altura": 2244
+          },
+          "textos": {
+            "titulo": {
+              "linhas": [
+                "Aluguel de carro",
+                "não é tudo igual."
+              ],
+              "caracteresPorLinha": 17,
+              "largura": 358
+            },
+            "apoio": {
+              "linhas": [
+                "Quatro condições que estão no",
+                "contrato, não só no anúncio."
+              ],
+              "caracteresPorLinha": 29,
+              "largura": 358
+            },
+            "card-1": {
+              "linhas": [
+                "0% de caução"
+              ],
+              "caracteresPorLinha": 12,
+              "largura": 310
+            },
+            "card-2": {
+              "linhas": [
+                "Proteção do seu jeito"
+              ],
+              "caracteresPorLinha": 21,
+              "largura": 310
+            },
+            "card-3": {
+              "linhas": [
+                "Atendimento feito por humanos"
+              ],
+              "caracteresPorLinha": 29,
+              "largura": 310
+            },
+            "card-4": {
+              "linhas": [
+                "Cancele quando quiser"
+              ],
+              "caracteresPorLinha": 21,
+              "largura": 310
+            }
+          }
+        }
+      }
+    },
+    "home-solucoes": {
+      "rota": "/",
+      "textos": {
+        "titulo": "Soluções que movem você.",
+        "assinatura-titulo": "Assinatura Locafacil",
+        "assinatura-apoio": "Esqueça tudo o que você sabe sobre ter carro.",
+        "assinatura-botao": "Quero saber da assinatura",
+        "empresas-titulo": "Locafacil Empresas",
+        "empresas-apoio": "Seu negócio não pode parar.",
+        "empresas-botao": "Receber proposta comercial"
+      },
+      "formatos": {
+        "desktop": {
+          "recorte": {
+            "caminho": "/doc/marketing/textos/home-solucoes-desktop.jpg",
+            "largura": 1440,
+            "altura": 908
+          },
+          "textos": {
+            "titulo": {
+              "linhas": [
+                "Soluções que movem você."
+              ],
+              "caracteresPorLinha": 24,
+              "largura": 1216
+            },
+            "assinatura-titulo": {
+              "linhas": [
+                "Assinatura Locafacil"
+              ],
+              "caracteresPorLinha": 20,
+              "largura": 432
+            },
+            "assinatura-apoio": {
+              "linhas": [
+                "Esqueça tudo o que você sabe sobre ter carro."
+              ],
+              "caracteresPorLinha": 45,
+              "largura": 432
+            },
+            "assinatura-botao": {
+              "linhas": [
+                "Quero saber da assinatura"
+              ],
+              "caracteresPorLinha": 25,
+              "largura": 251
+            },
+            "empresas-titulo": {
+              "linhas": [
+                "Locafacil Empresas"
+              ],
+              "caracteresPorLinha": 18,
+              "largura": 432
+            },
+            "empresas-apoio": {
+              "linhas": [
+                "Seu negócio não pode parar."
+              ],
+              "caracteresPorLinha": 27,
+              "largura": 432
+            },
+            "empresas-botao": {
+              "linhas": [
+                "Receber proposta comercial"
+              ],
+              "caracteresPorLinha": 26,
+              "largura": 266
+            }
+          }
+        },
+        "celular": {
+          "recorte": {
+            "caminho": "/doc/marketing/textos/home-solucoes-celular.jpg",
+            "largura": 780,
+            "altura": 2778
+          },
+          "textos": {
+            "titulo": {
+              "linhas": [
+                "Soluções que",
+                "movem você."
+              ],
+              "caracteresPorLinha": 12,
+              "largura": 358
+            },
+            "assinatura-titulo": {
+              "linhas": [
+                "Assinatura Locafacil"
+              ],
+              "caracteresPorLinha": 20,
+              "largura": 310
+            },
+            "assinatura-apoio": {
+              "linhas": [
+                "Esqueça tudo o que você sabe sobre ter carro."
+              ],
+              "caracteresPorLinha": 45,
+              "largura": 310
+            },
+            "assinatura-botao": {
+              "linhas": [
+                "Quero saber da assinatura"
+              ],
+              "caracteresPorLinha": 25,
+              "largura": 251
+            },
+            "empresas-titulo": {
+              "linhas": [
+                "Locafacil Empresas"
+              ],
+              "caracteresPorLinha": 18,
+              "largura": 310
+            },
+            "empresas-apoio": {
+              "linhas": [
+                "Seu negócio não pode parar."
+              ],
+              "caracteresPorLinha": 27,
+              "largura": 310
+            },
+            "empresas-botao": {
+              "linhas": [
+                "Receber proposta comercial"
+              ],
+              "caracteresPorLinha": 26,
+              "largura": 266
+            }
+          }
+        }
+      }
+    },
+    "home-por-que": {
+      "rota": "/",
+      "textos": {
+        "titulo": "Por que alugar com a Locafacil?",
+        "motivo-1": "Aceleração de aprovação",
+        "motivo-2": "O que você vê é o que você paga",
+        "motivo-3": "Máquinas selecionadas a dedo",
+        "motivo-4": "Gente de verdade do outro lado"
+      },
+      "formatos": {
+        "desktop": {
+          "recorte": {
+            "caminho": "/doc/marketing/textos/home-por-que-desktop.jpg",
+            "largura": 1440,
+            "altura": 692
+          },
+          "textos": {
+            "titulo": {
+              "linhas": [
+                "Por que alugar",
+                "com a Locafacil?"
+              ],
+              "caracteresPorLinha": 16,
+              "largura": 576
+            },
+            "motivo-1": {
+              "linhas": [
+                "Aceleração de aprovação"
+              ],
+              "caracteresPorLinha": 23,
+              "largura": 576
+            },
+            "motivo-2": {
+              "linhas": [
+                "O que você vê é o que você paga"
+              ],
+              "caracteresPorLinha": 31,
+              "largura": 576
+            },
+            "motivo-3": {
+              "linhas": [
+                "Máquinas selecionadas a dedo"
+              ],
+              "caracteresPorLinha": 28,
+              "largura": 576
+            },
+            "motivo-4": {
+              "linhas": [
+                "Gente de verdade do outro lado"
+              ],
+              "caracteresPorLinha": 30,
+              "largura": 576
+            }
+          }
+        },
+        "celular": {
+          "recorte": {
+            "caminho": "/doc/marketing/textos/home-por-que-celular.jpg",
+            "largura": 780,
+            "altura": 1476
+          },
+          "textos": {
+            "titulo": {
+              "linhas": [
+                "Por que alugar",
+                "com a Locafacil?"
+              ],
+              "caracteresPorLinha": 16,
+              "largura": 358
+            },
+            "motivo-1": {
+              "linhas": [
+                "Aceleração de aprovação"
+              ],
+              "caracteresPorLinha": 23,
+              "largura": 358
+            },
+            "motivo-2": {
+              "linhas": [
+                "O que você vê é o que você paga"
+              ],
+              "caracteresPorLinha": 31,
+              "largura": 358
+            },
+            "motivo-3": {
+              "linhas": [
+                "Máquinas selecionadas a dedo"
+              ],
+              "caracteresPorLinha": 28,
+              "largura": 358
+            },
+            "motivo-4": {
+              "linhas": [
+                "Gente de verdade do outro lado"
+              ],
+              "caracteresPorLinha": 30,
+              "largura": 358
+            }
+          }
+        }
+      }
+    },
+    "home-chamada-final": {
+      "rota": "/",
+      "textos": {
+        "titulo": "Escolha seu carro, faça sua reserva e deixe o resto com a Locafacil.",
+        "apoio": "Reserve de forma rápida e simples, escolha a opção que melhor atende sua necessidade e siga com mais praticidade desde o primeiro contato.",
+        "botao-1": "Garantir meu carro agora",
+        "botao-2": "Ligar: (21) 96854-0185",
+        "selo-1": "Sem caução",
+        "selo-2": "Atendimento próximo",
+        "selo-3": "Cancele quando quiser"
+      },
+      "formatos": {
+        "desktop": {
+          "recorte": {
+            "caminho": "/doc/marketing/textos/home-chamada-final-desktop.jpg",
+            "largura": 1440,
+            "altura": 437
+          },
+          "textos": {
+            "titulo": {
+              "linhas": [
+                "Escolha seu carro, faça sua reserva",
+                "e deixe o resto com a Locafacil."
+              ],
+              "caracteresPorLinha": 35,
+              "largura": 768
+            },
+            "apoio": {
+              "linhas": [
+                "Reserve de forma rápida e simples, escolha a opção que melhor atende",
+                "sua necessidade e siga com mais praticidade desde o primeiro contato."
+              ],
+              "caracteresPorLinha": 69,
+              "largura": 598
+            },
+            "botao-1": {
+              "linhas": [
+                "Garantir meu carro agora"
+              ],
+              "caracteresPorLinha": 24,
+              "largura": 272
+            },
+            "botao-2": {
+              "linhas": [
+                "Ligar: (21) 96854-0185"
+              ],
+              "caracteresPorLinha": 22,
+              "largura": 246
+            },
+            "selo-1": {
+              "linhas": [
+                "Sem caução"
+              ],
+              "caracteresPorLinha": 10,
+              "largura": 95
+            },
+            "selo-2": {
+              "linhas": [
+                "Atendimento próximo"
+              ],
+              "caracteresPorLinha": 19,
+              "largura": 147
+            },
+            "selo-3": {
+              "linhas": [
+                "Cancele quando quiser"
+              ],
+              "caracteresPorLinha": 21,
+              "largura": 156
+            }
+          }
+        },
+        "celular": {
+          "recorte": {
+            "caminho": "/doc/marketing/textos/home-chamada-final-celular.jpg",
+            "largura": 780,
+            "altura": 1174
+          },
+          "textos": {
+            "titulo": {
+              "linhas": [
+                "Escolha seu carro, faça",
+                "sua reserva e deixe o",
+                "resto com a Locafacil."
+              ],
+              "caracteresPorLinha": 23,
+              "largura": 358
+            },
+            "apoio": {
+              "linhas": [
+                "Reserve de forma rápida e simples,",
+                "escolha a opção que melhor atende",
+                "sua necessidade e siga com mais",
+                "praticidade desde o primeiro contato."
+              ],
+              "caracteresPorLinha": 37,
+              "largura": 358
+            },
+            "botao-1": {
+              "linhas": [
+                "Garantir meu carro agora"
+              ],
+              "caracteresPorLinha": 24,
+              "largura": 358
+            },
+            "botao-2": {
+              "linhas": [
+                "Ligar: (21) 96854-0185"
+              ],
+              "caracteresPorLinha": 22,
+              "largura": 358
+            },
+            "selo-1": {
+              "linhas": [
+                "Sem caução"
+              ],
+              "caracteresPorLinha": 10,
+              "largura": 95
+            },
+            "selo-2": {
+              "linhas": [
+                "Atendimento próximo"
+              ],
+              "caracteresPorLinha": 19,
+              "largura": 147
+            },
+            "selo-3": {
+              "linhas": [
+                "Cancele quando quiser"
+              ],
+              "caracteresPorLinha": 21,
+              "largura": 156
+            }
+          }
+        }
+      }
+    },
+    "empresas-topo": {
+      "rota": "/para-empresas",
+      "textos": {
+        "titulo": "Locafacil Business",
+        "apoio": "Eficiência em movimento: soluções completas em terceirização de frota.",
+        "botao": "Solicitar Proposta Comercial"
+      },
+      "formatos": {
+        "desktop": {
+          "recorte": {
+            "caminho": "/doc/marketing/textos/empresas-topo-desktop.jpg",
+            "largura": 1440,
+            "altura": 413
+          },
+          "textos": {
+            "titulo": {
+              "linhas": [
+                "Locafacil",
+                "Business"
+              ],
+              "caracteresPorLinha": 9,
+              "largura": 584
+            },
+            "apoio": {
+              "linhas": [
+                "Eficiência em movimento: soluções completas em",
+                "terceirização de frota."
+              ],
+              "caracteresPorLinha": 46,
+              "largura": 516
+            },
+            "botao": {
+              "linhas": [
+                "Solicitar Proposta Comercial"
+              ],
+              "caracteresPorLinha": 28,
+              "largura": 276
+            }
+          }
+        },
+        "celular": {
+          "recorte": {
+            "caminho": "/doc/marketing/textos/empresas-topo-celular.jpg",
+            "largura": 780,
+            "altura": 694
+          },
+          "textos": {
+            "titulo": {
+              "linhas": [
+                "Locafacil",
+                "Business"
+              ],
+              "caracteresPorLinha": 9,
+              "largura": 358
+            },
+            "apoio": {
+              "linhas": [
+                "Eficiência em movimento: soluções",
+                "completas em terceirização de frota."
+              ],
+              "caracteresPorLinha": 36,
+              "largura": 358
+            },
+            "botao": {
+              "linhas": [
+                "Solicitar Proposta Comercial"
+              ],
+              "caracteresPorLinha": 28,
+              "largura": 276
+            }
+          }
+        }
+      }
+    },
+    "empresas-crescer": {
+      "rota": "/para-empresas",
+      "textos": {
+        "titulo": "Crescer dói, mas não precisa ser assim.",
+        "botao": "Solicitar Cotação Agora"
+      },
+      "formatos": {
+        "desktop": {
+          "recorte": {
+            "caminho": "/doc/marketing/textos/empresas-crescer-desktop.jpg",
+            "largura": 1440,
+            "altura": 570
+          },
+          "textos": {
+            "titulo": {
+              "linhas": [
+                "Crescer dói, mas não",
+                "precisa ser assim."
+              ],
+              "caracteresPorLinha": 20,
+              "largura": 576
+            },
+            "botao": {
+              "linhas": [
+                "Solicitar Cotação Agora"
+              ],
+              "caracteresPorLinha": 23,
+              "largura": 240
+            }
+          }
+        },
+        "celular": {
+          "recorte": {
+            "caminho": "/doc/marketing/textos/empresas-crescer-celular.jpg",
+            "largura": 780,
+            "altura": 1358
+          },
+          "textos": {
+            "titulo": {
+              "linhas": [
+                "Crescer dói, mas não",
+                "precisa ser assim."
+              ],
+              "caracteresPorLinha": 20,
+              "largura": 358
+            },
+            "botao": {
+              "linhas": [
+                "Solicitar Cotação Agora"
+              ],
+              "caracteresPorLinha": 23,
+              "largura": 240
+            }
+          }
+        }
+      }
+    },
+    "empresas-motivos": {
+      "rota": "/para-empresas",
+      "textos": {
+        "titulo": "4 motivos para contratar hoje",
+        "motivo-1": "Custos",
+        "motivo-2": "Agilidade",
+        "motivo-3": "Foco",
+        "motivo-4": "Planejamento"
+      },
+      "formatos": {
+        "desktop": {
+          "recorte": {
+            "caminho": "/doc/marketing/textos/empresas-motivos-desktop.jpg",
+            "largura": 1440,
+            "altura": 703
+          },
+          "textos": {
+            "titulo": {
+              "linhas": [
+                "4 motivos para contratar hoje"
+              ],
+              "caracteresPorLinha": 29,
+              "largura": 1216
+            },
+            "motivo-1": {
+              "linhas": [
+                "Custos"
+              ],
+              "caracteresPorLinha": 6,
+              "largura": 576
+            },
+            "motivo-2": {
+              "linhas": [
+                "Agilidade"
+              ],
+              "caracteresPorLinha": 9,
+              "largura": 576
+            },
+            "motivo-3": {
+              "linhas": [
+                "Foco"
+              ],
+              "caracteresPorLinha": 4,
+              "largura": 576
+            },
+            "motivo-4": {
+              "linhas": [
+                "Planejamento"
+              ],
+              "caracteresPorLinha": 12,
+              "largura": 576
+            }
+          }
+        },
+        "celular": {
+          "recorte": {
+            "caminho": "/doc/marketing/textos/empresas-motivos-celular.jpg",
+            "largura": 780,
+            "altura": 1748
+          },
+          "textos": {
+            "titulo": {
+              "linhas": [
+                "4 motivos para",
+                "contratar hoje"
+              ],
+              "caracteresPorLinha": 14,
+              "largura": 358
+            },
+            "motivo-1": {
+              "linhas": [
+                "Custos"
+              ],
+              "caracteresPorLinha": 6,
+              "largura": 358
+            },
+            "motivo-2": {
+              "linhas": [
+                "Agilidade"
+              ],
+              "caracteresPorLinha": 9,
+              "largura": 358
+            },
+            "motivo-3": {
+              "linhas": [
+                "Foco"
+              ],
+              "caracteresPorLinha": 4,
+              "largura": 358
+            },
+            "motivo-4": {
+              "linhas": [
+                "Planejamento"
+              ],
+              "caracteresPorLinha": 12,
+              "largura": 358
+            }
+          }
+        }
+      }
+    },
+    "contato-topo": {
+      "rota": "/contato",
+      "textos": {
+        "titulo": "Estamos aqui por você.",
+        "apoio": "Conheça a equipe por trás da Locafacil e entre em contato conosco."
+      },
+      "formatos": {
+        "desktop": {
+          "recorte": {
+            "caminho": "/doc/marketing/textos/contato-topo-desktop.jpg",
+            "largura": 1440,
+            "altura": 327
+          },
+          "textos": {
+            "titulo": {
+              "linhas": [
+                "Estamos aqui",
+                "por você."
+              ],
+              "caracteresPorLinha": 12,
+              "largura": 584
+            },
+            "apoio": {
+              "linhas": [
+                "Conheça a equipe por trás da Locafacil e entre em",
+                "contato conosco."
+              ],
+              "caracteresPorLinha": 49,
+              "largura": 516
+            }
+          }
+        },
+        "celular": {
+          "recorte": {
+            "caminho": "/doc/marketing/textos/contato-topo-celular.jpg",
+            "largura": 780,
+            "altura": 520
+          },
+          "textos": {
+            "titulo": {
+              "linhas": [
+                "Estamos aqui",
+                "por você."
+              ],
+              "caracteresPorLinha": 12,
+              "largura": 358
+            },
+            "apoio": {
+              "linhas": [
+                "Conheça a equipe por trás da Locafacil",
+                "e entre em contato conosco."
+              ],
+              "caracteresPorLinha": 38,
+              "largura": 358
+            }
+          }
+        }
+      }
+    },
+    "contato-equipe": {
+      "rota": "/contato",
+      "textos": {
+        "titulo": "Pessoas que fazem acontecer.",
+        "apoio": "Nossa equipe é formada por especialistas apaixonados por mobilidade. Mais do que alugar carros, trabalhamos para oferecer a melhor experiência.",
+        "subtitulo": "Um atendimento humano e próximo"
+      },
+      "formatos": {
+        "desktop": {
+          "recorte": {
+            "caminho": "/doc/marketing/textos/contato-equipe-desktop.jpg",
+            "largura": 1440,
+            "altura": 426
+          },
+          "textos": {
+            "titulo": {
+              "linhas": [
+                "Pessoas que fazem acontecer."
+              ],
+              "caracteresPorLinha": 28,
+              "largura": 1216
+            },
+            "apoio": {
+              "linhas": [
+                "Nossa equipe é formada por especialistas apaixonados por mobilidade.",
+                "Mais do que alugar carros, trabalhamos para oferecer a melhor experiência."
+              ],
+              "caracteresPorLinha": 74,
+              "largura": 670
+            },
+            "subtitulo": {
+              "linhas": [
+                "Um atendimento humano e próximo"
+              ],
+              "caracteresPorLinha": 31,
+              "largura": 584
+            }
+          }
+        },
+        "celular": {
+          "recorte": {
+            "caminho": "/doc/marketing/textos/contato-equipe-celular.jpg",
+            "largura": 780,
+            "altura": 1462
+          },
+          "textos": {
+            "titulo": {
+              "linhas": [
+                "Pessoas que",
+                "fazem acontecer."
+              ],
+              "caracteresPorLinha": 16,
+              "largura": 358
+            },
+            "apoio": {
+              "linhas": [
+                "Nossa equipe é formada por especialistas",
+                "apaixonados por mobilidade. Mais",
+                "do que alugar carros, trabalhamos",
+                "para oferecer a melhor experiência."
+              ],
+              "caracteresPorLinha": 40,
+              "largura": 358
+            },
+            "subtitulo": {
+              "linhas": [
+                "Um atendimento humano e",
+                "próximo"
+              ],
+              "caracteresPorLinha": 23,
+              "largura": 358
+            }
+          }
+        }
+      }
+    },
+    "reserva-revisao": {
+      "rota": "/reservar/revisao",
+      "textos": {
+        "pre-reserva-titulo": "Isto é uma pré-reserva",
+        "pre-reserva-passo-1": "Em até 24 horas, nossa equipe entra em contato pelo telefone ou WhatsApp que você informou, para confirmar a reserva e combinar o pagamento.",
+        "pre-reserva-passo-2": "Antes da retirada, mandamos uma mensagem no WhatsApp para lembrar o dia e o horário.",
+        "aplicativos-titulo": "Importante",
+        "aplicativos-texto": "Os veículos da Locafácil são destinados exclusivamente ao uso particular ou empresarial. Não realizamos locações para utilização em aplicativos de transporte de passageiros, como Uber, 99 ou similares.",
+        "aplicativos-ciente": "Declaro estar ciente e de acordo com essa condição.",
+        "botao": "Confirmar pré-reserva"
+      },
+      "formatos": {
+        "desktop": {
+          "recorte": {
+            "caminho": "/doc/marketing/textos/reserva-revisao-desktop.jpg",
+            "largura": 1440,
+            "altura": 588
+          },
+          "textos": {
+            "pre-reserva-titulo": {
+              "linhas": [
+                "Isto é uma pré-reserva"
+              ],
+              "caracteresPorLinha": 22,
+              "largura": 718
+            },
+            "pre-reserva-passo-1": {
+              "linhas": [
+                "Em até 24 horas, nossa equipe entra em contato pelo telefone ou WhatsApp que você informou, para confirmar a",
+                "reserva e combinar o pagamento."
+              ],
+              "caracteresPorLinha": 108,
+              "largura": 678
+            },
+            "pre-reserva-passo-2": {
+              "linhas": [
+                "Antes da retirada, mandamos uma mensagem no WhatsApp para lembrar o dia e o horário."
+              ],
+              "caracteresPorLinha": 84,
+              "largura": 532
+            },
+            "aplicativos-titulo": {
+              "linhas": [
+                "Importante"
+              ],
+              "caracteresPorLinha": 10,
+              "largura": 718
+            },
+            "aplicativos-texto": {
+              "linhas": [
+                "Os veículos da Locafácil são destinados exclusivamente ao uso particular ou empresarial. Não realizamos locações para",
+                "utilização em aplicativos de transporte de passageiros, como Uber, 99 ou similares."
+              ],
+              "caracteresPorLinha": 117,
+              "largura": 718
+            },
+            "aplicativos-ciente": {
+              "linhas": [
+                "Declaro estar ciente e de acordo com essa condição."
+              ],
+              "caracteresPorLinha": 51,
+              "largura": 306
+            },
+            "botao": {
+              "linhas": [
+                "Confirmar pré-reserva"
+              ],
+              "caracteresPorLinha": 21,
+              "largura": 672
+            }
+          }
+        },
+        "celular": {
+          "recorte": {
+            "caminho": "/doc/marketing/textos/reserva-revisao-celular.jpg",
+            "largura": 780,
+            "altura": 1436
+          },
+          "textos": {
+            "pre-reserva-titulo": {
+              "linhas": [
+                "Isto é uma pré-reserva"
+              ],
+              "caracteresPorLinha": 22,
+              "largura": 316
+            },
+            "pre-reserva-passo-1": {
+              "linhas": [
+                "Em até 24 horas, nossa equipe entra em",
+                "contato pelo telefone ou WhatsApp que você",
+                "informou, para confirmar a reserva e combinar",
+                "o pagamento."
+              ],
+              "caracteresPorLinha": 45,
+              "largura": 276
+            },
+            "pre-reserva-passo-2": {
+              "linhas": [
+                "Antes da retirada, mandamos uma mensagem",
+                "no WhatsApp para lembrar o dia e o horário."
+              ],
+              "caracteresPorLinha": 43,
+              "largura": 276
+            },
+            "aplicativos-titulo": {
+              "linhas": [
+                "Importante"
+              ],
+              "caracteresPorLinha": 10,
+              "largura": 316
+            },
+            "aplicativos-texto": {
+              "linhas": [
+                "Os veículos da Locafácil são destinados",
+                "exclusivamente ao uso particular ou empresarial. Não",
+                "realizamos locações para utilização em aplicativos de",
+                "transporte de passageiros, como Uber, 99 ou",
+                "similares."
+              ],
+              "caracteresPorLinha": 53,
+              "largura": 316
+            },
+            "aplicativos-ciente": {
+              "linhas": [
+                "Declaro estar ciente e de acordo com essa",
+                "condição."
+              ],
+              "caracteresPorLinha": 41,
+              "largura": 284
+            },
+            "botao": {
+              "linhas": [
+                "Confirmar pré-reserva"
+              ],
+              "caracteresPorLinha": 21,
+              "largura": 358
+            }
+          }
+        }
+      }
+    },
+    "reserva-confirmacao": {
+      "rota": "/reservar/confirmacao",
+      "textos": {
+        "titulo": "Pré-reserva enviada",
+        "apoio": "Guarde o número abaixo: é com ele que nossa equipe vai falar com você.",
+        "proximos": "Próximos passos",
+        "passo-1": "Em até 24 horas, nossa equipe entra em contato para confirmar a reserva e combinar o pagamento.",
+        "passo-2": "Antes da retirada, mandamos uma mensagem no WhatsApp para lembrar o dia e o horário.",
+        "passo-3": "No dia da retirada, basta apresentar sua CNH válida e os documentos solicitados para finalizar a locação.",
+        "botao-suporte": "Falar com o suporte",
+        "botao-calendario": "Adicionar ao calendário",
+        "link-alterar": "Alterar ou cancelar esta pré-reserva"
+      },
+      "formatos": {
+        "desktop": {
+          "recorte": {
+            "caminho": "/doc/marketing/textos/reserva-confirmacao-desktop.jpg",
+            "largura": 1440,
+            "altura": 902
+          },
+          "textos": {
+            "titulo": {
+              "linhas": [
+                "Pré-reserva enviada"
+              ],
+              "caracteresPorLinha": 19,
+              "largura": 590
+            },
+            "apoio": {
+              "linhas": [
+                "Guarde o número abaixo: é com ele que nossa equipe vai falar com você."
+              ],
+              "caracteresPorLinha": 70,
+              "largura": 590
+            },
+            "proximos": {
+              "linhas": [
+                "Próximos passos"
+              ],
+              "caracteresPorLinha": 15,
+              "largura": 590
+            },
+            "passo-1": {
+              "linhas": [
+                "Em até 24 horas, nossa equipe entra em contato para confirmar a reserva e combinar o",
+                "pagamento."
+              ],
+              "caracteresPorLinha": 84,
+              "largura": 550
+            },
+            "passo-2": {
+              "linhas": [
+                "Antes da retirada, mandamos uma mensagem no WhatsApp para lembrar o dia e o horário."
+              ],
+              "caracteresPorLinha": 84,
+              "largura": 532
+            },
+            "passo-3": {
+              "linhas": [
+                "No dia da retirada, basta apresentar sua CNH válida e os documentos solicitados para",
+                "finalizar a locação."
+              ],
+              "caracteresPorLinha": 84,
+              "largura": 550
+            },
+            "botao-suporte": {
+              "linhas": [
+                "Falar com o suporte"
+              ],
+              "caracteresPorLinha": 19,
+              "largura": 289
+            },
+            "botao-calendario": {
+              "linhas": [
+                "Adicionar ao calendário"
+              ],
+              "caracteresPorLinha": 23,
+              "largura": 289
+            },
+            "link-alterar": {
+              "linhas": [
+                "Alterar ou cancelar esta pré-reserva"
+              ],
+              "caracteresPorLinha": 36,
+              "largura": 206
+            }
+          }
+        },
+        "celular": {
+          "recorte": {
+            "caminho": "/doc/marketing/textos/reserva-confirmacao-celular.jpg",
+            "largura": 780,
+            "altura": 2214
+          },
+          "textos": {
+            "titulo": {
+              "linhas": [
+                "Pré-reserva enviada"
+              ],
+              "caracteresPorLinha": 19,
+              "largura": 292
+            },
+            "apoio": {
+              "linhas": [
+                "Guarde o número abaixo: é com ele que",
+                "nossa equipe vai falar com você."
+              ],
+              "caracteresPorLinha": 37,
+              "largura": 292
+            },
+            "proximos": {
+              "linhas": [
+                "Próximos passos"
+              ],
+              "caracteresPorLinha": 15,
+              "largura": 292
+            },
+            "passo-1": {
+              "linhas": [
+                "Em até 24 horas, nossa equipe entra em",
+                "contato para confirmar a reserva e",
+                "combinar o pagamento."
+              ],
+              "caracteresPorLinha": 38,
+              "largura": 252
+            },
+            "passo-2": {
+              "linhas": [
+                "Antes da retirada, mandamos uma",
+                "mensagem no WhatsApp para lembrar o",
+                "dia e o horário."
+              ],
+              "caracteresPorLinha": 35,
+              "largura": 252
+            },
+            "passo-3": {
+              "linhas": [
+                "No dia da retirada, basta apresentar sua",
+                "CNH válida e os documentos solicitados",
+                "para finalizar a locação."
+              ],
+              "caracteresPorLinha": 40,
+              "largura": 252
+            },
+            "botao-suporte": {
+              "linhas": [
+                "Falar com o suporte"
+              ],
+              "caracteresPorLinha": 19,
+              "largura": 292
+            },
+            "botao-calendario": {
+              "linhas": [
+                "Adicionar ao calendário"
+              ],
+              "caracteresPorLinha": 23,
+              "largura": 292
+            },
+            "link-alterar": {
+              "linhas": [
+                "Alterar ou cancelar esta pré-reserva"
+              ],
+              "caracteresPorLinha": 36,
+              "largura": 206
+            }
+          }
+        }
+      }
+    }
+  }
+}

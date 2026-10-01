@@ -4,6 +4,7 @@ import { useArmazenamento, usePessoa } from './hooks'
 import { BotaoCopiar } from './Pecas'
 import { ehImpressao } from './modoImpressao'
 import { salvarRetorno } from './retornos'
+import { CHAVE_QUEBRAS, lerLocal } from './retornoMarketing'
 
 const hora = (iso) =>
   new Date(iso).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
@@ -50,6 +51,9 @@ export default function Checklist({ publico }) {
           nome: pessoa.nome,
           passos: estado,
           enviadoEm,
+          // O mesmo arquivo guarda as quebras de linha do design: vão junto,
+          // senão este salvamento apagaria as que já estão lá.
+          ...(publico === 'marketing' ? { quebras: lerLocal(CHAVE_QUEBRAS, {}) } : {}),
         })
         setSalvamento(
           resultado.salvo ? { tipo: 'salvo', em: resultado.atualizadoEm } : { tipo: 'local' },
